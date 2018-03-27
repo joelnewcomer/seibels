@@ -1,0 +1,31 @@
+.main-footer, .sub-footer {
+	display: block;
+	float: left;
+	width: 100%;}
+
+.main-footer {
+	background: $light-gray;
+	padding: 24px 0;
+	a.logo {
+		margin-bottom: 20px;
+	}
+}
+
+.sub-footer {
+	padding: 24px 0 10px 0;
+	background: $dark-gray;
+	p, a {
+		font-size: 14px;
+		color: #fff;
+	}
+}
+
+.footer-menu {
+	li {
+		list-style: none;
+		margin-bottom: 8px;
+		a {
+			font-size: 18px;
+		}
+	}
+}
