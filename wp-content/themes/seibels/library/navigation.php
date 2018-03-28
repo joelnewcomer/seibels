@@ -9,7 +9,7 @@
 register_nav_menus(array(
 	'main-menu'  => 'Main Menu',
 	'footer-menu'  => 'Footer Menu',
-	'fullscreen-menu'  => 'Full Screen Menu',
+	'top-menu'  => 'Top Menu',
 ));
 
 /**
@@ -41,13 +41,13 @@ if ( ! function_exists( 'drumroll_footer_menu' ) ) {
 		));
 	}
 }
-if ( ! function_exists( 'drumroll_fullscreen_menu' ) ) {
-	function drumroll_fullscreen_menu() {
+if ( ! function_exists( 'drumroll_top_menu' ) ) {
+	function drumroll_top_menu() {
 		wp_nav_menu( array(
 			'container'      => false,
 			'menu_class'     => 'menu',
 			'items_wrap'     => '<ul id="%1$s" class="%2$s fullscreen-menu">%3$s</ul>',
-			'theme_location' => 'fullscreen-menu',
+			'theme_location' => 'top-menu',
 			'depth'          => 3,
 			'fallback_cb'    => false,
 		));

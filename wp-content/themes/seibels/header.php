@@ -49,13 +49,8 @@
 					</div> <!-- top-bar-left -->
 					<div class="top-bar-right hide-for-print">
 						<?php drumroll_main_menu(); ?>
-						<a href="#" class="menu" aria-controls="site-navigation"><?php get_template_part('assets/images/hamburger.svg'); ?> <?php _e( 'More', 'drumroll' ); ?></a>
 						<div class="icon-wrapper">
 							<?php
-							// WooCommerce Cart Icon
-							if (is_woocommerce_activated()) {
-								get_template_part('template-parts/cart-icon');
-							}
 							// Search Icon
 							get_template_part('assets/images/search.svg');
 							?>

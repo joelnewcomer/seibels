@@ -30,7 +30,7 @@ header#masthead {
     display: block;
     float: left;
     width: 100%;
-    background: #fff;
+    background: $primary-color;
     position: relative;
     top: 0;
 	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.10);
@@ -41,7 +41,6 @@ header#masthead {
 			position: fixed;
 			height: auto !important;
 			top: -70px;
-			background: #fff;
 			transform: translateY(70px);
 			transition: transform 500ms ease,background 900ms ease;
 			-webkit-transition: transform 500ms ease,background 900ms ease;
@@ -124,5 +123,4 @@ main.container > section > .grid-container {
 
 .header-wrapper {
 	z-index: 11;
-	background: $primary-color;
 }
