@@ -125,15 +125,39 @@ ul.slimmenu li>ul>li ul {
 
 ul.slimmenu li a {
     display: block;
-    white-space: nowrap;
+    text-align: center;
     padding: 12px 16px;
+    border: solid 1px transparent;
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 400;
-    transition: color 0.5s ease-out;
-    -o-transition: color 0.5s ease-out;
-    -moz-transition: color 0.5s ease-out;
-    -webkit-transition: color 0.5s ease-out
+    transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    -moz-transition: all 0.5s ease-out;
+    -webkit-transition: all 0.5s ease-out;
+    @media only screen and (min-width: 40.063em) {
+		max-width: 152px;
+	}
+}
+
+ul.slimmenu li.policy a:hover {
+	color: $policy-color;
+	border-color: $policy-color;
+}
+
+ul.slimmenu li.claims a:hover {
+	color: $claims-color;
+	border-color: $claims-color;
+}
+
+ul.slimmenu li.financial a:hover {
+	color: $financial-color;
+	border-color: $financial-color;
+}
+
+ul.slimmenu li.accounting a:hover {
+	color: $accounting-color;
+	border-color: $accounting-color;
 }
 
 @media only screen and (max-width: 40.062em) {

@@ -1,14 +1,68 @@
-.slider-container {
+.home-block {
+	display: inline-block;
+	position: relative;
+	background: #fff;
+	padding: 165px 60px 50px 60px;
+	margin: 20px 0;
+	svg {
+		position: absolute;
+		top: 45px;
+		max-width: 164px;
+		max-height: 120px;
+		left: 50%;
+		margin-left: -82px;
+	}
+	h3, p, svg {
+		transition: all .5s;
+		-webkit-transition: all .5s; /* Safari and Chrome */
+		-ms-transition: all .5s; /* Opera */
+	}
+	&:hover {
+		h3, p {
+			opacity: 0;
+		}
+		svg {
+			position: absolute;
+			top: 50%;
+			margin-top: -60px;
+			z-index: 3;
+			path:not(.stroke):not(.no-fill), polygon:not(.no-fill), stroke, rect:not(.no-fill) {
+				fill: #fff;
+			}
+			polygon.no-fill, path.no-fill, rect.no-fill {
+				fill: none;
+			}
+			path.stroke {
+				stroke: #fff;
+			}
+		}
+	}
+	&.policy-services:hover {
+		background: $policy-color;
+	}
+	&.claims-services:hover {
+		background: $claims-color;
+	}
+	&.financial-services:hover {
+		background: $financial-color;
+	}
+	&.accounting-services:hover {
+		background: $accounting-color;
+	}
+}
+
+#home-blocks {
 	display: block;
 	float: left;
 	width: 100%;
-}
-
-.slider-container li img {
-	width: 100%;
-}
-section.intro {
-	display:block;
-	width:100%;
-	float:left;
+	background: #edeeee;
+	padding: 100px 0 130px 0;
+	.cell {
+		padding: 0 20px;
+	}
+	h2 {
+		margin-bottom: 70px;
+		font-size: 42px;
+		color: #6D6E71;
+	}
 }

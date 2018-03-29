@@ -58,12 +58,12 @@
 					</div> <!-- top-bar-left -->
 					<div class="top-bar-right hide-for-print">
 						<?php drumroll_main_menu(); ?>
-						<div class="icon-wrapper">
+						<!-- <div class="icon-wrapper">
 							<?php
 							// Search Icon
-							get_template_part('assets/images/search.svg');
+							// get_template_part('assets/images/search.svg');
 							?>
-						</div> <!-- icon-wrapper -->
+						<!-- </div> <!-- icon-wrapper -->
 					</div> <!-- top-bar-right -->
 				</nav> <!-- #site-navigation -->
 			</header> <!-- #masthead -->

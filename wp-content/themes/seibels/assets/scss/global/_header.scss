@@ -1,22 +1,23 @@
 header a.logo {
-	margin: 15px;
+	margin: 37px 15px;
 }
 
 a.logo {
 	display: inline-block;
 	svg {
-		width: 173px;
-		height: 60px;
+		float: left;
+		width: 186px;
+		height: 43px;
 		@media only screen and (max-width: 40.063em) {
 			width: 144px;
-			height: 50px;	
+			height: 33px;	
 		}
 	}
 }
 
 .top-bar-right {
 	@media only screen and (min-width: 40.063em) {
-		margin-top: 20px;
+		margin-top: 23px;
 	}
 }
 
@@ -135,14 +136,22 @@ main.container > section > .grid-container {
 		li {
 			display: inline-block;
 			a {
+				display: inline-block;
 				text-transform: uppercase;
 				color: #fff;
 				opacity: .4;
-				padding: 4px 12px;
+				padding: 8px 12px;
 			}
 		}
 		li.active a, a:hover {
 			opacity: 1;
+		}
+		li.submit-claim a {
+			color: #E8CD5F;
+			opacity: 1;
+		}
+		li.submit-claim.active a, li.submit-claim a:hover {
+			color: #E6BA05;
 		}
 	}
 }
