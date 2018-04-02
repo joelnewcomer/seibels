@@ -176,13 +176,50 @@ get_header(); ?>
 		   			<div class="button yellow"><a href="<?php echo get_field('convo_link'); ?>">Start a Conversation</a></div>
 		   		</div>
 		   		<div class="large-6 medium-6 cell convo-quote">
-		   			<p><?php echo get_field('convo_quote'); ?></p>
-		   			<p class="convo-name"><span><?php echo get_field('convo_quote_name'); ?></span><br />
+		   			<p class="quote"><?php echo get_field('convo_quote'); ?></p>
+		   			<p class="quote-name"><span><?php echo get_field('convo_quote_name'); ?></span><br />
 		   			<?php echo get_field('convo_quote_title'); ?></p>
 		   		</div>
 	   		</div>
 		</div>
 	</section> <!-- #convo -->
+	
+	<section id="why">
+		<div class="grid-container">
+	   		<div class="grid-x">		
+		   		<div class="large-12 cell text-center">
+			   		<h2>Why Choose Seibels?</h2>
+		   		</div>
+			   	<?php if(get_field('why_icons')): ?>
+			   		<?php while(has_sub_field('why_icons')): ?>
+			   			<div class="large-4 medium-4 cell why-icon text-center">
+				   			<?php $link = get_sub_field('link'); ?>
+				   			<?php if ($link != '') : ?>
+					   			<a href="<?php echo $link; ?>">
+						   	<?php endif; ?>
+						   	<div class="why-icon-container">
+					   			<div style="display:table;width:100%;height:100%;">
+					   			  <div style="display:table-cell;vertical-align:middle;">
+					   			    <div style="text-align:center;"><?php echo file_get_contents(get_sub_field('icon')); ?></div>
+					   			  </div>
+					   			</div>
+						   	</div>
+				   			<?php echo get_sub_field('title'); ?>
+				   			<?php if ($link != '') : ?>
+					   			</a>
+						   	<?php endif; ?>
+			   			</div>
+			   		<?php endwhile; ?>
+			   	<?php endif; ?>
+
+			   	<div class="large-12 cell text-center">
+		   			<p class="quote"><?php echo get_field('why_quote'); ?></p>
+		   			<p class="quote-name"><span><?php echo get_field('why_quote_name'); ?></span><br />
+		   			<?php echo get_field('why_quote_title'); ?></p>
+			   	</div>	   	
+	   		</div>
+		</div>		
+	</section>
 
 </div> <!-- #page -->
 
@@ -190,6 +227,7 @@ get_header(); ?>
 jQuery(document).ready(function($){
 	
 	jQuery('.logo-container').matchHeight({byRow:false});
+	jQuery('.why-icon-container').matchHeight({byRow:false});
 	
 	//set slider animation parameters
 	var duration = 1000,

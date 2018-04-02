@@ -1,13 +1,18 @@
 .social {
 	display: inline-block;
+	margin-bottom: 16px;
 	a {
 		display: inline-block;
+		opacity: .3;
+		&:hover {
+			opacity: 1;
+		}
 	}
 	svg {
-		margin: 0 2px;
+		margin: 0 18px;
 		height: 24px;
 		width: 24px;
-		fill: $primary-color;
+		fill: #fff;
 		vertical-align: middle;
 	}
 	a:first-child svg {

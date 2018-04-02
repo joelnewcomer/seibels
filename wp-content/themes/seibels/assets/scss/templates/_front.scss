@@ -147,17 +147,47 @@
 		font-size: 36px;
 		margin-bottom: 90px;
 	}
-	p:not(.convo-name) {
-		margin-bottom: 24px;
-		line-height: 1.6;
-		font-size: 18px;
+}
+
+#why {
+	background: #e5f5fb;
+	padding: 100px 0;
+	h2, p {
+		color: #009CDE;
 	}
-	p.convo-name {
-		font-size: 14px;
-		span {
-			letter-spacing: 3px;
-			text-transform: uppercase;
-			font-size: 16px;
+	h2 {
+		font-size: 48px;
+		margin-bottom: 24px;
+	}
+	.why-icon {
+		margin-bottom: 40px;
+		svg {
+			max-width: 83px;
+			max-height: 79px;
 		}
+		svg path {
+			transition: all .5s;
+			-webkit-transition: all .5s; /* Safari and Chrome */
+			-ms-transition: all .5s; /* Opera */
+		}
+		a:hover svg path {
+			fill: $primary-color; 
+		}
+	}
+	
+}
+
+
+p.quote {
+	margin-bottom: 24px;
+	line-height: 1.6;
+	font-size: 18px;
+}
+p.quote-name {
+	font-size: 14px;
+	span {
+		letter-spacing: 3px;
+		text-transform: uppercase;
+		font-size: 16px;
 	}
 }

@@ -15,7 +15,5 @@
 				<a href="mailto:<?php echo $location['loc_email'];?>" class="email"><?php echo $location['loc_email'];?></a><br />
 			<?php endif; ?>		
 		</p>
-		<?php // function drum_smart_directions($address,$address_line_2,$city,$state,$zip);
-		echo drum_smart_directions($location['loc_address'],$location['loc_address_2'],$location['loc_city'],$location['loc_state'],$location['loc_zip']); ?>
 	<?php endforeach; ?>
 <?php endif; ?>

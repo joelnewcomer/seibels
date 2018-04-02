@@ -20,10 +20,31 @@
 							<?php get_template_part('template-parts/locations'); ?>
 						</div> <!-- address -->
 						<?php get_template_part('template-parts/social'); ?>
-						<p>&copy;<?php echo date('Y'); ?> <?php bloginfo('name'); ?>.  <span class="no-break"><?php _e( 'All rights reserved.', 'textdomain' ); ?></span></p>
+						<p class="copyright">&copy;<?php echo date('Y'); ?> <?php bloginfo('name'); ?>.  <span class="no-break"><?php _e( 'All rights reserved.', 'textdomain' ); ?></span></p>
 					</div>
-					<div class="large-8 medium-8 cell hide-for-print small-text-center">
-						<h3>Insights & Resources</h3>
+					<div class="large-8 medium-8 cell hide-for-print text-center footer-resources">
+						<h3 class="resources-header">Insights & Resources</h3>
+						<div class="footer-icons">
+							<a class="footer-icon" href="<?php echo get_site_url(); ?>/news-events">
+								<span class="transition">News & Events</span>
+								<div class="footer-svg">
+									<?php get_template_part('assets/images/news', 'icon.svg'); ?>
+								</div>
+							</a>
+							<a class="footer-icon" href="<?php echo get_site_url(); ?>/video-library">
+								<span class="transition">Video Library</span>
+								<div class="footer-svg">
+									<?php get_template_part('assets/images/video', 'icon.svg'); ?>
+								</div>
+							</a>
+							<a class="footer-icon" href="<?php echo get_site_url(); ?>/white-papers">
+								<span class="transition">White Papers</span>
+								<div class="footer-svg">
+									<?php get_template_part('assets/images/whitepaper', 'icon.svg'); ?>
+								</div>
+							</a>							
+						</div>
+						<h3>Subscribe to our mailing list</h3>
 						<?php get_template_part('template-parts/subscribe-form'); ?>
 					</div>
 				</div> <!-- grid-x -->

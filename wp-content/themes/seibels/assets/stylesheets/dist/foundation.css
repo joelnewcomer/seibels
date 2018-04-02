@@ -497,12 +497,12 @@ img {
 textarea {
   height: auto;
   min-height: 50px;
-  border-radius: 4px; }
+  border-radius: 0; }
 
 select {
   box-sizing: border-box;
   width: 100%;
-  border-radius: 4px; }
+  border-radius: 0; }
 
 .map_canvas img,
 .map_canvas embed,
@@ -516,7 +516,7 @@ button {
   padding: 0;
   appearance: none;
   border: 0;
-  border-radius: 4px;
+  border-radius: 0;
   background: transparent;
   line-height: 1;
   cursor: auto; }
@@ -2152,8 +2152,7 @@ kbd {
   padding: 0.125rem 0.25rem 0;
   background-color: #e6e6e6;
   font-family: Consolas, "Liberation Mono", Courier, monospace;
-  color: #0a0a0a;
-  border-radius: 4px; }
+  color: #0a0a0a; }
 
 .subheader {
   margin-top: 0.2rem;
@@ -2275,9 +2274,9 @@ textarea {
   margin: 0 0 1rem;
   padding: 0.5rem;
   border: 1px solid #cacaca;
-  border-radius: 4px;
+  border-radius: 0;
   background-color: #fff;
-  box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+  box-shadow: none;
   font-family: inherit;
   font-size: 1rem;
   font-weight: normal;
@@ -2311,7 +2310,7 @@ textarea[readonly] {
 [type='submit'],
 [type='button'] {
   appearance: none;
-  border-radius: 4px; }
+  border-radius: 0; }
 
 input[type='search'] {
   box-sizing: border-box; }
@@ -2361,9 +2360,9 @@ label {
   width: 100%;
   margin-bottom: 1rem; }
   .input-group > :first-child {
-    border-radius: 4px 0 0 4px; }
+    border-radius: 0 0 0 0; }
   .input-group > :last-child > * {
-    border-radius: 0 4px 4px 0; }
+    border-radius: 0 0 0 0; }
 
 .input-group-label, .input-group-field, .input-group-button, .input-group-button a,
 .input-group-button input,
@@ -2434,7 +2433,7 @@ select {
   padding: 0.5rem;
   appearance: none;
   border: 1px solid #cacaca;
-  border-radius: 4px;
+  border-radius: 0;
   background-color: #fff;
   font-family: inherit;
   font-size: 1rem;
@@ -2523,7 +2522,7 @@ select {
     clear: both; }
   .pagination li {
     margin-right: 0.0625rem;
-    border-radius: 4px;
+    border-radius: 0;
     font-size: 0.875rem;
     display: none; }
     .pagination li:last-child, .pagination li:first-child {
@@ -2535,7 +2534,7 @@ select {
   .pagination button {
     display: block;
     padding: 0.1875rem 0.625rem;
-    border-radius: 4px;
+    border-radius: 0;
     color: #0a0a0a; }
     .pagination a:hover,
     .pagination button:hover {
@@ -2989,14 +2988,27 @@ main.container > section > .grid-container {
   width: 100%; }
 
 .main-footer {
-  background: #e6e6e6;
-  padding: 24px 0; }
+  background: #004B87;
+  padding: 70px 0 14px 0; }
   .main-footer a.logo {
     margin-bottom: 20px; }
+  .main-footer h2, .main-footer h3, .main-footer p, .main-footer a {
+    color: #fff; }
+  .main-footer p.copyright {
+    font-size: 14px;
+    opacity: .8; }
+  .main-footer .address p {
+    font-size: 18px; }
+  .main-footer h3 {
+    font-size: 18px; }
+  .main-footer h3.resources-header {
+    margin-bottom: 24px; }
+  .main-footer .gform_fields li {
+    width: 189px; }
 
 .sub-footer {
   padding: 24px 0 10px 0;
-  background: #8a8a8a; }
+  background: #083C66; }
   .sub-footer p, .sub-footer a {
     font-size: 14px;
     color: #fff; }
@@ -3006,6 +3018,33 @@ main.container > section > .grid-container {
   margin-bottom: 8px; }
   .footer-menu li a {
     font-size: 18px; }
+
+.footer-icon {
+  height: 58px;
+  line-height: 58px;
+  display: inline-block;
+  position: relative;
+  margin: 0 24px; }
+  .footer-icon .footer-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 58px;
+    text-align: center; }
+    .footer-icon .footer-svg svg {
+      max-height: 58px;
+      opacity: .2; }
+  .footer-icon:hover span {
+    opacity: 0; }
+  .footer-icon:hover svg {
+    opacity: 1; }
+
+.footer-icons {
+  margin-bottom: 50px; }
+
+#gform_wrapper_4 {
+  margin-top: 0; }
 
 #loader {
   position: absolute;
@@ -3496,7 +3535,7 @@ main.container > section > .grid-container {
   display: none;
   padding: 1rem;
   border: 1px solid #cacaca;
-  border-radius: 4px;
+  border-radius: 0;
   background-color: #fff;
   max-height: 100px !important;
   padding: 0 !important;
@@ -3657,14 +3696,18 @@ section.breadcrumbs {
     left: 100%; }
 
 .social {
-  display: inline-block; }
+  display: inline-block;
+  margin-bottom: 16px; }
   .social a {
-    display: inline-block; }
+    display: inline-block;
+    opacity: .3; }
+    .social a:hover {
+      opacity: 1; }
   .social svg {
-    margin: 0 2px;
+    margin: 0 18px;
     height: 24px;
     width: 24px;
-    fill: #123261;
+    fill: #fff;
     vertical-align: middle; }
   .social a:first-child svg {
     margin-left: 0; }
@@ -3687,7 +3730,7 @@ ul.pagination li.current a {
   padding: 0 !important; }
 
 .subscribe-form .gform_body {
-  width: 217px !important; }
+  width: 100% !important; }
 
 .subscribe-form .gform_footer {
   margin-left: -4px !important;
@@ -3702,7 +3745,7 @@ ul.pagination li.current a {
   padding: 11px 4px; }
 
 .menu-container .subscribe-form .gform_body {
-  width: 179px !important; }
+  width: 100% !important; }
 
 /* -------------------------------- 
 
@@ -4118,7 +4161,7 @@ ul.post-meta {
   vertical-align: top; }
 
 #blog-search {
-  border-radius: 4px;
+  border-radius: 0;
   position: relative;
   margin-bottom: 8px; }
   #blog-search .search-icon {
@@ -4438,16 +4481,40 @@ h1.entry-title-ul {
   #convo h2 {
     font-size: 36px;
     margin-bottom: 90px; }
-  #convo p:not(.convo-name) {
-    margin-bottom: 24px;
-    line-height: 1.6;
-    font-size: 18px; }
-  #convo p.convo-name {
-    font-size: 14px; }
-    #convo p.convo-name span {
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-size: 16px; }
+
+#why {
+  background: #e5f5fb;
+  padding: 100px 0; }
+  #why h2, #why p {
+    color: #009CDE; }
+  #why h2 {
+    font-size: 48px;
+    margin-bottom: 24px; }
+  #why .why-icon {
+    margin-bottom: 40px; }
+    #why .why-icon svg {
+      max-width: 83px;
+      max-height: 79px; }
+    #why .why-icon svg path {
+      transition: all .5s;
+      -webkit-transition: all .5s;
+      /* Safari and Chrome */
+      -ms-transition: all .5s;
+      /* Opera */ }
+    #why .why-icon a:hover svg path {
+      fill: #123261; }
+
+p.quote {
+  margin-bottom: 24px;
+  line-height: 1.6;
+  font-size: 18px; }
+
+p.quote-name {
+  font-size: 14px; }
+  p.quote-name span {
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 16px; }
 
 #single-post .single-title-ul {
   position: relative;
