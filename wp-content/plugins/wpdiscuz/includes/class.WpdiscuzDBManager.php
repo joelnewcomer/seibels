@@ -295,7 +295,7 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
             $this->deleteCommentNotifications($subsriptionId, $email);
         }
         $activationKey = md5($email . uniqid() . time());
-        $sql = $this->db->prepare("INSERT INTO `" . $this->emailNotification . "` (`email`, `subscribtion_id`, `post_id`, `subscribtion_type`, `activation_key`,`confirm`) VALUES(%s, %d, %d, %s, %s, %d);", $email, $subsriptionId, $postId, $subscriptionType, $activationKey, $confirm);
+        $sql = $this->db->prepare("INSERT INTO `" . $this->emailNotification . "` (`email`, `subscribtion_id`, `post_id`, `subscribtion_type`, `activation_key`,`confirm`) VALUES(%s, %d, %d, %s, %s, %d);", $email, $subsriptionId, $postId, $subscriptionType, $activationKey, $confirm);        
         $this->db->query($sql);
         return $this->db->insert_id ? array('id' => $this->db->insert_id, 'activation_key' => $activationKey) : false;
     }
@@ -391,8 +391,8 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
     }
 
     public function alterNotificationTable($version) {
-        if (version_compare($version, '5.0.4', '<=') && version_compare($version, '1.0.0', '!=')) {
-            $sql_alter = "ALTER TABLE `" . $this->emailNotification . "` ADD UNIQUE KEY `subscribe_unique_index` (`subscribtion_id`,`email`, `post_id`);";
+        if (version_compare($version, '5.0.5', '<=') && version_compare($version, '1.0.0', '!=')) {            
+            $sql_alter = "ALTER TABLE `" . $this->emailNotification . "` DROP INDEX subscribe_unique_index, ADD UNIQUE KEY `subscribe_unique_index` (`subscribtion_id`,`email`, `post_id`);";
             $this->db->query($sql_alter);
         }
     }

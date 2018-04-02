@@ -3,7 +3,7 @@
 /*
  * Plugin Name: wpDiscuz
  * Description: Better comment system. Wordpress post comments and discussion plugin. Allows your visitors discuss, vote for comments and share.
- * Version: 5.0.5
+ * Version: 5.0.6
  * Author: gVectors Team (A. Chakhoyan, G. Zakaryan, H. Martirosyan)
  * Author URI: https://gvectors.com/
  * Plugin URI: http://wpdiscuz.com/
@@ -345,10 +345,13 @@ class WpdiscuzCore implements WpDiscuzConstants {
         $uniqueId = isset($_POST['wpdiscuz_unique_id']) ? trim($_POST['wpdiscuz_unique_id']) : '';
         $postId = isset($_POST['postId']) ? intval($_POST['postId']) : '';
 
-        $savedKey = get_transient(self::OPTION_SLUG_ANTISPAM);
-        if (isset($_POST['antispamKey']) && $savedKey && $savedKey != $_POST['antispamKey']) {
-            die(__('Hacker?', 'wpdiscuz'));
-        }        
+        if (!current_user_can('moderate_comments') &&
+                ($key = trim($this->optionsSerialized->antispamKey)) &&
+                isset($_POST['ahk']) &&
+                ($ahk = trim($_POST['ahk'])) &&
+                $key != $ahk) {
+            die(__('We are sorry, but this comment cannot be posted. Please try later.', 'wpdiscuz'));
+        }
 
         if ($uniqueId && $postId) {
             $form = $this->wpdiscuzForm->getForm($postId);
@@ -405,6 +408,9 @@ class WpdiscuzCore implements WpDiscuzConstants {
             }
 
             if ($name && $email && $comment_content) {
+                $name = urldecode($name);
+                $email = urldecode($email);
+                $website_url = $website_url ? urldecode($website_url) : '';
                 $stickyComment = isset($_POST['wc_sticky_comment']) && ($sticky = intval($_POST['wc_sticky_comment'])) ? $sticky : '';
                 $closedComment = isset($_POST['wc_closed_comment']) && ($closed = absint($_POST['wc_closed_comment'])) ? $closed : '';
                 $author_ip = $this->helper->getRealIPAddr();
@@ -454,8 +460,9 @@ class WpdiscuzCore implements WpDiscuzConstants {
                 $messageArray['code'] = $uniqueId;
                 $messageArray['redirect'] = $this->optionsSerialized->redirectPage;
                 $messageArray['new_comment_id'] = $new_comment_id;
-                $messageArray['user_name'] = $name;
-                $messageArray['user_email'] = $email;
+                $messageArray['comment_author'] = $name;
+                $messageArray['comment_author_email'] = $email;
+                $messageArray['comment_author_url'] = $website_url;
                 $messageArray['is_main'] = $comment_parent ? 0 : 1;
                 $messageArray['held_moderate'] = $held_moderate;
                 $messageArray['is_in_same_container'] = $isInSameContainer;
@@ -466,7 +473,7 @@ class WpdiscuzCore implements WpDiscuzConstants {
                 $commentListArgs['comment_author_email'] = $email;
                 $this->form = $this->wpdiscuzForm->getForm($postId);
                 $commentListArgs['can_user_comment'] = $this->form ? $this->form->isUserCanComment($currentUser, $postId) : true;
-                $messageArray['message'] = wp_list_comments($commentListArgs, array($newComment));                
+                $messageArray['message'] = wp_list_comments($commentListArgs, array($newComment));
             } else {
                 $messageArray['code'] = 'wc_invalid_field';
             }
@@ -1012,7 +1019,7 @@ class WpdiscuzCore implements WpDiscuzConstants {
             $args['caller'] = $this->commentsArgs['caller'] = 'wpdiscuz-';
             if (!$this->optionsSerialized->votingButtonsShowHide && $this->commentsArgs['orderby'] == 'by_vote') {
                 $args['join'] .= " LEFT JOIN " . $wpdb->commentmeta . " ON " . $wpdb->comments . ".comment_ID = " . $wpdb->commentmeta . ".comment_id  AND (" . $wpdb->commentmeta . ".meta_key = '" . self::META_KEY_VOTES . "')";
-                $orderby = $wpdb->commentmeta . ".meta_value+0 DESC, ";
+                $orderby = " IFNULL(" . $wpdb->commentmeta . ".meta_value,0)+0 DESC, ";
             }
             $args['orderby'] = $orderby . $wpdb->comments . '.comment_date_gmt ';
             $args['orderby'] .= isset($args['order']) ? '' : $this->commentsArgs['order'];
@@ -1075,35 +1082,35 @@ class WpdiscuzCore implements WpDiscuzConstants {
                 'msgConfirmPurgeGravatarsCache' => __('Do you really want to delete gravatars cache?', 'wpdiscuz'),
             );
 
-            wp_register_style('wpdiscuz-font-awesome', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/font-awesome-5.0.6/css/fontawesome-all.min.css'), null, '4.6.3');
+            wp_register_style('wpdiscuz-font-awesome', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/font-awesome-5.0.6/css/fontawesome-all.min.css'), null, $this->version);
             wp_enqueue_style('wpdiscuz-font-awesome');
-            wp_register_style('wpdiscuz-cp-index-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/css/index.css'));
+            wp_register_style('wpdiscuz-cp-index-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/css/index.css'), null, $this->version);
             wp_enqueue_style('wpdiscuz-cp-index-css');
-            wp_register_style('wpdiscuz-cp-compatibility-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/css/compatibility.css'));
+            wp_register_style('wpdiscuz-cp-compatibility-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/css/compatibility.css'), null, $this->version);
             wp_enqueue_style('wpdiscuz-cp-compatibility-css');
-            wp_register_script('wpdiscuz-cp-colors-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/js/colors.js'), array('jquery'), '1.0.0', false);
+            wp_register_script('wpdiscuz-cp-colors-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/js/colors.js'), array('jquery'), $this->version, false);
             wp_enqueue_script('wpdiscuz-cp-colors-js');
-            wp_register_script('wpdiscuz-cp-colorpicker-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/js/jqColorPicker.min.js'), array('jquery'), '1.0.0', false);
+            wp_register_script('wpdiscuz-cp-colorpicker-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/js/jqColorPicker.min.js'), array('jquery'), $this->version, false);
             wp_enqueue_script('wpdiscuz-cp-colorpicker-js');
-            wp_register_script('wpdiscuz-cp-index-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/js/index.js'), array('jquery'), '1.0.0', false);
+            wp_register_script('wpdiscuz-cp-index-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/colorpicker/js/index.js'), array('jquery'), $this->version, false);
             wp_enqueue_script('wpdiscuz-cp-index-js');
-            wp_register_style('wpdiscuz-easy-responsive-tabs-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/easy-responsive-tabs/css/easy-responsive-tabs.min.css'), true);
+            wp_register_style('wpdiscuz-easy-responsive-tabs-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/easy-responsive-tabs/css/easy-responsive-tabs.min.css'), null, $this->version);
             wp_enqueue_style('wpdiscuz-easy-responsive-tabs-css');
-            wp_register_script('wpdiscuz-easy-responsive-tabs-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/easy-responsive-tabs/js/easy-responsive-tabs.js'), array('jquery'), '1.0.1', true);
+            wp_register_script('wpdiscuz-easy-responsive-tabs-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/easy-responsive-tabs/js/easy-responsive-tabs.js'), array('jquery'), $this->version, true);
             wp_enqueue_script('wpdiscuz-easy-responsive-tabs-js');
-            wp_register_style('wpdiscuz-options-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/css/options.css'));
+            wp_register_style('wpdiscuz-options-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/css/options.css'), null, $this->version);
             wp_enqueue_style('wpdiscuz-options-css');
-            wp_register_script('wpdiscuz-options-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/js/wpdiscuz-options.js'), array('jquery'));
+            wp_register_script('wpdiscuz-options-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/js/wpdiscuz-options.js'), array('jquery'), $this->version);
             wp_enqueue_script('wpdiscuz-options-js');
             wp_localize_script('wpdiscuz-options-js', 'wpdiscuzObj', $args);
             wp_enqueue_script('thickbox');
-            wp_register_script('wpdiscuz-jquery-cookie', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/wpdcookiejs/customcookie.js'), array('jquery'), '2.1.3', true);
+            wp_register_script('wpdiscuz-jquery-cookie', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/wpdcookiejs/customcookie.js'), array('jquery'), $this->version, true);
             wp_enqueue_script('wpdiscuz-jquery-cookie');
-            wp_register_script('wpdiscuz-contenthover', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/contenthover/jquery.contenthover.min.js'), array('jquery'), '1.0.0', true);
+            wp_register_script('wpdiscuz-contenthover', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/contenthover/jquery.contenthover.min.js'), array('jquery'), $this->version, true);
             wp_enqueue_script('wpdiscuz-contenthover');
         }
         if (version_compare($wp_version, '4.2.0', '>=')) {
-            wp_register_script('wpdiscuz-addon-notes', plugins_url(WPDISCUZ_DIR_NAME . '/assets/js/wpdiscuz-notes.js'), array('jquery'), '1.0.0', true);
+            wp_register_script('wpdiscuz-addon-notes', plugins_url(WPDISCUZ_DIR_NAME . '/assets/js/wpdiscuz-notes.js'), array('jquery'), $this->version, true);
             wp_enqueue_script('wpdiscuz-addon-notes');
         }
 
@@ -1113,13 +1120,13 @@ class WpdiscuzCore implements WpDiscuzConstants {
                 'msgReasonDescRequired' => __('Please provide more information', 'wpdiscuz'),
                 'adminUrl' => get_admin_url()
             );
-            wp_register_style('wpdiscuz-lity-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/lity/lity.css'));
+            wp_register_style('wpdiscuz-lity-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/lity/lity.css'), null, $this->version);
             wp_enqueue_style('wpdiscuz-lity-css');
-            wp_register_script('wpdiscuz-lity-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/lity/lity.js'), array('jquery'), '1.0.0', false);
+            wp_register_script('wpdiscuz-lity-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/lity/lity.js'), array('jquery'), $this->version);
             wp_enqueue_script('wpdiscuz-lity-js');
             wp_register_style('wpdiscuz-deactivation-css', plugins_url(WPDISCUZ_DIR_NAME . '/assets/css/wpdiscuz-deactivation.css'));
             wp_enqueue_style('wpdiscuz-deactivation-css');
-            wp_register_script('wpdiscuz-deactivation-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/js/wpdiscuz-deactivation.js'), array('jquery'), '1.0.0', false);
+            wp_register_script('wpdiscuz-deactivation-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/js/wpdiscuz-deactivation.js'), array('jquery'), $this->version);
             wp_enqueue_script('wpdiscuz-deactivation-js');
             wp_localize_script('wpdiscuz-deactivation-js', 'deactivationObj', $reasonArgs);
         }
@@ -1132,7 +1139,7 @@ class WpdiscuzCore implements WpDiscuzConstants {
         global $post;
         $this->isWpdiscuzLoaded = $this->helper->isLoadWpdiscuz($post);
         if (!$this->optionsSerialized->disableFontAwesome) {
-            wp_register_style('wpdiscuz-font-awesome', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/font-awesome-5.0.6/css/fontawesome-all.min.css'), null, '5.0.6');
+            wp_register_style('wpdiscuz-font-awesome', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/font-awesome-5.0.6/css/fontawesome-all.min.css'), null, $this->version);
         }
 
         if (!$this->isWpdiscuzLoaded && $this->optionsSerialized->ratingCssOnNoneSingular) {
@@ -1160,9 +1167,9 @@ class WpdiscuzCore implements WpDiscuzConstants {
                 wp_enqueue_style('wpdiscuz-frontend-css');
             }
 
-            wp_register_script('wpdiscuz-cookie-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/wpdcookiejs/customcookie.js'), array('jquery'));
+            wp_register_script('wpdiscuz-cookie-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/wpdcookiejs/customcookie.js'), array('jquery'), $this->version);
             wp_enqueue_script('wpdiscuz-cookie-js');
-            wp_register_script('autogrowtextarea-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/autogrow/jquery.autogrowtextarea.min.js'), array('jquery'), '3.0', false);
+            wp_register_script('autogrowtextarea-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/third-party/autogrow/jquery.autogrowtextarea.min.js'), array('jquery'), $this->version);
             wp_enqueue_script('autogrowtextarea-js');
             $form = $this->wpdiscuzForm->getForm($post->ID);
             $form->initFormMeta();

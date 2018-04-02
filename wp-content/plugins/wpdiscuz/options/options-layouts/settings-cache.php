@@ -44,7 +44,7 @@ if (!defined('ABSPATH')) {
                     <?php _e('Purge expired caches', 'wpdiscuz'); ?>
                 </th>
                 <td>
-                    <?php $expiredCacheUrl = admin_url('admin-post.php/?action=purgeExpiredGravatarsCaches'); ?>
+                    <?php $expiredCacheUrl = admin_url('admin-post.php?action=purgeExpiredGravatarsCaches'); ?>
                     <a id="wpdiscuz-purge-expired-gravatars-cache" href="<?php echo wp_nonce_url($expiredCacheUrl, 'purgeExpiredGravatarsCaches'); ?>" class="button button-secondary" style="margin-left: 5px;"><?php _e('Purge expired caches', 'wpdiscuz'); ?></a>
                 </td>
             </tr>
@@ -53,7 +53,7 @@ if (!defined('ABSPATH')) {
                     <?php _e('Purge all caches', 'wpdiscuz'); ?>
                 </th>
                 <td>
-                    <?php $allCacheUrl = admin_url('admin-post.php/?action=purgeGravatarsCaches'); ?>
+                    <?php $allCacheUrl = admin_url('admin-post.php?action=purgeGravatarsCaches'); ?>
                     <a id="wpdiscuz-purge-gravatars-cache" href="<?php echo wp_nonce_url($allCacheUrl, 'purgeGravatarsCaches'); ?>" class="button button-secondary" style="margin-left: 5px;"><?php _e('Purge all caches', 'wpdiscuz'); ?></a>
                 </td>
             </tr>

@@ -256,10 +256,6 @@ if (!post_password_required($post->ID)) {
                     <?php
                     $args = array('first_load' => 1);
                     $showLoadeMore = 1;
-                    $lastParentId = filter_input(INPUT_GET, 'wpdParentID', FILTER_SANITIZE_NUMBER_INT);
-                    if ($lastParentId) {
-                        $args['last_parent_id'] = $lastParentId--;
-                    }
 
                     if ($wpdiscuz->optionsSerialized->showSortingButtons && $wpdiscuz->optionsSerialized->mostVotedByDefault && !$wpdiscuz->optionsSerialized->votingButtonsShowHide) {
                         $args['orderby'] = 'by_vote';
@@ -278,11 +274,11 @@ if (!post_password_required($post->ID)) {
                             $loadMoreButtonText = ($wpdiscuz->optionsSerialized->commentListLoadType == 1) ? $wpdiscuz->optionsSerialized->phrases['wc_load_rest_comments_submit_text'] : $wpdiscuz->optionsSerialized->phrases['wc_load_more_submit_text'];
                             ?>
                             <div class="wc-load-more-submit-wrap">
-                                <a class="wc-load-more-link" href="<?php echo $wpdiscuz->helper->loadMoreLink($commentData['last_parent_id'], $post->ID); ?>">
+                                <div class="wc-load-more-link" data-lastparentid="<?php echo $commentData['last_parent_id']; ?>">
                                     <button name="submit"  class="wc-load-more-submit wc-loaded button">
                                         <?php echo $loadMoreButtonText; ?>
                                     </button>
-                                </a>
+                                </div>
                             </div>
                             <input id="wpdiscuzHasMoreComments" type="hidden" value="<?php echo $commentData['is_show_load_more']; ?>" />
                             <?php

@@ -415,13 +415,6 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                 return $authorURL;
             }
 
-            public function loadMoreLink($parentCommentID, $post_id) {
-                global $wp_rewrite;
-                $loadMoreLink = !$wp_rewrite->using_permalinks() ? get_permalink($post_id) . "&" : get_permalink($post_id) . "?";
-                $loadMoreLink .= 'wpdParentID=' . $parentCommentID;
-                return $loadMoreLink;
-            }
-
             public static function getCurrentUser() {
                 global $user_ID;
                 if ($user_ID) {

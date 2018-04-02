@@ -153,4 +153,20 @@ jQuery(document).ready(function ($) {
     $('#wpd-disable-addons').click(function () {
         location.href = $('#wpd-disable-addons-action').val();
     });
+
+    $('#generateAntispamKey').click(function () {
+        $('#antispamKey').val(uniqueKey(32));
+    });
+
+    function uniqueKey(length) {
+        var text = "";
+        var possible = "abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-=";
+
+        for (var i = 0; i < length; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+        return text;
+    }
+
+
 });

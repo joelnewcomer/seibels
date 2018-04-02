@@ -9,7 +9,7 @@ var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 var inProduction = (process.env.NODE_ENV === 'production');
 // Replace URL of website.
-var BaseURL = "http://drumstarter.local/";
+var BaseURL = "http://seibels.local/";
 
 module.exports = {
     entry: {
@@ -59,7 +59,7 @@ module.exports = {
                         loader: 'file-loader',
                         options: {
                             // name: '/images/[name].[hash].[ext]'
-                            name: './images/[name].[ext]'
+                            name: '../../images/[name].[ext]'
                         }
                     }
                 ]

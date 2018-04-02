@@ -78,6 +78,21 @@ if (!defined('ABSPATH')) {
                 </th>
             </tr>
             <tr valign="top">
+                <th scope="row">
+                    <label for="antispamKey"><?php _e('Spam Protection', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc">
+                        <?php _e('You should purge caches after each key generation otherwise the plugin may work not correctly', 'wpdiscuz'); ?>
+                    </p>
+                    <p class="wpd-desc">
+                        <?php _e('Leave the field empty if you don\'t want to use this feature', 'wpdiscuz'); ?>
+                    </p>
+                </th>
+                <th>
+                    <input type="text" value="<?php echo $this->optionsSerialized->antispamKey ?>" name="antispamKey" id="antispamKey" style="padding: 3px 5px;" size="35"/>
+                    <button type="button" id="generateAntispamKey" class="button button-secondary"><?php _e('Generate', 'wpdiscuz') ?></button>                    
+                </th>
+            </tr>
+            <tr valign="top">
                 <th scope="row" style="width:55%;">
                     <label for="wc_quick_tags"><?php _e('Enable Quicktags', 'wpdiscuz'); ?></label>
                     <p class="wpd-desc"><?php _e('Quicktag is a on-click button that inserts HTML in to comment textarea. For example the "b" Quicktag will insert the HTML bold tags < b > < /b >.', 'wpdiscuz'); ?></p>

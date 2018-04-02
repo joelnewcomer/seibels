@@ -41,15 +41,16 @@ class Website extends Field {
     }
 
     public function frontFormHtml($name, $args, $options, $currentUser, $uniqueId, $isMainForm) {
-        if (!$currentUser->ID) {
+        if (!$currentUser->ID) {            
             $hasIcon = $args['icon'] ? true : false;
             if ($args['enable']) {
+                $authorUrl = $this->commenter && is_array($this->commenter) && isset($this->commenter['comment_author_url']) ? urldecode($this->commenter['comment_author_url']) : '';
                 ?>
                 <div class="wpdiscuz-item <?php echo $hasIcon ? 'wpd-has-icon' : '' ?>">
                     <?php if ($hasIcon) { ?>
                         <div class="wpd-field-icon"><i class="<?php echo strpos(trim($args['icon']), ' ') ? $args['icon'] : 'fas '.$args['icon']; ?>"></i></div>
                     <?php } ?>
-                    <input class="<?php echo $name; ?> wpd-field" type="text" name="<?php echo $name; ?>" value="" placeholder="<?php echo $args['name']; ?>">
+                        <input value="<?php echo $authorUrl; ?>" class="<?php echo $name; ?> wpd-field" type="text" name="<?php echo $name; ?>" value="" placeholder="<?php echo $args['name']; ?>">
                     <?php if ($args['desc']) { ?>
                         <div class="wpd-field-desc"><i class="far fa-question-circle" aria-hidden="true"></i><span><?php echo esc_html($args['desc']); ?></span></div>
                             <?php } ?>

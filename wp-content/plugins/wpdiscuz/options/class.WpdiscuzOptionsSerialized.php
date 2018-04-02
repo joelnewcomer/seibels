@@ -550,6 +550,14 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
     public $reverseChildren;
 
     /**
+     * Type - Input text
+     * Available Values - random string (32 chars)
+     * Description - Generating unique key for spam protection
+     * Default Value - unique key
+     */
+    public $antispamKey;
+
+    /**
      * wordpress options
      */
     public $wordpressDateFormat;
@@ -649,6 +657,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $this->gravatarCacheTimeout = isset($options['gravatarCacheTimeout']) ? $options['gravatarCacheTimeout'] : 10;
         $this->theme = isset($options['theme']) ? $options['theme'] : 'wpd-default';
         $this->reverseChildren = isset($options['reverseChildren']) ? $options['reverseChildren'] : 0;
+        $this->antispamKey = isset($options['antispamKey']) ? $options['antispamKey'] : '';
         do_action('wpdiscuz_init_options', $this);
     }
 
@@ -836,6 +845,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'gravatarCacheTimeout' => $this->gravatarCacheTimeout,
             'theme' => $this->theme,
             'reverseChildren' => $this->reverseChildren,
+            'antispamKey' => $this->antispamKey,
         );
         return $options;
     }
@@ -916,6 +926,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'gravatarCacheTimeout' => '10',
             'theme' => 'wpd-default',
             'reverseChildren' => 0,
+            'antispamKey' => $this->generateUniqueKey(),
             'wcf_google_map_api_key' => '',
         );
         add_option(self::OPTION_SLUG_OPTIONS, serialize($options));
@@ -987,11 +998,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $js_options['facebookAppID'] = $this->facebookAppID;
         $js_options['cookiehash'] = COOKIEHASH;
         $js_options['isLoadOnlyParentComments'] = $this->isLoadOnlyParentComments;
-        if (!($antispamKey = get_transient(self::OPTION_SLUG_ANTISPAM))) {
-            $antispamKey = md5(time() . uniqid());
-            set_transient(self::OPTION_SLUG_ANTISPAM, $antispamKey, DAY_IN_SECONDS);
-        }
-        $js_options['antispamKey'] = $antispamKey;
+        $js_options['ahk'] = $this->antispamKey;
         return $js_options;
     }
 
@@ -1000,6 +1007,15 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         if ($this->isGoodbyeCaptchaActive) {
             $this->goodbyeCaptchaTocken = GdbcWordPressPublicModule::getInstance()->getTokenFieldHtml();
         }
+    }
+
+    public function generateUniqueKey($length = 32) {
+        $chars = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-=';
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $chars[rand(0, strlen($chars) - 1)];
+        }
+        return $randomString;
     }
 
 }

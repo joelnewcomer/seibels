@@ -152,7 +152,7 @@ if (!defined('ABSPATH')) {
                             $resetOptionsUrl = wp_nonce_url($resetOptionsUrl, 'wpdiscuz_reset_options_nonce');
                             ?>
                             <a id="wpdiscuz-reset-options" style="float: left;" class="button button-secondary" href="<?php echo $resetOptionsUrl; ?>"><?php _e('Reset Options', 'wpdiscuz'); ?></a>                            
-                            <?php $voteUrl = admin_url('admin-post.php/?action=removeVoteData&remove=1'); ?>
+                            <?php $voteUrl = admin_url('admin-post.php?action=removeVoteData&remove=1'); ?>
                             <a id="wpdiscuz-remove-votes" href="<?php echo wp_nonce_url($voteUrl, 'remove_vote_data'); ?>" class="button button-secondary" style="margin-left: 5px;"><?php _e('Remove vote data', 'wpdiscuz'); ?></a>
                             <input style="float: right;" type="submit" class="button button-primary" name="wc_submit_options" value="<?php _e('Save Changes', 'wpdiscuz'); ?>" />                                
                         </p>

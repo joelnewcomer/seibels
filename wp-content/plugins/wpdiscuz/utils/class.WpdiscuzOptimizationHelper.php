@@ -54,12 +54,10 @@ class WpdiscuzOptimizationHelper {
      * @param type $comment current comment object
      */
     public function statusEventHandler($newStatus, $oldStatus, $comment) {
-        if ($newStatus != $oldStatus) {
-            if ($newStatus == 'approved') {
-                $this->notifyOnApprove($comment);
-                if ($this->optionsSerialized->isNotifyOnCommentApprove) {
-                    $this->emailHelper->notifyOnApproving($comment);
-                }
+        if ($newStatus != $oldStatus && $newStatus == 'approved') {
+            $this->notifyOnApprove($comment);
+            if ($this->optionsSerialized->isNotifyOnCommentApprove) {
+                $this->emailHelper->notifyOnApproving($comment);
             }
         }
     }
@@ -111,7 +109,7 @@ class WpdiscuzOptimizationHelper {
             wp_redirect(admin_url('edit-comments.php?page=' . WpdiscuzCore::PAGE_SETTINGS));
         }
     }
-    
+
     public function cleanCommentRelatedRows($commentId) {
         $this->dbManager->deleteSubscriptions($commentId);
         $this->dbManager->deleteVotes($commentId);

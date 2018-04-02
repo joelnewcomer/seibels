@@ -14,10 +14,12 @@ abstract class Field {
     protected $fieldInputName;
     protected $fieldData;
     protected $fieldDefaultData;
+    protected $commenter;
 
     private function __construct() {
         $this->initType();
         $this->initDefaultData();
+        $this->commenter = wp_get_current_commenter();
     }
 
     public static function getInstance() {

@@ -1,3 +1,4 @@
+;
 jQuery(document).ready(function ($) {
     $('body').addClass('wpdiscuz_' + wpdiscuzAjaxObj.wpdiscuz_options.version);
 
@@ -48,7 +49,6 @@ jQuery(document).ready(function ($) {
     });
 
     if ($('.wc_main_comm_form').length) {
-        setCookieInForm();
         wpdiscuzReplaceValidationUI($('.wc_main_comm_form')[0]);
     }
     $(document).delegate('.wc-reply-button', 'click', function () {
@@ -59,7 +59,6 @@ jQuery(document).ready(function ($) {
             cloneSecondaryForm($(this));
         }
         $(this).toggleClass('wc-cta-active');
-        setCookieInForm();
     });
 
     $(document).delegate('.wc-comment-img-link', 'click', function () {
@@ -99,10 +98,6 @@ jQuery(document).ready(function ($) {
         } else {
             $('.share_buttons_box', parent).hide();
         }
-    });
-
-    $(document).delegate('.wpdiscuz-nofollow,.wc_captcha_refresh_img,.wc-toggle,.wc-load-more-link', 'click', function (e) {
-        e.preventDefault();
     });
 
     $(document).delegate('.wc-toggle', 'click', function () {
@@ -222,7 +217,7 @@ jQuery(document).ready(function ($) {
             $(currentSubmitBtn).removeClass('wc_not_clicked');
             var data = new FormData();
             data.append('action', 'addComment');
-            data.append('antispamKey', wpdiscuzAjaxObj.wpdiscuz_options.antispamKey);
+            data.append('ahk', wpdiscuzAjaxObj.wpdiscuz_options.ahk);
             var inputs = $(":input", wcForm);
             inputs.each(function () {
                 if (this.name != '' && this.type != 'checkbox' && this.type != 'radio') {
@@ -326,7 +321,7 @@ jQuery(document).ready(function ($) {
                         wpdiscuzRedirect(obj);
                         addCookie(wcForm, obj);
                         wcForm.get(0).reset();
-                        setCookieInForm();
+                        setCookieInForm(obj);
                         var currTArea = $('.wc_comment', wcForm);
                         currTArea.css('height', '72px');
                         setTextareaCharCount(currTArea, commentTextMaxLength);
@@ -370,7 +365,7 @@ jQuery(document).ready(function ($) {
             var data = new FormData();
             data.append('action', 'checkNotificationType');
             data.append('comment_id', obj.new_comment_id);
-            data.append('email', obj.user_email);
+            data.append('email', obj.comment_author_email);
             data.append('isParent', obj.is_main);
             var ajaxObject = getAjaxObj('', data);
             ajaxObject.done(function (response) {
@@ -400,15 +395,15 @@ jQuery(document).ready(function ($) {
         }
     }
 
-    function setCookieInForm() {
-        if (Cookies.get('comment_author_' + wpdiscuzCookiehash) && Cookies.get('comment_author_' + wpdiscuzCookiehash).indexOf('Anonymous') < 0) {
-            $('.wc_comm_form .wc_name').val(decodeURIComponent(Cookies.get('comment_author_' + wpdiscuzCookiehash)));
+    function setCookieInForm(obj) {
+        if (obj.comment_author.indexOf('Anonymous') < 0) {
+            $('.wc_comm_form .wc_name').val(obj.comment_author);
         }
-        if (Cookies.get('comment_author_email_' + wpdiscuzCookiehash) && Cookies.get('comment_author_email_' + wpdiscuzCookiehash).indexOf('@example.com') < 0) {
-            $('.wc_comm_form .wc_email').val(decodeURIComponent(Cookies.get('comment_author_email_' + wpdiscuzCookiehash)));
+        if (obj.comment_author_email.indexOf('@example.com') < 0) {
+            $('.wc_comm_form .wc_email').val(obj.comment_author_email);
         }
-        if (Cookies.get('comment_author_url_' + wpdiscuzCookiehash)) {
-            $('.wc_comm_form .wc_website').val(decodeURIComponent(Cookies.get('comment_author_url_' + wpdiscuzCookiehash)));
+        if (obj.comment_author_url) {
+            $('.wc_comm_form .wc_website').val(obj.comment_author_url);
         }
     }
 
@@ -423,7 +418,7 @@ jQuery(document).ready(function ($) {
         if ($('.wc_name', wcForm).val()) {
             name = $('.wc_name', wcForm).val();
         } else {
-            name = obj.user_name;
+            name = obj.comment_author;
         }
         if (storeCommenterData == null) {
             Cookies.set('comment_author_email_' + wpdiscuzCookiehash, email);
@@ -950,13 +945,11 @@ jQuery(document).ready(function ($) {
     }
 
     function getLastParentID() {
-        var url = $('.wc-load-more-link').attr("href");
-        return url.substring(url.lastIndexOf('=') + 1);
+        return $('.wc-load-more-link').attr("data-lastparentid");
     }
 
     function setLastParentID(lastParentID) {
-        var url = $('.wc-load-more-link').attr("href");
-        $('.wc-load-more-link').attr("href", url.replace(/[\d]+$/m, lastParentID));
+        $('.wc-load-more-link').attr("data-lastparentid", lastParentID);
         if (commentListLoadType != 2) {
             $('.wpdiscuz-comment-pagination').show();
         }

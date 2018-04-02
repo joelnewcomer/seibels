@@ -130,11 +130,67 @@ get_header(); ?>
 	   		</div>
 		</div>	
 	</section>
+	
+	<section id="approach">
+		<div class="grid-container">
+	   		<div class="grid-x">
+	   			<div class="large-12 cell text-center">
+		   			<h2><?php echo get_field('approach_title'); ?></h2>
+		   			<p><?php echo get_field('approach_paragraph'); ?></p>
+		   			<div class="button ghost reverse"><a href="<?php echo get_field('approach_title'); ?>">Our Approach</a></div>
+	   			</div>
+	   		</div>
+		</div>		
+	</section>
+
+	<section id="technology">
+		<div class="grid-container">
+	   		<div class="grid-x">
+	   			<div class="large-12 cell text-center">
+		   			<h2><?php echo get_field('technology_title'); ?></h2>
+		   			<h3><?php echo get_field('technology_subtitle'); ?></h3>
+	   			</div>
+		   		<?php if(get_field('technology_logos')): ?>
+		   			<?php while(has_sub_field('technology_logos')): ?>
+		   				<div class="large-3 medium-6 cell text-center">
+			   				<div class="logo-container">
+			   					<div style="display:table;width:100%;height:100%;">
+			   					  <div style="display:table-cell;vertical-align:middle;">
+			   					    <div style="text-align:center;"><?php echo file_get_contents(get_sub_field('logo')); ?></div>
+			   					  </div>
+			   					</div>
+			   				</div>
+		   				</div>
+		   			<?php endwhile; ?>
+		   		<?php endif; ?>
+	   		</div>
+		</div>		
+	</section>
+	
+	<section id="convo">
+		<div class="bg-overlay"  style="background-image: url(<?php echo get_field('convo_background_image'); ?>);"></div>
+		<div class="grid-container">
+	   		<div class="grid-x">		
+		   		<div class="large-6 medium-6 cell convo-title">
+		   			<h2><?php echo get_field('convo_title'); ?></h2>
+		   			<div class="button yellow"><a href="<?php echo get_field('convo_link'); ?>">Start a Conversation</a></div>
+		   		</div>
+		   		<div class="large-6 medium-6 cell convo-quote">
+		   			<p><?php echo get_field('convo_quote'); ?></p>
+		   			<p class="convo-name"><span><?php echo get_field('convo_quote_name'); ?></span><br />
+		   			<?php echo get_field('convo_quote_title'); ?></p>
+		   		</div>
+	   		</div>
+		</div>
+	</section> <!-- #convo -->
 
 </div> <!-- #page -->
 
 <script>
 jQuery(document).ready(function($){
+	
+	jQuery('.logo-container').matchHeight({byRow:false});
+	
 	//set slider animation parameters
 	var duration = 1000,
 		epsilon = (1000 / 60 / duration) / 4,

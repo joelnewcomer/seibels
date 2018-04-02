@@ -93,6 +93,7 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->gravatarCacheTimeout = isset($_POST['gravatarCacheTimeout']) ? $_POST['gravatarCacheTimeout'] : 10;
             $this->optionsSerialized->theme = isset($_POST['theme']) ? $_POST['theme'] : 'wpd-default';
             $this->optionsSerialized->reverseChildren = isset($_POST['reverseChildren']) ? $_POST['reverseChildren'] : 0;
+            $this->optionsSerialized->antispamKey = isset($_POST['antispamKey']) ? $_POST['antispamKey'] : '';
             do_action('wpdiscuz_save_options', $_POST);
             $this->optionsSerialized->updateOptions();
             add_settings_error('wpdiscuz', 'settings_updated', __('Settings updated', 'wpdiscuz'), 'updated');

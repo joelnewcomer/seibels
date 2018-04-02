@@ -3,7 +3,7 @@ Contributors: gVectors Team
 Tags: comment, comments, ajax comments, custom comment form, custom comment field
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 5.0.5
+Stable tag: 5.0.6
 Requires PHP: 5.4 and higher
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -174,6 +174,25 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 
 == Changelog ==
 
+= Comments - wpDiscuz v5.0.6 =
+
+* Fixed Bug: "+" symbol in Comment Author Names
+* Fixed Bug: Problem with "Most voted" comment sorting
+* Fixed Bug: Spam protection issue on hosting with hard caching
+* Fixed Bug: Option to insert Antispam key (CAPTCHA Alternative)
+
+
+IMPORTANT!
+
+- wpDiscuz uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
+- Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
+- If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
+- If you have JetPack installed please deactivate Jetpack comments, it affects wpDiscuz
+- If you have a Cache Plugin, please delete all caches after wpDiscuz update.
+- If you use CDN and found some issue please purge it.
+- If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
+
+
 = Comments - wpDiscuz v5.0.5 =
 
 * Added: Shortcodes for Notification Emails Subject
@@ -184,17 +203,6 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 * Changed: Export / Import wpDiscuz Options using .txt file
 * Fixed Bug: Gravatar cache issue when passed variable is object
 * Fixed Bug: Delete Gravatar cache problem on "cron job" mode.
-
-
-IMPORTANT!
-
-- wpDiscuz 5.0.3 uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
-- Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
-- If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
-- If you have JetPack installed please deactivate Jetpack comments, it affects wpDiscuz
-- If you have a Cache Plugin, please delete all caches after wpDiscuz update.
-- If you use CDN and found some issue please purge it.
-- If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
 
 
 = Comments - wpDiscuz v5.0.3 / v5.0.4 =

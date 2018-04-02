@@ -25,7 +25,7 @@ $showDemos = get_option(WpDiscuzConstants::OPTION_SLUG_SHOW_DEMO, 1);
                         <label for="wpd-disable-addons" style="display: inline-block; margin-right: 30px;">&nbsp;</label>
                         <?php
                         $show = get_option(WpDiscuzConstants::OPTION_SLUG_SHOW_DEMO, 1);
-                        $disableAddonsUrl = admin_url('admin-post.php/?action=disableAddonsDemo&show=' . intval(!$showDemos));
+                        $disableAddonsUrl = admin_url('admin-post.php?action=disableAddonsDemo&show=' . intval(!$showDemos));
                         ?>
                         <input type="hidden" value="<?php echo wp_nonce_url($disableAddonsUrl, 'disableAddonsDemo'); ?>" id="wpd-disable-addons-action" />
                     </div>

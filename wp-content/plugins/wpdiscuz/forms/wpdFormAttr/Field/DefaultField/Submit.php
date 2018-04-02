@@ -29,6 +29,30 @@ class Submit extends Field {
         $wpdiscuz = wpDiscuz();
         ?>
         <div class="wc-field-submit">
+            <?php
+            if ($isMainForm && current_user_can('moderate_comments')) {
+                ?>
+                <label class="wpd_label">
+                    <input id="wc_sticky_comment" class="wpd_label__checkbox" value="1" type="checkbox" name="wc_sticky_comment"/>
+                    <span class="wpd_label__text">
+                        <span class="wpd_label__check">
+                            <div class="wpd-field-desc"><i class="fas fa-thumbtack wpdicon wpdicon-on"></i><span><?php echo $options->phrases['wc_stick_main_form_comment_on']; ?></span></div>
+                            <div class="wpd-field-desc"><i class="fas fa-thumbtack wpdicon wpdicon-off"></i><span><?php echo $options->phrases['wc_stick_main_form_comment_off']; ?></span></div>
+                        </span>
+                    </span>
+                </label>
+                <label class="wpd_label">
+                    <input id="wc_closed_comment" class="wpd_label__checkbox" value="1" type="checkbox" name="wc_closed_comment"/>
+                    <span class="wpd_label__text">
+                        <span class="wpd_label__check">
+                            <div class="wpd-field-desc"><i class="fas fa-lock wpdicon wpdicon-on"></i><span><?php echo $options->phrases['wc_close_main_form_comment_on']; ?></span></div>
+                            <div class="wpd-field-desc"><i class="fas fa-unlock-alt wpdicon wpdicon-off"></i><span><?php echo $options->phrases['wc_close_main_form_comment_off']; ?></span></div>
+                        </span>
+                    </span>
+                </label>
+                <?php
+            }
+            ?>
             <?php if ($options->wordpressThreadComments || class_exists('Prompt_Comment_Form_Handling')) { ?>
                 <?php
                 $isShowSubscribeWrapper = false;
@@ -43,28 +67,6 @@ class Submit extends Field {
                     $isReplyDefaultChecked = $options->isReplyDefaultChecked ? 'checked="checked"' : '';
                     ?>    
                     <?php
-                    if ($isMainForm && current_user_can('moderate_comments')) {
-                        ?>
-                        <label class="wpd_label">
-                            <input id="wc_sticky_comment" class="wpd_label__checkbox" value="1" type="checkbox" name="wc_sticky_comment"/>
-                            <span class="wpd_label__text">
-                                <span class="wpd_label__check">
-                                    <div class="wpd-field-desc"><i class="fas fa-thumbtack wpdicon wpdicon-on"></i><span><?php echo $options->phrases['wc_stick_main_form_comment_on']; ?></span></div>
-                                    <div class="wpd-field-desc"><i class="fas fa-thumbtack wpdicon wpdicon-off"></i><span><?php echo $options->phrases['wc_stick_main_form_comment_off']; ?></span></div>
-                                </span>
-                            </span>
-                        </label>
-                        <label class="wpd_label">
-                            <input id="wc_closed_comment" class="wpd_label__checkbox" value="1" type="checkbox" name="wc_closed_comment"/>
-                            <span class="wpd_label__text">
-                                <span class="wpd_label__check">
-                                    <div class="wpd-field-desc"><i class="fas fa-lock wpdicon wpdicon-on"></i><span><?php echo $options->phrases['wc_close_main_form_comment_on']; ?></span></div>
-                                    <div class="wpd-field-desc"><i class="fas fa-unlock-alt wpdicon wpdicon-off"></i><span><?php echo $options->phrases['wc_close_main_form_comment_off']; ?></span></div>
-                                </span>
-                            </span>
-                        </label>
-                        <?php
-                    }
                     if (class_exists('Prompt_Comment_Form_Handling') && $options->usePostmaticForCommentNotification) {
                         ?>
                         <label class="wpd_label">

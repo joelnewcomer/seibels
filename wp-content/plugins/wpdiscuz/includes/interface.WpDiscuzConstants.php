@@ -10,7 +10,6 @@ interface WpDiscuzConstants {
     const OPTION_SLUG_VERSION                         = 'wc_plugin_version';
     const OPTION_SLUG_DEACTIVATION                    = 'wc_deactivation_modal_never_show';
     const OPTION_SLUG_SHOW_DEMO                       = 'wc_show_addons_demo';
-    const OPTION_SLUG_ANTISPAM                        = 'wc_antispam_key';
     /* === OPTIONS SLUGS === */
     const PAGE_SETTINGS                               = 'wpdiscuz_options_page';
     const PAGE_PHRASES                                = 'wpdiscuz_phrases_page';
