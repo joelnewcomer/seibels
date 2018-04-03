@@ -3003,21 +3003,65 @@ main.container > section > .grid-container {
     font-size: 18px; }
   .main-footer h3.resources-header {
     margin-bottom: 24px; }
+  .main-footer h3.subscribe-header {
+    margin-bottom: 12px; }
+  .main-footer .gform_body {
+    text-align: center; }
   .main-footer .gform_fields li {
-    width: 189px; }
+    display: inline-block;
+    margin: 0 5px !important;
+    width: 189px;
+    clear: none; }
+    .main-footer .gform_fields li input[type="text"] {
+      border: none;
+      background: rgba(255, 255, 255, 0.2);
+      height: 33px;
+      padding: 4px 10px;
+      text-transform: uppercase;
+      font-size: 12px !important;
+      margin-bottom: 10px; }
+  .main-footer #gform_submit_button_4 {
+    background: #009CDE;
+    height: 33px;
+    width: 189px !important;
+    display: inline-block;
+    padding: 4px 10px;
+    text-transform: uppercase;
+    font-size: 12px !important;
+    text-align: left; }
+  .main-footer .gform_footer {
+    width: 100% !important;
+    text-align: center; }
+  .main-footer .address {
+    margin-bottom: 100px; }
 
 .sub-footer {
-  padding: 24px 0 10px 0;
+  padding: 20px 0;
   background: #083C66; }
   .sub-footer p, .sub-footer a {
     font-size: 14px;
     color: #fff; }
+  .sub-footer .drum a {
+    font-size: 12px;
+    opacity: .2; }
+
+#menu-footer-menu {
+  margin: 0; }
 
 .footer-menu li {
   list-style: none;
-  margin-bottom: 8px; }
+  display: inline-block;
+  margin-bottom: 8px;
+  margin: 0 0 0 -4px;
+  border-right: solid 1px #fff;
+  line-height: 1;
+  opacity: .8; }
+  .footer-menu li:last-child {
+    border-right: none; }
   .footer-menu li a {
-    font-size: 18px; }
+    font-size: 14px;
+    padding: 0 10px;
+    line-height: 1; }
 
 .footer-icon {
   height: 58px;
@@ -3041,7 +3085,7 @@ main.container > section > .grid-container {
     opacity: 1; }
 
 .footer-icons {
-  margin-bottom: 50px; }
+  margin-bottom: 56px; }
 
 #gform_wrapper_4 {
   margin-top: 0; }
@@ -3731,10 +3775,6 @@ ul.pagination li.current a {
 
 .subscribe-form .gform_body {
   width: 100% !important; }
-
-.subscribe-form .gform_footer {
-  margin-left: -4px !important;
-  width: 98px !important; }
 
 .subscribe-form .gform_button {
   width: 100% !important;

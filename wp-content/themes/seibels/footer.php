@@ -44,7 +44,7 @@
 								</div>
 							</a>							
 						</div>
-						<h3>Subscribe to our mailing list</h3>
+						<h3 class="subscribe-header">Subscribe to our mailing list</h3>
 						<?php get_template_part('template-parts/subscribe-form'); ?>
 					</div>
 				</div> <!-- grid-x -->
@@ -53,7 +53,7 @@
 		<div class="sub-footer">
 			<div class="grid-container">
 				<div class="grid-x">
-					<div class="large-7 medium-7 cell drum hide-on-print small-text-center">
+					<div class="large-7 medium-7 cell hide-on-print small-text-center">
 						<?php drumroll_footer_menu(); ?>
 					</div>
 					<div class="large-5 medium-5 cell drum hide-on-print text-right small-text-center">
