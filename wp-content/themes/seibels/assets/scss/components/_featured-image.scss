@@ -11,6 +11,33 @@
     img {
 		width: 100%;
 	}
+	.blog-header > div {
+		padding-top: 123px;
+		@media only screen and (max-width: 1000px) {
+			padding-top: 99px;
+		}
+		@media only screen and (max-width: 40.063em) {
+			padding-top: 0;	
+		}
+	}
+	svg {
+		max-width: 224px;
+		@media only screen and (max-width: 1000px) {
+			max-width: 150px;	
+		}
+		@media only screen and (max-width: 740px) {
+			max-width: 100px;	
+		}
+		path:not(.stroke):not(.no-fill), polygon:not(.no-fill), stroke, rect:not(.no-fill) {
+			fill: #fff;
+		}
+		polygon.no-fill, path.no-fill, rect.no-fill {
+			fill: none;
+		}
+		path.stroke {
+			stroke: #fff;
+		}
+	}	
 }
 
 .parallax-featured {

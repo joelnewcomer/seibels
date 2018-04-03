@@ -12,25 +12,17 @@ if (is_home() && get_option('page_for_posts') ) {
 if ($image_id == null) {
 	$image_id = get_theme_mod( 'default_featured' );
 }
+
+$icon = get_field('icon');
 ?>
 
 
 	<div class="featured-container">
-		<div class="blurred-container"><div class="blurred-bg"></div><div class="blurred-overlay"></div></div>
-		<?php $blurred_image = wp_get_attachment_image_src($image_id, 'featured'); ?>
-		<script>
-		 	jQuery( document ).ready(function() {
-		    	jQuery('.blurred-bg').backgroundBlur({
-		        	imageURL : '<?php echo $blurred_image[0]; ?>',
-					blurAmount : 7,
-					imageClass : 'bg-blur'
-		     	});
-		 	});
-		</script>	
+		<?php echo wp_get_attachment_image($image_id, 'featured'); ?>
 		<div class="grid-container no-padding">
 			<div class="featured-image blog-landing-featured">
-				<?php echo wp_get_attachment_image($image_id, 'featured'); ?>
 				<div class="overlay">
+					<?php if (is_single()) : ?>
 					<section class="breadcrumbs">
 						<div class="grid-container">
 							<div class="large-12 cell">
@@ -42,10 +34,14 @@ if ($image_id == null) {
 							</div>
 						</div> <!-- grid-container -->
 					</section>
+					<?php endif; ?>
 					<div class="blog-header single-header text-center">
 						<div style="display:table;width:100%;height:100%;">
 							<div style="display:table-cell;vertical-align:middle;">
 						    	<div style="text-align:center;">
+							    	<?php if ($icon != '') : ?>
+							    		<?php echo file_get_contents($icon); ?>
+									<?php endif; ?>
 							    	<h1 class="entry-title single-title-ul"><?php the_title(); ?></h1>
 						    	</div>
 							</div>

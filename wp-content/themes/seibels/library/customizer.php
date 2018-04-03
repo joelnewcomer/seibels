@@ -233,6 +233,13 @@ if( class_exists('Kirki') ) {
 		'section'     => 'global_section',
 		'default'     => true,
 	));
+	Kirki::add_field( 'contact_page_field', array(
+		'type'        => 'dropdown-pages',
+		'settings'    => 'contact_page',
+		'label'       => esc_attr__( 'Contact Page', 'textdomain' ),
+		'section'     => 'global_section',
+		'default'     => true,
+	));
 	Kirki::add_field( 'newsletter_form_field', array(
 		'type'     => 'text',
 		'settings' => 'newsletter_gfid',

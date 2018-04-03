@@ -49,6 +49,8 @@ ul.post-meta {
 	float: left;
 	position: relative;
 	width: 100%;
+	max-height: 550px;
+	text-align: center;
 	overflow: hidden;
 	background: $primary-color;
 	& > .grid-container {

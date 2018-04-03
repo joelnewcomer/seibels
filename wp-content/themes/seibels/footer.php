@@ -64,7 +64,7 @@
 		</div> <!-- sub-footer -->
 	</footer>
 	
-	<?php get_template_part( 'template-parts/search-modal' ); ?>
+	<?php // get_template_part( 'template-parts/search-modal' ); ?>
 	<a class="cd-top"><?php _e( 'Top', 'textdomain' ); ?></a>
 
 <?php wp_footer(); ?>
