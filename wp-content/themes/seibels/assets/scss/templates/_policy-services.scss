@@ -21,6 +21,9 @@
 			background: none;
 			box-shadow: none;
 		}
+	}
+	.featured-image .overlay {
+		background: rgba(#004B87, .8);
 	}	
 }
 
@@ -33,9 +36,6 @@
 			background: $policy-color;
 			border-color: $policy-color;
 		}
-	}
-	.featured-image .overlay {
-		background: rgba(#004B87, .8);
 	}
 }
 

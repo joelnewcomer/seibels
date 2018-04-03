@@ -4497,15 +4497,15 @@ body.error404 .entry-content h2 {
     background: none;
     box-shadow: none; } }
 
+.page-template-policy-services .featured-image .overlay, .page-template-claims-services .featured-image .overlay, .page-template-financial-services .featured-image .overlay, .page-template-accounting-services .featured-image .overlay {
+  background: rgba(0, 75, 135, 0.8); }
+
 .page-template-policy-services #content p, .page-template-policy-services #content h3 {
   color: #6D6E71; }
 
 .page-template-policy-services #content .button a {
   background: #90CDF0;
   border-color: #90CDF0; }
-
-.page-template-policy-services .featured-image .overlay {
-  background: rgba(0, 75, 135, 0.8); }
 
 a.policy-scroll {
   display: inline-block;

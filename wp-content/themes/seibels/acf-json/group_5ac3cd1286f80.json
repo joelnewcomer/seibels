@@ -65,6 +65,13 @@
                 "operator": "==",
                 "value": "page-templates\/policy-services.php"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates\/claims-services.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -85,5 +92,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1522783912
+    "modified": 1522788928
 }
