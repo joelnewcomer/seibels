@@ -522,7 +522,7 @@ jQuery( document ).ready(function() {
             jQuery(this).floatlabel();
         }
     });
-    jQuery('.match-header').matchHeight({ byRow: false });
+    // jQuery('.match-header').matchHeight({ byRow: false });
 
     jQuery('ul.slimmenu').slimmenu( {
         resizeWidth: '640',

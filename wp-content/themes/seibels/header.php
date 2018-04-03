@@ -44,7 +44,7 @@
 		<div class="top-nav-wrapper">
 			<nav id="top-navigation" class="top-navigation top-bar grid-container" role="navigation">
 				<div class="grid-x">
-					<div class="large-12 cell text-right">
+					<div class="large-12 cell text-right small-text-center">
 						<?php drumroll_top_menu(); ?>
 					</div>
 				</div>

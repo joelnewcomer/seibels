@@ -90,8 +90,9 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
                 update_option(self::OPTION_SLUG_DEACTIVATION, $v);
                 $response['code'] = 'dismiss_and_deactivate';
             } else if (isset($data['deactivation_reason']) && ($reason = trim($data['deactivation_reason']))) {
+                $pluginData = get_plugin_data(WPDISCUZ_DIR_PATH . "/class.WpdiscuzCore.php");
                 $to = 'feedback@wpdiscuz.com';
-                $subject = '[wpDiscuz Feedback] - ' . $reason;
+                $subject = '[wpDiscuz Feedback - ' . $pluginData['Version'] . '] - ' . $reason;
                 $headers = array();
                 $contentType = 'text/html';
                 $fromName = apply_filters('wp_mail_from_name', get_option('blogname'));
@@ -105,8 +106,6 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
                 if (isset($data['deactivation_reason_desc']) && ($reasonDesc = trim($data['deactivation_reason_desc']))) {
                     $message .= "<strong>Deactivation reason description:</strong> " . $reasonDesc . "\r\n" . "<br/>";
                 }
-                $pluginData = get_plugin_data(WPDISCUZ_DIR_PATH . "/class.WpdiscuzCore.php");
-                $message .= '<strong>wpDiscuz Version:</strong>' . $pluginData['Version'] . "\r\n" . "<br/>";
                 $sent = wp_mail($to, $subject, $message, $headers);
                 $response['code'] = 'send_and_deactivate';
             }

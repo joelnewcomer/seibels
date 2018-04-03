@@ -6,6 +6,9 @@
 .main-footer {
 	background: #004B87;
 	padding: 70px 0 14px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0 14px 0;	
+	}
 	a.logo {
 		margin-bottom: 20px;
 	}
@@ -36,6 +39,9 @@
 			display: inline-block;
 			margin: 0 5px !important;
 			width: 189px;
+			@media only screen and (max-width: 40.063em) {
+				max-width: 45%
+			}
 			clear: none;
 			input[type="text"] {
 				border: none;
@@ -64,6 +70,9 @@
 	}
 	.address {
 		margin-bottom: 100px;
+		@media only screen and (max-width: 40.063em) {
+			margin-bottom: 24px;	
+		}
 	}
 }
 
@@ -134,6 +143,9 @@
 
 .footer-icons {
 	margin-bottom: 56px;
+	@media only screen and (max-width: 40.063em) {
+		margin-bottom: 30px;	
+	}
 }
 
 #gform_wrapper_4 {

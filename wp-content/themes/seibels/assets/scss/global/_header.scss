@@ -1,5 +1,8 @@
 header a.logo {
 	margin: 37px 15px;
+	@media only screen and (max-width: 1000px) {
+		margin: 25px 15px;	
+	}
 }
 
 a.logo {
@@ -18,6 +21,9 @@ a.logo {
 .top-bar-right {
 	@media only screen and (min-width: 40.063em) {
 		margin-top: 23px;
+	}
+	@media only screen and (max-width: 1000px) {
+		margin-top: 10px;	
 	}
 }
 
@@ -84,11 +90,11 @@ header#masthead {
 @media only screen and (max-width: 40em) {
 	.top-bar-left {
 		text-align: center;
+		height: 64px;
 		a.logo {
 			z-index: 9999;
 			position: relative;
-			margin: 7px;
-			height: 50px;
+			margin: 15px;
 			img {
 				max-height: 100%;
 			}
@@ -99,6 +105,7 @@ header#masthead {
 		top: 0;
 		z-index: 999;
 		width: 100%;
+		margin-top: 0;
 	}
 	.icon-wrapper {
 		position: absolute;
@@ -124,7 +131,9 @@ main.container > section > .grid-container {
 
 .header-wrapper {
 	z-index: 11;
-	position: absolute;
+	@media only screen and (min-width: 40.063em) {
+		position: absolute;
+	}
 	width: 100%;
 }
 
@@ -141,6 +150,10 @@ main.container > section > .grid-container {
 				color: #fff;
 				opacity: .4;
 				padding: 8px 12px;
+				@media only screen and (max-width: 675px) {
+					padding: 8px;
+					font-size: 14px;	
+				}
 			}
 		}
 		li.active a, a:hover {

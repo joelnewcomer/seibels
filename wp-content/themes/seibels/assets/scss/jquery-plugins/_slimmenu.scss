@@ -5,7 +5,7 @@
 }
 
 div.collapse-button {
-	background: $primary-color;
+	background: $secondary-color;
     padding: 0 15px;
     color: #fff;
     font-size: 14px;
@@ -23,7 +23,7 @@ div.collapse-button:before {
 
 .collapse-button:hover,
 .collapse-button:focus {
-    background-color: $secondary-color;
+    background-color: $primary-color;
 }
 
 /*.collapse-button .icon-bar {
@@ -84,6 +84,9 @@ ul.slimmenu li {
     position: relative;
     float: left;
     display: inline-block;
+    @media only screen and (max-width: 40.063em) {
+	 	background: rgba(18, 50, 97, 0.9);   
+	}
 }
 
 ul.slimmenu li ul {
@@ -137,6 +140,18 @@ ul.slimmenu li a {
     -webkit-transition: all 0.5s ease-out;
     @media only screen and (min-width: 40.063em) {
 		max-width: 152px;
+	}
+	@media only screen and (max-width: 830px) {
+		padding: 12px 10px;
+		max-width: 125px;	
+	}
+	@media only screen and (max-width: 720px) {
+		font-size: 14px;
+		max-width: 105px;
+		padding: 12px 8px;	
+	}
+	@media only screen and (max-width: 40.063em) {
+		max-width: none;	
 	}
 }
 
@@ -210,6 +225,5 @@ ul.slimmenu li .sub-toggle>svg {
 @media only screen and (max-width: 40.062em) {
 	ul.slimmenu {
 		z-index: 999;
-		background: #fff;
 	}
 }

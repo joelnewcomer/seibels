@@ -53,7 +53,7 @@ get_header(); ?>
 	   		<div class="grid-container">
 	   			<div class="grid-x">
 	   				<div class="large-12 cell">
-		   				<div style="display:table;width:100%;height:100%;">
+		   				<div class="slider-table" style="display:table;width:100%;height:100%;">
 		   					<div style="display:table-cell;vertical-align:middle;">
 			   				    <?php if(get_field('feature_content')): ?>
 			   				    	<?php $content_i = 1; ?>
@@ -90,7 +90,7 @@ get_header(); ?>
 	   				</div>
 	   			</div>
 	   		</div>
-	   		<div class="slider-scroll text-center">
+	   		<div class="slider-scroll text-center hide-for-small">
 		   		Best-in-Class Services<br />
 		   		<?php get_template_part('assets/images/down', 'triangle.svg'); ?>
 	   		</div>
@@ -152,7 +152,7 @@ get_header(); ?>
 	   			</div>
 		   		<?php if(get_field('technology_logos')): ?>
 		   			<?php while(has_sub_field('technology_logos')): ?>
-		   				<div class="large-3 medium-6 cell text-center">
+		   				<div class="large-3 medium-6 small-6 cell text-center">
 			   				<div class="logo-container">
 			   					<div style="display:table;width:100%;height:100%;">
 			   					  <div style="display:table-cell;vertical-align:middle;">
@@ -192,7 +192,7 @@ get_header(); ?>
 		   		</div>
 			   	<?php if(get_field('why_icons')): ?>
 			   		<?php while(has_sub_field('why_icons')): ?>
-			   			<div class="large-4 medium-4 cell why-icon text-center">
+			   			<div class="large-4 medium-4 small-6 cell why-icon text-center">
 				   			<?php $link = get_sub_field('link'); ?>
 				   			<?php if ($link != '') : ?>
 					   			<a href="<?php echo $link; ?>">

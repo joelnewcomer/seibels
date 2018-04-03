@@ -100,7 +100,11 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    $(document).delegate('.wc-toggle', 'click', function () {
+    $(document).delegate('.wpdiscuz-nofollow,.wc_captcha_refresh_img,.wc-toggle,.wc-load-more-link', 'click', function (e) {
+        e.preventDefault();
+    });
+
+    $(document).delegate('.wc-toggle', 'click', function (e) {        
         var uniqueID = getUniqueID($(this), 0);
         var toggle = $(this);
         var icon = $('.fas', toggle);
@@ -140,7 +144,8 @@ jQuery(document).ready(function ($) {
         $('.wpdiscuz-subscribe-bar').slideToggle(500);
     });
     //============================== CAPTCHA ============================== //
-    $(document).delegate('.wc_captcha_refresh_img', 'click', function () {
+    $(document).delegate('.wc_captcha_refresh_img', 'click', function (e) {
+        e.preventDefault();
         changeCaptchaImage($(this));
     });
     function changeCaptchaImage(reloadImage) {

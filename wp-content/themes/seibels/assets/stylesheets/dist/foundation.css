@@ -2862,6 +2862,9 @@ body.edge .bx-loading {
 
 header a.logo {
   margin: 37px 15px; }
+  @media only screen and (max-width: 1000px) {
+    header a.logo {
+      margin: 25px 15px; } }
 
 a.logo {
   display: inline-block; }
@@ -2877,6 +2880,10 @@ a.logo {
 @media only screen and (min-width: 40.063em) {
   .top-bar-right {
     margin-top: 23px; } }
+
+@media only screen and (max-width: 1000px) {
+  .top-bar-right {
+    margin-top: 10px; } }
 
 @media only screen and (min-width: 40.063em) {
   .header-container {
@@ -2925,19 +2932,20 @@ header#masthead {
 
 @media only screen and (max-width: 40em) {
   .top-bar-left {
-    text-align: center; }
+    text-align: center;
+    height: 64px; }
     .top-bar-left a.logo {
       z-index: 9999;
       position: relative;
-      margin: 7px;
-      height: 50px; }
+      margin: 15px; }
       .top-bar-left a.logo img {
         max-height: 100%; }
   .top-bar-right {
     position: absolute;
     top: 0;
     z-index: 999;
-    width: 100%; }
+    width: 100%;
+    margin-top: 0; }
   .icon-wrapper {
     position: absolute;
     right: 0;
@@ -2958,8 +2966,10 @@ main.container > section > .grid-container {
 
 .header-wrapper {
   z-index: 11;
-  position: absolute;
   width: 100%; }
+  @media only screen and (min-width: 40.063em) {
+    .header-wrapper {
+      position: absolute; } }
 
 .top-nav-wrapper {
   padding: 8px 0;
@@ -2974,6 +2984,10 @@ main.container > section > .grid-container {
         color: #fff;
         opacity: .4;
         padding: 8px 12px; }
+        @media only screen and (max-width: 675px) {
+          .top-nav-wrapper ul li a {
+            padding: 8px;
+            font-size: 14px; } }
     .top-nav-wrapper ul li.active a, .top-nav-wrapper ul a:hover {
       opacity: 1; }
     .top-nav-wrapper ul li.submit-claim a {
@@ -2990,6 +3004,9 @@ main.container > section > .grid-container {
 .main-footer {
   background: #004B87;
   padding: 70px 0 14px 0; }
+  @media only screen and (max-width: 40.063em) {
+    .main-footer {
+      padding: 40px 0 14px 0; } }
   .main-footer a.logo {
     margin-bottom: 20px; }
   .main-footer h2, .main-footer h3, .main-footer p, .main-footer a {
@@ -3012,6 +3029,9 @@ main.container > section > .grid-container {
     margin: 0 5px !important;
     width: 189px;
     clear: none; }
+    @media only screen and (max-width: 40.063em) {
+      .main-footer .gform_fields li {
+        max-width: 45%; } }
     .main-footer .gform_fields li input[type="text"] {
       border: none;
       background: rgba(255, 255, 255, 0.2);
@@ -3034,6 +3054,9 @@ main.container > section > .grid-container {
     text-align: center; }
   .main-footer .address {
     margin-bottom: 100px; }
+    @media only screen and (max-width: 40.063em) {
+      .main-footer .address {
+        margin-bottom: 24px; } }
 
 .sub-footer {
   padding: 20px 0;
@@ -3086,6 +3109,9 @@ main.container > section > .grid-container {
 
 .footer-icons {
   margin-bottom: 56px; }
+  @media only screen and (max-width: 40.063em) {
+    .footer-icons {
+      margin-bottom: 30px; } }
 
 #gform_wrapper_4 {
   margin-top: 0; }
@@ -4077,13 +4103,28 @@ Keyframes
   .slider-overlay .feature-content {
     display: block;
     float: left;
-    margin-right: 20px; }
+    margin-right: 3%; }
+    @media only screen and (max-width: 830px) {
+      .slider-overlay .feature-content {
+        max-width: 30%; } }
   .slider-overlay h1 {
     font-size: 64px; }
+    @media only screen and (max-width: 1000px) {
+      .slider-overlay h1 {
+        font-size: 38px; } }
+    @media only screen and (max-width: 40.063em) {
+      .slider-overlay h1 {
+        font-size: 24px; } }
   .slider-overlay p {
     font-size: 20px;
     max-width: 310px;
     opacity: 0; }
+    @media only screen and (max-width: 1000px) {
+      .slider-overlay p {
+        font-size: 16px; } }
+    @media only screen and (max-width: 40.063em) {
+      .slider-overlay p {
+        display: none; } }
     .slider-overlay p.fade-in {
       opacity: 1; }
   .slider-overlay .fc-1 p, .slider-overlay .fc-3 p {
@@ -4451,12 +4492,19 @@ h1.entry-title-ul {
   width: 100%;
   background: #edeeee;
   padding: 100px 0 130px 0; }
+  @media only screen and (max-width: 40.063em) {
+    #home-blocks {
+      padding: 30px 0; } }
   #home-blocks .cell {
     padding: 0 20px; }
   #home-blocks h2 {
     margin-bottom: 70px;
     font-size: 42px;
     color: #6D6E71; }
+    @media only screen and (max-width: 40.063em) {
+      #home-blocks h2 {
+        font-size: 32px;
+        margin-bottom: 10px; } }
 
 #page > section {
   display: block;
@@ -4467,30 +4515,49 @@ h1.entry-title-ul {
   padding: 120px 0 70px 0;
   background: url(../../images/approach-bg.jpg) center center no-repeat;
   background-size: cover !important; }
+  @media only screen and (max-width: 40.063em) {
+    #approach {
+      padding: 40px 0 20px 0; } }
   #approach h2 {
     font-size: 48px;
     color: #fff;
     margin-bottom: 30px;
     display: inline-block;
     max-width: 510px; }
+    @media only screen and (max-width: 40.063em) {
+      #approach h2 {
+        font-size: 32px; } }
   #approach p {
     color: #fff;
     text-align: left; }
   #approach .button {
     margin-top: 80px; }
+    @media only screen and (max-width: 40.063em) {
+      #approach .button {
+        margin-top: 40px; } }
     #approach .button a {
       padding: 10px 60px; }
 
 #technology {
   padding: 120px 0 160px 0; }
+  @media only screen and (max-width: 40.063em) {
+    #technology {
+      padding: 30px 0; } }
   #technology h2, #technology h3 {
     color: #6D6E71; }
   #technology h2 {
     font-size: 48px;
     margin-bottom: 20px; }
+    @media only screen and (max-width: 40.063em) {
+      #technology h2 {
+        font-size: 32px; } }
   #technology h3 {
     font-size: 24px;
     margin-bottom: 80px; }
+    @media only screen and (max-width: 40.063em) {
+      #technology h3 {
+        font-size: 20px;
+        margin-bottom: 30px; } }
   #technology .logo-container {
     padding: 0 30px; }
     #technology .logo-container svg {
@@ -4500,6 +4567,9 @@ h1.entry-title-ul {
   padding: 110px 0 90px 0;
   background-color: #009CDE;
   position: relative; }
+  @media only screen and (max-width: 40.063em) {
+    #convo {
+      padding: 40px 0; } }
   #convo .bg-overlay {
     display: block;
     position: absolute;
@@ -4510,26 +4580,47 @@ h1.entry-title-ul {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat; }
+    @media only screen and (max-width: 40.063em) {
+      #convo .bg-overlay {
+        width: 100%; } }
   #convo .convo-quote {
     padding: 0 50px; }
+    @media only screen and (max-width: 40.063em) {
+      #convo .convo-quote {
+        padding-top: 25px; } }
   #convo .convo-title {
-    padding: 0 35px;
+    padding: 0 35px; }
+  #convo .convo-quote, #convo .convo-title {
     position: relative;
     z-index: 2; }
+    @media only screen and (max-width: 40.063em) {
+      #convo .convo-quote, #convo .convo-title {
+        padding-left: 25px;
+        padding-right: 25px; } }
   #convo h2, #convo p {
     color: #fff; }
   #convo h2 {
     font-size: 36px;
     margin-bottom: 90px; }
+    @media only screen and (max-width: 40.063em) {
+      #convo h2 {
+        font-size: 28px;
+        margin-bottom: 40px; } }
 
 #why {
   background: #e5f5fb;
   padding: 100px 0; }
+  @media only screen and (max-width: 40.063em) {
+    #why {
+      padding: 40px 0; } }
   #why h2, #why p {
     color: #009CDE; }
   #why h2 {
     font-size: 48px;
     margin-bottom: 24px; }
+    @media only screen and (max-width: 40.063em) {
+      #why h2 {
+        font-size: 32px; } }
   #why .why-icon {
     margin-bottom: 40px; }
     #why .why-icon svg {
@@ -5077,7 +5168,7 @@ h2.resp-accordion {
   float: left; }
 
 div.collapse-button {
-  background: #123261;
+  background: #009CDE;
   padding: 0 15px;
   color: #fff;
   font-size: 14px;
@@ -5093,7 +5184,7 @@ div.collapse-button:before {
 
 .collapse-button:hover,
 .collapse-button:focus {
-  background-color: #009CDE; }
+  background-color: #123261; }
 
 /*.collapse-button .icon-bar {
     display: block;
@@ -5145,6 +5236,9 @@ ul.slimmenu li {
   position: relative;
   float: left;
   display: inline-block; }
+  @media only screen and (max-width: 40.063em) {
+    ul.slimmenu li {
+      background: rgba(18, 50, 97, 0.9); } }
 
 ul.slimmenu li ul {
   margin: 0;
@@ -5191,6 +5285,18 @@ ul.slimmenu li a {
   @media only screen and (min-width: 40.063em) {
     ul.slimmenu li a {
       max-width: 152px; } }
+  @media only screen and (max-width: 830px) {
+    ul.slimmenu li a {
+      padding: 12px 10px;
+      max-width: 125px; } }
+  @media only screen and (max-width: 720px) {
+    ul.slimmenu li a {
+      font-size: 14px;
+      max-width: 105px;
+      padding: 12px 8px; } }
+  @media only screen and (max-width: 40.063em) {
+    ul.slimmenu li a {
+      max-width: none; } }
 
 ul.slimmenu li.policy a:hover {
   color: #90CDF0;
@@ -5247,8 +5353,7 @@ ul.slimmenu li .sub-toggle > svg {
 
 @media only screen and (max-width: 40.062em) {
   ul.slimmenu {
-    z-index: 999;
-    background: #fff; } }
+    z-index: 999; } }
 
 /*!
  * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)

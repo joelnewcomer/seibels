@@ -3,7 +3,7 @@ Contributors: gVectors Team
 Tags: comment, comments, ajax comments, custom comment form, custom comment field
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 5.0.6
+Stable tag: 5.0.7
 Requires PHP: 5.4 and higher
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,7 +16,7 @@ AJAX realtime comment system with custom comment form and fields. Designed to su
 Comments - wpDiscuz is Multisite and RTL ready!
 
 * Support Forum: [https://gvectors.com/forum/](https://gvectors.com/forum/)
-* wpDiscuz Demo: [http://wpdiscuz.com/wpdiscuz-4/](http://wpdiscuz.com/wpdiscuz-4/)
+* wpDiscuz Demo: [http://wpdiscuz.com/demo/](http://wpdiscuz.com/demo/)
 * wpDiscuz Addons: [http://wpdiscuz.com/addons/](http://wpdiscuz.com/addons)
 * wpDiscuz Documentation: [http://wpdiscuz.com/wpdiscuz-documentation/](http://wpdiscuz.com/wpdiscuz-documentation/)
 
@@ -174,12 +174,11 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 
 == Changelog ==
 
-= Comments - wpDiscuz v5.0.6 =
+= Comments - wpDiscuz v5.0.7 =
 
-* Fixed Bug: "+" symbol in Comment Author Names
-* Fixed Bug: Problem with "Most voted" comment sorting
-* Fixed Bug: Spam protection issue on hosting with hard caching
-* Fixed Bug: Option to insert Antispam key (CAPTCHA Alternative)
+* Updated: Ultimate Member 2 integration code
+* Changed: JS code optimization to prevent json parse errors
+* Fixed Bug : Refresh CAPTCHA link jumps on top of site
 
 
 IMPORTANT!
@@ -192,6 +191,12 @@ IMPORTANT!
 - If you use CDN and found some issue please purge it.
 - If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
 
+= Comments - wpDiscuz v5.0.6 =
+
+* Fixed Bug: "+" symbol in Comment Author Names
+* Fixed Bug: Problem with "Most voted" comment sorting
+* Fixed Bug: Spam protection issue on hosting with hard caching
+* Fixed Bug: Option to insert Antispam key (CAPTCHA Alternative)
 
 = Comments - wpDiscuz v5.0.5 =
 
