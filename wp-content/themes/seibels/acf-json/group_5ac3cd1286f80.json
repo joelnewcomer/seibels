@@ -79,6 +79,13 @@
                 "operator": "==",
                 "value": "page-templates\/financial-services.php"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates\/accounting-services.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -99,5 +106,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1522853438
+    "modified": 1522859576
 }

@@ -24,8 +24,11 @@
 	}
 }
 
+.button.ghost a {
+	background: transparent;	
+}
+
 .button.ghost.reverse a {
-	background: transparent;
 	border: solid 1px #fff;
 	color: #fff;
 	&:hover {
