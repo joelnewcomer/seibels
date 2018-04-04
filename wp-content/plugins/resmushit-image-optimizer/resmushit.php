@@ -1,19 +1,19 @@
 <?php
 /**
  * @package   resmushit
- * @author    Charles Bourgeaux <charles.bourgeaux@maecia.com>
+ * @author    Charles Bourgeaux <hello@resmush.it>
  * @license   GPL-2.0+
  * @link      http://www.resmush.it
- * @copyright 2017 Resmush.it
+ * @copyright 2018 Resmush.it
  *
  * @wordpress-plugin
  * Plugin Name:       reSmush.it Image Optimizer
- * Plugin URI:        http://www.resmush.it
+ * Plugin URI:        https://resmush.it
  * Description:       Image Optimization API. Provides image size optimization
- * Version:           0.1.13
- * Timestamp:         2017.12.14
- * Author:            Maecia
- * Author URI:        https://www.maecia.com
+ * Version:           0.1.14
+ * Timestamp:         2018.04.04
+ * Author:            reSmush.it
+ * Author URI:        https://resmush.it
  * Author:            Charles Bourgeaux
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

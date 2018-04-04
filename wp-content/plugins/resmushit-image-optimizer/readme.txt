@@ -1,9 +1,9 @@
 === reSmush.it Image Optimizer  ===
-Contributors: maecia
+Contributors: resmushit
 Tags: image, optimizer, image optimization, resmush.it, smush, jpg, png, gif, optimization, compression, Compress, Images, Pictures, Reduce Image Size, Smush, Smush.it
 Requires at least: 4.0.0
-Tested up to: 4.9.1
-Stable tag: 0.1.13
+Tested up to: 4.9.5
+Stable tag: 0.1.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -20,7 +20,7 @@ The plugin includes an option to exclude some pictures of the optimizer.
 
 Since Aug. 2016, reSmush.it allows to optimize pictures up to 5MB, for free !
 
-This plugin has been developped by [Maecia Agency](http://www.maecia.com/ "Maecia Drupal & Wordpress Agency"), Paris.
+This plugin has initially been developped by [Maecia Agency](http://www.maecia.com/ "Maecia Drupal & Wordpress Agency"), Paris.
 
 == Installation ==
 
@@ -65,6 +65,11 @@ Yes ! Absolutely free, the only restriction is to send images below 5MB.
 1. The simple interface
 
 == Changelog ==
+
+= 0.1.14 =
+* Tested up to Wordpress 4.9.5
+* New contributor (resmushit)
+* Translation completion
 
 = 0.1.13 =
 * Tested up to Wordpress 4.9.1

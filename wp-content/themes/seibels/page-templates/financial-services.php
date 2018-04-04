@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Claims Services
+Template Name: Financial Services
 */
 get_header(); ?>
 
