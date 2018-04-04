@@ -72,6 +72,13 @@
                 "operator": "==",
                 "value": "page-templates\/claims-services.php"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates\/financial-services.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -92,5 +99,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1522788928
+    "modified": 1522853438
 }

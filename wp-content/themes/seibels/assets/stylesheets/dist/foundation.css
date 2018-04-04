@@ -3286,7 +3286,8 @@ body > main.container > header,
       max-width: 150px; } }
   @media only screen and (max-width: 740px) {
     .featured-image svg {
-      max-width: 100px; } }
+      max-width: 100px;
+      max-height: 75px; } }
   .featured-image svg path:not(.stroke):not(.no-fill), .featured-image svg polygon:not(.no-fill), .featured-image svg stroke, .featured-image svg rect:not(.no-fill) {
     fill: #fff; }
   .featured-image svg polygon.no-fill, .featured-image svg path.no-fill, .featured-image svg rect.no-fill {
@@ -4490,6 +4491,9 @@ body.error404 .entry-content h2 {
       padding: 40px 0; } }
   .policy-intro p, .claims-intro p {
     font-size: 20px; }
+    @media only screen and (max-width: 40.063em) {
+      .policy-intro p, .claims-intro p {
+        font-size: 18px; } }
 
 .claims-intro {
   background: #fbefed; }
