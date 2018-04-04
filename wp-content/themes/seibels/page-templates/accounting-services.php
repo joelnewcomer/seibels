@@ -18,11 +18,11 @@ get_header(); ?>
 </section>
 
 <section class="accounting-services">
-	<div class="grid-container fluid">
+	<div class="grid-container fluid no-padding">
 		<div class="grid-x">
 			<?php if(get_field('services')): ?>
 				<?php while(has_sub_field('services')): ?>
-			 		<div class="large-4 medium-4 cell accounting-service-cell text-center">
+			 		<div class="large-4 medium-4 cell accounting-service-cell">
 			 			<div class="accounting-service">
 			 				<div class="accounting-title">
 				 				<h2><?php echo get_sub_field('title'); ?></h2> 

@@ -9,6 +9,28 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'open_sansitalic';
+    src: url('../fonts/OpenSans-Italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('../fonts/OpenSans-Bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'open_sansbold_italic';
+    src: url('../fonts/OpenSans-BoldItalic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 .sr-only {
 	position: absolute;
 	width: 1px;

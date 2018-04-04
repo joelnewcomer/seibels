@@ -1,8 +1,8 @@
 .policy-intro, .claims-intro, .financial-intro, .accounting-intro {
 	background: #f3fafd;
-	padding: 100px 0;
+	padding: 100px 20px;
 	@media only screen and (max-width: 40.063em) {
-		padding: 40px 0;	
+		padding: 40px 20px;	
 	}
 	p {
 		font-size: 20px;
@@ -17,6 +17,10 @@
 }
 
 .financial-intro {
+	background: #f9f9ef;
+}
+
+.accounting-intro {
 	background: #f9f9ef;
 }
 
@@ -347,5 +351,42 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
 }
 
 .accounting-service-cell {
-	
+	padding: 80px 40px 80px 160px;
+	min-height: 300px;
+	@media only screen and (max-width: 1000px) {
+		padding: 80px 20px 80px 80px;
+	}
+	position: relative;
+	.accounting-title {
+		transform-origin: left 0%;
+		transform: rotate(-90deg);
+		position: absolute;
+		left: 30px;
+		top: 380px;
+		@media only screen and (max-width: 1000px) {
+			left: 9px;
+		}
+		display: block;
+		h2 {
+			font-family: 'open_sansbold';
+			font-size: 64px;
+			margin: 0;
+			display: block;
+			width: 300px;
+			text-align: right;
+			color: #fff;
+			@media only screen and (max-width: 1000px) {
+				font-size: 48px;	
+			}
+		}
+	}
+	&:nth-child(1) {
+		background: #D7DACC;
+	}
+	&:nth-child(2) {
+		background: #dfe1d6;
+	}
+	&:nth-child(3) {
+		background: #e7e9e0;
+	}	
 }
