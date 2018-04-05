@@ -193,3 +193,15 @@ section.partnerships {
 section.history-header {
 	background: #D7DACC;
 }
+
+section.team-header {
+	background: #E0DFB1;
+}
+
+section.team {
+	background: #f9f9ef;
+	padding: 140px 0 100px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;	
+	}
+}
