@@ -152,7 +152,7 @@ body > main.container > header,
 				}
 			}
 		}
-		li.active a, a:hover {
+		li.active a, a:hover, li.current-page-ancestor a {
 			opacity: 1;
 		}
 		li.submit-claim a {

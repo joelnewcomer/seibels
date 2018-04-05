@@ -2754,6 +2754,10 @@ select {
   font-weight: normal;
   font-style: normal; }
 
+strong {
+  font-family: 'open_sansbold';
+  font-weight: normal; }
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -3003,7 +3007,7 @@ body > main.container > header,
           .top-nav-wrapper ul li a {
             padding: 8px;
             font-size: 14px; } }
-    .top-nav-wrapper ul li.active a, .top-nav-wrapper ul a:hover {
+    .top-nav-wrapper ul li.active a, .top-nav-wrapper ul a:hover, .top-nav-wrapper ul li.current-page-ancestor a {
       opacity: 1; }
     .top-nav-wrapper ul li.submit-claim a {
       color: #E8CD5F;
@@ -4803,6 +4807,47 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
     background: #dfe1d6; }
   .accounting-service-cell:nth-child(3) {
     background: #e7e9e0; }
+
+.about-menu {
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0; }
+  .about-menu a {
+    display: inline-block;
+    width: 210px;
+    height: 107px;
+    max-width: 20%;
+    padding: 10px;
+    font-size: 20px;
+    color: #6D6E71;
+    line-height: 1.2;
+    vertical-align: bottom;
+    margin-left: -5px; }
+    .about-menu a.careers {
+      color: #fff; }
+    .about-menu a:nth-child(1) {
+      background: #F0E9CE; }
+    .about-menu a:nth-child(2) {
+      background: #D7DACC; }
+    .about-menu a:nth-child(3) {
+      background: #E0DFB1; }
+    .about-menu a:nth-child(4) {
+      background: #EFEEE3; }
+    .about-menu a:nth-child(5) {
+      background: #A7A9AB; }
+    .about-menu a:hover, .about-menu a.active {
+      color: #123261; }
+    .about-menu a.active {
+      pointer-events: none; }
+
+section.approach-header {
+  padding: 80px 0;
+  background: #F0E9CE; }
+  section.approach-header h2 {
+    font-size: 48px;
+    margin: 0; }
 
 /**
  * BxSlider v4.1.2 - Fully loaded, responsive content slider

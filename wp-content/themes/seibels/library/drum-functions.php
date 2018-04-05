@@ -579,4 +579,16 @@ $dimensions = get_theme_mod('home_featured_dimensions', true);
 add_image_size( 'featured-home', intval($dimensions['width']), intval($dimensions['height']), true );
 $dimensions = get_theme_mod('featured_dimensions', true);
 add_image_size( 'featured', intval($dimensions['width']), intval($dimensions['height']), true );
+
+// Is this a child, grandchild, etc of particular page
+function is_ancestor($post_id) {
+    global $wp_query;
+    $ancestors = $wp_query->post->ancestors;
+    if ( in_array($post_id, $ancestors) ) {
+        $return = true;
+    } else {
+        $return = false;
+    }
+    return $return;
+}
 ?>

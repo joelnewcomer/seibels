@@ -219,24 +219,17 @@ if( class_exists('Kirki') ) {
 			),
 		)
 	));	
-	Kirki::add_field( 'terms_page_field', array(
-		'type'        => 'dropdown-pages',
-		'settings'    => 'terms_page',
-		'label'       => esc_attr__( 'Terms Page', 'textdomain' ),
-		'section'     => 'global_section',
-		'default'     => true,
-	));
-	Kirki::add_field( 'privacy_page_field', array(
-		'type'        => 'dropdown-pages',
-		'settings'    => 'privacy_page',
-		'label'       => esc_attr__( 'Privacy Page', 'textdomain' ),
-		'section'     => 'global_section',
-		'default'     => true,
-	));
 	Kirki::add_field( 'contact_page_field', array(
 		'type'        => 'dropdown-pages',
 		'settings'    => 'contact_page',
 		'label'       => esc_attr__( 'Contact Page', 'textdomain' ),
+		'section'     => 'global_section',
+		'default'     => true,
+	));
+	Kirki::add_field( 'about_page_field', array(
+		'type'        => 'dropdown-pages',
+		'settings'    => 'about_page',
+		'label'       => esc_attr__( 'About Page', 'textdomain' ),
 		'section'     => 'global_section',
 		'default'     => true,
 	));

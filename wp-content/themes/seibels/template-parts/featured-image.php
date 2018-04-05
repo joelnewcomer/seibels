@@ -49,5 +49,36 @@ $icon = get_field('icon');
 					</div> <!-- blog-header -->
 				</div> <!-- overlay -->
 			</div> <!-- blog-landing-featured -->
-		</div> <!-- row -->
+			<!-- If this is a child of the About page then show the About menu -->
+			<?php
+			if (is_ancestor(get_theme_mod( 'about_page' ))) { ?>
+				<div class="about-menu">
+					<?php
+					$args = array(
+						'post_type' => 'page',
+						'post_parent' => get_theme_mod( 'about_page' ),
+						'orderby' => 'menu_order',
+						'order' => 'ASC'
+					);
+					$the_query = new WP_Query( $args );
+					while ( $the_query->have_posts() ) : $the_query->the_post(); ?>
+						<?php
+						$active = '';
+						$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
+						if (strpos($url,get_the_permalink()) !== false) {
+							$active = 'active';
+						}	
+						?>
+						<a href="<?php the_permalink(); ?>" class="<?php echo $active; ?> <?php echo sanitize_title(get_the_title()); ?>">
+							<div style="display:table;width:100%;height:100%;">
+							  <div style="display:table-cell;vertical-align:middle;">
+							    <div style="text-align:center;"><?php the_title(); ?></div>
+							  </div>
+							</div>
+						</a>
+					<?php endwhile; ?>
+					<?php wp_reset_postdata(); ?>
+				</div> <!-- about-menu -->
+			<?php } ?>
+		</div> <!-- grid-container -->
 	</div> <!-- featured-container -->
