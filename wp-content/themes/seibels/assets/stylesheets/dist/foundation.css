@@ -4811,11 +4811,16 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
 .about-menu {
   display: block;
   width: 100%;
-  position: absolute;
+  position: relative;
+  z-index: 2;
   bottom: 0;
   left: 0; }
+  @media only screen and (min-width: 1049px) {
+    .about-menu {
+      position: absolute; } }
   .about-menu a {
-    display: inline-block;
+    display: block;
+    float: left;
     width: 210px;
     height: 107px;
     max-width: 20%;
@@ -4823,8 +4828,26 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
     font-size: 20px;
     color: #6D6E71;
     line-height: 1.2;
-    vertical-align: bottom;
-    margin-left: -5px; }
+    vertical-align: bottom; }
+    @media only screen and (min-width: 1049px) {
+      .about-menu a {
+        display: inline-block;
+        margin-left: -5px;
+        float: none; } }
+    @media only screen and (max-width: 730px) {
+      .about-menu a {
+        font-size: 16px;
+        height: 75px; } }
+    @media only screen and (max-width: 40.063em) {
+      .about-menu a {
+        font-size: 14px;
+        padding: 5px 10px;
+        width: 50%;
+        max-width: 50%;
+        height: 50px; }
+        .about-menu a:last-child {
+          width: 100%;
+          max-width: 100%; } }
     .about-menu a.careers {
       color: #fff; }
     .about-menu a:nth-child(1) {
@@ -4842,12 +4865,105 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
     .about-menu a.active {
       pointer-events: none; }
 
-section.approach-header {
-  padding: 80px 0;
-  background: #F0E9CE; }
-  section.approach-header h2 {
+section.about-header {
+  padding: 80px 0; }
+  @media only screen and (max-width: 40.063em) {
+    section.about-header {
+      padding: 40px 0; } }
+  section.about-header h2 {
     font-size: 48px;
     margin: 0; }
+
+section.approach-header {
+  background: #F0E9CE; }
+
+.featured-image-container {
+  display: block;
+  float: left;
+  width: 100%;
+  position: relative; }
+
+section.people {
+  padding: 100px 0 60px;
+  background-image: url(../../images/people-bg.jpg);
+  background-size: cover;
+  background-position: center center; }
+  @media only screen and (max-width: 40.063em) {
+    section.people {
+      padding: 40px 0 20px 0; } }
+  section.people h2 {
+    font-family: 'open_sansbold';
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-size: 28px; }
+  section.people p {
+    font-size: 18px; }
+
+section.mission-values {
+  padding: 100px 0;
+  background-image: radial-gradient(50% 116%, #FFFFFF 50%, #F3EDD4 100%); }
+  @media only screen and (max-width: 40.063em) {
+    section.mission-values {
+      padding: 40px 0; } }
+  section.mission-values .mission-graphic-container {
+    display: block;
+    margin: 0 auto;
+    max-width: 327px;
+    width: 100%;
+    position: relative; }
+    @media only screen and (max-width: 40.063em) {
+      section.mission-values .mission-graphic-container {
+        margin: 40px auto; } }
+    section.mission-values .mission-graphic-container img {
+      transform: scale(1.35); }
+    section.mission-values .mission-graphic-container .mission-graphic {
+      display: block;
+      float: left;
+      width: 100%; }
+    section.mission-values .mission-graphic-container .mission-graphic-people {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%; }
+  @media only screen and (min-width: 1000px) {
+    section.mission-values .mission, section.mission-values .core-values {
+      padding-top: 80px; } }
+  section.mission-values .mission {
+    padding-right: 10px; }
+  @media only screen and (max-width: 40.063em) {
+    section.mission-values .core-values {
+      margin-top: 30px; } }
+  section.mission-values .mission p {
+    font-size: 20px; }
+  section.mission-values .core-values p {
+    font-size: 24px;
+    text-transform: uppercase;
+    line-height: 1.65; }
+  section.mission-values h2 {
+    font-family: 'open_sansbold';
+    font-size: 40px;
+    margin-bottom: 16px; }
+
+body.our-approach main#content p, body.our-approach main#content h2, body.our-approach main#content h3, body.history main#content p, body.history main#content h2, body.history main#content h3, body.executive-team main#content p, body.executive-team main#content h2, body.executive-team main#content h3, body.community-engagement main#content p, body.community-engagement main#content h2, body.community-engagement main#content h3, body.careers main#content p, body.careers main#content h2, body.careers main#content h3 {
+  color: #6D6E71; }
+
+section.partnerships {
+  background: #fcfbf5;
+  padding: 100px 0 60px 0; }
+  @media only screen and (max-width: 40.063em) {
+    section.partnerships {
+      padding: 40px 0; } }
+  section.partnerships h2 {
+    font-size: 48px; }
+  section.partnerships h3 {
+    font-family: 'open_sansbold';
+    font-size: 20px; }
+  section.partnerships p {
+    font-size: 18px; }
+
+section.history-header {
+  background: #D7DACC; }
 
 /**
  * BxSlider v4.1.2 - Fully loaded, responsive content slider

@@ -18,37 +18,40 @@ $icon = get_field('icon');
 
 
 	<div class="featured-container">
-		<?php echo wp_get_attachment_image($image_id, 'featured'); ?>
-		<div class="grid-container no-padding">
-			<div class="featured-image blog-landing-featured">
-				<div class="overlay">
-					<?php if (is_single()) : ?>
-					<section class="breadcrumbs">
-						<div class="grid-container">
-							<div class="large-12 cell">
-								<?php
-								if ( function_exists('yoast_breadcrumb') ) {
-									yoast_breadcrumb('<p id="breadcrumbs">','</p>');
-								}
-								?>
+		<div class="featured-image-container">
+			<?php echo wp_get_attachment_image($image_id, 'featured'); ?>
+			<div class="grid-container no-padding">
+				<div class="featured-image blog-landing-featured">
+					<div class="overlay">
+						<?php if (is_single()) : ?>
+						<section class="breadcrumbs">
+							<div class="grid-container">
+								<div class="large-12 cell">
+									<?php
+									if ( function_exists('yoast_breadcrumb') ) {
+										yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+									}
+									?>
+								</div>
+							</div> <!-- grid-container -->
+						</section>
+						<?php endif; ?>
+						<div class="blog-header single-header text-center">
+							<div style="display:table;width:100%;height:100%;">
+								<div style="display:table-cell;vertical-align:middle;">
+							    	<div style="text-align:center;">
+								    	<?php if ($icon != '') : ?>
+								    		<?php echo file_get_contents($icon); ?>
+										<?php endif; ?>
+								    	<h1 class="entry-title single-title-ul"><?php the_title(); ?></h1>
+							    	</div>
+								</div>
 							</div>
-						</div> <!-- grid-container -->
-					</section>
-					<?php endif; ?>
-					<div class="blog-header single-header text-center">
-						<div style="display:table;width:100%;height:100%;">
-							<div style="display:table-cell;vertical-align:middle;">
-						    	<div style="text-align:center;">
-							    	<?php if ($icon != '') : ?>
-							    		<?php echo file_get_contents($icon); ?>
-									<?php endif; ?>
-							    	<h1 class="entry-title single-title-ul"><?php the_title(); ?></h1>
-						    	</div>
-							</div>
-						</div>
-					</div> <!-- blog-header -->
-				</div> <!-- overlay -->
-			</div> <!-- blog-landing-featured -->
+						</div> <!-- blog-header -->
+					</div> <!-- overlay -->
+				</div> <!-- blog-landing-featured -->
+			</div> <!-- grid-container -->
+		</div> <!-- featured-image-container -->
 			<!-- If this is a child of the About page then show the About menu -->
 			<?php
 			if (is_ancestor(get_theme_mod( 'about_page' ))) { ?>
@@ -80,5 +83,5 @@ $icon = get_field('icon');
 					<?php wp_reset_postdata(); ?>
 				</div> <!-- about-menu -->
 			<?php } ?>
-		</div> <!-- grid-container -->
+		
 	</div> <!-- featured-container -->

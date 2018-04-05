@@ -1,11 +1,21 @@
 .about-menu {
 	display: block;
 	width: 100%;
-	position: absolute;
+	position: relative;
+	z-index: 2;
+	@media only screen and (min-width: 1049px) {
+		position: absolute;
+	}
 	bottom: 0;
 	left: 0;
 	a {
-		display: inline-block;
+		display: block;
+		float: left;
+		@media only screen and (min-width: 1049px) {
+			display: inline-block;
+			margin-left: -5px;
+			float: none;
+		}
 		width: 210px;
 		height: 107px;
 		max-width: 20%;
@@ -14,7 +24,21 @@
 		color: #6D6E71;
 		line-height: 1.2;
 		vertical-align: bottom;
-		margin-left: -5px;
+		@media only screen and (max-width: 730px) {
+			font-size: 16px;
+			height: 75px;	
+		}
+		@media only screen and (max-width: 40.063em) {
+			font-size: 14px;
+			padding: 5px 10px;
+			width: 50%;
+			max-width: 50%;
+			height: 50px;
+			&:last-child {
+				width: 100%;
+				max-width: 100%;
+			}	
+		}
 		&.careers {
 			color: #fff;
 		}
@@ -42,11 +66,130 @@
 	}
 }
 
-section.approach-header {
+section.about-header {
 	padding: 80px 0;
-	background: #F0E9CE;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;	
+	}
 	h2 {
 		font-size: 48px;
 		margin: 0;
+	}	
+}
+
+section.approach-header {
+	background: #F0E9CE;
+}
+
+.featured-image-container {
+	display: block;
+	float: left;
+	width: 100%;
+	position: relative;
+}
+
+section.people {
+	padding: 100px 0 60px;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0 20px 0; 	
 	}
+	background-image: url(../images/people-bg.jpg);
+	background-size: cover;
+	background-position: center center;
+	h2 {
+		font-family: 'open_sansbold';
+		text-transform: uppercase;
+		margin-bottom: 20px;
+		font-size: 28px;
+	}
+	p {
+		font-size: 18px;
+	}
+}
+
+section.mission-values {
+	padding: 100px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;	
+	}
+	background-image: radial-gradient(50% 116%, #FFFFFF 50%, #F3EDD4 100%);
+	.mission-graphic-container {
+		display: block;
+		margin: 0 auto;
+		@media only screen and (max-width: 40.063em) {
+			margin: 40px auto;	
+		}
+		max-width: 327px;
+		width: 100%;
+		position: relative;
+		img {
+			transform: scale(1.35);
+		}
+		.mission-graphic {
+			display: block;
+			float: left;
+			width: 100%;
+		}
+		.mission-graphic-people {
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+		}
+	}
+	.mission, .core-values {
+		@media only screen and (min-width: 1000px) {
+			padding-top: 80px;	
+		}
+	}
+	.mission {
+		padding-right: 10px;
+	}
+	.core-values {
+		@media only screen and (max-width: 40.063em) {
+			margin-top: 30px;	
+		}
+	}
+	.mission p {
+		font-size: 20px;
+	}
+	.core-values p {
+		font-size: 24px;
+		text-transform: uppercase;
+		line-height: 1.65;
+	}
+	h2 {
+		font-family: 'open_sansbold';
+		font-size: 40px;
+		margin-bottom: 16px;
+	}
+}
+
+body.our-approach main#content, body.history main#content, body.executive-team main#content, body.community-engagement main#content, body.careers main#content {
+	p, h2, h3 {
+		color: #6D6E71;
+	}
+}
+
+section.partnerships {
+	background: #fcfbf5;
+	padding: 100px 0 60px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;	
+	}
+	h2 {
+		font-size: 48px;
+	}
+	h3 {
+		font-family: 'open_sansbold';
+		font-size: 20px;
+	}
+	p {
+		font-size: 18px;
+	}
+}
+
+section.history-header {
+	background: #D7DACC;
 }
