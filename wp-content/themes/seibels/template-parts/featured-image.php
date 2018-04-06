@@ -55,7 +55,7 @@ $icon = get_field('icon');
 			<!-- If this is a child of the About page then show the About menu -->
 			<?php
 			if (is_ancestor(get_theme_mod( 'about_page' ))) { ?>
-				<div class="about-menu">
+				<div class="featured-menu about-menu">
 					<?php
 					$args = array(
 						'post_type' => 'page',
@@ -83,5 +83,11 @@ $icon = get_field('icon');
 					<?php wp_reset_postdata(); ?>
 				</div> <!-- about-menu -->
 			<?php } ?>
+			
+			<?php
+			if (is_ancestor(581)) {
+				get_template_part('template-parts/news','menu');
+			}
+			?>
 		
 	</div> <!-- featured-container -->

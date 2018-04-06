@@ -1,4 +1,4 @@
-.about-menu {
+.featured-menu {
 	display: block;
 	width: 100%;
 	position: relative;
@@ -42,6 +42,17 @@
 		&.careers {
 			color: #fff;
 		}
+		&:hover, &.active {
+			color: $primary-color;
+		}
+		&.active {
+			pointer-events: none;
+		}
+	}
+}
+
+.about-menu {
+	a {
 		&:nth-child(1) {
 			background: #F0E9CE;
 		}
@@ -56,13 +67,7 @@
 		}
 		&:nth-child(5) {
 			background: #A7A9AB;
-		}
-		&:hover, &.active {
-			color: $primary-color;
-		}
-		&.active {
-			pointer-events: none;
-		}
+		}		
 	}
 }
 

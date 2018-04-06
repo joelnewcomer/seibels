@@ -23,38 +23,17 @@ if ($image_id == null) {
 ?>
 
 <div class="featured-container">
-	<div class="blurred-container"><div class="blurred-bg"></div><div class="blurred-overlay"></div></div>
-	<?php $blurred_image = wp_get_attachment_image_src($image_id, 'featured'); ?>
-	<script>
-	 	jQuery( document ).ready(function() {
-	    	jQuery('.blurred-bg').backgroundBlur({
-	        	imageURL : '<?php echo $blurred_image[0]; ?>',
-				blurAmount : 7,
-				imageClass : 'bg-blur'
-	     	});
-	 	});
-	</script>	
-	<div class="grid-container">
+	<div class="featured-image-container">
 		<div class="featured-image blog-landing-featured">
 			<?php echo wp_get_attachment_image($image_id,'featured'); ?>
 			<div class="overlay">
-				<section class="breadcrumbs">
-					<div class="grid-container">
-						<div class="large-12 cell">
-							<?php
-							if ( function_exists('yoast_breadcrumb') ) {
-								yoast_breadcrumb('<p id="breadcrumbs">','</p>');
-							}
-							?>
-						</div> <!-- grid-container -->
-					</div>
-				</section>
-				<?php // get_template_part('template-parts/blog', 'header-1'); ?>
-				<!-- Header Version 2 has featured article and featured categories -->
-				<?php get_template_part('template-parts/blog', 'header-2'); ?>
+				<?php get_template_part('template-parts/blog', 'header-1'); ?>
 			</div> <!-- overlay -->
 		</div> <!-- blog-landing-featured -->
-	</div> <!-- grid-container -->
+	</div>
+
+	<?php get_template_part('template-parts/news','menu'); ?>
+
 </div> <!-- featured-container -->
 
 <div id="page" role="main" class="blog-grid">

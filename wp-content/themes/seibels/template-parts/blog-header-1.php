@@ -10,7 +10,7 @@
 				    $title = single_term_title("", false);
 			    }	
 			    ?>
-		    	<h1 class="entry-title entry-title-ul"><?php echo $title; ?></h1>
+		    	<h1 class="entry-title"><?php echo $title; ?></h1>
 				<?php get_template_part('template-parts/blog', 'search-cats'); ?>
 	    	</div>
 		</div>

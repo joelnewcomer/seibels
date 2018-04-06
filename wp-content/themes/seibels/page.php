@@ -17,6 +17,8 @@ get_header(); ?>
 <div id="page" role="main">
 	<?php while ( have_posts() ) : the_post(); ?>
 		<article <?php post_class(array('main-content')) ?> id="post-<?php the_ID(); ?>">
+			<!-- Don't show breadcrumbs on News & Events pages -->
+			<?php if (!is_ancestor(581)) : ?>
 				<section class="breadcrumbs">
 					<div class="grid-container">
 						<div class="large-12 cell">
@@ -28,6 +30,7 @@ get_header(); ?>
 						</div>
 					</div>
 				</section>
+			<?php endif; ?>	
 			<div class="entry-content">
 				<?php if ( post_password_required() ) : ?>
 					<div class="grid-container password-protected-row">
