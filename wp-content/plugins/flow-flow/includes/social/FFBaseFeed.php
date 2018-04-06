@@ -72,7 +72,7 @@ abstract class FFBaseFeed implements FFFeed{
 	 *
 	 * @return void
 	 */
-    public final function init($context, $options, $feed){
+    public function init($context, $options, $feed){
 		$this->context = $context;
 		$this->options = $options;
 		$this->errors = array();

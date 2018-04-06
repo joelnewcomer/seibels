@@ -1,4 +1,6 @@
 <?php namespace flow\social;
+use InstagramScraper\Instagram;
+use InstagramScraper\Model\Media;
 use la\core\social\LAFeedWithComments;
 use flow\settings\FFSettingsUtils;
 
@@ -19,36 +21,51 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	private $comments = null;
 	private $userMeta = null;
 	private $pagination = true;
+	private $alternative = false;
+	private $timeline;
+	private $accounts = [];
 
 	public function __construct() {
 		parent::__construct( 'instagram' );
 	}
 
+	public function init( $context, $options, $feed ) {
+		parent::init( $context, $options, $feed );
+		require_once $context['root'] . 'libs/InstagramScraper.php';
+		require_once $context['root'] . 'libs/Unirest.php';
+		require_once $context['root'] . 'libs/phpFastCache.php';
+	}
+
 	public function deferredInit($options, $feed) {
 		$original = $options->original();
 		$accessToken = $original['instagram_access_token'];
+		$this->url = "https://api.instagram.com/v1/users/self/media/recent/?access_token={$accessToken}&count={$this->getCount()}";
 		if (isset($feed->{'timeline-type'})) {
-			switch ($feed->{'timeline-type'}) {
+			$this->timeline = $feed->{'timeline-type'};
+			switch ($this->timeline) {
 				case 'user_timeline':
 					$content = FFSettingsUtils::preparePrefixContent($feed->content, '@');
-					$userId = $this->getUserId($content, $accessToken);
-					$this->userMeta = $this->getUserMeta($userId, $accessToken);
-					$this->url = "https://api.instagram.com/v1/users/{$userId}/media/recent/?access_token={$accessToken}&count={$this->getCount()}";
-					break;
-				case 'likes':
-					$this->url = "https://api.instagram.com/v1/users/self/media/liked?access_token={$accessToken}&count={$this->getCount()}";
-					break;
-				case 'licked':
-					$this->url = "https://api.instagram.com/v1/users/self/media/liked?access_token={$accessToken}&count={$this->getCount()}";
+					//$userId = $this->getUserId($content, $accessToken);
+					//$this->userMeta = $this->getUserMeta($userId, $accessToken);
+					//$this->url = "https://api.instagram.com/v1/users/self/media/recent/?access_token={$accessToken}&count={$this->getCount()}";
+					if (empty($content)){
+						$this->url = "https://api.instagram.com/v1/users/self/media/recent/?access_token={$accessToken}&count={$this->getCount()}";
+					}
+					else {
+						$this->url = $content;
+						$this->alternative = true;
+					}
 					break;
 				case 'tag':
 					$tag = FFSettingsUtils::preparePrefixContent($feed->content, '#');
-					$tag = urlencode($tag);
-					$this->url = "https://api.instagram.com/v1/tags/{$tag}/media/recent?access_token={$accessToken}&count={$this->getCount()}";
+//					$tag = urlencode($tag);
+					$this->url = $tag;//"https://api.instagram.com/v1/tags/{$tag}/media/recent?access_token={$accessToken}&count={$this->getCount()}";
+					$this->alternative = true;
 					break;
 				case 'location':
 					$locationID = $feed->content;
 					$this->url = "https://api.instagram.com/v1/locations/{$locationID}/media/recent?access_token={$accessToken}&count={$this->getCount()}";
+					//$this->alternative = true;
 					break;
 				case 'coordinates':
 					$coordinates = explode(',', $feed->content);
@@ -56,53 +73,82 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 					$lng = trim($coordinates[1]);
 					$this->url = "https://api.instagram.com/v1/media/search?lat={$lat}&lng={$lng}&access_token={$accessToken}&count={$this->getCount()}";
 					break;
-				default:
-					$this->url = "https://api.instagram.com/v1/users/self/feed?access_token={$accessToken}&count={$this->getCount()}";
 			}
 		}
 	}
 
-    public function onePagePosts() {
-        $result = array();
-        $data = $this->getFeedData($this->url);
-        if (sizeof($data['errors']) > 0){
-	        $this->errors[] = array(
-		        'type'    => $this->getType(),
-                'message' => is_object($data['errors']) ? 'Error getting data from instagram server' : $this->filterErrorMessage($data['errors']),
-		        'url' => $this->url
-	        );
-	        error_log(print_r($data['errors'], true));
-	        throw new \Exception();
-        }
-        if (isset($data['response']) && is_string($data['response'])){
-	        $response = $data['response'];
-	        //fix malformed
-	        //http://stackoverflow.com/questions/19981442/decoding-instagram-reply-php
-	        //In case of a problem, comment out this line
-	        $response = html_entity_decode($response);
-            $page = json_decode($response);
-	        if (isset($page->pagination) && isset($page->pagination->next_url))
-		        $this->url = $page->pagination->next_url;
-	        else
-		        $this->pagination = false;
-			foreach ($page->data as $item) {
-				$post = $this->parsePost($item);
-				
+	public function onePagePosts() {
+		$result = array();
+		if ($this->alternative){
+			$instagram = new Instagram();
+			$medias = [];
+			$forced_loading_of_post = false;
+			switch ($this->timeline){
+				case 'user_timeline':
+					$account = $instagram->getAccount($this->url);
+					$this->accounts[$account->getId()] = $account;
+					$medias = $instagram->getMediasByUserId($account->getId(), $this->getCount());
+					break;
+				case 'tag':
+					$medias = $instagram->getMediasByTag($this->url, $this->getCount());
+					$forced_loading_of_post = true;
+					break;
+//				case 'location':
+//					$location = $instagram->getLocationById('380503552017025');
+//					$medias = $instagram->getMediasByLocationId('380503552017025', $this->getCount());
+//					break;
+			}
+
+			foreach ( $medias as $media ) {
+				$post = $this->altParsePost($media, $forced_loading_of_post);
 				if(!empty($this->userMeta)){
 					$post->userMeta = $this->userMeta;
 				}
-				
 				if ($this->isSuitablePost($post)) $result[$post->id] = $post;
 			}
-        } else {
-	        $this->errors[] = array(
-		        'type'    => 'instagram',
-		        'message' => 'FFInstagram has returned the empty data.',
-		        'url' => $this->url
-	        );
-        }
-        return $result;
-    }
+			$this->pagination = false;
+		}
+		else {
+			$data = $this->getFeedData($this->url);
+			if (sizeof($data['errors']) > 0){
+				$this->errors[] = array(
+					'type'    => $this->getType(),
+					'message' => is_object($data['errors']) ? 'Error getting data from instagram server' : $this->filterErrorMessage($data['errors']),
+					'url' => $this->url
+				);
+				error_log(print_r($data['errors'], true));
+				throw new \Exception();
+			}
+			if (isset($data['response']) && is_string($data['response'])){
+				$response = $data['response'];
+				//fix malformed
+				//http://stackoverflow.com/questions/19981442/decoding-instagram-reply-php
+				//In case of a problem, comment out this line
+				$response = html_entity_decode($response);
+				$page = json_decode($response);
+				if (isset($page->pagination) && isset($page->pagination->next_url))
+					$this->url = $page->pagination->next_url;
+				else
+					$this->pagination = false;
+				foreach ($page->data as $item) {
+					$post = $this->parsePost($item);
+
+					if(!empty($this->userMeta)){
+						$post->userMeta = $this->userMeta;
+					}
+
+					if ($this->isSuitablePost($post)) $result[$post->id] = $post;
+				}
+			} else {
+				$this->errors[] = array(
+					'type'    => 'instagram',
+					'message' => 'FFInstagram has returned the empty data.',
+					'url' => $this->url
+				);
+			}
+		}
+		return $result;
+	}
 
 	private function parsePost($post) {
 		$options = $this->options->original();
@@ -113,6 +159,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		$tc->header = '';
 		$tc->type = $this->getType();
 		$tc->nickname = (string)$post->user->username;
+		if (!isset($post->user->full_name)) $post->user = $this->fillUser($post->user->username);
 		$tc->screenname = FFFeedUtils::removeEmoji((string)$post->user->full_name);
 		if (function_exists('mb_convert_encoding')){
 			$tc->screenname = mb_convert_encoding($tc->screenname, 'HTML-ENTITIES', 'UTF-8');
@@ -124,7 +171,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		$tc->system_timestamp = $post->created_time;
 		$tc->img = $this->createImage($post->images->low_resolution->url,
 				$post->images->low_resolution->width, $post->images->low_resolution->height);
-		$tc->text = $this->getCaption($post);
+		$tc->text = isset($post->caption->text) ? $this->getCaption($post->caption->text) : '';
 		$tc->userlink = 'http://instagram.com/' . $tc->nickname;
 		$tc->permalink = (string)$post->link;
 		$tc->location = $post->location;
@@ -140,7 +187,77 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		}
 		return $tc;
 	}
-	
+
+	/**
+	 * @param Media $post
+	 * @param bool $forced_loading_of_post
+	 *
+	 * @return \stdClass
+	 */
+	private function altParsePost($post, $forced_loading_of_post = false) {
+
+		if ($forced_loading_of_post || Media::TYPE_IMAGE != $post->getType()) {
+			$instagram = new Instagram();
+			$post      = $instagram->getMediaById( $post->getId() );
+			$account = $post->getOwner();
+		}
+		else {
+			$account = $this->getAccountById($post->getOwnerId());
+		}
+
+		$tc = new \stdClass();
+		$tc->feed_id = $this->id();
+		$tc->id = $post->getId();
+		$tc->type = $this->getType();
+		$tc->header = '';
+		$tc->nickname = $account->getUsername();
+		$tc->screenname = FFFeedUtils::removeEmoji($account->getFullName());
+		$tc->userpic = $account->getProfilePicUrlHd();
+		$tc->system_timestamp = $post->getCreatedTime();
+		$tc->carousel = [];
+
+		$min_thumbnail = 1000;
+		$max_thumbnail = 0;
+		foreach ( $post->getThumbnailResources() as $width => $thumbnail ) {
+			if ($min_thumbnail > $width && $width >= 200) $min_thumbnail = $width;
+			if ($max_thumbnail < $width && $width <= 1000) $max_thumbnail = $width;
+		}
+		$min_thumbnail = $post->getThumbnailResources()[$min_thumbnail];
+		$max_thumbnail = $post->getThumbnailResources()[$max_thumbnail];
+
+		$tc->img = $this->createImage($min_thumbnail->url, $min_thumbnail->width, $min_thumbnail->height);
+
+		if (Media::TYPE_VIDEO == $post->getType()){
+			$tc->media = $this->createMedia($post->getVideoStandardResolutionUrl(), $max_thumbnail->width, $max_thumbnail->height, 'video/mp4', true);
+		}
+		else if (Media::TYPE_SIDECAR == $post->getType() && !empty($post->getSidecarMedias())){
+			foreach ($post->getSidecarMedias()  as $item ) {
+				$width = max(array_keys($item->getThumbnailResources()));
+				$max_thumbnail = $item->getThumbnailResources()[$width];
+				$tc->carousel[] = $this->createMedia($max_thumbnail->url, $max_thumbnail->width, $max_thumbnail->height, Media::TYPE_IMAGE == $item->getType() ? Media::TYPE_IMAGE : 'video/mp4', true);
+			}
+			$tc->media = $tc->carousel[0];
+		}
+		else if (Media::TYPE_CAROUSEL == $post->getType() && !empty($post->getCarouselMedia())){
+			foreach ($post->getCarouselMedia()  as $item ) {
+				$width = max(array_keys($item->getThumbnailResources()));
+				$max_thumbnail = $item->getThumbnailResources()[$width];
+				$tc->carousel[] = $this->createMedia($max_thumbnail->url, $max_thumbnail->width, $max_thumbnail->height, Media::TYPE_IMAGE == $item->getType() ? Media::TYPE_IMAGE : 'video/mp4', true);
+			}
+			$tc->media = $tc->carousel[0];
+		}
+		else {
+			$tc->media = $this->createMedia($max_thumbnail->url, $max_thumbnail->width, $max_thumbnail->height, Media::TYPE_IMAGE, true);
+		}
+		$tc->text = $this->getCaption($post->getCaption());
+		$tc->userlink = 'http://instagram.com/' . $tc->nickname;
+		$tc->permalink = $post->getLink();
+		if (empty($post->getLocation())) $tc->location = $post->getLocation();
+		$tc->additional = array('likes' => (string)$post->getLikesCount(), 'comments' => (string)$post->getCommentsCount());
+
+		return $tc;
+	}
+
 	private function getCarousel($post){
 		$carousel = array();
 		foreach ($post->carousel_media as $item){
@@ -160,45 +277,42 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		}
 	}
 	
-    private function getCaption($post){
-        if (isset($post->caption->text)) {
-	        $text = FFFeedUtils::removeEmoji( (string) $post->caption->text );
-	        return $this->hashtagLinks($text);
-        }
-	    return '';
+    private function getCaption($text){
+		$text = FFFeedUtils::removeEmoji( (string) $text );
+		return $this->hashtagLinks($text);
     }
 
-    private function getUserMeta($userId, $accessToken){
-        $request = $this->getFeedData("https://api.instagram.com/v1/users/{$userId}/?access_token={$accessToken}");
-        $json = json_decode($request['response']);
-        if (!is_object($json) || (is_object($json) && sizeof($json->data) == 0)) {
-            if (isset($request['errors']) && is_array($request['errors'])){
-                foreach ( $request['errors'] as $error ) {
-                    $error['type'] = 'instagram';
-                    //TODO $this->filterErrorMessage
-                    $this->errors[] = $error;
-                    throw new \Exception();
-                }
-            }
-            else {
-                $this->errors[] = array('type'=>'instagram', 'message' => 'Bad request, access token issue', 'url' => "https://api.instagram.com/v1/users/search?q={$userId}&access_token={$accessToken}");
-                throw new \Exception();
-            }
-            return $userId;
-        }
-        else {
-            if($json->data){
-                return $json->data;
-            }else{
-                $this->errors[] = array(
-                    'type' => 'instagram',
-                    'message' => 'User not found',
-                    'url' => "https://api.instagram.com/v1/users/{$userId}&access_token={$accessToken}"
-                );
-                throw new \Exception();
-            }
-        }
-    }
+//    private function getUserMeta($userId, $accessToken){
+//        $request = $this->getFeedData("https://api.instagram.com/v1/users/{$userId}/?access_token={$accessToken}");
+//        $json = json_decode($request['response']);
+//        if (!is_object($json) || (is_object($json) && sizeof($json->data) == 0)) {
+//            if (isset($request['errors']) && is_array($request['errors'])){
+//                foreach ( $request['errors'] as $error ) {
+//                    $error['type'] = 'instagram';
+//                    //TODO $this->filterErrorMessage
+//                    $this->errors[] = $error;
+//                    throw new \Exception();
+//                }
+//            }
+//            else {
+//                $this->errors[] = array('type'=>'instagram', 'message' => 'Bad request, access token issue', 'url' => "https://api.instagram.com/v1/users/search?q={$userId}&access_token={$accessToken}");
+//                throw new \Exception();
+//            }
+//            return $userId;
+//        }
+//        else {
+//            if($json->data){
+//                return $json->data;
+//            }else{
+//                $this->errors[] = array(
+//                    'type' => 'instagram',
+//                    'message' => 'User not found',
+//                    'url' => "https://api.instagram.com/v1/users/{$userId}&access_token={$accessToken}"
+//                );
+//                throw new \Exception();
+//            }
+//        }
+//    }
 
 	/**
 	 * @param $content
@@ -207,80 +321,99 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	 * @return string
 	 * @throws \Exception
 	 */
-	private function getUserId($content, $accessToken){
-		$request = $this->getFeedData("https://api.instagram.com/v1/users/search?q={$content}&access_token={$accessToken}");
-		$json = json_decode($request['response']);
-		if (!is_object($json) || (is_object($json) && sizeof($json->data) == 0)) {
-			if (isset($request['errors']) && is_array($request['errors'])){
-				foreach ( $request['errors'] as $error ) {
-					$error['type'] = 'instagram';
-					//TODO $this->filterErrorMessage
-					$this->errors[] = $error;
-					throw new \Exception();
-				}
-			}
-			else {
-				$this->errors[] = array('type'=>'instagram', 'message' => 'Bad request, access token issue. <a href="http://docs.social-streams.com/article/55-400-bad-request" target="_blank">Troubleshooting</a>.', 'url' => "https://api.instagram.com/v1/users/search?q={$content}&access_token={$accessToken}");
-				throw new \Exception();
-			}
-			return $content;
-		}
-		else {
-            $lowerContent = strtolower($content);
-			foreach($json->data as $user){
-				if (strtolower($user->username) == $lowerContent) return $user->id;
-			}
-			$this->errors[] = array(
-				'type' => 'instagram',
-				'message' => 'Username not found',
-                'url' => "https://api.instagram.com/v1/users/search?q={$content}&access_token={$accessToken}"
-			);
-			throw new \Exception();
-		}
-	}
+//	private function getUserId($content, $accessToken){
+//		$request = $this->getFeedData("https://api.instagram.com/v1/users/search?q={$content}&access_token={$accessToken}");
+//		$json = json_decode($request['response']);
+//		if (!is_object($json) || (is_object($json) && sizeof($json->data) == 0)) {
+//			if (isset($request['errors']) && is_array($request['errors'])){
+//				foreach ( $request['errors'] as $error ) {
+//					$error['type'] = 'instagram';
+//					//TODO $this->filterErrorMessage
+//					$this->errors[] = $error;
+//					throw new \Exception();
+//				}
+//			}
+//			else {
+//				$this->errors[] = array('type'=>'instagram', 'message' => 'Bad request, access token issue. <a href="http://docs.social-streams.com/article/55-400-bad-request" target="_blank">Troubleshooting</a>.', 'url' => "https://api.instagram.com/v1/users/search?q={$content}&access_token={$accessToken}");
+//				throw new \Exception();
+//			}
+//			return $content;
+//		}
+//		else {
+//            $lowerContent = strtolower($content);
+//			foreach($json->data as $user){
+//				if (strtolower($user->username) == $lowerContent) return $user->id;
+//			}
+//			$this->errors[] = array(
+//				'type' => 'instagram',
+//				'message' => 'Username not found',
+//                'url' => "https://api.instagram.com/v1/users/search?q={$content}&access_token={$accessToken}"
+//			);
+//			throw new \Exception();
+//		}
+//	}
 
 	public function getComments($item) {
 		if (is_object($item)){
 			return array();
 		}
-		
-		$objectId = $item;
-		$original = $this->options->original();
-		$accessToken = $original['instagram_access_token'];
-		$url = "https://api.instagram.com/v1/media/{$objectId}/comments?access_token={$accessToken}";
-		$request = $this->getFeedData($url);
-		$json = json_decode($request['response']);
 
-		if (!is_object($json) || (is_object($json) && sizeof($json->data) == 0)) {
-			if (isset($request['errors']) && is_array($request['errors'])){
-				if (!empty($request['errors'])){					
-					foreach ( $request['errors'] as $error ) {
-						$error['type'] = 'instagram';
-						//TODO $this->filterErrorMessage
-						$this->errors[] = $error;
-						throw new \Exception();
-					}
-				}
-			}
-			else {
-				$this->errors[] = array('type'=>'instagram', 'message' => 'Bad request, access token issue. <a href="http://docs.social-streams.com/article/55-400-bad-request" target="_blank">Troubleshooting</a>.', 'url' => $url);
-				throw new \Exception();
-			}
-			return array();
+		$result = [];
+		$objectId = $item;
+		$instagram = new Instagram();
+		$comments = $instagram->getMediaCommentsById($objectId);
+		foreach ( $comments as $comment ) {
+			$from = new \stdClass();
+			$from->id = $comment->getOwner()->getId();
+			$from->username = $comment->getOwner()->getUsername();
+			$from->full_name = $comment->getOwner()->getFullName();
+			$from->profile_picture = $comment->getOwner()->getProfilePicUrl();
+
+			$c = new \stdClass();
+			$c->id = $comment->getId();
+			$c->text = $comment->getText();
+			$c->created_time = $comment->getCreatedAt();
+			$c->from = $from;
+			$result[] = $c;
 		}
-		else {
-			if($json->data){
-				// return first 5 comments
-				return array_slice($json->data, 0, 5);
-			}else{
-				$this->errors[] = array(
-					'type' => 'instagram',
-					'message' => 'User not found',
-					'url' => $url
-				);
-				throw new \Exception();
-			}
-		}
+		return $result;
+
+//		$original = $this->options->original();
+//		$accessToken = $original['instagram_access_token'];
+//		$url = "https://api.instagram.com/v1/media/{$objectId}/comments?access_token={$accessToken}";
+//		$request = $this->getFeedData($url);
+//		$json = json_decode($request['response']);
+//
+//		if (!is_object($json) || (is_object($json) && sizeof($json->data) == 0)) {
+//			if (isset($request['errors']) && is_array($request['errors'])){
+//				if (!empty($request['errors'])){
+//					foreach ( $request['errors'] as $error ) {
+//						$error['type'] = 'instagram';
+//						//TODO $this->filterErrorMessage
+//						$this->errors[] = $error;
+//						throw new \Exception();
+//					}
+//				}
+//			}
+//			else {
+//				$this->errors[] = array('type'=>'instagram', 'message' => 'Bad request, access token issue. <a href="http://docs.social-streams.com/article/55-400-bad-request" target="_blank">Troubleshooting</a>.', 'url' => $url);
+//				throw new \Exception();
+//			}
+//			return array();
+//		}
+//		else {
+//			if($json->data){
+//				// return first 5 comments
+//				return array_slice($json->data, 0, 5);
+//			}else{
+//				$this->errors[] = array(
+//					'type' => 'instagram',
+//					'message' => 'User not found',
+//					'url' => $url
+//				);
+//				throw new \Exception();
+//			}
+//		}
 	}
 
 	protected function nextPage( $result ) {
@@ -300,5 +433,41 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	private function hashtagLinks($text) {
 		$result = preg_replace('~(\#)([^\s!,. /()"\'?]+)~', '<a href="https://www.instagram.com/explore/tags/$2">#$2</a>', $text);
 		return $result;
+	}
+
+	private function fillUser($username){
+		$account = $this->getAccount($username);
+		$result = new \stdClass();
+		$result->username = $account->getUsername();
+		$result->full_name = $account->getFullName();
+		$result->id = $account->getId();
+		$result->profile_picture = $account->getProfilePicUrl();
+		return $result;
+	}
+
+	/**
+	 * @param string $username
+	 *
+	 * @return \InstagramScraper\Model\Account
+	 */
+	private function getAccount($username){
+		if (!array_key_exists($username, $this->accounts)){
+			$i = new Instagram();
+			$this->accounts[$username] = $i->getAccount($username);
+		}
+		return $this->accounts[$username];
+	}
+
+	/**
+	 * @param string $id
+	 *
+	 * @return \InstagramScraper\Model\Account
+	 */
+	private function getAccountById($id){
+		if (!array_key_exists($id, $this->accounts)){
+			$i = new Instagram();
+			$this->accounts[$id] = $i->getAccountById($id);
+		}
+		return $this->accounts[$id];
 	}
 }

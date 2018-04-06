@@ -554,9 +554,9 @@ Posts to load during update\
 <dt>FEED TYPE </dt>\
 <dd>\
 <input id="<%= uid %>-page-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="page_timeline" checked />\
-<label for="<%= uid %>-page-timeline-type">Page</label><br><br>\
-<input id="<%= uid %>-group-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="group" />\
-<label for="<%= uid %>-group-timeline-type">Group</label><br><br>\
+<label for="<%= uid %>-page-timeline-type">Page</label>\
+<input class="hide" id="<%= uid %>-group-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="group" />\
+<label class="hide" for="<%= uid %>-group-timeline-type">Group</label><br><br>\
 <input id="<%= uid %>-album-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="album" />\
 <label for="<%= uid %>-album-timeline-type">Album</label>\
 </dd>\
@@ -570,7 +570,7 @@ Content to show\
         <h1>Content to show</h1>\
         <ul>\
             <li><b>Page</b> — enter nickname of any public page or Page ID.</li>\
-            <li><b>Group</b> — enter Group ID.</li>\
+            <li class="hide"><b>Group</b> — enter Group ID.</li>\
             <li><b>Album</b> — enter Album ID. <a href="http://docs.social-streams.com/article/50-find-facebook-album-id" target="_blank">What is it?</a> </li>\
         </ul><br>\
         Use <a href="http://lookup-id.com" target="_blank">Find my Facebook ID</a> tool to find your Page ID or Group ID.\
@@ -758,9 +758,9 @@ Posts to load during update\
           <dt>FEED TYPE</dt>\
           <dd>\
           <input id="<%= uid %>-user-timeline-type" checked type="radio" name="<%= uid %>-timeline-type" value="user_timeline"/>\
-            <label for="<%= uid %>-user-timeline-type">User feed</label><br><br>\
-          <input id="<%= uid %>-likes-type"  type="radio" name="<%= uid %>-timeline-type" value="likes"/>\
-            <label for="<%= uid %>-likes-type">User\'s likes</label><br><br>\
+            <label for="<%= uid %>-user-timeline-type">User feed</label>\
+          <input class="hide" id="<%= uid %>-likes-type"  type="radio" name="<%= uid %>-timeline-type" value="likes"/>\
+            <label class="hide" for="<%= uid %>-likes-type">User\'s likes</label><br><br>\
           <input id="<%= uid %>-search-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="tag"/>\
             <label for="<%= uid %>-search-timeline-type">Hashtag</label><br><br>\
           <input id="<%= uid %>-location-type" type="radio" name="<%= uid %>-timeline-type" value="location"/>\
@@ -776,7 +776,7 @@ Posts to load during update\
                     <h1>Content to show</h1>\
                     <ul>\
                         <li><b>User feed</b> — enter nickname of any public Instagram account.</li>\
-                        <li><b>User\'s likes</b> — enter nickname of your own account.</li>\
+                        <li class="hide"><b>User\'s likes</b> — enter nickname of your own account.</li>\
                         <li><b>Hashtag</b> — enter a hashtag.</li>\
                         <li><b>Location</b> — enter <a href="http://docs.social-streams.com/article/118-find-instagram-location-id" target="_blank">Location ID</a>.</li>\
                     </ul>\

@@ -2861,6 +2861,9 @@ var FlowFlowApp = (function($){
       if (errorData.type === 'facebook' && errorStr.indexOf('Application request limit') + 1) {
         errorStr += '. Check <a href="http://docs.social-streams.com/article/133-facebook-app-request-limit-reached" target="_blank">more info</a>'
       }
+      else if (errorStr.toLowerCase().indexOf('bad request') + 1) {
+          errorStr += '<br><br>Check <a href="https://docs.social-streams.com/article/55-400-bad-request" target="_blank"> info</a>'
+      }
 
       Controller.$errorPopup.html('<h4>Plugin received next error message from network API for this feed:</h4><p>' + errorStr + '</p>')
     },
