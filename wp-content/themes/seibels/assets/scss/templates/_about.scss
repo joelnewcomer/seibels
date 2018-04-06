@@ -74,11 +74,25 @@ section.about-header {
 	h2 {
 		font-size: 48px;
 		margin: 0;
+		@media only screen and (max-width: 40.063em) {
+			font-size: 28px;	
+		}
 	}	
 }
 
 section.approach-header {
 	background: #F0E9CE;
+}
+
+section.community-header {
+	background: #EFEEE3;
+}
+
+section.careers-header {
+	background: #A7A9AB;
+	h2 {
+		color: #fff !important;
+	}
 }
 
 .featured-image-container {
@@ -91,7 +105,7 @@ section.approach-header {
 section.people {
 	padding: 100px 0 60px;
 	@media only screen and (max-width: 40.063em) {
-		padding: 40px 0 20px 0; 	
+		padding: 40px 0 20px 0;
 	}
 	background-image: url(../images/people-bg.jpg);
 	background-size: cover;
@@ -200,8 +214,219 @@ section.team-header {
 
 section.team {
 	background: #f9f9ef;
+	position: relative;
+	z-index: 10 !important;
 	padding: 140px 0 100px 0;
 	@media only screen and (max-width: 40.063em) {
 		padding: 40px 0;	
+	}
+	.team-member-cell {
+		@media only screen and (max-width: 40.063em) {
+			padding: 0 15px;	
+		}
+	}
+	.team-member {
+		cursor: pointer;
+		margin-bottom: 40px;
+		h3 {
+			font-family: 'open_sansbold';
+			color: #004B87 !important;
+			margin-bottom: 2px;
+		}
+		p.team-title {
+			font-size: 14px;
+			text-transform: uppercase;
+			max-width: 245px;
+		}
+		.small-team-photo {
+			margin-bottom: 16px;
+			img {
+				transition: all .5s;
+				-webkit-transition: all .5s; /* Safari and Chrome */
+				-ms-transition: all .5s; /* Opera */
+			}
+			&.gray img:not(:hover) {
+				opacity: .8;
+				-webkit-filter: grayscale(100%);
+				filter: grayscale(100%);
+				filter: gray;
+				// filter: url("data:image/svg+xml;utf8,<svg version='1.1' xmlns='https://www.w3.org/2000/svg' height='0'><filter id='greyscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0' /></filter></svg>#greyscale");
+			}
+		}
+		.team-overlay {
+			position: fixed;
+			opacity: 0;
+			top: 10vh;
+			left: 5vw;
+			@media only screen and (max-width: 40.063em) {
+				left: 2vw;	
+			}
+			width: 0;
+			height: 0;
+			overflow: hidden;
+			.team-overlay-inner {
+				padding: 30px;
+				background: #E0DFB1;
+				@media only screen and (min-width: 40.063em) {
+					img {
+						float: left;
+						margin-right: 40px;
+						margin-bottom: 30px;
+					}
+				}
+				h3 {
+					margin-top: 80px;
+					font-size: 42px;
+					@media only screen and (max-width: 40.063em) {
+						margin-top: 20px;
+						font-size: 28px;	
+					}
+				}
+				p.team-title {
+					font-size: 18px;
+					max-width: none;
+					@media only screen and (max-width: 40.063em) {
+						font-size: 14px;
+					}
+				}
+				.bio {
+					display: block;
+					float: left;
+					width: 100%;
+				}
+			}
+		}
+		&.active .team-overlay {
+			opacity: 1;
+			width: 90vw;
+			@media only screen and (max-width: 40.063em) {
+				width: 96vw;	
+			}
+			height: auto;
+			z-index: 9999999;
+			.team-overlay-inner {
+				display: block;
+				max-height: 85vh;
+				overflow: scroll;
+			}
+		}
+	}
+}
+
+section.community-intro {
+	padding: 120px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;	
+	}
+	background: #fcfcf9;
+	p, a {
+		font-size: 20px;
+	}
+	a {
+		font-family: 'open_sansbold';
+		color: #6D6E71;
+		&:hover {
+			color: $primary-color;
+		}
+	}
+	.community-links {
+		margin-top: 30px;
+		a {
+			margin: 0 20px;
+			white-space: nowrap;
+		}
+	}
+}
+
+
+
+.single-chart {
+	display: inline-block;
+  width: 24%;
+  min-width: 185px;
+  margin-bottom: 80px;
+  @media only screen and (max-width: 1000px) {
+		margin-bottom: 20px;  
+  }
+  @media only screen and (max-width: 40.063em) {
+	margin-bottom: 5px;
+  }
+  justify-content: space-around ;
+  position: relative;
+}
+
+.circular-chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 170px;
+  max-height: 170px;
+  overflow: visible !important;
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #E5E5E5;
+  stroke-width: 6;
+}
+
+.circle {
+  fill: none;
+  stroke-width: 6;
+}
+
+.circle.in-view {
+  animation: progress 1s ease-out forwards;	
+}
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100;
+  }
+}
+
+.circular-chart.blue .circle.in-view {
+  stroke: #009ADE;
+}
+
+.chart-text {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	padding: 0 65px;
+	@media only screen and (max-width: 1000px) {
+		padding: 0 50px;	
+	}
+	font-size: 14px;
+	color: #009CDE;
+	line-height: 16px;
+	span {
+		font-family: 'open_sansbold';
+	}
+	span.stat-percentage {
+		font-size: 24px;
+	}
+	span.percent-symbol {
+		font-size: 18px;
+	}
+	.boomers {
+		display: inline-block;
+		margin-top: 8px;
+	}
+}
+
+.life-charts {
+	display: block;
+	float: left;
+	width: 100%;
+}
+
+section.careers-intro {
+	padding: 120px;
+	background: #edeeee;
+	p {
+		font-size: 18px;
+		line-height: 1.6;
 	}
 }

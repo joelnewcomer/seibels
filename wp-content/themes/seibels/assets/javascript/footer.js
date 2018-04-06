@@ -18,4 +18,6 @@ require('./originals/preloader');
 require('./originals/readingTime.min');
 require('./originals/headroom.min');
 require('./originals/jquery.typist.min');
+require('./originals/jquery.inview');
+require('./originals/owl.carousel.min');
 require('./originals/01_initalizer.all');

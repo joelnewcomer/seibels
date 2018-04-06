@@ -2932,8 +2932,9 @@ header#masthead {
       z-index: 99999;
       box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15); }
       header#masthead.headroom--pinned:not(.headroom--top) .top-bar-left a {
-        padding: 8px 0;
-        width: 87px;
+        padding: 16px 0;
+        width: 186px;
+        float: left;
         margin: 0 15px; }
         header#masthead.headroom--pinned:not(.headroom--top) .top-bar-left a img {
           min-height: 0; }
@@ -2989,6 +2990,9 @@ body > main.container > header,
   @media only screen and (min-width: 40.063em) {
     .header-wrapper {
       position: absolute; } }
+  @media only screen and (max-width: 40.063em) {
+    .header-wrapper {
+      z-index: 10; } }
 
 .top-nav-wrapper {
   padding: 8px 0;
@@ -4873,9 +4877,20 @@ section.about-header {
   section.about-header h2 {
     font-size: 48px;
     margin: 0; }
+    @media only screen and (max-width: 40.063em) {
+      section.about-header h2 {
+        font-size: 28px; } }
 
 section.approach-header {
   background: #F0E9CE; }
+
+section.community-header {
+  background: #EFEEE3; }
+
+section.careers-header {
+  background: #A7A9AB; }
+  section.careers-header h2 {
+    color: #fff !important; }
 
 .featured-image-container {
   display: block;
@@ -4970,10 +4985,181 @@ section.team-header {
 
 section.team {
   background: #f9f9ef;
+  position: relative;
+  z-index: 10 !important;
   padding: 140px 0 100px 0; }
   @media only screen and (max-width: 40.063em) {
     section.team {
       padding: 40px 0; } }
+  @media only screen and (max-width: 40.063em) {
+    section.team .team-member-cell {
+      padding: 0 15px; } }
+  section.team .team-member {
+    cursor: pointer;
+    margin-bottom: 40px; }
+    section.team .team-member h3 {
+      font-family: 'open_sansbold';
+      color: #004B87 !important;
+      margin-bottom: 2px; }
+    section.team .team-member p.team-title {
+      font-size: 14px;
+      text-transform: uppercase;
+      max-width: 245px; }
+    section.team .team-member .small-team-photo {
+      margin-bottom: 16px; }
+      section.team .team-member .small-team-photo img {
+        transition: all .5s;
+        -webkit-transition: all .5s;
+        /* Safari and Chrome */
+        -ms-transition: all .5s;
+        /* Opera */ }
+      section.team .team-member .small-team-photo.gray img:not(:hover) {
+        opacity: .8;
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+        filter: gray; }
+    section.team .team-member .team-overlay {
+      position: fixed;
+      opacity: 0;
+      top: 10vh;
+      left: 5vw;
+      width: 0;
+      height: 0;
+      overflow: hidden; }
+      @media only screen and (max-width: 40.063em) {
+        section.team .team-member .team-overlay {
+          left: 2vw; } }
+      section.team .team-member .team-overlay .team-overlay-inner {
+        padding: 30px;
+        background: #E0DFB1; }
+        @media only screen and (min-width: 40.063em) {
+          section.team .team-member .team-overlay .team-overlay-inner img {
+            float: left;
+            margin-right: 40px;
+            margin-bottom: 30px; } }
+        section.team .team-member .team-overlay .team-overlay-inner h3 {
+          margin-top: 80px;
+          font-size: 42px; }
+          @media only screen and (max-width: 40.063em) {
+            section.team .team-member .team-overlay .team-overlay-inner h3 {
+              margin-top: 20px;
+              font-size: 28px; } }
+        section.team .team-member .team-overlay .team-overlay-inner p.team-title {
+          font-size: 18px;
+          max-width: none; }
+          @media only screen and (max-width: 40.063em) {
+            section.team .team-member .team-overlay .team-overlay-inner p.team-title {
+              font-size: 14px; } }
+        section.team .team-member .team-overlay .team-overlay-inner .bio {
+          display: block;
+          float: left;
+          width: 100%; }
+    section.team .team-member.active .team-overlay {
+      opacity: 1;
+      width: 90vw;
+      height: auto;
+      z-index: 9999999; }
+      @media only screen and (max-width: 40.063em) {
+        section.team .team-member.active .team-overlay {
+          width: 96vw; } }
+      section.team .team-member.active .team-overlay .team-overlay-inner {
+        display: block;
+        max-height: 85vh;
+        overflow: scroll; }
+
+section.community-intro {
+  padding: 120px 0;
+  background: #fcfcf9; }
+  @media only screen and (max-width: 40.063em) {
+    section.community-intro {
+      padding: 40px 0; } }
+  section.community-intro p, section.community-intro a {
+    font-size: 20px; }
+  section.community-intro a {
+    font-family: 'open_sansbold';
+    color: #6D6E71; }
+    section.community-intro a:hover {
+      color: #123261; }
+  section.community-intro .community-links {
+    margin-top: 30px; }
+    section.community-intro .community-links a {
+      margin: 0 20px;
+      white-space: nowrap; }
+
+.single-chart {
+  display: inline-block;
+  width: 24%;
+  min-width: 185px;
+  margin-bottom: 80px;
+  justify-content: space-around;
+  position: relative; }
+  @media only screen and (max-width: 1000px) {
+    .single-chart {
+      margin-bottom: 20px; } }
+  @media only screen and (max-width: 40.063em) {
+    .single-chart {
+      margin-bottom: 5px; } }
+
+.circular-chart {
+  display: block;
+  margin: 10px auto;
+  max-width: 170px;
+  max-height: 170px;
+  overflow: visible !important; }
+
+.circle-bg {
+  fill: none;
+  stroke: #E5E5E5;
+  stroke-width: 6; }
+
+.circle {
+  fill: none;
+  stroke-width: 6; }
+
+.circle.in-view {
+  animation: progress 1s ease-out forwards; }
+
+@keyframes progress {
+  0% {
+    stroke-dasharray: 0 100; } }
+
+.circular-chart.blue .circle.in-view {
+  stroke: #009ADE; }
+
+.chart-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 0 65px;
+  font-size: 14px;
+  color: #009CDE;
+  line-height: 16px; }
+  @media only screen and (max-width: 1000px) {
+    .chart-text {
+      padding: 0 50px; } }
+  .chart-text span {
+    font-family: 'open_sansbold'; }
+  .chart-text span.stat-percentage {
+    font-size: 24px; }
+  .chart-text span.percent-symbol {
+    font-size: 18px; }
+  .chart-text .boomers {
+    display: inline-block;
+    margin-top: 8px; }
+
+.life-charts {
+  display: block;
+  float: left;
+  width: 100%; }
+
+section.careers-intro {
+  padding: 120px;
+  background: #edeeee; }
+  section.careers-intro p {
+    font-size: 18px;
+    line-height: 1.6; }
 
 /**
  * BxSlider v4.1.2 - Fully loaded, responsive content slider
@@ -5609,6 +5795,260 @@ ul.slimmenu li .sub-toggle > svg {
 @media only screen and (max-width: 40.062em) {
   ul.slimmenu {
     z-index: 999; } }
+
+/**
+ * Owl Carousel v2.3.3
+ * Copyright 2013-2018 David Deutsch
+ * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
+ */
+/*
+ *  Owl Carousel - Core
+ */
+.owl-carousel {
+  display: none;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  /* position relative and z-index fix webkit rendering fonts issue */
+  position: relative;
+  z-index: 1; }
+
+.owl-carousel .owl-stage {
+  position: relative;
+  -ms-touch-action: pan-Y;
+  touch-action: manipulation;
+  -moz-backface-visibility: hidden;
+  /* fix firefox animation glitch */ }
+
+.owl-carousel .owl-stage:after {
+  content: ".";
+  display: block;
+  clear: both;
+  visibility: hidden;
+  line-height: 0;
+  height: 0; }
+
+.owl-carousel .owl-stage-outer {
+  position: relative;
+  overflow: hidden;
+  /* fix for flashing background */
+  -webkit-transform: translate3d(0px, 0px, 0px); }
+
+.owl-carousel .owl-wrapper,
+.owl-carousel .owl-item {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0); }
+
+.owl-carousel .owl-item {
+  position: relative;
+  min-height: 1px;
+  float: left;
+  -webkit-backface-visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none; }
+
+.owl-carousel .owl-item img {
+  display: block;
+  width: 100%; }
+
+.owl-carousel .owl-nav.disabled,
+.owl-carousel .owl-dots.disabled {
+  display: none; }
+
+.owl-carousel .owl-nav .owl-prev,
+.owl-carousel .owl-nav .owl-next,
+.owl-carousel .owl-dot {
+  cursor: pointer;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel button.owl-dot {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0 !important;
+  font: inherit; }
+
+.owl-carousel.owl-loaded {
+  display: block; }
+
+.owl-carousel.owl-loading {
+  opacity: 0;
+  display: block; }
+
+.owl-carousel.owl-hidden {
+  opacity: 0; }
+
+.owl-carousel.owl-refresh .owl-item {
+  visibility: hidden; }
+
+.owl-carousel.owl-drag .owl-item {
+  -ms-touch-action: none;
+  touch-action: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.owl-carousel.owl-grab {
+  cursor: move;
+  cursor: grab; }
+
+.owl-carousel.owl-rtl {
+  direction: rtl; }
+
+.owl-carousel.owl-rtl .owl-item {
+  float: right; }
+
+/* No Js */
+.no-js .owl-carousel {
+  display: block; }
+
+/*
+ *  Owl Carousel - Animate Plugin
+ */
+.owl-carousel .animated {
+  animation-duration: 1000ms;
+  animation-fill-mode: both; }
+
+.owl-carousel .owl-animated-in {
+  z-index: 0; }
+
+.owl-carousel .owl-animated-out {
+  z-index: 1; }
+
+.owl-carousel .fadeOut {
+  animation-name: fadeOut; }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+/*
+ * 	Owl Carousel - Auto Height Plugin
+ */
+.owl-height {
+  transition: height 500ms ease-in-out; }
+
+/*
+ * 	Owl Carousel - Lazy Load Plugin
+ */
+.owl-carousel .owl-item .owl-lazy {
+  opacity: 0;
+  transition: opacity 400ms ease; }
+
+.owl-carousel .owl-item img.owl-lazy {
+  transform-style: preserve-3d; }
+
+/*
+ * 	Owl Carousel - Video Plugin
+ */
+.owl-carousel .owl-video-wrapper {
+  position: relative;
+  height: 100%;
+  background: #000; }
+
+.owl-carousel .owl-video-play-icon {
+  position: absolute;
+  height: 80px;
+  width: 80px;
+  left: 50%;
+  top: 50%;
+  margin-left: -40px;
+  margin-top: -40px;
+  cursor: pointer;
+  z-index: 1;
+  -webkit-backface-visibility: hidden;
+  transition: transform 100ms ease; }
+
+.owl-carousel .owl-video-play-icon:hover {
+  -ms-transform: scale(1.3, 1.3);
+  transform: scale(1.3, 1.3); }
+
+.owl-carousel .owl-video-playing .owl-video-tn,
+.owl-carousel .owl-video-playing .owl-video-play-icon {
+  display: none; }
+
+.owl-carousel .owl-video-tn {
+  opacity: 0;
+  height: 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  transition: opacity 400ms ease; }
+
+.owl-carousel .owl-video-frame {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  width: 100%; }
+
+/**
+ * Owl Carousel v2.3.3
+ * Copyright 2013-2018 David Deutsch
+ * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
+ */
+/*
+ * 	Default theme - Owl Carousel CSS File
+ */
+.owl-theme .owl-nav {
+  margin-top: 10px;
+  text-align: center;
+  -webkit-tap-highlight-color: transparent; }
+
+.owl-theme .owl-nav [class*='owl-'] {
+  color: #FFF;
+  font-size: 14px;
+  margin: 5px;
+  padding: 4px 7px;
+  background: #D6D6D6;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 3px; }
+
+.owl-theme .owl-nav [class*='owl-']:hover {
+  background: #869791;
+  color: #FFF;
+  text-decoration: none; }
+
+.owl-theme .owl-nav .disabled {
+  opacity: 0.5;
+  cursor: default; }
+
+.owl-theme .owl-nav.disabled + .owl-dots {
+  margin-top: 10px; }
+
+.owl-theme .owl-dots {
+  text-align: center;
+  -webkit-tap-highlight-color: transparent; }
+
+.owl-theme .owl-dots .owl-dot {
+  display: inline-block;
+  zoom: 1;
+  *display: inline; }
+
+.owl-theme .owl-dots .owl-dot span {
+  width: 10px;
+  height: 10px;
+  margin: 5px 7px;
+  background: #D6D6D6;
+  display: block;
+  -webkit-backface-visibility: visible;
+  transition: opacity 200ms ease;
+  border-radius: 30px; }
+
+.owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
+  background: #869791; }
 
 /*!
  * Load Awesome v1.1.0 (http://github.danielcardoso.net/load-awesome/)

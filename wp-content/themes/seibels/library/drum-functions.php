@@ -579,6 +579,7 @@ $dimensions = get_theme_mod('home_featured_dimensions', true);
 add_image_size( 'featured-home', intval($dimensions['width']), intval($dimensions['height']), true );
 $dimensions = get_theme_mod('featured_dimensions', true);
 add_image_size( 'featured', intval($dimensions['width']), intval($dimensions['height']), true );
+add_image_size( 'team-small', 232, 267, true );
 
 // Is this a child, grandchild, etc of particular page
 function is_ancestor($post_id) {
