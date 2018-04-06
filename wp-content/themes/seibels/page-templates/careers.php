@@ -25,7 +25,7 @@ get_header(); ?>
 			   <div class="owl-carousel owl-theme">
 			   		<?php 
 			   		$images = get_field('photo_carousel');
-			   		$size = 'medium'; // (thumbnail, medium, large, full or custom size)
+			   		$size = 'careers-carousel'; // (thumbnail, medium, large, full or custom size)
 			   		
 			   		if( $images ): ?>
 			   		        <?php foreach( $images as $image ): ?>
@@ -48,7 +48,7 @@ get_header(); ?>
 		    dots:false,
 		    responsive:{
 		        0:{
-		            items:1
+		            items:2
 		        },
 		        600:{
 		            items:3
@@ -67,6 +67,7 @@ get_header(); ?>
 		<div class="grid-x">
 	   		<div class="large-12 cell">
 		   	   <?php echo get_field('benefits_content'); ?>
+		   	   <div class="button yellow text-center"><a href="<?php echo get_permalink(get_theme_mod( 'contact_page' )); ?>">Start a Conversation</a></div>
 	   		</div>
 		</div>
 	</div>	
@@ -131,7 +132,7 @@ get_header(); ?>
 		   			<?php endwhile; ?>
 		   		<?php endif; ?>
 	   		</div> <!-- life-charts -->
-		   	<div class="large-12 cell">
+		   	<div class="large-12 cell text-left">
 			   	<?php echo get_field('life_content'); ?>
 	   		</div>
 		</div>

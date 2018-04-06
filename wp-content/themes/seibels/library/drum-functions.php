@@ -580,6 +580,7 @@ add_image_size( 'featured-home', intval($dimensions['width']), intval($dimension
 $dimensions = get_theme_mod('featured_dimensions', true);
 add_image_size( 'featured', intval($dimensions['width']), intval($dimensions['height']), true );
 add_image_size( 'team-small', 232, 267, true );
+add_image_size( 'careers-carousel', 312, 200, true );
 
 // Is this a child, grandchild, etc of particular page
 function is_ancestor($post_id) {

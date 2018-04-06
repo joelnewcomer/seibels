@@ -420,11 +420,122 @@ section.community-intro {
 	display: block;
 	float: left;
 	width: 100%;
+	margin: 50px 0 0 0;
+	@media only screen and (max-width: 40.063em) {
+		margin: 30px 0 0 0;	
+	}
 }
 
 section.careers-intro {
-	padding: 120px;
+	padding: 120px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;	
+	}
 	background: #edeeee;
+	p {
+		font-size: 18px;
+		line-height: 1.6;
+	}
+}
+
+.owl-carousel {
+	margin-top: 50px;
+}
+
+.owl-nav {
+	display: block;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	margin-top: -27px !important;
+	@media only screen and (max-width: 40.063em) {
+		display: none;	
+	}
+}
+
+.owl-prev, .owl-next {
+	position: absolute;
+	top: 0;
+	display: block;
+	background-size: 31px 55px !important;
+	width: 31px;
+	height: 55px;
+	text-indent: -9999px;
+	transition: all .5s;
+	-webkit-transition: all .5s; /* Safari and Chrome */
+	-ms-transition: all .5s; /* Opera */
+}
+
+.owl-theme .owl-nav .owl-prev {
+	left: -55px;
+	background: url(../images/left-chevron.svg) left top no-repeat !important;
+	@media only screen and (max-width: 40.063em) {
+		left: -20px;	
+	}
+}
+
+.owl-theme .owl-nav .owl-next {
+	left: calc(100% + 17px);
+	margin-left: 15px;
+	background: url(../images/right-chevron.svg) left top no-repeat !important;
+	@media only screen and (max-width: 40.063em) {
+		margin-left: -30px;	
+	}
+}
+
+section.benefits {
+	padding: 140px 0 80px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;	
+	}
+	background: url(../images/benefits-bg.jpg) center center no-repeat !important;
+	h2 {
+		font-size: 36px;
+		margin-bottom: 12px;	
+	}
+	h2, p, li {
+		color: #fff !important;
+	}
+	ul {
+		padding: 24px;
+		@media only screen and (min-width: 1000px) {
+			-webkit-column-count: 2; /* Chrome, Safari, Opera */
+			-moz-column-count: 2; /* Firefox */
+			column-count: 2;
+		}
+	}
+	li {
+		font-family: 'open_sansbold';
+		list-style-position: inside;
+	}
+	p, li {
+		font-size: 18px;
+	}
+}
+
+section.life {
+	padding: 90px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;
+	}	
+	h2 {
+		font-size: 36px;
+	}
+	p {
+		font-size: 18px;
+	}
+}
+
+section.continued-ed {
+	background: #edeeee;
+	padding: 120px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 40px 0;	
+	}
+	h2 {
+		font-size: 36px;
+		margin-bottom: 16px;
+	}
 	p {
 		font-size: 18px;
 		line-height: 1.6;
