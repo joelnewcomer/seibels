@@ -1,0 +1,53 @@
+section.pdfs, section.videos {
+	padding: 100px 0;
+	h2 {
+		font-size: 36px;
+		color: #6D6E71;
+		margin-bottom: 40px;
+	}
+}
+
+section.pdfs {
+	background: #f7f8f5;
+	a.pdf {
+		img {
+			max-height: 300px;
+			width: auto;
+			transition: all .5s;
+			-webkit-transition: all .5s; /* Safari and Chrome */
+			-ms-transition: all .5s; /* Opera */
+			margin-bottom: 20px;
+		}
+		&:hover img {
+			transform: scale(1.1);
+			box-shadow: 0 2px 28px 1px rgba(0,0,0,0.50);
+		}
+		span.title {
+			display: inline-block;
+			width: 100%;
+			clear: both;
+			color: #6D6E71;
+		}
+	}
+}
+
+section.videos {
+	background: #D7DACC;
+	iframe {
+		border: solid 3px #fff;
+		margin-bottom: 16px;
+	}
+	span.title {
+		display: inline-block;
+		clear: both;
+		width: 100%;
+		font-size: 18px;
+		color: #6D6E71;
+	}
+	.video {
+		display: block;
+		float: left;
+		width: 100%;
+		margin-bottom: 60px;
+	}
+}
