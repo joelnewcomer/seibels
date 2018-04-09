@@ -545,7 +545,7 @@ class Media extends AbstractModel
                 }
                 break;
             case 'location':
-            	$this->location = (object)$arr[$prop];
+            	$this->location = $arr[$prop];
                 $this->locationId = $arr[$prop]['id'];
                 $this->locationName = $arr[$prop]['name'];
                 break;

@@ -198,8 +198,14 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 
 		if ($forced_loading_of_post || Media::TYPE_IMAGE != $post->getType()) {
 			$instagram = new Instagram();
-			$post      = $instagram->getMediaById( $post->getId() );
-			$account = $post->getOwner();
+
+			try{
+				$post      = $instagram->getMediaById( $post->getId() );
+				$account = $post->getOwner();
+			}catch(\Exception $e){
+				error_log($e->getMessage());
+				error_log($e->getTraceAsString());
+			}
 		}
 		else {
 			$account = $this->getAccountById($post->getOwnerId());
@@ -252,7 +258,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		$tc->text = $this->getCaption($post->getCaption());
 		$tc->userlink = 'http://instagram.com/' . $tc->nickname;
 		$tc->permalink = $post->getLink();
-		if (empty($post->getLocation())) $tc->location = $post->getLocation();
+		if (!empty($post->getLocation())) $tc->location = (object)$post->getLocation();
 		$tc->additional = array('likes' => (string)$post->getLikesCount(), 'comments' => (string)$post->getCommentsCount());
 
 		return $tc;

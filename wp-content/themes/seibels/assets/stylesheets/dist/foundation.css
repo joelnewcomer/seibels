@@ -4945,6 +4945,135 @@ section.history-header {
 section.team-header {
   background: #E0DFB1; }
 
+section.timeline-section {
+  padding: 100px 0 30px 0;
+  position: relative;
+  z-index: 9 !important; }
+  section.timeline-section h2 {
+    font-size: 64px;
+    color: #D7DACC !important;
+    font-family: 'open_sansbold';
+    margin-bottom: 30px; }
+  section.timeline-section .timeline-container {
+    display: block;
+    float: left;
+    width: 100%;
+    height: 380px;
+    padding: 112px 0;
+    overflow: hidden; }
+    section.timeline-section .timeline-container .timeline-slider {
+      display: block;
+      position: relative;
+      width: 99999999px;
+      left: calc(50% - 78px);
+      overflow-x: visible;
+      white-space: nowrap; }
+      section.timeline-section .timeline-container .timeline-slider .year-container {
+        margin-right: 148px;
+        position: relative;
+        display: block;
+        float: left;
+        width: 156px;
+        height: 156px;
+        text-align: center;
+        border-radius: 78px;
+        font-size: 36px;
+        font-family: 'open_sansbold';
+        color: #fff;
+        line-height: 141px;
+        border: solid 8px #D7DACC; }
+        section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+1), section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+1) .year-modal, section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+1) .close-button {
+          background: #90cdf0; }
+        section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+2), section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+2) .year-modal, section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+2) .close-button {
+          background: #e8cd5f; }
+        section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+3), section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+3) .year-modal, section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+3) .close-button {
+          background: #dd634b; }
+        section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+4), section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+4) .year-modal, section.timeline-section .timeline-container .timeline-slider .year-container:nth-child(5n+4) .close-button {
+          background: #a3cf62; }
+        section.timeline-section .timeline-container .timeline-slider .year-container:after {
+          content: '';
+          display: block;
+          width: 156px;
+          height: 8px;
+          position: absolute;
+          top: 50%;
+          left: 100%;
+          margin-top: -4px;
+          background: #D7DACC; }
+        section.timeline-section .timeline-container .timeline-slider .year-container:last-child:after {
+          width: 99999999px; }
+        section.timeline-section .timeline-container .timeline-slider .year-container .modal-photo-container {
+          display: block;
+          position: relative;
+          direction: block;
+          float: right;
+          max-width: 66%;
+          margin: -30px -30px 0 20px; }
+          @media only screen and (max-width: 40.063em) {
+            section.timeline-section .timeline-container .timeline-slider .year-container .modal-photo-container {
+              width: calc(100% + 60px);
+              max-width: calc(100% + 60px);
+              margin: -30px -30px 20px -30px; } }
+          section.timeline-section .timeline-container .timeline-slider .year-container .modal-photo-container img {
+            display: block;
+            float: left; }
+        section.timeline-section .timeline-container .timeline-slider .year-container .close-button {
+          position: absolute;
+          left: -16px;
+          top: 17px;
+          width: 32px;
+          height: 32px;
+          border-radius: 16px;
+          line-height: 30px;
+          text-align: center;
+          font-family: "open_sansregular";
+          color: #fff; }
+        section.timeline-section .timeline-container .timeline-slider .year-container .year-modal {
+          text-align: left;
+          display: none;
+          position: relative;
+          position: fixed;
+          z-index: 9999999;
+          top: 200px;
+          left: 5%;
+          width: 90%;
+          padding: 30px 30px 0 30px; }
+          section.timeline-section .timeline-container .timeline-slider .year-container .year-modal h3, section.timeline-section .timeline-container .timeline-slider .year-container .year-modal p {
+            color: #fff !important; }
+          section.timeline-section .timeline-container .timeline-slider .year-container .year-modal h3 {
+            font-family: 'open_sansbold'; }
+            @media only screen and (max-width: 40.063em) {
+              section.timeline-section .timeline-container .timeline-slider .year-container .year-modal h3 {
+                clear: both; } }
+          section.timeline-section .timeline-container .timeline-slider .year-container .year-modal p {
+            font-family: "open_sansregular";
+            font-size: 16px;
+            white-space: normal;
+            margin-bottom: 20px; }
+          @media only screen and (max-width: 40.063em) {
+            section.timeline-section .timeline-container .timeline-slider .year-container .year-modal {
+              top: 100px; } }
+          @media only screen and (max-width: 40.063em) {
+            section.timeline-section .timeline-container .timeline-slider .year-container .year-modal {
+              padding-bottom: 10px; } }
+  section.timeline-section .tl-nav-container {
+    display: block;
+    float: left;
+    width: 100%;
+    color: #6D6E71; }
+    section.timeline-section .tl-nav-container svg {
+      width: 17px;
+      height: 30px;
+      pointer-events: none; }
+    section.timeline-section .tl-nav-container .tl-nav {
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 12px; }
+    section.timeline-section .tl-nav-container .tl-nav.active {
+      cursor: pointer; }
+    section.timeline-section .tl-nav-container .tl-nav:not(.active) {
+      opacity: .3; }
+
 section.team {
   background: #f9f9ef;
   position: relative;

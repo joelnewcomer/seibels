@@ -123,6 +123,10 @@ abstract class FFBaseFeed implements FFFeed{
 		catch (\Exception $e){
 			error_log($e->getMessage());
 			error_log($e->getTraceAsString());
+			$this->errors[] = array(
+				'type'    => $this->getType(),
+				'message' => $e->getMessage()
+			);
 		}
 		$this->criticalError = true;
 		return $result;

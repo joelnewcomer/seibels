@@ -217,6 +217,159 @@ section.team-header {
 	background: #E0DFB1;
 }
 
+section.timeline-section {
+	padding: 100px 0 30px 0;
+	position: relative;
+	z-index: 9 !important;
+	h2 {
+		font-size: 64px;
+		color: #D7DACC !important;
+		font-family: 'open_sansbold';
+		margin-bottom: 30px;
+	}
+	.timeline-container {
+		display: block;
+		float: left;
+		width: 100%;
+		height: 380px;
+		padding: 112px 0;
+		overflow: hidden;
+		.timeline-slider {
+			display: block;
+			position: relative;
+			width: 99999999px;
+			left: calc(50% - 78px);
+			overflow-x: visible;
+			white-space: nowrap;
+			.year-container {
+				margin-right: 148px;
+				position: relative;
+				display: block;
+				float: left;
+				width: 156px;
+				height: 156px;
+				text-align: center;
+				border-radius: 78px;
+				font-size: 36px;
+				font-family: 'open_sansbold';
+				color: #fff;
+				line-height: 141px;
+				border: solid 8px #D7DACC;
+				&:nth-child(5n+1), &:nth-child(5n+1) .year-modal, &:nth-child(5n+1) .close-button {
+					background: #90cdf0;
+				}
+				&:nth-child(5n+2), &:nth-child(5n+2) .year-modal, &:nth-child(5n+2) .close-button {
+					background: #e8cd5f;
+				}
+				&:nth-child(5n+3), &:nth-child(5n+3) .year-modal, &:nth-child(5n+3) .close-button {
+					background: #dd634b;
+				}								
+				&:nth-child(5n+4), &:nth-child(5n+4) .year-modal, &:nth-child(5n+4) .close-button {
+					background: #a3cf62;
+				}
+
+				&:after {
+					content: '';
+					display: block;
+					width: 156px;
+					height: 8px;
+					position: absolute;
+					top: 50%;
+					left: 100%;
+					margin-top: -4px;
+					background: #D7DACC;
+				}
+				&:last-child:after {
+					width: 99999999px;
+				}
+				.modal-photo-container {
+					display: block;
+					position: relative;
+					direction: block;
+					float: right;
+					max-width: 66%;
+					margin: -30px -30px 0 20px;
+					@media only screen and (max-width: 40.063em) {
+						width: calc(100% + 60px);
+						max-width: calc(100% + 60px);
+						margin: -30px -30px 20px -30px;
+					}
+					img {
+						display: block;
+						float: left;
+					}
+				}
+				.close-button {
+					position: absolute;
+					left: -16px;
+					top: 17px;
+					width: 32px;
+					height: 32px;
+					border-radius: 16px;
+					line-height: 30px;
+					text-align: center;
+					font-family: "open_sansregular";
+					color: #fff;
+				}				
+				.year-modal {
+					text-align: left;
+					display: none;
+					position: relative;
+					h3, p {
+						color: #fff !important;
+					}
+					h3 {
+						font-family: 'open_sansbold';
+						@media only screen and (max-width: 40.063em) {
+							clear: both;	
+						}
+					}
+					p {
+						font-family: "open_sansregular";
+						font-size: 16px;
+						white-space: normal;
+						margin-bottom: 20px;
+					}
+					position: fixed;
+					z-index: 9999999;
+					top: 200px;
+					@media only screen and (max-width: 40.063em) {
+						top: 100px;	
+					}
+					left: 5%;
+					width: 90%;
+					padding: 30px 30px 0 30px;
+					@media only screen and (max-width: 40.063em) {
+						padding-bottom: 10px;
+					}
+				}
+			}
+		}	
+	}
+	.tl-nav-container {
+		display: block;
+		float: left;
+		width: 100%;
+		color: #6D6E71;
+		svg {
+			width: 17px;
+			height: 30px;
+			pointer-events: none;
+		}
+		.tl-nav {
+			display: inline-block;
+			vertical-align: middle;
+			margin: 0 12px;
+		}
+		.tl-nav.active {
+			cursor: pointer;
+		}
+		.tl-nav:not(.active) {
+			opacity: .3;
+		} 
+	}
+}
+
 section.team {
 	background: #f9f9ef;
 	position: relative;
