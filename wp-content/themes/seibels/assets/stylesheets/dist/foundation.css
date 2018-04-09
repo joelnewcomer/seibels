@@ -5352,6 +5352,9 @@ section.continued-ed {
 
 section.pdfs, section.videos {
   padding: 100px 0; }
+  @media only screen and (max-width: 40.063em) {
+    section.pdfs, section.videos {
+      padding: 60px 0; } }
   section.pdfs h2, section.videos h2 {
     font-size: 36px;
     color: #6D6E71;
@@ -5359,23 +5362,26 @@ section.pdfs, section.videos {
 
 section.pdfs {
   background: #f7f8f5; }
-  section.pdfs a.pdf img {
-    max-height: 300px;
-    width: auto;
-    transition: all .5s;
-    -webkit-transition: all .5s;
-    /* Safari and Chrome */
-    -ms-transition: all .5s;
-    /* Opera */
-    margin-bottom: 20px; }
-  section.pdfs a.pdf:hover img {
-    transform: scale(1.1);
-    box-shadow: 0 2px 28px 1px rgba(0, 0, 0, 0.5); }
-  section.pdfs a.pdf span.title {
+  section.pdfs a.pdf {
     display: inline-block;
-    width: 100%;
-    clear: both;
-    color: #6D6E71; }
+    margin-bottom: 60px; }
+    section.pdfs a.pdf img {
+      max-height: 300px;
+      width: auto;
+      transition: all .5s;
+      -webkit-transition: all .5s;
+      /* Safari and Chrome */
+      -ms-transition: all .5s;
+      /* Opera */
+      margin-bottom: 20px; }
+    section.pdfs a.pdf:hover img {
+      transform: scale(1.1);
+      box-shadow: 0 2px 28px 1px rgba(0, 0, 0, 0.5); }
+    section.pdfs a.pdf span.title {
+      display: inline-block;
+      width: 100%;
+      clear: both;
+      color: #6D6E71; }
 
 section.videos {
   background: #D7DACC; }
@@ -5393,6 +5399,9 @@ section.videos {
     float: left;
     width: 100%;
     margin-bottom: 60px; }
+
+.hidden {
+  display: none; }
 
 /**
  * BxSlider v4.1.2 - Fully loaded, responsive content slider

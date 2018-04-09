@@ -15,7 +15,7 @@ get_header(); ?>
 			</div>
 			<?php if(get_field('pdfs')): ?>
 		   		<?php while(has_sub_field('pdfs')): ?>
-			   		<div class="large-4 medium-4 cell text-center">	
+			   		<div class="large-4 medium-4 cell text-center search-cell">	
 		   	   			<?php
 			   	   		$pdf_array = get_sub_field('add_pdf');
 			   	   		// print_r($pdf_array);
@@ -42,7 +42,7 @@ get_header(); ?>
 	   	   <div class="large-12 cell video-cell text-center">	
 		   	   <?php if(get_field('videos')): ?>
 		   	   	<?php while(has_sub_field('videos')): ?>
-		   	   		<div class="video">
+		   	   		<div class="video search-cell">
 			   	   		<?php echo get_sub_field('video'); ?>
 			   	   		 <span class="title"><?php echo get_sub_field('video_title'); ?></span>
 		   	   		</div>

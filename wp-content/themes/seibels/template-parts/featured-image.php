@@ -44,6 +44,13 @@ $icon = get_field('icon');
 								    		<?php echo file_get_contents($icon); ?>
 										<?php endif; ?>
 								    	<h1 class="entry-title single-title-ul"><?php the_title(); ?></h1>
+								    	
+								    	<!-- Show search form on Resources page -->
+								    	<?php
+									    if (is_page_template( 'page-templates/resources.php' )) {
+									    	get_template_part('template-parts/search','resources');	
+								    	}
+										?>
 							    	</div>
 								</div>
 							</div>

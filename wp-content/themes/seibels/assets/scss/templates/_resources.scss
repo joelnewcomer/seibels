@@ -1,5 +1,8 @@
 section.pdfs, section.videos {
 	padding: 100px 0;
+	@media only screen and (max-width: 40.063em) {
+		padding: 60px 0;	
+	}
 	h2 {
 		font-size: 36px;
 		color: #6D6E71;
@@ -10,6 +13,8 @@ section.pdfs, section.videos {
 section.pdfs {
 	background: #f7f8f5;
 	a.pdf {
+		display: inline-block;
+		margin-bottom: 60px;
 		img {
 			max-height: 300px;
 			width: auto;
@@ -50,4 +55,8 @@ section.videos {
 		width: 100%;
 		margin-bottom: 60px;
 	}
+}
+
+.hidden {
+	display: none;
 }

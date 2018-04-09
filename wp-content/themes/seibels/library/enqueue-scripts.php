@@ -36,6 +36,9 @@ if ( ! function_exists( 'drumroll_scripts' ) ) :
 		if ( true == get_theme_mod( 'sr_toggle', true ) ) {
 			wp_register_script( 'scroll-reveal', get_template_directory_uri() . '/assets/javascript/originals/scrollreveal.min.js', array('jquery'), '1.0.0', true );
 		}
+		if (is_page_template( 'page-templates/resources.php' )) {
+			wp_register_script( 'holmes', get_template_directory_uri() . '/assets/javascript/originals/holmes.min.js', array('jquery'), '1.0.0', true );
+		}
 		wp_register_script( 'footer-scripts', get_template_directory_uri() . '/assets/javascript/dist/footer_scripts.js', array('jquery'), '1.0.0', true );
 		wp_register_script( 'snap-svg', get_template_directory_uri() . '/assets/javascript/originals/snap.svg-min.js', array('jquery'), '1.0.0', true );
 		
@@ -43,6 +46,9 @@ if ( ! function_exists( 'drumroll_scripts' ) ) :
 		// enqueue scripts
 		wp_enqueue_script('header-scripts');
 		wp_enqueue_script('scroll-reveal');
+		if (is_page_template( 'page-templates/resources.php' )) {
+			wp_enqueue_script('holmes');
+		}
 		wp_enqueue_script('footer-scripts');
 		wp_enqueue_script('snap-svg');
 
