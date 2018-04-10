@@ -54,9 +54,6 @@ $size = $width . '|' . $height;
 	</div> <!-- featured-container -->
 	
 	<div class="single-container">
-		<div class="grid-container entry-content">
-		<?php while ( have_posts() ) : the_post(); ?>
-			<article class="main-content large-12 cell" <?php post_class() ?> id="post-<?php the_ID(); ?>">
 				<section class="breadcrumbs">
 					<div class="grid-container">
 						<div class="large-12 cell">
@@ -67,7 +64,10 @@ $size = $width . '|' . $height;
 							?>
 						</div>
 					</div>
-				</section>
+				</section>		
+		<div class="grid-container entry-content">
+		<?php while ( have_posts() ) : the_post(); ?>
+			<article class="main-content large-12 cell" <?php post_class() ?> id="post-<?php the_ID(); ?>">
 				<?php if (!has_post_thumbnail()) : ?>
 				<header>
 					<h1 class="entry-title"><?php the_title(); ?></h1>
