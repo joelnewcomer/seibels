@@ -18,7 +18,6 @@ $dimensions = get_theme_mod('featured_dimensions');
 $width = intval($dimensions['width']);
 $height = intval($dimensions['height']);
 $size = $width . '|' . $height;
-$blur_size = 'width=' . $width . '&height=' . $height . '&crop=1';
 ?>
 
 <div id="single-post" role="main">
@@ -27,17 +26,6 @@ $blur_size = 'width=' . $width . '&height=' . $height . '&crop=1';
 			<div class="featured-image blog-landing-featured">
 				<?php echo wp_get_attachment_image($image_id,'featured'); ?>
 				<div class="overlay">
-					<div class="grid-container">
-						<section class="breadcrumbs grid-x">
-							<div class="large-12 cell">
-								<?php
-								if ( function_exists('yoast_breadcrumb') ) {
-									yoast_breadcrumb('<p id="breadcrumbs">','</p>');
-								}
-								?>
-							</div>
-						</section>
-					</div>
 					<div class="blog-header single-header text-center">
 						<div style="display:table;width:100%;height:100%;">
 							<div style="display:table-cell;vertical-align:middle;">
