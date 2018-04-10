@@ -2281,7 +2281,7 @@ textarea {
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #8a8a8a;
+  color: #123261;
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
   appearance: none; }
   [type='text']:focus, [type='password']:focus, [type='date']:focus, [type='datetime']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='week']:focus, [type='email']:focus, [type='number']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='url']:focus, [type='color']:focus,
@@ -2439,7 +2439,7 @@ select {
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #8a8a8a;
+  color: #123261;
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' width='32' height='24' viewBox='0 0 32 24'><polygon points='0,0 32,0 16,24' style='fill: rgb%2851, 51, 51%29'></polygon></svg>");
   background-origin: content-box;
   background-position: right -1rem center;
@@ -3082,6 +3082,18 @@ body > main.container > header,
     text-transform: uppercase;
     font-size: 12px !important;
     text-align: left; }
+  .main-footer ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: #fff; }
+  .main-footer ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: #fff; }
+  .main-footer :-ms-input-placeholder {
+    /* IE 10+ */
+    color: #fff; }
+  .main-footer :-moz-placeholder {
+    /* Firefox 18- */
+    color: #fff; }
   .main-footer .gform_footer {
     width: 100% !important;
     text-align: center; }

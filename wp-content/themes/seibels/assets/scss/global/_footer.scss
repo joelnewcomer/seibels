@@ -64,6 +64,19 @@
 		font-size: 12px !important;	
 		text-align: left;
 	}
+	
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  color: #fff;
+	}
+	::-moz-placeholder { /* Firefox 19+ */
+	  color: #fff;
+	}
+	:-ms-input-placeholder { /* IE 10+ */
+	  color: #fff;
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	  color: #fff;
+	}	
 	.gform_footer {
 		width: 100% !important;
 		text-align: center;
