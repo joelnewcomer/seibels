@@ -30,7 +30,7 @@ get_header(); ?>
 			<?php $i = 0; ?>
 			<?php if(get_field('timeline')): ?>
 				<?php while(has_sub_field('timeline')): ?>
-					<div class="year-container <?php if ($i == 0) { echo 'active'; } ?>">
+					<div class="year-container <?php if ($i == 0) { echo 'active'; } ?>" data-index="<?php echo $i; ?>">
 						<?php echo get_sub_field('year'); ?>
 						<div class="year-modal">
 							<div class="modal-photo-container">
@@ -91,9 +91,12 @@ get_header(); ?>
 				jQuery("#tl-right").addClass('active');
 			}						
 		}
-	</script>
-	<script>
-		jQuery(".timeline-container").on( "click", ".year-container", function() {
+		
+		// Timeline modal functionality
+		jQuery(".timeline-container").on( "click", ".year-container", function(tlPosition) {
+			tlActive = jQuery(this).data('index');
+			tlRecalc();
+			tlNavActive();
 			jQuery(this).children('.year-modal').fadeToggle();
 			jQuery('.year-container').not(this).each(function(){
 				jQuery(this).children('.year-modal').fadeOut();			
