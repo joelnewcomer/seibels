@@ -14,10 +14,14 @@ if ($image_id == null) {
 }
 
 $icon = get_field('icon');
+$has_menu = '';
+if (is_ancestor(get_theme_mod( 'about_page' )) || is_ancestor(581)) {
+	$has_menu = 'has-menu';
+}
 ?>
 
 
-	<div class="featured-container">
+	<div class="featured-container <?php echo $has_menu; ?>">
 		<div class="featured-image-container">
 			<?php echo wp_get_attachment_image($image_id, 'featured'); ?>
 			<div class="grid-container no-padding">
@@ -43,7 +47,11 @@ $icon = get_field('icon');
 								    	<?php if ($icon != '') : ?>
 								    		<?php echo file_get_contents($icon); ?>
 										<?php endif; ?>
-								    	<h1 class="entry-title single-title-ul"><?php the_title(); ?></h1>
+								    	<?php if (is_ancestor(get_theme_mod( 'about_page' ))) : ?>  	 
+											<h1 class="entry-title single-title-ul">About & Culture</h1> 
+								    	<?php else : ?>
+								    		<h1 class="entry-title single-title-ul"><?php the_title(); ?></h1>
+								    	<?php endif; ?>
 								    	
 								    	<!-- Show search form on Resources page -->
 								    	<?php

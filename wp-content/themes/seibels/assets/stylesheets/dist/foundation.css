@@ -3407,6 +3407,9 @@ input.button::after,
   .featured-image svg path.stroke {
     stroke: #fff; }
 
+.has-menu .featured-image .blog-header > div {
+  padding-bottom: 107px; }
+
 .parallax-featured {
   height: 480px; }
   .parallax-featured .grid-container, .parallax-featured .cell {
