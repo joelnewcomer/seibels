@@ -61,7 +61,7 @@ get_header(); ?>
 				</div>
 			</div>
 			<div class="large-12 cell text-center">
-				<div class="button ghost"><a href="<?php echo get_field('doc_management_link'); ?>">Document Management</a></div>
+				<div class="button ghost"><a href="<?php echo get_field('doc_management_link'); ?>"><span>Document Management</span></a></div>
 			</div>
 		</div>
 	</div>
