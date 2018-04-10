@@ -22,15 +22,19 @@ get_header(); ?>
 		<div class="grid-x">
 		    <?php if(get_field('services')): ?>
 		    	<?php while(has_sub_field('services')): ?>
+		    		<?php
+			    	$title = get_sub_field('title');
+			    	$slug = sanitize_title($title);
+			    	?>
 		    		<?php $link = get_sub_field('link'); ?>
-		    		<div class="large-4 medium-4 small-6 cell financial-service-cell text-center">
+		    		<div class="large-4 medium-4 small-6 cell financial-service-cell text-center <?php echo $slug; ?>">
 			    		<?php if ($link != '') : ?>
 			    			<a href="<?php echo $link ?>" class="financial-service">
 						<?php else : ?>
 							<div class="financial-service">
 				    	<?php endif; ?>
 				    	<?php echo file_get_contents(get_sub_field('image')); ?><br />
-			    		<?php echo get_sub_field('title'); ?>
+			    		<?php echo $title; ?>
 		    			<?php if ($link != '') : ?>
 			    			</a>
 						<?php else : ?>
