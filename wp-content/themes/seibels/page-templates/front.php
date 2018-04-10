@@ -137,7 +137,7 @@ get_header(); ?>
 	   			<div class="large-12 cell text-center">
 		   			<h2><?php echo get_field('approach_title'); ?></h2>
 		   			<p><?php echo get_field('approach_paragraph'); ?></p>
-		   			<div class="button ghost reverse"><a href="<?php echo get_field('approach_title'); ?>">Our Approach</a></div>
+		   			<div class="button ghost reverse"><a href="<?php echo get_field('approach_title'); ?>"><span>Our Approach</span></a></div>
 	   			</div>
 	   		</div>
 		</div>		
@@ -173,7 +173,7 @@ get_header(); ?>
 	   		<div class="grid-x">	
 		   		<div class="large-6 medium-6 cell convo-title">
 		   			<h2><?php echo get_field('convo_title'); ?></h2>
-		   			<div class="button yellow text-center"><a href="<?php echo get_field('convo_link'); ?>">Start a Conversation</a></div>
+		   			<div class="button yellow text-center"><a href="<?php echo get_field('convo_link'); ?>"><span>Start a Conversation</span></a></div>
 		   		</div>
 		   		<div class="large-6 medium-6 cell convo-quote">
 		   			<p class="quote"><?php echo get_field('convo_quote'); ?></p>

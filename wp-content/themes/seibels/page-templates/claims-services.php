@@ -35,7 +35,7 @@ get_header(); ?>
 			    			  </div>
 			    			</div>
 			    			<?php if ($link != '') : ?>
-			    				<div class="faux-button white">Read More</div>
+			    				<div class="faux-button white"><span>Read More</span></div>
 			    			<?php endif; ?>
 		    			<?php if ($link != '') : ?>
 			    			</a>

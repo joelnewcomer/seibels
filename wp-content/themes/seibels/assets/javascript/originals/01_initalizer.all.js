@@ -42,7 +42,7 @@ jQuery( document ).ready(function() {
         },
     });
     
-    jQuery(window).paroller();
+    // jQuery(window).paroller();
 });
 
 /* jQuery.holdReady( true );

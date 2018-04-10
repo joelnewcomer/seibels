@@ -1,17 +1,85 @@
+/* .button.reverse a {
+	-webkit-transition: color 0.3s;
+	transition: color 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+} */
+
+.faux-button::before,
+.faux-button::after,
+input.button::before,
+input.button::after,
+.button a::before,
+.button a::after {
+	content: '';
+	z-index: 0;
+	border-radius: inherit;
+	pointer-events: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: -webkit-transform 0.3s, opacity 0.3s;
+	transition: transform 0.3s, opacity 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
+}
+.button a::before, input.button::before, .faux-button::before {
+	border: $button-border-width solid $primary-color;
+	opacity: 0;
+	-webkit-transform: scale3d(1.2, 1.2, 1);
+	transform: scale3d(1.2, 1.2, 1);
+}
+
+.button.yellow a::before {
+	border-color: #E8CD5F;
+}
+
+.button a::after, input.button::after, .faux-button::after {
+	background: $primary-color;
+}
+
+.button.reverse a::before {
+	border: $button-border-width solid #fff;
+}
+
+.button.reverse a::after {
+	background: rgba(0,0,0,.15);
+}
+.button.reverse a:hover {
+	color: $primary-color;
+}
+
+.button.ghost.reverse a::before {
+	background: #fff;
+}
+
+.button a:hover::before, input.button:hover::before, .faux-button:hover::before {
+	opacity: 1;
+	-webkit-transform: scale3d(1, 1, 1);
+	transform: scale3d(1, 1, 1);
+}
+.button a:hover::after, input.button:hover::after, .faux-button:hover::after {
+	opacity: 0;
+	-webkit-transform: scale3d(0.8, 0.8, 1);
+	transform: scale3d(0.8, 0.8, 1);
+}
+
+
+
+// OLD
 .button a, input.button, .faux-button, button {
 	display: inline-block;
 	position: relative;
 	margin-bottom: 10px;
 	background: $primary-color;
-	border: solid $button-border-width $primary-color;
 	color: $white;
 	padding: 12px 30px;
 	text-align: center;
 	font-size: 18px;
 	font-weight: bold;
-	transition: all .5s;
-	-webkit-transition: all .5s; /* Safari and Chrome */
-	-ms-transition: all .5s; /* Opera */
 	@include breakpoint(medium ) {
 	    margin-right: 15px;
 	}
@@ -21,6 +89,10 @@
 	&:hover {
 		background: transparent;
 		color: $primary-color;
+	}
+	span {
+		position: relative;
+		z-index: 2;
 	}
 }
 
@@ -32,20 +104,31 @@
 	border: solid 1px #fff;
 	color: #fff;
 	&:hover {
-		background: #fff;
 		color: $primary-color;
 	}
 }
 
-.button.white a, .faux-button.white {
-	background: #fff;
+.faux-button {
+	transition: all .5s;
+	-webkit-transition: all .5s; /* Safari and Chrome */
+	-ms-transition: all .5s; /* Opera */
+}
+
+.button.white a::before, .faux-button.white::before {
 	border-color: #fff;
 }
 
+.button.white a::after, .faux-button.white::after {
+	background: #fff;
+}
+
+.button.yellow a::after {
+	background: #E8CD5F;	
+}
+
 .button.yellow a {
-	background: #E8CD5F;
+
 	color: #6D6E71;
-	border-color: #E8CD5F;
 	&:hover {
 		background: transparent;
 		color: #E8CD5F;
@@ -83,16 +166,12 @@
 }
 
 .button.reverse a, .faux-button.reverse, button.reverse {
-	border-color: #fff;
 	color: #fff;
-	background: rgba(0,0,0,.15);
 	font-weight: bold;
 	svg path {
 		fill: #fff;
 	}	
 	&:hover {
-		background: #fff;
-		color: $primary-color;
 		svg path {
 			fill: $primary-color;
 		}		

@@ -61,8 +61,13 @@
 .page-template-policy-services {
 	#content {
 		.button a {
-			background: $policy-color;
+			color: #fff !important;
+		}
+		.button a::before {
 			border-color: $policy-color;
+		}
+		.button a::after {
+			background: $policy-color;
 		}
 	}
 }
@@ -70,8 +75,13 @@
 .page-template-claims-services {
 	#content {
 		.button a {
-			background: $claims-color;
+			color: #fff !important;
+		}
+		.button a::before {
 			border-color: $claims-color;
+		}
+		.button a::after {
+			background: $claims-color;
 		}
 	}
 }
@@ -79,8 +89,13 @@
 .page-template-financial-services {
 	#content {
 		.button a {
-			background: $financial-color;
+			color: #fff !important;
+		}
+		.button a::before {
 			border-color: $financial-color;
+		}
+		.button a::after {
+			background: $financial-color;
 		}
 	}
 }
@@ -88,8 +103,13 @@
 .page-template-accounting-services {
 	#content {
 		.button a {
-			background: $accounting-color;
+			color: #fff !important;
+		}
+		.button a::before {
 			border-color: $accounting-color;
+		}
+		.button a::after {
+			background: $accounting-color;
 		}
 	}
 }
@@ -277,6 +297,9 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
 			left: 50%;
 			margin-left: -77px;
 			color: #DD634B;
+			&:hover {
+				color: #fff;
+			}
 		}
 		&:hover .faux-button {
 			opacity: 1;
