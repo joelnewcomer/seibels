@@ -57,6 +57,17 @@ $size = $width . '|' . $height;
 		<div class="grid-container entry-content">
 		<?php while ( have_posts() ) : the_post(); ?>
 			<article class="main-content large-12 cell" <?php post_class() ?> id="post-<?php the_ID(); ?>">
+				<section class="breadcrumbs">
+					<div class="grid-container">
+						<div class="large-12 cell">
+							<?php
+							if ( function_exists('yoast_breadcrumb') ) {
+								yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+							}
+							?>
+						</div>
+					</div>
+				</section>
 				<?php if (!has_post_thumbnail()) : ?>
 				<header>
 					<h1 class="entry-title"><?php the_title(); ?></h1>
