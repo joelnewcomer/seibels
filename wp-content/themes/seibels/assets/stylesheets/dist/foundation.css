@@ -3591,7 +3591,7 @@ input.button::after,
     transform: scale(1.3) rotate(5deg); }
 
 section.breadcrumbs {
-  background: rgba(0, 0, 0, 0.3);
+  background: #FAFAFA;
   padding: 14px 0 1px 32px; }
   @media only screen and (max-width: 40.063em) {
     section.breadcrumbs {
