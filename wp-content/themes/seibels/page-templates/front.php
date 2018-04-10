@@ -169,8 +169,8 @@ get_header(); ?>
 	
 	<section id="convo">
 		<div class="bg-overlay"  style="background-image: url(<?php echo get_field('convo_background_image'); ?>);"></div>
-		<div class="grid-container">
-	   		<div class="grid-x">		
+		<!-- <div class="grid-container"> -->
+	   		<div class="grid-x">	
 		   		<div class="large-6 medium-6 cell convo-title">
 		   			<h2><?php echo get_field('convo_title'); ?></h2>
 		   			<div class="button yellow"><a href="<?php echo get_field('convo_link'); ?>">Start a Conversation</a></div>
@@ -181,7 +181,7 @@ get_header(); ?>
 		   			<?php echo get_field('convo_quote_title'); ?></p>
 		   		</div>
 	   		</div>
-		</div>
+		<!-- </div> -->
 	</section> <!-- #convo -->
 	
 	<section id="why">
