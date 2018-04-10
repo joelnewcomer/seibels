@@ -2299,7 +2299,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-  color: #cacaca; }
+  color: #999; }
 
 input:disabled, input[readonly],
 textarea:disabled,
@@ -6780,7 +6780,7 @@ select, textarea {
   padding-left: 12px !important;
   border: 1px solid #cacaca;
   height: 44px;
-  color: #cacaca; }
+  color: #999; }
 
 select {
   /*for firefox*/
