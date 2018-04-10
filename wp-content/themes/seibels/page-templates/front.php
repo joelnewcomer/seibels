@@ -173,7 +173,7 @@ get_header(); ?>
 	   		<div class="grid-x">	
 		   		<div class="large-6 medium-6 cell convo-title">
 		   			<h2><?php echo get_field('convo_title'); ?></h2>
-		   			<div class="button yellow"><a href="<?php echo get_field('convo_link'); ?>">Start a Conversation</a></div>
+		   			<div class="button yellow text-center"><a href="<?php echo get_field('convo_link'); ?>">Start a Conversation</a></div>
 		   		</div>
 		   		<div class="large-6 medium-6 cell convo-quote">
 		   			<p class="quote"><?php echo get_field('convo_quote'); ?></p>
