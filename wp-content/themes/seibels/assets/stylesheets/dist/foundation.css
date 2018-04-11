@@ -5716,14 +5716,14 @@ ul.resp-tabs-list {
   width: 100%; }
 
 .entry-content .tabs-container > div:not(.resp-vtabs) ul.resp-tabs-list {
-  border-bottom: solid 2px #123261; }
+  border-bottom: solid 2px #009CDE; }
 
 .entry-content ul.resp-tabs-list li {
   font-size: 16px;
   display: inline-block;
   padding: 13px 40px;
   margin: 0 4px 0 0;
-  color: #595959;
+  color: #fff;
   list-style: none;
   cursor: pointer;
   float: left; }
@@ -5745,20 +5745,20 @@ h2.resp-accordion {
   display: block; }
 
 .resp-tab-active {
-  border: 1px solid #123261 !important;
+  border: 1px solid #009CDE !important;
   border-bottom: none;
   margin-bottom: -1px !important;
-  border-top: 1px solid #123261 !important;
+  border-top: 1px solid #009CDE !important;
   border-bottom: 0px #fff solid !important; }
 
 li.resp-tab-item {
-  background: rgba(18, 50, 97, 0.15) !important; }
+  background: rgba(0, 156, 222, 0.4) !important; }
   li.resp-tab-item svg {
     display: none; }
 
 .entry-content ul.resp-tabs-list li.resp-tab-active {
   border-bottom: none;
-  background-color: #123261 !important;
+  background-color: #009CDE !important;
   color: #fff !important;
   margin-top: -2px !important;
   padding-top: 15px !important; }
@@ -5772,7 +5772,7 @@ h2.resp-accordion {
   padding: 14px 15px;
   position: relative;
   transition: all .5s;
-  background: rgba(18, 50, 97, 0.15) !important;
+  background: rgba(0, 156, 222, 0.15) !important;
   -webkit-transition: all .5s;
   /* Safari and Chrome */
   -ms-transition: all .5s;
@@ -5785,7 +5785,7 @@ div.resp-easy-accordion {
   margin-right: auto !important; }
 
 h2.resp-tab-active {
-  border-bottom: 0px solid #123261 !important;
+  border-bottom: 0px solid #009CDE !important;
   margin-bottom: 0px !important; }
 
 h2.resp-tab-title:last-child {
@@ -5795,7 +5795,7 @@ h2.resp-tab-title:last-child {
 .resp-vtabs ul.resp-tabs-list {
   float: left;
   width: 30%;
-  border-left: solid 2px #123261;
+  border-left: solid 2px #009CDE;
   padding-top: 2px; }
 
 .entry-content .resp-vtabs ul.resp-tabs-list li {
@@ -5825,7 +5825,7 @@ h2.resp-tab-title:last-child {
 
 /*-----------Accordion styles-----------*/
 h2.resp-tab-active {
-  background: #123261 !important;
+  background: #009CDE !important;
   color: #fff; }
   h2.resp-tab-active svg .acc-arrow-1 {
     fill: #fff; }
@@ -5853,7 +5853,7 @@ h2.resp-accordion {
     /* Chrome, Safari, Opera */
     transform: rotate(180deg); }
     h2.resp-accordion svg .acc-arrow-1 {
-      fill: #123261; }
+      fill: #009CDE; }
   h2.resp-accordion.resp-tab-active svg {
     -ms-transform: rotate(0deg);
     /* IE 9 */
@@ -5883,7 +5883,7 @@ h2.resp-accordion {
     display: none !important; } }
 
 .resp-easy-accordion .resp-tab-content {
-  background: rgba(18, 50, 97, 0.05); }
+  background: rgba(0, 156, 222, 0.05); }
 
 .resp-tab-content {
   margin-bottom: 2px; }
