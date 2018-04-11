@@ -4,8 +4,8 @@
     "fields": [
         {
             "key": "field_5acdfd45e35a3",
-            "label": "Do not show in header",
-            "name": "not_in_header",
+            "label": "Do not show Featured Image in header",
+            "name": "featured_not_in_header",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -39,5 +39,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1523449663
+    "modified": 1523450713
 }

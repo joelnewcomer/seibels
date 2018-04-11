@@ -10,14 +10,9 @@ get_header();
 
 $image_id = get_post_thumbnail_id();
 // Default Featured Image
-if ($image_id == null) {
+if ($image_id == null || get_field('featured_not_in_header')) {
 	$image_id = get_theme_mod( 'default_featured' );
 }
-// Featured Image Dimensions from Customizer
-$dimensions = get_theme_mod('featured_dimensions');
-$width = intval($dimensions['width']);
-$height = intval($dimensions['height']);
-$size = $width . '|' . $height;
 ?>
 
 <div id="single-post" role="main">
