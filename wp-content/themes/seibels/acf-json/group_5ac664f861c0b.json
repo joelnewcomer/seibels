@@ -26,7 +26,7 @@
             "label": "Photo Carousel",
             "name": "photo_carousel",
             "type": "gallery",
-            "instructions": "",
+            "instructions": "Images will be sized and cropped to 312 x 200 pixels.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -190,5 +190,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1522953641
+    "modified": 1523474189
 }
