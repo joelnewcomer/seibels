@@ -219,11 +219,11 @@ p {
 	font-family: 'open_sansbold';
 }
 
+.grid-x .cell {
+	float: left;
+}
+
 // Temporarily remove "Submit a Claim" menu item
 li.menu-item.submit-claim {
 	display: none;
-}
-
-.grid-x .cell {
-	float: left;
 }
