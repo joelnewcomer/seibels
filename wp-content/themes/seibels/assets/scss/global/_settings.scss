@@ -90,8 +90,8 @@ $foundation-palette: (
 // Layout Section Color
 
 $default-section: $white;
-$primary-section: lighten($primary-color, 40%);
-$secondary-section: lighten($secondary-color, 40%);
+$primary-section: #FAFAFA;
+$secondary-section: $white;
 
 $body-background: none;
 $body-font-color: $black;
@@ -157,7 +157,7 @@ $header-sizes: (
     'h6': 16,
   ),
 );
-$header-color: inherit;
+$header-color: $secondary-color;
 $header-lineheight: 1.2;
 $header-margin-bottom: 0.5rem;
 $header-text-rendering: optimizeLegibility;
@@ -199,7 +199,7 @@ $blockquote-mobile-width: 100%;
 $blockquote-font-style: italic;
 $blockquote-padding: 30px 30px 20px 30px;
 $blockquote-margin: 30px 0 30px 30px;
-$blockquote-border: 7px solid $primary-color;
+$blockquote-border: 7px solid $secondary-color;
 
 $cite-font-size: rem-calc(13);
 $cite-color: $dark-gray;

@@ -27,7 +27,7 @@ input.button::after,
 	transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
 .button a::before, input.button::before, .faux-button::before {
-	border: $button-border-width solid $primary-color;
+	border: $button-border-width solid $secondary-color;
 	opacity: 0;
 	-webkit-transform: scale3d(1.2, 1.2, 1);
 	transform: scale3d(1.2, 1.2, 1);
@@ -38,7 +38,7 @@ input.button::after,
 }
 
 .button a::after, input.button::after, .faux-button::after {
-	background: $primary-color;
+	background: $secondary-color;
 }
 
 .button.reverse a::before {
@@ -74,7 +74,6 @@ input.button::after,
 	display: inline-block;
 	position: relative;
 	margin-bottom: 10px;
-	background: $primary-color;
 	color: $white;
 	padding: 12px 30px;
 	text-align: center;
@@ -88,7 +87,7 @@ input.button::after,
 	}	
 	&:hover {
 		background: transparent;
-		color: $primary-color;
+		color: $secondary-color;
 	}
 	span {
 		position: relative;
@@ -127,7 +126,6 @@ input.button::after,
 }
 
 .button.yellow a {
-
 	color: #6D6E71;
 	&:hover {
 		background: transparent;

@@ -560,6 +560,8 @@ function button_shortcode( $atts, $content = null ) {
         'type' => 'primary',
         'align' => 'text-left'
     ), $atts ) );
+    $content = str_replace ( '">', '"><span>', $content );
+    $content = str_replace ( '</a>', '<span></a>', $content );
 	$html = '<div class="button ' . $size . ' ' . $type . ' ' . $align . '">' . $content . '</div>';
     return $html;
 }

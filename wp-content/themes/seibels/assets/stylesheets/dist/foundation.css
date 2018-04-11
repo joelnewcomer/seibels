@@ -2008,7 +2008,7 @@ h6, .h6 {
   font-family: "open_sansregular", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   font-style: normal;
   font-weight: normal;
-  color: inherit;
+  color: #009CDE;
   text-rendering: optimizeLegibility; }
   h1 small, .h1 small,
   h2 small, .h2 small,
@@ -2119,7 +2119,7 @@ dl {
 blockquote {
   margin: 0 0 1rem;
   padding: 30px 30px 20px 30px;
-  border-left: 7px solid #123261; }
+  border-left: 7px solid #009CDE; }
   blockquote, blockquote p {
     line-height: 1.4;
     color: #123261; }
@@ -2835,13 +2835,13 @@ blockquote {
   background: transparent; }
 
 .entry-content section.default-background:nth-child(even) {
-  background: #5e93e1; }
+  background: #FAFAFA; }
 
 .entry-content section.primary-background {
-  background: #5e93e1; }
+  background: #FAFAFA; }
 
 .entry-content section.secondary-background {
-  background: #abe6ff; }
+  background: #fff; }
 
 .slider-container {
   overflow: hidden; }
@@ -2892,7 +2892,7 @@ body.events div#page {
 body.social-feeds div#page {
   background-image: linear-gradient(-180deg, #EFEEE3 0%, #F8F8F3 100%); }
 
-.entry-content p {
+p {
   font-size: 18px; }
 
 header a.logo {
@@ -3258,7 +3258,7 @@ input.button::after,
   transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1); }
 
 .button a::before, input.button::before, .faux-button::before {
-  border: 1px solid #123261;
+  border: 1px solid #009CDE;
   opacity: 0;
   -webkit-transform: scale3d(1.2, 1.2, 1);
   transform: scale3d(1.2, 1.2, 1); }
@@ -3267,7 +3267,7 @@ input.button::after,
   border-color: #E8CD5F; }
 
 .button a::after, input.button::after, .faux-button::after {
-  background: #123261; }
+  background: #009CDE; }
 
 .button.reverse a::before {
   border: 1px solid #fff; }
@@ -3295,7 +3295,6 @@ input.button::after,
   display: inline-block;
   position: relative;
   margin-bottom: 10px;
-  background: #123261;
   color: #fff;
   padding: 12px 30px;
   text-align: center;
@@ -3308,7 +3307,7 @@ input.button::after,
     margin-right: 0; }
   .button a:hover, input.button:hover, .faux-button:hover, button:hover {
     background: transparent;
-    color: #123261; }
+    color: #009CDE; }
   .button a span, input.button span, .faux-button span, button span {
     position: relative;
     z-index: 2; }
