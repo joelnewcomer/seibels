@@ -38,9 +38,9 @@ function new_excerpt_more( $more ) {
 	// Header 2 first blog post
 	if ($blog_header_two && $wp_query->current_post == -1) {
 		$arrow = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 40"><path class="right-arrow-1" d="M19.71,19.29l-18-19A1,1,0,1,0,.29,1.71L17.62,20,.29,38.29a1,1,0,1,0,1.41,1.41l18-19a1,1,0,0,0,0-1.41Z"/></svg>';		
-		return '...' . PHP_EOL . '</p><p class="faux-link faux-button read-more arrow reverse small">Read Full Story' . $arrow;
+		return '...' . PHP_EOL . '</p><p class="faux-link faux-button read-more arrow reverse small"><span>Read Full Story' . $arrow . '</span>';
 	} else {
-		return '...' . PHP_EOL . '</p><p class="faux-link read-more">Read More';
+		return '...' . PHP_EOL . '</p><p class="faux-link read-more"><span>Read More</span>';
 	}
 	
 }
@@ -459,7 +459,7 @@ function drum_smart_address($street1,$street2,$city,$state,$zip) {
 function drum_smart_phone($phone, $button_text = 'Click to Call', $phone_prefix) {
 	$clean_phone = preg_replace("/[^0-9]/","",$phone);
 	$output = '<span class="hide-for-small">' . $phone_prefix . $phone . '</span>';
-	$output .= '<span class="button hide-for-print"><a class="show-for-small" href="tel:' . $clean_phone . '">' . $button_text . '</a></span>';
+	$output .= '<span class="button hide-for-print"><a class="show-for-small" href="tel:' . $clean_phone . '"><span>' . $button_text . '</span></a></span>';
 	return $output;
 }
 
@@ -476,11 +476,11 @@ function drum_smart_directions($street1,$street2,$city,$state,$zip) {
 	$detect = new Mobile_Detect;
 	$output = '<div class="button hide-for-print">';
 	if( $detect->isiOS() ) {
-    	$output .= '<a href="http://maps.apple.com/?daddr=' . $clean_address . '">Apple Maps';
+    	$output .= '<a href="http://maps.apple.com/?daddr=' . $clean_address . '"><span>Apple Maps';
 	} else {
-	    $output .= '<a href="http://maps.google.com/?q=' . $clean_address . '" target="_blank">Get Directions';
+	    $output .= '<a href="http://maps.google.com/?q=' . $clean_address . '" target="_blank"><span>Get Directions';
 	}
-    $output .= '</a></div>';
+    $output .= '</span></a></div>';
     return $output;
 }
 

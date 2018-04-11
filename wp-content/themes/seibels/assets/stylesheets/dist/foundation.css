@@ -4874,7 +4874,7 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
 
 .accounting-service-cell {
   padding: 80px 40px 80px 160px;
-  min-height: 480px;
+  min-height: 510px;
   position: relative; }
   @media only screen and (max-width: 1000px) {
     .accounting-service-cell {
