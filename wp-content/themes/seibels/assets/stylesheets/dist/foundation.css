@@ -2895,6 +2895,9 @@ body.social-feeds div#page {
 p {
   font-size: 18px; }
 
+.entry-content a {
+  font-family: 'open_sansbold'; }
+
 header a.logo {
   margin: 37px 15px; }
   @media only screen and (max-width: 1000px) {
