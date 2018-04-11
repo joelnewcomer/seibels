@@ -3407,6 +3407,9 @@ input.button::after,
   .featured-image svg path.stroke {
     stroke: #fff; }
 
+.featured-container img {
+  width: 100%; }
+
 .has-menu .featured-image .blog-header > div {
   padding-bottom: 107px; }
 
@@ -4968,7 +4971,8 @@ section.careers-header {
   float: left;
   width: 100%;
   max-height: 700px;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
 
 section.people {
   padding: 100px 0 60px;
