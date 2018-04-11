@@ -33,6 +33,11 @@ input.button::after,
 	transform: scale3d(1.2, 1.2, 1);
 }
 
+input.button {
+	background: $secondary-color;
+	border-color: $secondary-color;
+}
+
 .button.yellow a::before {
 	border-color: #E8CD5F;
 }
