@@ -63,12 +63,9 @@ if ($image_id == null || get_field('featured_not_in_header')) {
 		<div class="grid-container entry-content">
 		<?php while ( have_posts() ) : the_post(); ?>
 			<article class="main-content large-12 cell" <?php post_class() ?> id="post-<?php the_ID(); ?>">
-				<?php if (!has_post_thumbnail()) : ?>
 				<header>
-					<h1 class="entry-title"><?php the_title(); ?></h1>
 					<?php drum_entry_meta(); ?>
 				</header>
-				<?php endif; ?>
 				<div class="entry-content">
 					<?php the_content(); ?>
 				</div>
