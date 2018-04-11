@@ -3480,6 +3480,7 @@ input.button::after,
     bottom: 30px; } }
 
 .entry-content > ul > li, section.section ul > li {
+  color: #595959;
   list-style: none;
   position: relative;
   padding-left: 18px;
