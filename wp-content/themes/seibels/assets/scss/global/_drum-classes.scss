@@ -218,3 +218,8 @@ p {
 .entry-content a {
 	font-family: 'open_sansbold';
 }
+
+// Temporarily remove "Submit a Claim" menu item
+li.menu-item.submit-claim {
+	display: none;
+}
