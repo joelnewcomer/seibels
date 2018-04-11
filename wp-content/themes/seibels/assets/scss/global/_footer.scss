@@ -56,6 +56,7 @@
 	}
 	#gform_submit_button_4 {
 		background: $secondary-color;
+		color: #fff !important;
 		height: 33px;
 		width: 189px !important;
 		display: inline-block;
@@ -63,6 +64,9 @@
 		text-transform: uppercase;
 		font-size: 12px !important;	
 		text-align: left;
+		&:hover {
+			$background: $primary-color;
+		}
 	}
 	
 	::-webkit-input-placeholder { /* Chrome/Opera/Safari */

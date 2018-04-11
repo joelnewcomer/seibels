@@ -3078,6 +3078,7 @@ body > main.container > header,
       margin-bottom: 10px; }
   .main-footer #gform_submit_button_4 {
     background: #009CDE;
+    color: #fff !important;
     height: 33px;
     width: 189px !important;
     display: inline-block;
