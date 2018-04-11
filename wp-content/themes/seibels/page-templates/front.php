@@ -137,7 +137,7 @@ get_header(); ?>
 	   			<div class="large-12 cell text-center">
 		   			<h2><?php echo get_field('approach_title'); ?></h2>
 		   			<p><?php echo get_field('approach_paragraph'); ?></p>
-		   			<div class="button ghost reverse"><a href="<?php echo get_field('approach_title'); ?>"><span>Our Approach</span></a></div>
+		   			<div class="button ghost reverse"><a href="<?php echo get_field('approach_link'); ?>"><span>Our Approach</span></a></div>
 	   			</div>
 	   		</div>
 		</div>		
