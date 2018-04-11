@@ -765,7 +765,7 @@ Posts to load during update\
             <label for="<%= uid %>-search-timeline-type">Hashtag</label><br><br>\
           <input id="<%= uid %>-location-type" type="radio" name="<%= uid %>-timeline-type" value="location"/>\
             <label for="<%= uid %>-location-type">Location</label><br><br>\
-          </dt>\
+          </dd>\
           <dt>\
             Content to show\
             <div class="desc hint-block">\
@@ -786,6 +786,29 @@ Posts to load during update\
           <dd>\
               <input type="text" name="<%= uid %>-content"/>\
                       </dd>\
+          <dt class="hide">API METHODS\
+          <div class="desc hint-block">\
+                <span class="hint-link">\
+                    <img src="<%= plugin_url %>/assets/info_icon.svg">\
+                </span>\
+                <div class="hint hint-pro">\
+                    <h1>Which API to choose</h1>\
+                    <ul>\
+                        <li><b>Official</b> — best way to stream posts of account for which you obtained token.</li>\
+                        <li><b>JSON</b> — unofficial method to stream posts of other accounts but only latest 13 posts and no video posts available for this method.</li>\
+                        <li><b>Graph</b> — this unofficial API is subject of fluent changes and requires updates to work but allows pagination and video posts.</li>\
+                    </ul>\
+                </div>\
+            </div>\
+          </dt>\
+          <dd class="hide" style="margin-top: 8px">\
+          <input id="<%= uid %>-api-official" checked type="radio" name="<%= uid %>-api-type" value="official"/>\
+            <label for="<%= uid %>-api-official">Official API</label><br><br>\
+          <input id="<%= uid %>-api-json" type="radio" name="<%= uid %>-api-type" value="json"/>\
+            <label for="<%= uid %>-api-json">JSON API</label><br><br>\
+          <input id="<%= uid %>-api-graph" type="radio" name="<%= uid %>-api-type" value="graph"/>\
+            <label for="<%= uid %>-api-graph">Graph API (experimental)</label><br><br>\
+          </dd>\
                       <dt>Feed updates frequency</dt>\
 <dd>\
 <div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\

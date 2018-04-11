@@ -219,6 +219,18 @@ class Instagram
                 'referer' => Endpoints::BASE_URL . '/',
                 'x-csrftoken' => isset($session['csrftoken']) ? $session['csrftoken'] : ''
             ];
+        } else {
+            $rur = "PRN";
+            $ig_vw = "1038";
+            $csrftoken = "ObRXje2ByOUmAnxqPaoFsD0CHvBEK8dQ";
+            $mid = "WsqLMgALAAFkkaMz9rbL568BCU5N";
+            $ig_vh = "532";
+            $ig_pr = "2.5";
+
+            $headers = ['cookie' => "rur=$rur; ig_vw=$ig_vw; csrftoken=$csrftoken; mid=$mid; ig_vh=$ig_vh; ig_pr=$ig_pr;",
+                        'referer' => Endpoints::BASE_URL . '/',
+                        'x-csrftoken' => $csrftoken,
+            ];
         }
 
         if ($this->getUserAgent()) {
@@ -267,9 +279,33 @@ class Instagram
      */
     public function getMedias($username, $count = 20, $maxId = '')
     {
+        $medias = [];
+        {
+	        $this->userSession['ig_pr'] = 1;
+	        $response = Request::get(Endpoints::getAccountJsonLink($username), $this->generateHeaders($this->userSession));
+	        if (static::HTTP_OK !== $response->code) {
+		        throw new InstagramException('Response code is ' . $response->code . '. Body: ' . static::getErrorBody($response->body) . ' Something went wrong. Please report issue.');
+	        }
+	        $arr = json_decode($response->raw_body, true, 512, JSON_BIGINT_AS_STRING);
+	        if (!is_array($arr)) {
+		        throw new InstagramException('Response code is ' . $response->code . '. Body: ' . static::getErrorBody($response->body) . ' Something went wrong. Please report issue.');
+	        }
+	        $nodes = $arr['graphql']['user']['edge_owner_to_timeline_media']['edges'];
+	        // fix - count takes longer/has more overhead
+	        if (!isset($nodes) || empty($nodes)) {
+		        return [];
+	        }
+	        foreach ($nodes as $mediaArray) {
+		        $medias[] = Media::create($mediaArray['node']);
+	        }
+	        if (empty($nodes) || !isset($nodes)) {
+		        return $medias;
+	        }
+        }
+        return $medias;
 
-        $account = $this->getAccount($username);
-        return $this->getMediasByUserId($account->getId(), $count, $maxId);
+//        $account = $this->getAccount($username);
+//        return $this->getMediasByUserId($account->getId(), $count, $maxId);
     }
 
     /**

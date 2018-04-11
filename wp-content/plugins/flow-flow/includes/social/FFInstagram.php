@@ -86,8 +86,10 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 			switch ($this->timeline){
 				case 'user_timeline':
 					$account = $instagram->getAccount($this->url);
+					$this->userMeta = $this->fillUser($this->url);
 					$this->accounts[$account->getId()] = $account;
-					$medias = $instagram->getMediasByUserId($account->getId(), $this->getCount());
+//					$medias = $instagram->getMediasByUserId($account->getId(), $this->getCount());
+					$medias = $instagram->getMedias($this->url, $this->getCount());
 					break;
 				case 'tag':
 					$medias = $instagram->getMediasByTag($this->url, $this->getCount());
@@ -367,8 +369,9 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		$result = [];
 		$objectId = $item;
 		$instagram = new Instagram();
-		$comments = $instagram->getMediaCommentsById($objectId);
-		foreach ( $comments as $comment ) {
+		$media = $instagram->getMediaById($objectId);
+		//$comments = $instagram->getMediaCommentsById($objectId);
+		foreach ( $media->getComments() as $comment ) {
 			$from = new \stdClass();
 			$from->id = $comment->getOwner()->getId();
 			$from->username = $comment->getOwner()->getUsername();
@@ -447,7 +450,13 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		$result->username = $account->getUsername();
 		$result->full_name = $account->getFullName();
 		$result->id = $account->getId();
-		$result->profile_picture = $account->getProfilePicUrl();
+		$result->bio = $account->getBiography();
+		$result->website = $account->getExternalUrl();
+		$result->counts = new \stdClass();
+		$result->counts->media = $account->getMediaCount();
+		$result->counts->follows = $account->getFollowsCount();
+		$result->counts->followed_by = $account->getFollowedByCount();
+		$result->profile_picture = $account->getProfilePicUrlHd();
 		return $result;
 	}
 
