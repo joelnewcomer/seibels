@@ -2813,11 +2813,11 @@ blockquote {
 
 .entry-content .grid-container {
   padding-top: 60px;
-  padding-bottom: 100px; }
+  padding-bottom: 60px; }
   @media only screen and (max-width: 40.063em) {
     .entry-content .grid-container {
       padding-top: 20px;
-      padding-bottom: 60px; } }
+      padding-bottom: 20px; } }
 
 .entry-content section, .parallax-container, main.container, .grid-wrapper {
   display: block;
