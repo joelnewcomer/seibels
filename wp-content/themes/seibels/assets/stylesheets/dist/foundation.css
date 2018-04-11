@@ -2901,6 +2901,9 @@ p {
 li.menu-item.submit-claim {
   display: none; }
 
+.grid-x .cell {
+  float: left; }
+
 header a.logo {
   margin: 37px 15px; }
   @media only screen and (max-width: 1000px) {
