@@ -24,7 +24,6 @@ get_header(); ?>
 		$image_id = get_theme_mod( 'default_featured' );
 	}
 	?>
-	<div class="grid-container">
 		<div class="featured-image blog-landing-featured">
 			<?php echo wp_get_attachment_image($image_id,'featured'); ?>
 			<div class="overlay">
@@ -44,7 +43,6 @@ get_header(); ?>
 				<?php // get_template_part('template-parts/blog', 'header-2'); ?>
 			</div> <!-- overlay -->
 		</div> <!-- blog-landing-featured -->
-	</div> <!-- row -->
 </div> <!-- featured-container -->
 
 <div id="page" role="main" class="blog-grid">
