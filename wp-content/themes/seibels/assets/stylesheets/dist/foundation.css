@@ -3091,7 +3091,7 @@ body > main.container > header,
     height: 33px;
     width: 189px !important;
     display: inline-block;
-    padding: 4px 10px;
+    padding: 4px 10px !important;
     text-transform: uppercase;
     font-size: 12px !important;
     text-align: left; }
