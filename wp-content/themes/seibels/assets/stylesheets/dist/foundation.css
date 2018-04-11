@@ -3086,6 +3086,8 @@ body > main.container > header,
     text-transform: uppercase;
     font-size: 12px !important;
     text-align: left; }
+    .main-footer #gform_submit_button_4:hover {
+      background: #123261; }
   .main-footer ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
     color: #fff; }
