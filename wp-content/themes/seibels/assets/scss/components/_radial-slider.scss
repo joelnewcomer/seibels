@@ -323,10 +323,13 @@ Keyframes
 	.feature-content {
 		display: block;
 		float: left;
-		margin-right: 3%;
+		margin-right: 4%;
 		@media only screen and (max-width: 830px) {
 			max-width: 30%;
 		}
+	}
+	.feature-content:last-child {
+		margin-right: 0;
 	}
 	h1 {
 		font-size: 64px;

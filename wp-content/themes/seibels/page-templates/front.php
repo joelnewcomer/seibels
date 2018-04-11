@@ -62,31 +62,31 @@ get_header(); ?>
 			   				    		<div class="feature-content fc-<?php echo $content_i; ?>">
 				   							<h1 class="typist"></h1>
 				   							<p class="transition"><?php echo get_sub_field('description'); ?></p>
-			   				    		</div>
-			   				    		<script>
-				   				    		function slide<?php echo $content_i; ?>Typist() {
-				   								jQuery('.fc-<?php echo $content_i; ?> .typist')
-				   									.typist({ speed: 12, cursor: false })
-				   									.typistPause(<?php echo $pause; ?>)
-				   									.typistAdd('<?php echo get_sub_field('title'); ?>');
+				   							<script>
+				   								function slide<?php echo $content_i; ?>Typist() {
+				   									jQuery('.fc-<?php echo $content_i; ?> .typist')
+				   										.typist({ speed: 12, cursor: false })
+				   										.typistPause(<?php echo $pause; ?>)
+				   										.typistAdd('<?php echo get_sub_field('title'); ?>');
+				   									
+				   									setTimeout(function(){ 
+				   										jQuery('.fc-<?php echo $content_i; ?> p').addClass('fade-in');
+				   									}, <?php echo $pause; ?>);
+				   									
+				   									setTimeout(function(){ 
+				   										<?php if ($content_i == 1) : ?>
+				   											jQuery(".feature-content p").removeClass('fade-in');
+				   											jQuery(".typist").empty();
+				   										<?php endif; ?>
+				   										slide<?php echo $content_i; ?>Typist();
+				   									}, 12000);		   				    		
+				   								}
 				   								
-				   								setTimeout(function(){ 
-					   								jQuery('.fc-<?php echo $content_i; ?> p').addClass('fade-in');
-					   							}, <?php echo $pause; ?>);
-					   							
-					   							setTimeout(function(){ 
-						   							<?php if ($content_i == 1) : ?>
-						   								jQuery(".feature-content p").removeClass('fade-in');
-							   							jQuery(".typist").empty();
-						   							<?php endif; ?>
-						   							slide<?php echo $content_i; ?>Typist();
-						   						}, 12000);		   				    		
-				   				    		}
-				   				    		
-				   							jQuery( document ).ready(function() {
-				   								slide<?php echo $content_i; ?>Typist();
-				   							});
-				   						</script>
+				   								jQuery( document ).ready(function() {
+				   									slide<?php echo $content_i; ?>Typist();
+				   								});
+				   							</script>
+				   						</div>
 				   						<?php
 					   					$content_i++;
 					   					if ($pause == 1000) {

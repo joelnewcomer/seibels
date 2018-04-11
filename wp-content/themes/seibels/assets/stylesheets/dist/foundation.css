@@ -3514,6 +3514,7 @@ input.button {
     border-radius: 4px; }
 
 .entry-content > ol, section.section ol {
+  margin-left: 2.5rem;
   counter-reset: item; }
   .entry-content > ol > li, section.section ol > li {
     display: block;
@@ -4001,10 +4002,12 @@ Keyframes
   .slider-overlay .feature-content {
     display: block;
     float: left;
-    margin-right: 3%; }
+    margin-right: 4%; }
     @media only screen and (max-width: 830px) {
       .slider-overlay .feature-content {
         max-width: 30%; } }
+  .slider-overlay .feature-content:last-child {
+    margin-right: 0; }
   .slider-overlay h1 {
     font-size: 64px; }
     @media only screen and (max-width: 1000px) {

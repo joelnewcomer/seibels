@@ -19,6 +19,7 @@
 }
 
 .entry-content > ol, section.section ol {
+	margin-left: 2.5rem;
 	counter-reset: item;
 	> li {
 		display: block;
