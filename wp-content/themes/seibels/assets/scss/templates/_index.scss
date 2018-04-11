@@ -147,6 +147,18 @@ ul.post-meta {
 }
 
 .search-and-cats {
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  color: #fff;
+	}
+	::-moz-placeholder { /* Firefox 19+ */
+	  color: #fff;
+	}
+	:-ms-input-placeholder { /* IE 10+ */
+	  color: #fff;
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	  color: #fff;
+	}		
 	input#s, select#blog-cats, input#fmenu-s {
 		color: #fff;
 		background-color: rgba(255,255,255,0.20);
