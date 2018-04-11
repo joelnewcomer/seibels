@@ -31,13 +31,13 @@
 									<?php get_template_part('assets/images/news', 'icon.svg'); ?>
 								</div>
 							</a>
-							<a class="footer-icon" href="<?php echo get_site_url(); ?>/video-library">
+							<a class="footer-icon" href="<?php echo get_site_url(); ?>/resources">
 								<span class="transition">Video Library</span>
 								<div class="footer-svg">
 									<?php get_template_part('assets/images/video', 'icon.svg'); ?>
 								</div>
 							</a>
-							<a class="footer-icon" href="<?php echo get_site_url(); ?>/white-papers">
+							<a class="footer-icon" href="<?php echo get_site_url(); ?>/resources">
 								<span class="transition">White Papers</span>
 								<div class="footer-svg">
 									<?php get_template_part('assets/images/whitepaper', 'icon.svg'); ?>
