@@ -27,6 +27,15 @@ get_header(); ?>
 		<div class="featured-image blog-landing-featured">
 			<?php echo wp_get_attachment_image($image_id,'featured'); ?>
 			<div class="overlay">
+
+				<?php get_template_part('template-parts/blog', 'header-1'); ?>
+				<!-- Header Version 2 has featured article and featured categories -->
+				<?php // get_template_part('template-parts/blog', 'header-2'); ?>
+			</div> <!-- overlay -->
+		</div> <!-- blog-landing-featured -->
+</div> <!-- featured-container -->
+
+<div id="page" role="main" class="blog-grid">
 				<section class="breadcrumbs ">
 					<div class="grid-container">
 						<div class="large-12 cell">
@@ -38,14 +47,6 @@ get_header(); ?>
 						</div>
 					</div>
 				</section>
-				<?php get_template_part('template-parts/blog', 'header-1'); ?>
-				<!-- Header Version 2 has featured article and featured categories -->
-				<?php // get_template_part('template-parts/blog', 'header-2'); ?>
-			</div> <!-- overlay -->
-		</div> <!-- blog-landing-featured -->
-</div> <!-- featured-container -->
-
-<div id="page" role="main" class="blog-grid">
 	<div class="grid-container">
     	<div class="grid-wrapper">
 		    <div class="blog-content-header">
