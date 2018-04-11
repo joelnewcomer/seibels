@@ -4874,17 +4874,18 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
 
 .accounting-service-cell {
   padding: 80px 40px 80px 160px;
-  min-height: 300px;
+  min-height: 480px;
   position: relative; }
   @media only screen and (max-width: 1000px) {
     .accounting-service-cell {
-      padding: 80px 20px 80px 80px; } }
+      padding: 80px 20px 80px 80px;
+      min-height: 353px; } }
   .accounting-service-cell .accounting-title {
     transform-origin: left 0%;
     transform: rotate(-90deg);
     position: absolute;
     left: 30px;
-    top: 380px;
+    top: 434px;
     display: block; }
     @media only screen and (max-width: 1000px) {
       .accounting-service-cell .accounting-title {
@@ -4894,7 +4895,7 @@ body.claims-services .services-benefits .benefits-content p, body.accounting-ser
       font-size: 64px;
       margin: 0;
       display: block;
-      width: 300px;
+      width: 353px;
       text-align: right;
       color: #fff; }
       @media only screen and (max-width: 1000px) {
