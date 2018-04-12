@@ -5019,7 +5019,8 @@ section.careers-header {
 .ppt-tabs {
   display: block;
   float: left;
-  width: 100%; }
+  width: 100%;
+  position: relative; }
 
 .ppt-tabs section {
   display: block;
