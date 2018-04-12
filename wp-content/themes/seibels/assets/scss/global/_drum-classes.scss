@@ -223,11 +223,6 @@ p {
 	float: left;
 }
 
-// Temporarily remove "Submit a Claim" menu item
-li.menu-item.submit-claim {
-	display: none;
-}
-
 body.events .entry-content > section > .grid-container {
 	max-width: 750px;
 }
@@ -236,4 +231,13 @@ ul#menu-top-menu {
 	@media only screen and (min-width: 40.063em) {
 		padding-right: 20px;
 	}
+}
+
+.ff-stream {
+	background: transparent !important;
+}
+
+// Temporarily remove "Submit a Claim" menu item
+li.menu-item.submit-claim {
+	display: none;
 }

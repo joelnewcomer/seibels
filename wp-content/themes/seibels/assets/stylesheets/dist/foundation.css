@@ -2901,15 +2901,18 @@ p {
 .grid-x .cell {
   float: left; }
 
-li.menu-item.submit-claim {
-  display: none; }
-
 body.events .entry-content > section > .grid-container {
   max-width: 750px; }
 
 @media only screen and (min-width: 40.063em) {
   ul#menu-top-menu {
     padding-right: 20px; } }
+
+.ff-stream {
+  background: transparent !important; }
+
+li.menu-item.submit-claim {
+  display: none; }
 
 header a.logo {
   margin: 37px 15px; }
