@@ -2904,7 +2904,7 @@ p {
 li.menu-item.submit-claim {
   display: none; }
 
-body.events .grid-container {
+body.events .entry-content > section > .grid-container {
   max-width: 750px; }
 
 @media only screen and (min-width: 40.063em) {
@@ -5063,13 +5063,13 @@ section.careers-header {
 .tab-indicator-wrap {
   display: none;
   position: absolute;
-  bottom: -87px;
+  bottom: -86px;
   left: 0;
   width: 100%;
   text-align: center; }
   @media only screen and (max-width: 40.063em) {
     .tab-indicator-wrap {
-      bottom: -43px; } }
+      bottom: -42px; } }
 
 .tab-indicator {
   display: inline-block;
