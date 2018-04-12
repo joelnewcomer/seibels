@@ -11,13 +11,14 @@ get_header(); ?>
 	<div class="grid-container">
 		<div class="grid-x">
 	   	   <div class="large-12 cell text-center">
-		   	   <h2><span class="ppt-tab-choice active" data-tab="people">People.</span> <span class="ppt-tab-choice" data-tab="process">Process.</span> <span class="ppt-tab-choice" data-tab="tech">Technology.</span></h2>
+		   	   <h2><span class="ppt-tab-choice active" data-tab="people">People.<span class="tab-indicator-wrap"><span class="tab-indicator"></span></span></span> <span class="ppt-tab-choice" data-tab="process">Process.<span class="tab-indicator-wrap"><span class="tab-indicator"></span></span></span> <span class="ppt-tab-choice" data-tab="tech">Technology.<span class="tab-indicator-wrap"><span class="tab-indicator"></span></span></span></h2>
 	   	   </div>
 		</div>
 	</div>	
 </section>
 
 <div class="ppt-tabs">
+	
 	<section class="people active transition">
 		<div class="grid-container">
 			<div class="grid-x">
