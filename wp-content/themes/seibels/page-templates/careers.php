@@ -67,7 +67,7 @@ get_header(); ?>
 		<div class="grid-x">
 	   		<div class="large-12 cell">
 		   	   <?php echo get_field('benefits_content'); ?>
-		   	   <div class="button yellow text-center"><a href="<?php echo get_permalink(get_theme_mod( 'contact_page' )); ?>"><span>Start a Conversation</span></a></div>
+		   	   <div class="button yellow text-center"><a href="https://www.jobs.net/jobs/seibels/all-jobs" target="_blank"><span>Join our Team</span></a></div>
 	   		</div>
 		</div>
 	</div>	
