@@ -67,13 +67,6 @@
 	<?php // get_template_part( 'template-parts/search-modal' ); ?>
 	<a class="cd-top"><?php _e( 'Top', 'textdomain' ); ?></a>
 	
-	<script>
-		jQuery( document ).ready(function() {
-			jQuery('.entry-content .button a').each(function() {
-				// jQuery(this).wrapInner( "<span></span>");
-			});	
-		});
-	</script>
 
 <?php wp_footer(); ?>
 

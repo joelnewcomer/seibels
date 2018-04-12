@@ -8,6 +8,7 @@
  * 4. is_blog() - Line 406 Checks to see if this is a blog-related page (blog, blog post, archive)
  */
 
+
 // Set content width to appease Theme Check
 if ( ! isset( $content_width ) ) $content_width = 1048;
 
