@@ -61,7 +61,7 @@ get_header(); ?>
 			   				    	<?php while(has_sub_field('feature_content')): ?>
 			   				    		<div class="feature-content fc-<?php echo $content_i; ?>">
 				   							<h1 class="typist"></h1>
-				   							<p class="transition"><?php echo get_sub_field('description'); ?></p>
+				   							<p><?php echo get_sub_field('description'); ?></p>
 				   							<script>
 				   								function slide<?php echo $content_i; ?>Typist() {
 				   									jQuery('.fc-<?php echo $content_i; ?> .typist')

@@ -342,6 +342,7 @@ Keyframes
 	}
 	p {
 		font-size: 20px;
+		transition: opacity 0.3s ease-out 0s;
 		@media only screen and (max-width: 1000px) {
 			font-size: 16px;	
 		}
@@ -351,6 +352,7 @@ Keyframes
 		max-width: 241px;
 		opacity: 0;
 		&.fade-in {
+			transition: opacity 0.3s ease-in 1s !important;
 			opacity: 1;
 		}
 	}

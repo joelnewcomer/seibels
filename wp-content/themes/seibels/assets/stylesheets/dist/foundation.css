@@ -4021,6 +4021,7 @@ Keyframes
         font-size: 24px; } }
   .slider-overlay p {
     font-size: 20px;
+    transition: opacity 0.3s ease-out 0s;
     max-width: 241px;
     opacity: 0; }
     @media only screen and (max-width: 1000px) {
@@ -4030,6 +4031,7 @@ Keyframes
       .slider-overlay p {
         display: none; } }
     .slider-overlay p.fade-in {
+      transition: opacity 0.3s ease-in 1s !important;
       opacity: 1; }
   .slider-overlay .fc-1 p, .slider-overlay .fc-3 p {
     max-width: 210px; }
