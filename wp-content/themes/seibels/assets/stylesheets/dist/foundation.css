@@ -3435,8 +3435,9 @@ input.button {
 .featured-container img {
   width: 100%; }
 
-.has-menu .featured-image .blog-header > div {
-  padding-bottom: 107px; }
+@media only screen and (min-width: 40.063em) {
+  .has-menu .featured-image .blog-header > div {
+    padding-bottom: 107px; } }
 
 .parallax-featured {
   height: 480px; }

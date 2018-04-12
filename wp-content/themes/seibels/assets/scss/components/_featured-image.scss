@@ -46,7 +46,9 @@
 }
 
 .has-menu .featured-image .blog-header > div {
-	padding-bottom: 107px;
+	@media only screen and (min-width: 40.063em) {
+		padding-bottom: 107px;
+	}
 }
 
 .parallax-featured {

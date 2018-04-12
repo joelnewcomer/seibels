@@ -20,16 +20,16 @@ get_header(); ?>
 <section class="community-intro">
 	<div class="grid-container">
 		<div class="grid-x">
-	   	   <div class="large-12 cell">
-		   	   <?php echo get_field('main_content'); ?>
-		   	   <div class="community-links text-center">
-			   	   <?php if(get_field('links')): ?>
+	   		<div class="large-12 cell">
+		   		<?php echo get_field('main_content'); ?>
+		   		<div class="community-links text-center">
+			   		<?php if(get_field('links')): ?>
 			   	   	<?php while(has_sub_field('links')): ?>
 			   	   		<a href="<?php echo get_sub_field('link'); ?>"><?php echo get_sub_field('title'); ?></a>
 			   	   	<?php endwhile; ?>
-			   	   <?php endif; ?>
-		   	   </div>
-	   	   </div>			
+			   	   	<?php endif; ?>
+		   		</div>
+	   		</div>			
 		</div>
 	</div>
 </section>
