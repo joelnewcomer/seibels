@@ -3096,7 +3096,7 @@ body > main.container > header,
       text-transform: uppercase;
       font-size: 12px !important;
       margin-bottom: 10px; }
-  .main-footer #gform_submit_button_4 {
+  .main-footer #gform_submit_button_6 {
     background: #009CDE;
     color: #fff !important;
     height: 33px;
@@ -3106,7 +3106,7 @@ body > main.container > header,
     text-transform: uppercase;
     font-size: 12px !important;
     text-align: left; }
-    .main-footer #gform_submit_button_4:hover {
+    .main-footer #gform_submit_button_6:hover {
       background: #123261; }
   .main-footer ::-webkit-input-placeholder {
     /* Chrome/Opera/Safari */
@@ -3184,7 +3184,7 @@ body > main.container > header,
     .footer-icons {
       margin-bottom: 30px; } }
 
-#gform_wrapper_4 {
+#gform_wrapper_6 {
   margin-top: 0; }
 
 #loader {
