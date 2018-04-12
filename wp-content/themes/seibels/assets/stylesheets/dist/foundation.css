@@ -3333,7 +3333,6 @@ input.button {
   .button a:last-child, input.button:last-child, .faux-button:last-child, button:last-child {
     margin-right: 0; }
   .button a:hover, input.button:hover, .faux-button:hover, button:hover {
-    background: transparent;
     color: #009CDE; }
   .button a span, input.button span, .faux-button span, button span {
     position: relative;
