@@ -18,11 +18,19 @@ get_header(); ?>
 			   		<div class="large-4 medium-4 cell text-center search-cell">	
 		   	   			<?php
 			   	   		$pdf_array = get_sub_field('add_pdf');
+			   	   		$thumbnail = get_sub_field('thumbnail_image');
 			   	   		// print_r($pdf_array);
 		   	   			?>
 		   	   			<a class="pdf" href="<?php echo $pdf_array['url']; ?>">
 			   	   			<span class="pdf-thumb">
-				   	   			<?php echo get_the_post_thumbnail($pdf_array['ID']); ?>
+				   	   			<?php
+					   	   		if ($thumbnail == '') {
+						   	   		echo get_the_post_thumbnail($pdf_array['ID']);
+						   	   	} else {
+							   	   	echo wp_get_attachment_image($thumbnail, 'medium');
+						   	   	}
+						   	   	?>
+						   	   		
 			   	   			</span>
 			   	   			<span class="title"><?php echo $pdf_array['title']; ?></span>
 		   	   			</a>
