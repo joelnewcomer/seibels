@@ -5016,6 +5016,11 @@ section.careers-header {
   position: relative;
   overflow: hidden; }
 
+.ppt-tabs {
+  display: block;
+  float: left;
+  width: 100%; }
+
 .ppt-tabs section {
   display: block;
   float: left;
