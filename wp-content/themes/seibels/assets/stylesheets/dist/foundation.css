@@ -2907,6 +2907,10 @@ li.menu-item.submit-claim {
 body.events .grid-container {
   max-width: 750px; }
 
+@media only screen and (min-width: 40.063em) {
+  ul#menu-top-menu {
+    padding-right: 20px; } }
+
 header a.logo {
   margin: 37px 15px; }
   @media only screen and (max-width: 1000px) {
