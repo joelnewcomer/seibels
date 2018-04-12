@@ -22,6 +22,44 @@
             "delay": 0
         },
         {
+            "key": "field_5acf4b69447a9",
+            "label": "Process Content",
+            "name": "process_content",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
+            "key": "field_5acf4bac6ca65",
+            "label": "Technology Content",
+            "name": "tech_content",
+            "type": "wysiwyg",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 0,
+            "delay": 0
+        },
+        {
             "key": "field_5ac5298af14f3",
             "label": "Mission Paragraph",
             "name": "mission_pp",
@@ -87,5 +125,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1522933888
+    "modified": 1523534791
 }

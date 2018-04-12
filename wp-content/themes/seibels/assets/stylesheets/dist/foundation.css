@@ -5013,21 +5013,45 @@ section.careers-header {
   position: relative;
   overflow: hidden; }
 
-section.people {
+.ppt-tabs section {
+  display: block;
+  float: left;
+  width: 100%;
   padding: 100px 0 60px;
-  background-image: url(../../images/people-bg.jpg);
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
   background-size: cover;
   background-position: center center; }
   @media only screen and (max-width: 40.063em) {
-    section.people {
+    .ppt-tabs section {
       padding: 40px 0 20px 0; } }
-  section.people h2 {
+  .ppt-tabs section h2 {
     font-family: 'open_sansbold';
     text-transform: uppercase;
     margin-bottom: 20px;
     font-size: 28px; }
-  section.people p {
+  .ppt-tabs section p {
     font-size: 18px; }
+  .ppt-tabs section.active {
+    opacity: 1;
+    position: relative; }
+
+section.people {
+  background-image: url(../../images/people-bg.jpg); }
+
+section.process {
+  background-image: url(../../images/process-bg.jpg); }
+
+section.tech {
+  background-image: url(../../images/tech-bg.jpg); }
+
+.ppt-tab-choice {
+  cursor: pointer; }
+
+.ppt-tab-choice.active {
+  font-family: 'open_sansbold'; }
 
 section.mission-values {
   padding: 100px 0;

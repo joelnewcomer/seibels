@@ -11,22 +11,57 @@ get_header(); ?>
 	<div class="grid-container">
 		<div class="grid-x">
 	   	   <div class="large-12 cell text-center">
-		   	   <h2><strong>People.</strong> Process. Technology.</h2>
+		   	   <h2><span class="ppt-tab-choice active" data-tab="people">People.</span> <span class="ppt-tab-choice" data-tab="process">Process.</span> <span class="ppt-tab-choice" data-tab="tech">Technology.</span></h2>
 	   	   </div>
 		</div>
 	</div>	
 </section>
 
-<section class="people">
-	<div class="grid-container">
-		<div class="grid-x">
-	   	   <div class="large-6 medium-6 cell">
-		   	   <h2>People</h2>
-		   	   <?php echo get_field('people_content'); ?>
-	   	   </div>
-		</div>
-	</div>		
-</section>
+<div class="ppt-tabs">
+	<section class="people active transition">
+		<div class="grid-container">
+			<div class="grid-x">
+		   	   <div class="large-6 medium-6 cell">
+			   	   <h2>People</h2>
+			   	   <?php echo get_field('people_content'); ?>
+		   	   </div>
+			</div>
+		</div>		
+	</section>
+	<section class="process transition">
+		<div class="grid-container">
+			<div class="grid-x">
+		   	   <div class="large-6 medium-6 cell">
+			   	   <h2>Process</h2>
+			   	   <?php echo get_field('people_content'); ?>
+		   	   </div>
+			</div>
+		</div>		
+	</section>
+	<section class="tech transition">
+		<div class="grid-container">
+			<div class="grid-x">
+		   	   <div class="large-6 medium-6 cell">
+			   	   <h2>Technology</h2>
+			   	   <?php echo get_field('people_content'); ?>
+		   	   </div>
+			</div>
+		</div>		
+	</section>
+</div>
+
+<script>
+jQuery(document).ready(function(){
+	jQuery('.ppt-tabs section').matchHeight({byRow:false});
+});
+jQuery(document).on( "click", ".ppt-tab-choice", function() {
+	jQuery(".ppt-tab-choice").removeClass('active');
+	jQuery(this).addClass('active');
+	var tab = jQuery(this).data('tab');
+	jQuery(".ppt-tabs section").removeClass('active');
+	jQuery(".ppt-tabs section." + tab).addClass('active');
+});
+</script>
 
 <section class="mission-values">
 	<div class="grid-container">

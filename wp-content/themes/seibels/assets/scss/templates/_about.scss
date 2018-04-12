@@ -109,12 +109,18 @@ section.careers-header {
 	overflow: hidden;
 }
 
-section.people {
+.ppt-tabs section {
+	display: block;
+	float: left;
+	width: 100%;
 	padding: 100px 0 60px;
+	opacity: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 	@media only screen and (max-width: 40.063em) {
 		padding: 40px 0 20px 0;
 	}
-	background-image: url(../images/people-bg.jpg);
 	background-size: cover;
 	background-position: center center;
 	h2 {
@@ -126,6 +132,30 @@ section.people {
 	p {
 		font-size: 18px;
 	}
+	&.active {
+		opacity: 1;
+		position: relative;
+	}
+}
+
+section.people {
+	background-image: url(../images/people-bg.jpg);
+}
+
+section.process {
+	background-image: url(../images/process-bg.jpg);
+}
+
+section.tech {
+	background-image: url(../images/tech-bg.jpg);
+}
+
+.ppt-tab-choice {
+	cursor: pointer;
+}
+
+.ppt-tab-choice.active {
+	font-family: 'open_sansbold';
 }
 
 section.mission-values {
