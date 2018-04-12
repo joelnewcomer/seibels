@@ -227,3 +227,7 @@ p {
 li.menu-item.submit-claim {
 	display: none;
 }
+
+body.events .grid-container {
+	max-width: 750px;
+}
