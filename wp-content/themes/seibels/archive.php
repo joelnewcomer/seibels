@@ -63,7 +63,7 @@ get_header(); ?>
 	    		    <?php while ( have_posts() ) : the_post(); ?>
 						<a href="<?php the_permalink(); ?>" class="large-4 medium-6 cell blog-card">
 							<?php if (has_post_thumbnail()) : ?>
-								<?php the_post_thumbnail( array( 'width' => 640, 'height' => 370, 'crop' => true ) ) ?>
+								<?php the_post_thumbnail(); ?>
 							<?php endif; ?>
 							<div class="blog-card-content">
 								<h3><?php the_title(); ?></h3>
