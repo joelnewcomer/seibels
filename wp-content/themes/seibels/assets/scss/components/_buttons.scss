@@ -36,6 +36,9 @@ input.button::after,
 input.button {
 	background: $secondary-color;
 	border-color: $secondary-color;
+	&:hover {
+		background: transparent;
+	}
 }
 
 .button.yellow a::before {

@@ -3289,6 +3289,8 @@ input.button::after,
 input.button {
   background: #009CDE;
   border-color: #009CDE; }
+  input.button:hover {
+    background: transparent; }
 
 .button.yellow a::before {
   border-color: #E8CD5F; }
