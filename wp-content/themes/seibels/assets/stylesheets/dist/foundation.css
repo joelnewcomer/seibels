@@ -2915,6 +2915,9 @@ body.events .entry-content > section > .grid-container {
 li.menu-item.submit-claim {
   display: none; }
 
+body.error404 main#content {
+  padding-top: 123px; }
+
 header a.logo {
   margin: 37px 15px; }
   @media only screen and (max-width: 1000px) {

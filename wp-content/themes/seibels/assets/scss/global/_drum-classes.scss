@@ -241,3 +241,7 @@ ul#menu-top-menu {
 li.menu-item.submit-claim {
 	display: none;
 }
+
+body.error404 main#content {
+	padding-top: 123px;
+}

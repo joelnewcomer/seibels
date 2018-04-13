@@ -17,7 +17,7 @@ get_header(); ?>
 					</header>
 					<div class="entry-content">
 						<h2><?php _e( 'Sorry, we couldn’t locate that page.', 'drumroll' ); ?></h2>
-						<div class="button"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php _e( 'Take Me Home', 'drumroll' ); ?></a></div>
+						<div class="button"><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><span><?php _e( 'Take Me Home', 'drumroll' ); ?></span></a></div>
 					</div>
 				</article>
 			</div>
