@@ -3,18 +3,19 @@
 function arve_get_options_defaults( $section ) {
 
 	$options['main'] = array(
-		'align_maxwidth'      => 400,
-		'align'               => 'none',
-		'autoplay'            => false,
-		'mode'                => 'normal',
-		'promote_link'        => false,
-		'video_maxwidth'      => '',
-		'wp_image_cache_time' => 18000,
-		'last_settings_tab'   => '',
-		'wp_video_override'   => true,
-		'controlslist'        => 'nodownload',
-		'vimeo_api_token'     => '',
-		'iframe_flash'        => true,
+		'align_maxwidth'        => 400,
+		'align'                 => 'none',
+		'always_enqueue_assets' => false,
+		'autoplay'              => false,
+		'mode'                  => 'normal',
+		'promote_link'          => false,
+		'video_maxwidth'        => '',
+		'wp_image_cache_time'   => 18000,
+		'last_settings_tab'     => '',
+		'wp_video_override'     => true,
+		'controlslist'          => 'nodownload',
+		'vimeo_api_token'       => '',
+		'iframe_flash'          => true,
 	);
 
 	$properties = arve_get_host_properties();
@@ -354,6 +355,20 @@ function arve_get_settings_definitions() {
 			),
 			'description'        => sprintf(
 				__( 'It is recommented to have this disabled if you not embed videos from a <a href="%s">not listed provider</a> that still requires flash and is not listed here. Disable flash will make general iframe embeds more secure, prevents evil redirection from within the iframe. This also makes the Pro Addon\'s \'Disable Links\' feature possible for unlisted providers. Note you can still put <code>disable_flash="yes/no"</code> on individual shortcodes to overwrite this if needed.', ARVE_SLUG ),
+				'https://nextgenthemes.com/plugins/arve-pro/#support-table'
+			),
+		),
+		array(
+			'hide_from_sc' => true,
+			'attr'               => 'always_enqueue_assets',
+			'label'              => esc_html__( 'Assent loading', ARVE_SLUG ),
+			'type'               => 'select',
+			'options'            => array(
+				'no'              => esc_html__( 'When ARVE video is detected', ARVE_SLUG ),
+				'yes'             => esc_html__( 'Always', ARVE_SLUG ),
+			),
+			'description'        => sprintf(
+				__( 'Usually ARVE will loads its scripts and styles only on pages what need them. In case your content is loaded via AJAX or the styles are not loaded for another reason you may have to enable this option', ARVE_SLUG ),
 				'https://nextgenthemes.com/plugins/arve-pro/#support-table'
 			),
 		),
@@ -785,15 +800,21 @@ function arve_get_host_properties() {
 			),
 		),
 		'ustream' => array(
-			'regex'          => $s . 'ustream\.tv/(channel/)?(?<id>[0-9]{8}|recorded/[0-9]{8}(/highlight/[0-9]+)?)',
+			'regex'          => $s . 'ustream\.tv/(embed/)?(channel/)?(?<id>[0-9]+|recorded/[0-9]+(/highlight/[0-9]+)?)',
 			'embed_url'      => 'http://www.ustream.tv/embed/%s',
 			'default_params' => 'html5ui',
 			'auto_thumbnail' => false,
 			'aspect_ratio'   => '480:270',
 			'tests' => array(
-				array( 'url' => 'http://www.ustream.tv/recorded/59999872?utm_campaign=ustre.am&utm_source=ustre.am/:43KHS&utm_medium=social&utm_content=20170405204127', 'id' => 'recorded/59999872' ),
+				array(
+					'url' => 'http://www.ustream.tv/recorded/59999872?utm_campaign=ustre.am&utm_source=ustre.am/:43KHS&utm_medium=social&utm_content=20170405204127',
+					'id' =>                        'recorded/59999872'
+				),
+				array(
+					'url' => 'http://www.ustream.tv/embed/17074538?wmode=transparent&v=3&autoplay=false',
+					'id' =>                              '17074538'
+				),
 			),
-
 		),
 		'rutube' => array(
 			'name'           => 'RuTube.ru',
@@ -803,7 +824,7 @@ function arve_get_host_properties() {
 			'tests' => array(
 				array(
 					'url' => 'https://rutube.ru/play/embed/9822149',
-					'id'  =>                               9822149
+					'id'  =>                              '9822149'
 				),
 			),
 		),
