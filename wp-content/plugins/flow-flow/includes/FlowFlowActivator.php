@@ -82,7 +82,7 @@ class FlowFlowActivator extends LAActivatorBase{
 				'plugin_url'        => plugin_dir_url(dirname($file).'/'),
 				'admin_url'         => admin_url('admin-ajax.php'),
 				'table_name_prefix' => $wpdb->prefix . 'ff_',
-				'version' 			=> '3.2.22',
+				'version' 			=> '3.2.24',
 				'faq_url' 			=> 'http://docs.social-streams.com/'
 		);
 		$adapter = new FFFacebookCacheAdapter();

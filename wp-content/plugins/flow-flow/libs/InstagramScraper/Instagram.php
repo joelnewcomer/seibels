@@ -208,6 +208,7 @@ class Instagram
      */
     private function generateHeaders($session)
     {
+	    $csrftoken = "Ku1sDF1yPG8qHY0huKHLTazsALW4PYcM";
         $headers = [];
         if ($session) {
             $cookies = '';
@@ -222,7 +223,6 @@ class Instagram
         } else {
             $rur = "PRN";
             $ig_vw = "1038";
-            $csrftoken = "ObRXje2ByOUmAnxqPaoFsD0CHvBEK8dQ";
             $mid = "WsqLMgALAAFkkaMz9rbL568BCU5N";
             $ig_vh = "532";
             $ig_pr = "2.5";
@@ -317,20 +317,84 @@ class Instagram
      */
     public function getAccount($username)
     {
-        $response = Request::get(Endpoints::getAccountJsonLink($username), $this->generateHeaders($this->userSession));
+        $response = Request::get(Endpoints::getAccountPageLink($username), $this->generateHeaders($this->userSession));
         if (static::HTTP_NOT_FOUND === $response->code) {
             throw new InstagramNotFoundException('Account with given username does not exist.');
         }
         if (static::HTTP_OK !== $response->code) {
             throw new InstagramException('Response code is ' . $response->code . '. Body: ' . static::getErrorBody($response->body) . ' Something went wrong. Please report issue.');
         }
+        preg_match_all('#\_sharedData \= (.*?)\;\<\/script\>#', $response->raw_body, $out);
+        $userArray = json_decode($out[1][0], true, 512, JSON_BIGINT_AS_STRING);
 
-        $userArray = json_decode($response->raw_body, true, 512, JSON_BIGINT_AS_STRING);
-        if (!isset($userArray['graphql']['user'])) {
+        if (!isset($userArray['entry_data']['ProfilePage'][0]['graphql']['user'])) {
             throw new InstagramNotFoundException('Account with this username does not exist', 404);
         }
-        return Account::create($userArray['graphql']['user']);
+        return Account::create($userArray['entry_data']['ProfilePage'][0]['graphql']['user']);
     }
+
+	/**
+	 * @param string $username
+	 * @param int $count
+	 *
+	 * @return Media[]
+	 * @throws InstagramException
+	 * @throws InstagramNotFoundException
+	 */
+	public function getMediasFromFeed($username, $count = 20)
+	{
+		$medias = [];
+		$index = 0;
+		$response = Request::get(Endpoints::getAccountJsonLink($username), $this->generateHeaders($this->userSession));
+		if (static::HTTP_NOT_FOUND === $response->code) {
+			throw new InstagramNotFoundException('Account with given username does not exist.');
+		}
+		if (static::HTTP_OK !== $response->code) {
+			throw new InstagramException('Response code is ' . $response->code . '. Body: ' . static::getErrorBody($response->body) . ' Something went wrong. Please report issue.');
+		}
+		$userArray = json_decode($response->raw_body, true, 512, JSON_BIGINT_AS_STRING);
+		if (!isset($userArray['graphql']['user'])) {
+			throw new InstagramNotFoundException('Account with this username does not exist', 404);
+		}
+		$nodes = $userArray['graphql']['user']['edge_owner_to_timeline_media']['edges'];
+		if (!isset($nodes) || empty($nodes)) {
+			return [];
+		}
+		foreach ($nodes as $mediaArray) {
+			if ($index === $count) {
+				return $medias;
+			}
+			$medias[] = Media::create($mediaArray['node']);
+			$index++;
+		}
+		return $medias;
+	}
+
+	public function getMediasFromURL($username, $count = 12)
+	{
+		$doc = new \DOMDocument();
+		$doc->loadHTML(implode("",file('https://www.instagram.com/'.$username.'/')));
+		$jsNodes = $doc->getElementsByTagName("script");
+		$jsNodeTmp = "";
+		foreach($jsNodes as $node){
+			if(strpos($node->nodeValue,"window._sharedData")!==false){
+				$jsNodeTmp = $node->nodeValue;
+				break;
+			}
+		}
+		$medias = array();
+		if($jsNodeTmp){
+			$jsNodeTmp = trim(str_replace("window._sharedData","",$jsNodeTmp)," ;=");
+			$json = json_decode($jsNodeTmp, true);
+			$jsonMedia = $json['entry_data']['ProfilePage'][0]['graphql']['user']['edge_owner_to_timeline_media']['edges'];
+			foreach($jsonMedia as $jsonMediaItem){
+				if(count($medias) < $count) {
+					$medias[] = Media::create( $jsonMediaItem['node'] );
+				}
+			}
+		}
+		return $medias;
+	}
 
     /**
      * @param int $id

@@ -81,15 +81,24 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		$result = array();
 		if ($this->alternative){
 			$instagram = new Instagram();
+			//$session = array();
+			//$session['sessionid'] = 'IGSC1f31c2506ad9ee4d3eb3132715a9faebbd660562b8611102d31e0a223219cabb%3AzFkS1R8tbgNX3XZmcXavLvzF7QnI1pb3%3A%7B%22_auth_user_id%22%3A40466450%2C%22_auth_user_backend%22%3A%22accounts.backends.CaseInsensitiveModelBackend%22%2C%22_token%22%3A%2240466450%3AOWVm3mgEHF6ZExZgNDjx4w9Cjw9th1ag%3A99c20122554129ac56e25b2668aaff1cade7b9e99c129490377b0e72dda409ff%22%2C%22_platform%22%3A4%2C%22_remote_ip%22%3A%222a02%3A17d0%3A109%3Ad600%3A80fc%3A7239%3A37f%3Adceb%22%2C%22_mid%22%3A%22WjeFVwAEAAFCN48iPbhwu8R0NTCH%22%2C%22_user_agent_md5%22%3A%22231067d56394223babc9d7439bc32e9f%22%2C%22_token_ver%22%3A2%2C%22last_refreshed%22%3A1523619642.1870338917%7D';
+			//$session['csrftoken'] = 'fUBTWa061HsB89JByGPPV5zbbiv3F1NC';
+			$instagram->setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+			//$instagram->login();
+			//$instagram->isLoggedIn($session);
 			$medias = [];
 			$forced_loading_of_post = false;
 			switch ($this->timeline){
 				case 'user_timeline':
-					$account = $instagram->getAccount($this->url);
-					$this->userMeta = $this->fillUser($this->url);
-					$this->accounts[$account->getId()] = $account;
-//					$medias = $instagram->getMediasByUserId($account->getId(), $this->getCount());
-					$medias = $instagram->getMedias($this->url, $this->getCount());
+//					$account = $instagram->getAccount($this->url);
+//					$this->userMeta = $this->fillUser($this->url);
+//					$this->accounts[$account->getId()] = $account;
+//					$account_id = $account->getId();
+//					$medias = $instagram->getMediasByUserId($account_id, $this->getCount());
+//					$medias = $instagram->getMedias($this->url, $this->getCount());
+//					$medias = $instagram->getMediasFromFeed($this->url, $this->getCount());
+					$medias = $instagram->getMediasFromURL($this->url, $this->getCount());
 					break;
 				case 'tag':
 					$medias = $instagram->getMediasByTag($this->url, $this->getCount());
@@ -102,7 +111,8 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 			}
 
 			foreach ( $medias as $media ) {
-				$post = $this->altParsePost($media, $forced_loading_of_post);
+				$post      = $instagram->getMediaByUrl( $media->getLink() );
+				$post      = $this->altParsePost($post, $forced_loading_of_post);
 				if(!empty($this->userMeta)){
 					$post->userMeta = $this->userMeta;
 				}
@@ -198,20 +208,21 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	 */
 	private function altParsePost($post, $forced_loading_of_post = false) {
 
-		if ($forced_loading_of_post || Media::TYPE_IMAGE != $post->getType()) {
-			$instagram = new Instagram();
-
-			try{
-				$post      = $instagram->getMediaById( $post->getId() );
-				$account = $post->getOwner();
-			}catch(\Exception $e){
-				error_log($e->getMessage());
-				error_log($e->getTraceAsString());
-			}
-		}
-		else {
-			$account = $this->getAccountById($post->getOwnerId());
-		}
+//		if ($forced_loading_of_post || Media::TYPE_IMAGE != $post->getType()) {
+//			$instagram = new Instagram();
+//
+//			try{
+//				$post      = $instagram->getMediaById( $post->getId() );
+//				$account = $post->getOwner();
+//			}catch(\Exception $e){
+//				error_log($e->getMessage());
+//				error_log($e->getTraceAsString());
+//			}
+//		}
+//		else {
+//			$account = $this->getAccountById($post->getOwnerId());
+//		}
+		$account = $post->getOwner();
 
 		$tc = new \stdClass();
 		$tc->feed_id = $this->id();

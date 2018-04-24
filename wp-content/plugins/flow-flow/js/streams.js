@@ -528,7 +528,7 @@ Content to show\
 </dd>\
 <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -580,7 +580,7 @@ Content to show\
 <dd><input type="text" name="<%= uid %>-content"/></dd>\
 <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -637,7 +637,7 @@ Posts to load during update\
 <dd><input type="text" name="<%= uid %>-content"/></dd>\
 <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>MODERATE THIS FEED</dt>\
 <dd>\
 <label for="<%= uid %>-mod"><input id="<%= uid %>-mod" class="switcher" type="checkbox" name="<%= uid %>-mod" value="yep"/> <div><div></div></div></label>\
@@ -665,7 +665,7 @@ Posts to load during update\
       <dd><input type="text" name="<%= uid %>-content" placeholder="+UserName"/></dd>\
       <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -705,7 +705,7 @@ Posts to load during update\
           </dd>\
           <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
     MODERATE THIS FEED\
     <p class="desc"><a href="http://docs.social-streams.com/article/70-manual-premoderation" target="_blank">Learn more</a></p>\
@@ -739,7 +739,7 @@ Posts to load during update\
           <dd class=""><input type="text" name="<%= uid %>-content"/></dd>\
               <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
     MODERATE THIS FEED\
     <p class="desc"><a href="http://docs.social-streams.com/article/70-manual-premoderation" target="_blank">Learn more</a></p>\
@@ -811,12 +811,12 @@ Posts to load during update\
           </dd>\
                       <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
-<dt>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<dt class="hide" >\
     Posts to load during update\
     <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
 </dt>\
-<dd>\
+<dd class="hide" >\
 <div class="select-wrapper"> <select name="<%= uid %>-posts" id="<%= uid %>-post"><option value="1">1 post</option><option value="5">5 posts</option><option selected value="10">10 posts</option><option value="20">20 posts</option></select></div>\
 </dd>\
 <dt>\
@@ -882,7 +882,7 @@ Posts to load during update\
               </dd>\
               <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -942,7 +942,7 @@ Posts to load during update\
       </dd>\
       <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -985,7 +985,7 @@ Posts to load during update\
              </dd>\
              <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -1022,7 +1022,7 @@ Posts to load during update\
                  <dd class=""><input type="text" name="<%= uid %>-content"/></dd>\
                  <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -1061,7 +1061,7 @@ Posts to load during update\
              </dd>\
              <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -1109,7 +1109,7 @@ Posts to load during update\
                  <dd class=""><input type="text" name="<%= uid %>-content"/></dd>\
                  <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
     MODERATE THIS FEED\
     <p class="desc"><a href="http://docs.social-streams.com/article/70-manual-premoderation" target="_blank">Learn more</a></p>\
@@ -1144,7 +1144,7 @@ tumblrView:     '\
              </dd>\
              <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -1180,7 +1180,7 @@ linkedinView:   '\
              </dd>\
              <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
@@ -1215,7 +1215,7 @@ soundcloudView: '\
                  <dd class=""><input type="text" name="<%= uid %>-content"/></dd>\
                  <dt>Feed updates frequency</dt>\
 <dd>\
-<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="5">Every 5 min</option> <option value="30" selected>Every 30 min</option> <option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
+<div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option> <option value="10080">Once a week</option></select> </div></dd>\
 <dt>\
 Posts to load during update\
 <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
