@@ -284,9 +284,17 @@ ul.pagination {
 		&:nth-child(3) {
 			background: #EFEEE3;
 		}		
+		&:nth-child(4) {
+			background: #A7A9AB;
+			color: #fff;
+		}	
 	}
 }
 
 body.blog .blog-grid {
 	background-image: linear-gradient(-180deg, #D7DACC 0%, #EDEFE8 100%);
+}
+
+.nl-archive-title h2 {
+	margin-bottom: 50px;
 }

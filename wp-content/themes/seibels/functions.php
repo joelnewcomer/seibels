@@ -72,3 +72,52 @@ function my_acf_json_load_point( $paths ) {
     $paths[] = get_stylesheet_directory() . '/acf-json';
     return $paths;
 }
+
+function cptui_register_my_cpts_newsletters() {
+
+	/**
+	 * Post Type: Newsletters.
+	 */
+
+	$labels = array(
+		"name" => __( "Newsletters", "" ),
+		"singular_name" => __( "Newsletter", "" ),
+  'add_new' => 'Add Newsletter',
+  'add_new_item' => 'Add New Newsletter',
+  'edit' => 'Edit',
+  'edit_item' => 'Edit Newsletter',
+  'new_item' => 'New Newsletter',
+  'view' => 'View Newsletter',
+  'view_item' => 'View Newsletter',
+  'search_items' => 'Search Newsletters',
+  'not_found' => 'No Newsletters Found',
+  'not_found_in_trash' => 'No Newsletters Found in Trash',
+		
+	);
+
+	$args = array(
+		"label" => __( "Newsletters", "" ),
+		"labels" => $labels,
+		"description" => "",
+		"public" => true,
+		'menu_icon' => 'dashicons-id-alt',
+		"publicly_queryable" => true,
+		"show_ui" => true,
+		"show_in_rest" => false,
+		"rest_base" => "",
+		"has_archive" => true,
+		"show_in_menu" => true,
+		"show_in_nav_menus" => true,
+		"exclude_from_search" => false,
+		"capability_type" => "post",
+		"map_meta_cap" => true,
+		"hierarchical" => false,
+		"rewrite" => array( "slug" => "newsletters", "with_front" => true ),
+		"query_var" => true,
+		"supports" => array( "title", "thumbnail" ),
+	);
+
+	register_post_type( "newsletters", $args );
+}
+
+add_action( 'init', 'cptui_register_my_cpts_newsletters' );

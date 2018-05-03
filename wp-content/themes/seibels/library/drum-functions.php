@@ -584,6 +584,11 @@ $dimensions = get_theme_mod('featured_dimensions', true);
 add_image_size( 'featured', intval($dimensions['width']), intval($dimensions['height']), true );
 add_image_size( 'team-small', 232, 267, true );
 add_image_size( 'careers-carousel', 312, 200, true );
+add_image_size( 'nl-third', 311, 288, true );
+add_image_size( 'nl-two-thirds', 635, 288, true );
+add_image_size( 'nl-third-tall', 311, 587, true );
+add_image_size( 'nl-two-thirds-tall', 635, 587, true );
+
 
 // Is this a child, grandchild, etc of particular page
 function is_ancestor($post_id) {
