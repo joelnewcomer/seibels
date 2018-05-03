@@ -25,13 +25,14 @@
 		<?php endwhile; ?>
 		<?php wp_reset_postdata(); ?>
 			
-			<!--
+			<?php if (is_super_admin()) : ?>
 			<a href="<?php echo get_site_url(); ?>/newsletters" class="<?php echo $active; ?> newsletters">
 				<div style="display:table;width:100%;height:100%;">
 				  <div style="display:table-cell;vertical-align:middle;">
 				    <div style="text-align:center;">Newsletter</div>
 				  </div>
 				</div>
-			</a> -->
+			</a>
+			<?php endif; ?>
 		
 	</div> <!-- news-menu -->
