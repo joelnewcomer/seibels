@@ -138,7 +138,7 @@ jQuery( document ).ready(function() {
 											  </div>
 											</div>
 										</div>
-									<?php else : ?>
+									<?php elseif ($image_id != '') : ?>
 										<div class="nl-hover nl-zoom text-center transition photo">
 											<div style="display:table;width:100%;height:100%;">
 											  <div style="display:table-cell;vertical-align:middle;">
