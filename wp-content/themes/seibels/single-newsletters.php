@@ -98,6 +98,7 @@ jQuery( document ).ready(function() {
 							// Image & Link
 							$image_id = get_sub_field('image');
 							$no_photo = '';
+							$photo = '';
 							if ($image_id == '') {
 								$no_photo = 'no-photo';
 								$photo = '';
@@ -117,7 +118,7 @@ jQuery( document ).ready(function() {
 								<div class="nl-block-inner" <?php echo $photo; ?>>
 									<?php if ($has_link) : ?>
 										<a href="<?php echo $link; ?>">
-									<?php else : ?>
+									<?php elseif ($image_id != '') : ?>
 										<a class="photo" href="<?php echo $image_src_large[0]; ?>">
 											
 											
@@ -146,7 +147,10 @@ jQuery( document ).ready(function() {
 											</div>
 										</div>
 									<?php endif; ?>
+									
+									<?php if ($has_link || $image_id != '') : ?>
 									</a>
+									<?php endif; ?>
 								</div> <!-- nl-block-inner -->
 							</div> <!-- nl-block -->
 						<?php endwhile; ?>
