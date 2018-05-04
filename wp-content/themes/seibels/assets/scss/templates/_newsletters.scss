@@ -120,6 +120,9 @@
 	position: relative;
 	display: inline-block;
 	width: calc(33% - 10px);
+	@media only screen and (max-width: 40.063em) {
+		width: calc(50% - 10px);
+	}
 	margin: 5px 5px 5px 1px;
 	.nl-overlay {
 		position: absolute;

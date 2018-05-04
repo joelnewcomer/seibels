@@ -5751,6 +5751,9 @@ section.videos {
   display: inline-block;
   width: calc(33% - 10px);
   margin: 5px 5px 5px 1px; }
+  @media only screen and (max-width: 40.063em) {
+    .nl-archive-block {
+      width: calc(50% - 10px); } }
   .nl-archive-block .nl-overlay {
     position: absolute;
     top: 0;
