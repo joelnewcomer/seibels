@@ -113,8 +113,12 @@ jQuery( document ).ready(function() {
 							if ($link != '') {
 								$has_link = true;
 							}
+							$no_link = '';
+							if ($image_id == '' && !$has_link) {
+								$no_link = ' no-link';
+							}
 							?>
-							<div class="<?php echo $width; ?> <?php echo $height; ?> cell nl-block <?php echo $no_photo; ?>">
+							<div class="<?php echo $width; ?> <?php echo $height; ?> cell nl-block <?php echo $no_photo; ?><?php echo $no_link; ?>">
 								<div class="nl-block-inner" <?php echo $photo; ?>>
 									<?php if ($has_link) : ?>
 										<a href="<?php echo $link; ?>">

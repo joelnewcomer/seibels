@@ -5692,7 +5692,7 @@ section.videos {
   .nl-block.no-photo .nl-overlay {
     font-size: 24px;
     height: 100%; }
-  .nl-block:hover .nl-overlay {
+  .nl-block:not(.no-link):hover .nl-overlay {
     height: 0;
     padding: 0; }
   .nl-block:nth-child(4n+1) .nl-overlay, .nl-block:nth-child(4n+1) .nl-hover {
