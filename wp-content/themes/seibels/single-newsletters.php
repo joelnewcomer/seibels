@@ -127,12 +127,12 @@ jQuery( document ).ready(function() {
 											
 											
 									<?php endif; ?>
-									<div class="nl-overlay">
-											<div style="display:table;width:100%;height:100%;">
-											  <div style="display:table-cell;vertical-align:middle;">
-											    <div style="text-align:center;"><?php echo $title; ?></div>
-											  </div>
-											</div>										
+									<div class="nl-overlay transition">
+										<div style="display:table;width:100%;height:100%;">
+											<div style="display:table-cell;vertical-align:middle;">
+												<div style="text-align:center;"><?php echo $title; ?></div>
+											</div>
+										</div>										
 									</div>
 									<?php if ($has_link) : ?>
 										<div class="nl-hover nl-read-more text-center transition">
