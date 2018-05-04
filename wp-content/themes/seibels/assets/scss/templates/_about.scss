@@ -35,8 +35,9 @@
 			max-width: 50%;
 			height: 50px;
 			&:last-child {
-				width: 100%;
-				max-width: 100%;
+				// Uncomment these for odd number of menu items
+				// width: 100%;
+				// max-width: 100%;
 			}	
 		}
 		&.careers {
