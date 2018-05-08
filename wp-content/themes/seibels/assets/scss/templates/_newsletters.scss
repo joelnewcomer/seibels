@@ -37,9 +37,27 @@
 		font-size: 18px;
 		pointer-events: none;
 	}
+	&.has-intro .nl-overlay {
+		top: 0;
+		bottom: auto;
+		height: 100%;
+		p {
+			color: #fff;
+			font-size: 14px;
+			font-weight: normal;
+		}
+	}
 	&.no-photo .nl-overlay {
 		font-size: 24px;
 		height: 100%;
+	}
+	.overflow-fade {
+		display: block;
+		position: absolute;
+		height: 30px;
+		width: 100%;
+		bottom: 0;
+		left: 0;		
 	}
 	&:not(.no-link):hover .nl-overlay {
 		height: 0;
@@ -49,20 +67,32 @@
 		.nl-overlay, .nl-hover {
 			background: rgba(0,156,222,0.80);
 		}
+		.overflow-fade{
+			background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,156,222,1) 100%);
+		}
 	}	
 	&:nth-child(4n+2) {
 		.nl-overlay, .nl-hover {
 			background: rgba(221,99,75,0.80);
+		}
+		.overflow-fade{
+			background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(221,99,75,1) 100%);
 		}
 	}
 	&:nth-child(4n+3) {
 		.nl-overlay, .nl-hover {
 			background: rgba(163,207,98,0.80);
 		}
+		.overflow-fade{
+			background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(163,207,98,1) 100%);
+		}
 	}
 	&:nth-child(4n+4) {
 		.nl-overlay, .nl-hover {
 			background: rgba(0,75,135,0.80);
+		}
+		.overflow-fade{
+			background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,75,135,1) 100%);
 		}
 	}
 	.nl-hover {
@@ -160,4 +190,14 @@
 			background: rgba(0,75,135,0.80);
 		}
 	}	
+}
+
+.nl-modal { display: none;} 
+.featherlight-content .nl-modal { display: block; }
+
+body.single-newsletters .featherlight .featherlight-content {
+	background: #fff;
+	.nl-modal {
+		padding: 30px;		
+	}
 }

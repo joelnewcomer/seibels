@@ -18,7 +18,7 @@ if ($image_id == null) {
 <script>
 jQuery( document ).ready(function() {
 	jQuery.featherlight.prototype.beforeOpen = function(event) {
-		if(!jQuery(event.target).hasClass('photo')) {
+		if(!jQuery(event.target).hasClass('photo') && !jQuery(event.target).hasClass('fl-modal-link')) {
 			window.open = jQuery(event.target).attr('href');
 			return false;
 		}
@@ -66,6 +66,7 @@ jQuery( document ).ready(function() {
 							<?php
 							// Title
 							$title = get_sub_field('title');
+							$slug = sanitize_title($title);
 							$count = 1;
 							$title = preg_replace('/\*/', '<strong>', $title, $count); // will replace first '*'
 							$title = preg_replace('/\*/', '</strong>', $title);    // will replace all others
@@ -117,25 +118,45 @@ jQuery( document ).ready(function() {
 							if ($image_id == '' && !$has_link) {
 								$no_link = ' no-link';
 							}
+							$intro = get_sub_field('intro');
+							$has_intro = '';
+							if ($intro != '') {
+								$has_intro = ' has-intro';
+							}
+							
+							$modal_content = get_sub_field('modal_content');
 							?>
-							<div class="<?php echo $width; ?> <?php echo $height; ?> cell nl-block <?php echo $no_photo; ?><?php echo $no_link; ?>">
+							<div class="<?php echo $width; ?> <?php echo $height; ?> cell nl-block <?php echo $no_photo; ?><?php echo $no_link; ?><?php echo $has_intro; ?>">
 								<div class="nl-block-inner" <?php echo $photo; ?>>
 									<?php if ($has_link) : ?>
 										<a href="<?php echo $link; ?>">
+									<?php elseif ($modal_content != '') : ?>
+										<div class="nl-modal" id="<?php echo $slug; ?>"><?php echo $modal_content; ?></div>
+										<a class="fl-modal-link" href="#" data-featherlight="#<?php echo $slug; ?>">		
 									<?php elseif ($image_id != '') : ?>
 										<a class="photo" href="<?php echo $image_src_large[0]; ?>">
-											
-											
 									<?php endif; ?>
 									<div class="nl-overlay transition">
 										<div style="display:table;width:100%;height:100%;">
 											<div style="display:table-cell;vertical-align:middle;">
 												<div style="text-align:center;"><?php echo $title; ?></div>
+												<?php echo $intro; ?>
 											</div>
-										</div>										
+										</div>
+										<?php if ($intro != '') : ?>
+											<div class="overflow-fade"></div>
+										<?php endif; ?>														
 									</div>
 									<?php if ($has_link) : ?>
 										<div class="nl-hover nl-read-more text-center transition">
+											<div style="display:table;width:100%;height:100%;">
+											  <div style="display:table-cell;vertical-align:middle;">
+											    <div style="text-align:center;">Read More</div>
+											  </div>
+											</div>
+										</div>
+									<?php elseif ($modal_content != '') : ?>
+										<div class="nl-hover nl-zoom text-center transition">
 											<div style="display:table;width:100%;height:100%;">
 											  <div style="display:table-cell;vertical-align:middle;">
 											    <div style="text-align:center;">Read More</div>
@@ -165,4 +186,5 @@ jQuery( document ).ready(function() {
 		</div> <!-- grid-container -->
 	</div> <!-- single-container -->
 </div> <!-- #single-post -->
+
 <?php get_footer(); ?>

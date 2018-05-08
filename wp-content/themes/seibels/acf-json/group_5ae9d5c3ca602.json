@@ -121,7 +121,7 @@
                     "label": "Link",
                     "name": "link",
                     "type": "link",
-                    "instructions": "",
+                    "instructions": "Leave this blank if you want to open content in a pop-up window.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -130,6 +130,44 @@
                         "id": ""
                     },
                     "return_format": "url"
+                },
+                {
+                    "key": "field_5af1b1e138e54",
+                    "label": "Intro",
+                    "name": "intro",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 4,
+                    "new_lines": "wpautop"
+                },
+                {
+                    "key": "field_5af1b13d38e53",
+                    "label": "Pop-Up Content",
+                    "name": "modal_content",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0
                 }
             ]
         }
@@ -151,5 +189,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1525380334
+    "modified": 1525793297
 }

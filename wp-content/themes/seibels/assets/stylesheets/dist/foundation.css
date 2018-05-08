@@ -5689,20 +5689,43 @@ section.videos {
     color: #fff;
     font-size: 18px;
     pointer-events: none; }
+  .nl-block.has-intro .nl-overlay {
+    top: 0;
+    bottom: auto;
+    height: 100%; }
+    .nl-block.has-intro .nl-overlay p {
+      color: #fff;
+      font-size: 14px;
+      font-weight: normal; }
   .nl-block.no-photo .nl-overlay {
     font-size: 24px;
     height: 100%; }
+  .nl-block .overflow-fade {
+    display: block;
+    position: absolute;
+    height: 30px;
+    width: 100%;
+    bottom: 0;
+    left: 0; }
   .nl-block:not(.no-link):hover .nl-overlay {
     height: 0;
     padding: 0; }
   .nl-block:nth-child(4n+1) .nl-overlay, .nl-block:nth-child(4n+1) .nl-hover {
     background: rgba(0, 156, 222, 0.8); }
+  .nl-block:nth-child(4n+1) .overflow-fade {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #009cde 100%); }
   .nl-block:nth-child(4n+2) .nl-overlay, .nl-block:nth-child(4n+2) .nl-hover {
     background: rgba(221, 99, 75, 0.8); }
+  .nl-block:nth-child(4n+2) .overflow-fade {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #dd634b 100%); }
   .nl-block:nth-child(4n+3) .nl-overlay, .nl-block:nth-child(4n+3) .nl-hover {
     background: rgba(163, 207, 98, 0.8); }
+  .nl-block:nth-child(4n+3) .overflow-fade {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #a3cf62 100%); }
   .nl-block:nth-child(4n+4) .nl-overlay, .nl-block:nth-child(4n+4) .nl-hover {
     background: rgba(0, 75, 135, 0.8); }
+  .nl-block:nth-child(4n+4) .overflow-fade {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #004b87 100%); }
   .nl-block .nl-hover {
     display: block;
     left: 0;
@@ -5773,6 +5796,17 @@ section.videos {
     background: rgba(136, 194, 227, 0.9); }
   .nl-archive-block:nth-child(4n+4) .nl-overlay {
     background: rgba(0, 75, 135, 0.8); }
+
+.nl-modal {
+  display: none; }
+
+.featherlight-content .nl-modal {
+  display: block; }
+
+body.single-newsletters .featherlight .featherlight-content {
+  background: #fff; }
+  body.single-newsletters .featherlight .featherlight-content .nl-modal {
+    padding: 30px; }
 
 /**
  * BxSlider v4.1.2 - Fully loaded, responsive content slider
