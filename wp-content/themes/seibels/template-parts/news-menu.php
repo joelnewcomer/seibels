@@ -17,9 +17,11 @@
 			?>
 			<a href="<?php the_permalink(); ?>" class="<?php echo $active; ?> <?php echo sanitize_title(get_the_title()); ?>">
 				<div style="display:table;width:100%;height:100%;">
-				  <div style="display:table-cell;vertical-align:middle;">
-				    <div style="text-align:center;"><?php the_title(); ?></div>
-				  </div>
+					<div style="display:table-cell;vertical-align:middle;">
+						<div style="text-align:center;">
+							<?php the_title(); ?>
+						</div>
+					</div>
 				</div>
 			</a>
 		<?php endwhile; ?>

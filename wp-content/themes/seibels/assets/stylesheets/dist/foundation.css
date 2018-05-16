@@ -5689,14 +5689,13 @@ section.videos {
     color: #fff;
     font-size: 18px;
     pointer-events: none; }
-  .nl-block.has-intro .nl-overlay {
-    top: 0;
-    bottom: auto;
-    height: 100%; }
-    .nl-block.has-intro .nl-overlay p {
+  .nl-block .nl-modal, .nl-block .nl-hover {
+    padding: 10px; }
+    .nl-block .nl-modal p, .nl-block .nl-hover p {
       color: #fff;
       font-size: 14px;
-      font-weight: normal; }
+      font-weight: normal;
+      font-family: "open_sansregular"; }
   .nl-block.no-photo .nl-overlay {
     font-size: 24px;
     height: 100%; }
@@ -5707,13 +5706,19 @@ section.videos {
     width: 100%;
     bottom: 0;
     left: 0; }
-  .nl-block:not(.no-link):hover .nl-overlay {
+  @media only screen and (min-width: 40.063em) {
+    .nl-block:not(.no-link):hover .nl-overlay {
+      height: 0;
+      padding: 0; } }
+  .nl-block:not(.no-link).hover .nl-overlay {
     height: 0;
     padding: 0; }
   .nl-block:nth-child(4n+1) .nl-overlay, .nl-block:nth-child(4n+1) .nl-hover {
     background: rgba(0, 156, 222, 0.8); }
   .nl-block:nth-child(4n+1) .overflow-fade {
     background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #009cde 100%); }
+  .nl-block:nth-child(4n+1) .faux-button::after {
+    background: #123261; }
   .nl-block:nth-child(4n+2) .nl-overlay, .nl-block:nth-child(4n+2) .nl-hover {
     background: rgba(221, 99, 75, 0.8); }
   .nl-block:nth-child(4n+2) .overflow-fade {
@@ -5739,7 +5744,11 @@ section.videos {
     font-weight: bold;
     color: #fff;
     pointer-events: none; }
-  .nl-block:hover .nl-hover {
+  @media only screen and (min-width: 40.063em) {
+    .nl-block:hover .nl-hover {
+      height: 100%;
+      opacity: 1; } }
+  .nl-block.hover .nl-hover {
     height: 100%;
     opacity: 1; }
   .nl-block .nl-zoom svg {

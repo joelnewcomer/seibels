@@ -125,8 +125,12 @@ jQuery( document ).ready(function() {
 							}
 							
 							$modal_content = get_sub_field('modal_content');
+							$is_modal = '';
+							if ($modal_content != '') {
+								$is_modal = ' is-modal';
+							}
 							?>
-							<div class="<?php echo $width; ?> <?php echo $height; ?> cell nl-block <?php echo $no_photo; ?><?php echo $no_link; ?><?php echo $has_intro; ?>">
+							<div class="<?php echo $width; ?> <?php echo $height; ?> cell nl-block <?php echo $no_photo; ?><?php echo $no_link; ?><?php echo $has_intro; ?><?php echo $is_modal; ?>">
 								<div class="nl-block-inner" <?php echo $photo; ?>>
 									<?php if ($has_link) : ?>
 										<a href="<?php echo $link; ?>">
@@ -140,26 +144,29 @@ jQuery( document ).ready(function() {
 										<div style="display:table;width:100%;height:100%;">
 											<div style="display:table-cell;vertical-align:middle;">
 												<div style="text-align:center;"><?php echo $title; ?></div>
-												<?php echo $intro; ?>
 											</div>
-										</div>
-										<?php if ($intro != '') : ?>
-											<div class="overflow-fade"></div>
-										<?php endif; ?>														
+										</div>													
 									</div>
 									<?php if ($has_link) : ?>
 										<div class="nl-hover nl-read-more text-center transition">
 											<div style="display:table;width:100%;height:100%;">
-											  <div style="display:table-cell;vertical-align:middle;">
-											    <div style="text-align:center;">Read More</div>
-											  </div>
+												<div style="display:table-cell;vertical-align:middle;">
+											    	<div style="text-align:center;">
+												    	<?php if ($intro != '') : ?>
+												    	
+												    	<?php endif; ?>
+												    	<div class="faux-button"><span>Read More</span></div>
+													</div>
+												</div>
 											</div>
 										</div>
 									<?php elseif ($modal_content != '') : ?>
 										<div class="nl-hover nl-zoom text-center transition">
 											<div style="display:table;width:100%;height:100%;">
 											  <div style="display:table-cell;vertical-align:middle;">
-											    <div style="text-align:center;">Read More</div>
+												  <?php echo $intro; ?>
+												  <div style="text-align:center;" class="faux-button"><span>Read More</span></div>
+												  <div class="overflow-fade"></div>
 											  </div>
 											</div>
 										</div>
@@ -186,5 +193,14 @@ jQuery( document ).ready(function() {
 		</div> <!-- grid-container -->
 	</div> <!-- single-container -->
 </div> <!-- #single-post -->
+
+<script type="text/javascript">
+	jQuery(document).on( "click", ".nl-block.has-intro:not(.hover):not(.is-modal)", function(e) {
+        if(jQuery(window).width()<641) {
+	        e.preventDefault();
+			jQuery(this).addClass("hover");
+        }	
+	});
+</script>
 
 <?php get_footer(); ?>
