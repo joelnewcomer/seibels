@@ -317,7 +317,7 @@ Keyframes
 	.grid-container, .grid-x, .cell {
 		height: 100%;
 	}
-	h1, p {
+	h1, p, span {
 		color: #fff;
 	}
 	.feature-content {
@@ -331,7 +331,7 @@ Keyframes
 	.feature-content:last-child {
 		margin-right: 0;
 	}
-	h1 {
+	span.typist {
 		font-size: 64px;
 		@media only screen and (max-width: 1000px) {
 			font-size: 38px;

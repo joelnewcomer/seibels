@@ -60,7 +60,7 @@ get_header(); ?>
 			   				    	<?php $pause = 1000; ?>
 			   				    	<?php while(has_sub_field('feature_content')): ?>
 			   				    		<div class="feature-content fc-<?php echo $content_i; ?>">
-				   							<h1 class="typist"></h1>
+				   							<span class="typist"></span>
 				   							<p><?php echo get_sub_field('description'); ?></p>
 				   							<script>
 				   								function slide<?php echo $content_i; ?>Typist() {
@@ -120,7 +120,7 @@ get_header(); ?>
 		<div class="grid-container">
 	   		<div class="grid-x">
 	   			<div class="large-12 cell text-center">
-	   				<h2><?php echo get_field('home_blocks_title'); ?></h2>
+	   				<h1><?php echo get_field('home_blocks_title'); ?></h1>
 	   			</div>
 	   			<?php if(get_field('home_blocks')): ?>
 	   				<?php while(has_sub_field('home_blocks')): ?>
