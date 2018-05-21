@@ -356,6 +356,11 @@ Keyframes
 			opacity: 1;
 		}
 	}
+	.feature-content:last-child {
+		p {
+			max-width: 350px;
+		}
+	}	
 	.fc-1 p, .fc-3 p {
 		max-width: 210px;
 	}
