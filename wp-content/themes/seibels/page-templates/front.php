@@ -79,7 +79,7 @@ get_header(); ?>
 				   											jQuery(".typist").empty();
 				   										<?php endif; ?>
 				   										slide<?php echo $content_i; ?>Typist();
-				   									}, 12000);		   				    		
+				   									}, 13000);		   				    		
 				   								}
 				   								
 				   								jQuery( document ).ready(function() {
@@ -89,10 +89,10 @@ get_header(); ?>
 				   						</div>
 				   						<?php
 					   					$content_i++;
-					   					if ($pause == 1000) {
-						   					$pause += 3000;
-					   					} else {
-						   					$pause += 4000;
+						   				if ($pause == 1000) {
+							   				$pause += 3000;
+							   			} else {
+							   				$pause += 4000;
 						   				}
 					   					?>
 			   				    	<?php endwhile; ?>
@@ -262,7 +262,9 @@ jQuery(document).ready(function($){
 		this.rightMask = this.mask.find('mask').eq(1);
 		this.bindEvents();
 	} 
-
+	
+	var sliderIndex = 1;
+	var sliderDelay = 4000;
 	radialSlider.prototype.bindEvents = function() {
 		var self = this;
 
@@ -274,8 +276,15 @@ jQuery(document).ready(function($){
 				self.updateIndexes('next');
 				//show new slide
 				self.updateSlides('next');
+				sliderIndex += 1;
+				if (sliderIndex == 4) {
+					sliderDelay = 5000;
+					sliderIndex = 1;
+				} else {
+					sliderDelay = 4000;
+				}
 			}
-			setTimeout( advance_slide, 4000 );
+			setTimeout( advance_slide, sliderDelay );
 		};
 		setTimeout( advance_slide, 4000 );
 	}
