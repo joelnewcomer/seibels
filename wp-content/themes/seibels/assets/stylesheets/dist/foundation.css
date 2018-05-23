@@ -7168,8 +7168,7 @@ select::-ms-expand {
   margin-bottom: 0; }
 
 body .gform_wrapper .top_label div.ginput_container {
-  margin-top: 8px;
-  padding-right: 16px; }
+  margin-top: 8px; }
 
 .ginput_container.ginput_container_select {
   margin-right: 0 !important; }
@@ -7194,23 +7193,8 @@ div.ginput_complex.ginput_container.gf_name_has_3 span.name_last {
     div.ginput_complex.ginput_container.gf_name_has_3 span.name_last {
       width: 45%; } }
 
-.gform_wrapper.gf_browser_chrome ul.gform_fields li.gfield span.name_first .gform_wrapper .top_label li.gfield.gf_left_half {
-  padding-right: 16px !important; }
-  @media print, screen and (min-width: 40em) {
-    .gform_wrapper.gf_browser_chrome ul.gform_fields li.gfield span.name_first .gform_wrapper .top_label li.gfield.gf_left_half {
-      width: 50.5% !important; } }
-
-.gform_wrapper .top_label li.gfield.gf_right_half {
-  padding-right: 0px !important; }
-  @media print, screen and (min-width: 40em) {
-    .gform_wrapper .top_label li.gfield.gf_right_half {
-      width: 49.5% !important; } }
-
 .gform_wrapper.gf_browser_chrome .gform_body {
   max-width: 100% !important; }
-
-.gform_wrapper ul.gform_fields li.gfield {
-  padding-right: 0 !important; }
 
 legend.gfield_label {
   margin-bottom: 0 !important; }
