@@ -124,7 +124,7 @@ abstract class Field {
             $cleanData['name'] = $name ? $name : $this->fieldDefaultData['name'];
         }
         if (isset($data['desc'])) {
-            $cleanData['desc'] = trim(strip_tags($data['desc']));
+            $cleanData['desc'] = trim($data['desc']);
         }
 
         if (isset($data['values'])) {

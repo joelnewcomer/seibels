@@ -99,13 +99,13 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
         $userKey = $comment->user_id . '_' . $comment->comment_author_email;
         if (isset($this->users[$userKey])) {
             $user = $this->users[$userKey];
-        } else {
+        } else {            
             if ($this->optionsSerialized->isUserByEmail) {
                 $user = get_user_by('email', $comment->comment_author_email);
             } else {
-                $user = $comment->user_id ? get_user_by('id', $comment->user_id) : null;
+                $user = $comment->user_id ? get_user_by('id', $comment->user_id) : '';
             }
-            $this->users[$userKey] = $user;
+            $this->users[$userKey] = $user;          
         }
 
         if ($user) {
@@ -123,7 +123,7 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
                 $author_title = $this->optionsSerialized->phrases['wc_blog_role_guest'];
                 $blogRoles = $this->optionsSerialized->blogRoles;
                 if ($blogRoles) {
-                    if ($user->roles && is_array($user->roles)) {                        
+                    if ($user->roles && is_array($user->roles)) {
                         foreach ($user->roles as $role) {
                             if (array_key_exists($role, $blogRoles)) {
                                 $authorClass = 'wc-blog-user wc-blog-' . $role;
@@ -152,7 +152,7 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
                 $timeFormat = $this->optionsSerialized->wordpressTimeFormat;
                 $postedDate = get_comment_date($dateFormat . ' ' . $timeFormat, $comment->comment_ID);
             } else {
-                $postedDate = $this->helper->dateDiff(time(), strtotime($comment->comment_date_gmt), 1);
+                $postedDate = $this->helper->dateDiff($comment->comment_date_gmt);
             }
         }
 
@@ -247,8 +247,8 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
         }
 
         $output .= apply_filters('wpdiscuz_comment_type_icon', '', $comment, $user, $currentUser);
-        if ($this->optionsSerialized->shareButtons) {
-            $output .= '<i class="fas fa-share-alt wc-share-link wpf-cta" aria-hidden="true" title="' . $shareText . '" ></i>';
+        if ($this->optionsSerialized->isEnabledShare()) {
+            $output .= '<div class="wc-share-link wpf-cta wpd-tooltip-right"><i class="fas fa-share-alt" aria-hidden="true" title="' . $shareText . '" ></i>';
             $commentLinkLength = strlen($commentLink);
             if ($commentLinkLength < 110) {
                 $twitt_content = mb_substr(esc_attr(strip_tags($commentContent)), 0, 135 - $commentLinkLength) . '... ';
@@ -257,13 +257,13 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
             }
             $twitt_content = urlencode($twitt_content);
             $twCommentLink = urlencode($commentLink);
-            $output .= '<span class="share_buttons_box">';
-            $output .= (in_array('fb', $this->optionsSerialized->shareButtons) && $this->optionsSerialized->facebookAppID) ? '<span class="wc_fb"><i class="fab fa-facebook wpf-cta" aria-hidden="true" title=""></i><span>' . $this->optionsSerialized->phrases['wc_share_facebook'] . '</span></span>' : '';
-            $output .= in_array('twitter', $this->optionsSerialized->shareButtons) ? '<a class="wc_tw" target="_blank" href="https://twitter.com/intent/tweet?text=' . $twitt_content . '&url=' . $twCommentLink . '" title=""><i class="fab fa-twitter wpf-cta" aria-hidden="true"></i><span>' . $this->optionsSerialized->phrases['wc_share_twitter'] . '</span></a>' : '';
-            $output .= in_array('google', $this->optionsSerialized->shareButtons) ? '<a class="wc_go" target="_blank" href="https://plus.google.com/share?url=' . get_permalink($comment->comment_post_ID) . '" title=""><i class="fab fa-google wpf-cta" aria-hidden="true"></i><span>' . $this->optionsSerialized->phrases['wc_share_google'] . '</span></a>' : '';
-            $output .= in_array('vk', $this->optionsSerialized->shareButtons) ? '<a class="wc_vk" target="_blank" href="http://vk.com/share.php?url=' . get_permalink($comment->comment_post_ID) . '" title=""><i class="fab fa-vk wpf-cta" aria-hidden="true"></i><span>' . $this->optionsSerialized->phrases['wc_share_vk'] . '</span></a>' : '';
-            $output .= in_array('ok', $this->optionsSerialized->shareButtons) ? '<a class="wc_ok" target="_blank" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=' . get_permalink($comment->comment_post_ID) . '" title=""><i class="fab fa-odnoklassniki wpf-cta" aria-hidden="true"></i><span>' . $this->optionsSerialized->phrases['wc_share_ok'] . '</span></a>' : '';
-            $output .= '</span>';
+            $output .= '<wpdtip>';
+            $output .= ( $this->optionsSerialized->enableFbShare && $this->optionsSerialized->fbAppID) ? '<span class="wc_fb"><i class="fab fa-facebook-f wpf-cta" aria-hidden="true" title="' . $this->optionsSerialized->phrases['wc_share_facebook'] . '"></i></span>' : '';
+            $output .= $this->optionsSerialized->enableTwitterShare ? '<a class="wc_tw" target="_blank" href="https://twitter.com/intent/tweet?text=' . $twitt_content . '&url=' . $twCommentLink . '" title="' . $this->optionsSerialized->phrases['wc_share_twitter'] . '"><i class="fab fa-twitter wpf-cta" aria-hidden="true"></i></a>' : '';
+            $output .= $this->optionsSerialized->enableGoogleShare ? '<a class="wc_go" target="_blank" href="https://plus.google.com/share?url=' . get_permalink($comment->comment_post_ID) . '" title="' . $this->optionsSerialized->phrases['wc_share_google'] . '"><i class="fab fa-google wpf-cta" aria-hidden="true"></i></a>' : '';
+            $output .= $this->optionsSerialized->enableVkShare ? '<a class="wc_vk" target="_blank" href="http://vk.com/share.php?url=' . get_permalink($comment->comment_post_ID) . '" title="' . $this->optionsSerialized->phrases['wc_share_vk'] . '"><i class="fab fa-vk wpf-cta" aria-hidden="true"></i>' : '';
+            $output .= $this->optionsSerialized->enableOkShare ? '<a class="wc_ok" target="_blank" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=' . get_permalink($comment->comment_post_ID) . '" title="' . $this->optionsSerialized->phrases['wc_share_ok'] . '"><i class="fab fa-odnoklassniki wpf-cta" aria-hidden="true"></i></a>' : '';
+            $output .= '</wpdtip></div>';
         }
 
         $output = apply_filters('wpdiscuz_before_comment_link', $output, $comment, $user, $currentUser);
@@ -336,7 +336,9 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
 
             $output = apply_filters('wpdiscuz_comment_buttons', $output, $comment, $user, $currentUser);
 
-            if (isset($args['high_level_user']) && $args['high_level_user'] && !$comment->comment_parent) {
+            if (!$comment->comment_parent &&
+                    ((isset($args['high_level_user']) && $args['high_level_user']) ||
+                    (isset($args['can_stick_or_close']) && $args['can_stick_or_close']))) {
                 $stickText = $isSticky ? $this->optionsSerialized->phrases['wc_unstick_comment'] : $this->optionsSerialized->phrases['wc_stick_comment'];
                 $closeText = $isClosed ? $this->optionsSerialized->phrases['wc_open_comment'] : $this->optionsSerialized->phrases['wc_close_comment'];
                 $output .= '<span class="wc_stick_btn wc-cta-button"><i class="fas fa-thumbtack"></i><span class="wc_stick_text">' . $stickText . '</span></span>';

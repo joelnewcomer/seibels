@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
     exit();
 }
 
-class WpdiscuzEmailHelper {
+class WpdiscuzEmailHelper implements WpDiscuzConstants {
 
     private $optionsSerialized;
     private $dbManager;
@@ -28,9 +28,9 @@ class WpdiscuzEmailHelper {
         }
 
         $success = 0;
-        if (wp_verify_nonce($subscribeFormNonce, 'wpdiscuz_subscribe_form_nonce_action') && $email && filter_var($email, FILTER_VALIDATE_EMAIL) !== false && in_array($subscriptionType, array(WpdiscuzCore::SUBSCRIPTION_POST, WpdiscuzCore::SUBSCRIPTION_ALL_COMMENT)) && $postId) {
+        if (wp_verify_nonce($subscribeFormNonce, 'wpdiscuz_subscribe_form_nonce_action') && $email && filter_var($email, FILTER_VALIDATE_EMAIL) !== false && in_array($subscriptionType, array(self::SUBSCRIPTION_POST, self::SUBSCRIPTION_ALL_COMMENT)) && $postId) {
             $noNeedMemberConfirm = ($currentUser->ID && $this->optionsSerialized->disableMemberConfirm);
-            $noNeedGuestsConfirm = (!$currentUser->ID && $this->optionsSerialized->disableGuestsConfirm && $this->dbManager->hasConfirmedSubscription($email));
+            $noNeedGuestsConfirm = (!$currentUser->ID && $this->optionsSerialized->disableGuestsConfirm);
             if ($noNeedMemberConfirm || $noNeedGuestsConfirm) {
                 $confirmData = $this->dbManager->addEmailNotification($postId, $postId, $email, $subscriptionType, 1);
                 if ($confirmData) {
@@ -69,7 +69,7 @@ class WpdiscuzEmailHelper {
         if (strpos($message, '[BLOG_TITLE]') !== false) {
             $message = str_replace('[BLOG_TITLE]', $blogTitle, $message);
         }
-        if (strpos($message, '[POST_TITLE]') !== false) {            
+        if (strpos($message, '[POST_TITLE]') !== false) {
             $message = str_replace('[POST_TITLE]', $postTitle, $message);
         }
         if (strpos($subject, '[BLOG_TITLE]') !== false) {
@@ -78,8 +78,20 @@ class WpdiscuzEmailHelper {
         if (strpos($subject, '[POST_TITLE]') !== false) {
             $subject = str_replace('[POST_TITLE]', $postTitle, $subject);
         }
-        $message .= "<br/><br/><a href='$confirm_url'>" . $this->optionsSerialized->phrases['wc_confirm_email'] . "</a>";
-        $message .= "<br/><br/><a href='$unsubscribe_url'>" . $this->optionsSerialized->phrases['wc_ignore_subscription'] . "</a>";
+
+        if (strpos($message, '[CONFIRM_URL]') === false) {
+            $message .= "<br/><br/><a href='$confirm_url'>" . $this->optionsSerialized->phrases['wc_confirm_email'] . "</a>";
+        } else {
+            $message = str_replace('[CONFIRM_URL]', $confirm_url, $message);
+        }
+
+        if (strpos($message, '[CANCEL_URL]') === false) {
+            $message .= "<br/><br/><a href='$unsubscribe_url'>" . $this->optionsSerialized->phrases['wc_ignore_subscription'] . "</a>";
+        } else {
+            $message = str_replace('[CANCEL_URL]', $unsubscribe_url, $message);
+        }
+
+
         $headers = array();
         $mailContentType = apply_filters('wp_mail_content_type', 'text/html');
         $fromName = apply_filters('wp_mail_from_name', $blogTitle);
@@ -90,14 +102,15 @@ class WpdiscuzEmailHelper {
         $fromEmail = apply_filters('wp_mail_from', $fromEmail);
         $headers[] = "Content-Type:  $mailContentType; charset=UTF-8";
         $headers[] = "From: " . $fromName . " <" . $fromEmail . "> \r\n";
-        $message = html_entity_decode($message);
+        $subject = html_entity_decode($subject, ENT_QUOTES);
+        $message = html_entity_decode($message, ENT_QUOTES);
         return wp_mail($email, $subject, $message, $headers);
     }
 
     /**
      * send email
      */
-    public function emailSender($emailData, $commentId, $subject, $message) {
+    public function emailSender($emailData, $commentId, $subject, $message, $subscriptionType) {
         global $wp_rewrite;
         $comment = get_comment($commentId);
         $post = get_post($comment->comment_post_ID);
@@ -129,15 +142,24 @@ class WpdiscuzEmailHelper {
             if (strpos($message, '[BLOG_TITLE]') !== false) {
                 $message = str_replace('[BLOG_TITLE]', $blogTitle, $message);
             }
-            if (strpos($message, '[POST_TITLE]') !== false) {                
+            if (strpos($message, '[POST_TITLE]') !== false) {
                 $message = str_replace('[POST_TITLE]', $postTitle, $message);
             }
             if (strpos($message, '[COMMENT_URL]') !== false) {
                 $commentPermalink = get_comment_link($commentId);
                 $message = str_replace('[COMMENT_URL]', $commentPermalink, $message);
             }
-            if (strpos($message, '[COMMENT_AUTHOR]') !== false) {
-                $message = str_replace('[COMMENT_AUTHOR]', $comment->comment_author, $message);
+
+            if ((strpos($message, '[COMMENT_AUTHOR]') !== false) && ($subscriptionType == self::SUBSCRIPTION_COMMENT)) {
+                $parentComment = get_comment($comment->comment_parent);
+                $commentAuthor = $parentComment && $parentComment->comment_author ? $parentComment->comment_author : '';
+                $message = str_replace('[COMMENT_AUTHOR]', $commentAuthor, $message);
+            } else {
+                if ((strpos($message, '[SUBSCRIBER_NAME]') !== false) && ($subscriptionType == self::SUBSCRIPTION_ALL_COMMENT || $subscriptionType == self::SUBSCRIPTION_POST)) {
+                    $user = get_user_by('email', $emailData['email']);
+                    $commentAuthor = $user && $user->display_name ? $user->display_name : '';
+                    $message = str_replace('[SUBSCRIBER_NAME]', $commentAuthor, $message);
+                }
             }
             if (strpos($message, '[COMMENT_CONTENT]') !== false) {
                 $message = str_replace('[COMMENT_CONTENT]', $comment->comment_content, $message);
@@ -148,7 +170,13 @@ class WpdiscuzEmailHelper {
             if (strpos($subject, '[POST_TITLE]') !== false) {
                 $subject = str_replace('[POST_TITLE]', $postTitle, $subject);
             }
-            $message .= "<br/><br/><a href='$unsubscribeUrl'>" . $this->optionsSerialized->phrases['wc_unsubscribe'] . "</a>";
+
+            if (strpos($message, '[UNSUBSCRIBE_URL]') === false) {
+                $message .= "<br/><br/><a href='$unsubscribeUrl'>" . $this->optionsSerialized->phrases['wc_unsubscribe'] . "</a>";
+            } else {
+                $message = str_replace('[UNSUBSCRIBE_URL]', $unsubscribeUrl, $message);
+            }
+
             $headers = array();
             $mailContentType = apply_filters('wp_mail_content_type', 'text/html');
             $fromName = apply_filters('wp_mail_from_name', $blogTitle);
@@ -159,7 +187,8 @@ class WpdiscuzEmailHelper {
             $fromEmail = apply_filters('wp_mail_from', $fromEmail);
             $headers[] = "Content-Type:  $mailContentType; charset=UTF-8";
             $headers[] = "From: " . $fromName . " <" . $fromEmail . "> \r\n";
-            $message = html_entity_decode($message);
+            $subject = html_entity_decode($subject, ENT_QUOTES);
+            $message = html_entity_decode($message, ENT_QUOTES);
             wp_mail($emailData['email'], $subject, $message, $headers);
         }
     }
@@ -206,7 +235,7 @@ class WpdiscuzEmailHelper {
         foreach ($emailsArray as $eRow) {
             $subscriberUserId = $eRow['id'];
             $subscriberEmail = $eRow['email'];
-            $this->emailSender($eRow, $commentId, $subject, $message);
+            $this->emailSender($eRow, $commentId, $subject, $message, self::SUBSCRIPTION_POST);
             do_action('wpdiscuz_notify_post_subscribers', $postId, $commentId, $subscriberUserId, $subscriberEmail);
         }
     }
@@ -220,12 +249,12 @@ class WpdiscuzEmailHelper {
      */
     public function notifyAllCommentSubscribers($postId, $newCommentId, $email) {
         $emailsArray = $this->dbManager->getAllNewCommentNotification($postId, $email);
-        $subject = $this->optionsSerialized->phrases['wc_new_reply_email_subject'];
-        $message = $this->optionsSerialized->phrases['wc_new_reply_email_message'];
+        $subject = $this->optionsSerialized->phrases['wc_all_comment_new_reply_subject'];
+        $message = $this->optionsSerialized->phrases['wc_all_comment_new_reply_message'];
         foreach ($emailsArray as $eRow) {
             $subscriberUserId = $eRow['id'];
             $subscriberEmail = $eRow['email'];
-            $this->emailSender($eRow, $newCommentId, $subject, $message);
+            $this->emailSender($eRow, $newCommentId, $subject, $message, self::SUBSCRIPTION_ALL_COMMENT);
             do_action('wpdiscuz_notify_all_comment_subscribers', $postId, $newCommentId, $subscriberUserId, $subscriberEmail);
         }
     }
@@ -245,7 +274,7 @@ class WpdiscuzEmailHelper {
         foreach ($emailsArray as $eRow) {
             $subscriberUserId = $eRow['id'];
             $subscriberEmail = $eRow['email'];
-            $this->emailSender($eRow, $newCommentId, $subject, $message);
+            $this->emailSender($eRow, $newCommentId, $subject, $message, self::SUBSCRIPTION_COMMENT);
             do_action('wpdiscuz_notify_comment_subscribers', $parentCommentId, $newCommentId, $subscriberUserId, $subscriberEmail);
         }
     }
@@ -258,13 +287,13 @@ class WpdiscuzEmailHelper {
      */
     public function notificationFromDashboard($commentId, $approved) {
         $referer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '';
-        $commentdata = get_comment($commentId);
+        $comment = get_comment($commentId);
         $commentsPage = strpos($referer, 'edit-comments.php') !== false;
         $postCommentsPage = (strpos($referer, 'post.php') !== false) && (strpos($referer, 'action=edit') !== false);
-        if ($approved == 1 && ($commentsPage || $postCommentsPage) && $commentdata) {
-            $postId = $commentdata->comment_post_ID;
-            $email = $commentdata->comment_author_email;
-            $parentComment = get_comment($commentdata->comment_parent);
+        if ($approved == 1 && ($commentsPage || $postCommentsPage) && $comment) {
+            $postId = $comment->comment_post_ID;
+            $email = $comment->comment_author_email;
+            $parentComment = $comment->comment_parent ? get_comment($comment->comment_parent) : 0;
             $this->notifyPostSubscribers($postId, $commentId, $email);
             if ($parentComment) {
                 $parentCommentEmail = $parentComment->comment_author_email;
@@ -305,7 +334,7 @@ class WpdiscuzEmailHelper {
             if (strpos($message, '[BLOG_TITLE]') !== false) {
                 $message = str_replace('[BLOG_TITLE]', $blogTitle, $message);
             }
-            if (strpos($message, '[POST_TITLE]') !== false) {                
+            if (strpos($message, '[POST_TITLE]') !== false) {
                 $message = str_replace('[POST_TITLE]', $postTitle, $message);
             }
             if (strpos($message, '[COMMENT_URL]') !== false) {
@@ -333,7 +362,8 @@ class WpdiscuzEmailHelper {
             $fromEmail = apply_filters('wp_mail_from', $fromEmail);
             $headers[] = "Content-Type:  $mailContentType; charset=UTF-8";
             $headers[] = "From: " . $fromName . " <" . $fromEmail . "> \r\n";
-            $message = html_entity_decode($message);
+            $subject = html_entity_decode($subject, ENT_QUOTES);
+            $message = html_entity_decode($message, ENT_QUOTES);
             wp_mail($email, $subject, $message, $headers);
         }
     }

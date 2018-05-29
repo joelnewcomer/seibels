@@ -26,11 +26,6 @@ $currentUser = $wpdiscuz->helper->getCurrentUser();
 do_action('wpdiscuz_before_load', $post, $currentUser, null);
 if (!post_password_required($post->ID)) {
     $commentsCount = get_comments_number();
-    $header_text = '<span class="wc_header_text_count">' . $commentsCount . '</span> ';
-    $header_text .= ($commentsCount > 1) ? $wpdiscuz->optionsSerialized->phrases['wc_header_text_plural'] : $wpdiscuz->optionsSerialized->phrases['wc_header_text'];
-    $header_text .= ' ' . $wpdiscuz->optionsSerialized->phrases['wc_header_on_text'];
-    $header_text .= ' "' . get_the_title($post) . '"';
-
     $wpCommClasses = array();
     $wpCommClasses[] = $currentUser && $currentUser->ID ? 'wpdiscuz_auth' : 'wpdiscuz_unauth';
     $wpCommClasses[] = $wpdiscuz->optionsSerialized->theme;
@@ -47,11 +42,37 @@ if (!post_password_required($post->ID)) {
         ob_start();
         do_action('comment_form_top');
         do_action('wpdiscuz_comment_form_top', $post, $currentUser, $commentsCount);
-        $wc_comment_form_top_content = ob_get_contents();
-        ob_get_clean();
+        $wc_comment_form_top_content = ob_get_clean();
         $wc_comment_form_top_content = wpdiscuz_close_divs($wc_comment_form_top_content);
     } else {
         $wc_ob_allowed = false;
+    }
+
+    if ((isset($_GET['deleteComments']) && $_GET['deleteComments'])) {
+        $decodedEmail = base64_decode($_GET['deleteComments']);
+        if (get_transient(WpDiscuzConstants::TRS_USER_HASH . md5($decodedEmail)) !== false) {
+            $comments = get_comments(array('author_email' => $decodedEmail, 'status' => 'all', 'fields' => 'ids'));
+            if ($comments) {
+                foreach ($comments as $cid) {
+                    wp_delete_comment($cid, true);
+                }
+                ?>
+                <div id="wc_delete_content_message">
+                    <span class="wc_delete_content_message"><?php _e('Your comments have been deleted from database', 'wpdiscuz'); ?></span>
+                </div>
+                <?php
+            }
+        }
+    } else if (isset($_GET['deleteSubscriptions']) && $_GET['deleteSubscriptions']) {
+        $decodedEmail = base64_decode($_GET['deleteSubscriptions']);
+        if (get_transient(WpDiscuzConstants::TRS_USER_HASH . md5($decodedEmail)) !== false) {
+            $wpdiscuz->dbManager->unsubscribeByEmail($decodedEmail);
+            ?>
+            <div id="wc_delete_content_message">
+                <span class="wc_delete_content_message"><?php _e('You cancel all your subscriptions successfully', 'wpdiscuz'); ?></span>
+            </div>
+            <?php
+        }
     }
 
     if (isset($_GET['wpdiscuzSubscribeID']) && isset($_GET['key'])) {
@@ -81,7 +102,7 @@ if (!post_password_required($post->ID)) {
         } else {
             if (isset($_GET['subscriptionID']) && ($subscriptionID = trim($_GET['subscriptionID']))) {
                 $noNeedMemberConfirm = ($currentUser->ID && $wpdiscuz->optionsSerialized->disableMemberConfirm);
-                $noNeedGuestsConfirm = (!$currentUser->ID && $wpdiscuz->optionsSerialized->disableGuestsConfirm && $wpdiscuz->dbManager->hasConfirmedSubscriptionByID($subscriptionID));
+                $noNeedGuestsConfirm = (!$currentUser->ID && $wpdiscuz->optionsSerialized->disableGuestsConfirm);
                 if ($noNeedMemberConfirm || $noNeedGuestsConfirm) {
                     $subscriptionMsg = $wpdiscuz->optionsSerialized->phrases['wc_subscribe_message'];
                 } else {
@@ -110,34 +131,58 @@ if (!post_password_required($post->ID)) {
             echo '<style type="text/css">' . $formCustomCss . '</style>';
         }
         ?>
-        <h3 id="wc-comment-header"><?php echo $form->getHeaderText(); ?></h3>
-        <?php
-        if ($wpdiscuz->optionsSerialized->showHideLoggedInUsername) {
-            if ($currentUser && $currentUser->ID) {
-                $user_url = get_author_posts_url($currentUser->ID);
-                ?>
-                <div id="wc_show_hide_loggedin_username">
-                    <span class="wc_show_hide_loggedin_username">
-                        <?php
-                        $logout = wp_loginout(get_permalink(), false);
-                        $logout = preg_replace('!>([^<]+)!is', '>' . $wpdiscuz->optionsSerialized->phrases['wc_log_out'], $logout);
-                        echo $wpdiscuz->optionsSerialized->phrases['wc_logged_in_as'] . ' <a href="' . $user_url . '">' . $wpdiscuz->helper->getCurrentUserDisplayName($currentUser) . '</a> | ' . $logout;
-                        ?>
-                    </span>
-                </div>
-                <?php
-            }
-        }
-        ?>
-        <div id="wpcomm" class="<?php echo $wpCommClasses; ?>">
-            <?php if (!$wpdiscuz->optionsSerialized->headerTextShowHide) { ?>
-                <div class="wc-comment-bar">
-                    <p class="wc-comment-title">
-                        <?php echo ($commentsCount) ? $header_text : $wpdiscuz->optionsSerialized->phrases['wc_be_the_first_text']; ?>
-                    </p>
-                    <div class="wpdiscuz_clear"></div>
+        <h3 id="wc-comment-header">
+            <?php if ($commentsCount) { ?>
+                <div class="wpdiscuz-comment-count">
+                    <div class="wpd-cc-value"><?php echo $commentsCount; ?></div>
+                    <div class="wpd-cc-arrow"></div>
                 </div>
             <?php } ?>
+            <?php echo $form->getHeaderText(); ?>
+        </h3>
+        <div id="wpcomm" class="<?php echo $wpCommClasses; ?>">
+            <div class="wpdiscuz-form-top-bar">
+                <div class="wpdiscuz-ftb-left">
+                    <?php
+                    $currentUserId = 0;
+                    $currentUserEmail = isset($_COOKIE['comment_author_email_' . COOKIEHASH]) ? $_COOKIE['comment_author_email_' . COOKIEHASH] : '';
+                    if ($currentUser && $currentUser->ID) {
+                        $currentUserId = $currentUser->ID;
+                        $currentUserEmail = $currentUser->user_email;
+                    }
+                    ?>
+                    <?php if (!$wpdiscuz->optionsSerialized->hideUserSettingsButton && $currentUserEmail) { ?>
+                        <div class="wpdiscuz-user-settings wpd-tooltip-left wpd-info wpd-not-clicked">
+                            <i class="fas fa-user-cog"></i>
+                            <wpdtip><?php echo $wpdiscuz->optionsSerialized->phrases['wc_content_and_settings']; ?></wpdtip>
+                        </div>
+                    <?php } ?>
+                    <div id="wc_show_hide_loggedin_username">
+                        <?php
+                        if ($wpdiscuz->optionsSerialized->showHideLoggedInUsername) {
+                            if ($currentUser && $currentUser->ID) {
+                                $user_url = get_author_posts_url($currentUser->ID);
+                                $user_url = apply_filters('wpdiscuz_profile_url', $user_url, $currentUser);
+                                $logout = wp_loginout(get_permalink(), false);
+                                $logout = preg_replace('!>([^<]+)!is', '>' . $wpdiscuz->optionsSerialized->phrases['wc_log_out'], $logout);
+                                echo $wpdiscuz->optionsSerialized->phrases['wc_logged_in_as'] . ' <a href="' . $user_url . '">' . $wpdiscuz->helper->getCurrentUserDisplayName($currentUser) . '</a> | ' . $logout;
+                            } else {
+                                if (!$form->isUserCanComment($currentUser, $post->ID)) {
+                                    $login = wp_loginout(get_permalink(), false);
+                                    $login = preg_replace('!>([^<]+)!is', '>' . __('Login', 'wpdiscuz'), $login);
+                                    $login = sprintf(__('Please %s to comment', 'wpdiscuz'), $login);
+                                    echo '<i class="fas fa-sign-in-alt"></i> <span>' . $login . '</span>';
+                                }
+                            }
+                        }
+                        ?>
+                    </div>
+                </div>
+                <?php do_action('comment_main_form_bar_top'); ?>
+                <div class="wpd-clear"></div>
+            </div>
+
+
             <?php do_action('comment_form_before'); ?>
             <div class="wc_social_plugin_wrapper">
                 <?php
@@ -293,7 +338,8 @@ if (!post_password_required($post->ID)) {
                 <?php if ($commentsCount) { ?>
                     <?php if ($wpdiscuz->optionsSerialized->showPluginPoweredByLink) { ?>
                         <div class="by-wpdiscuz">
-                            <span id="awpdiscuz" onclick='javascript:document.getElementById("bywpdiscuz").style.display = "inline";document.getElementById("awpdiscuz").style.display = "none";'>
+                            <span id="awpdiscuz" onclick='javascript:document.getElementById("bywpdiscuz").style.display = "inline";
+                                                document.getElementById("awpdiscuz").style.display = "none";'>
                                 <img alt="wpdiscuz" src="<?php echo plugins_url(WPDISCUZ_DIR_NAME . '/assets/img/plugin-icon/icon_info.png'); ?>"  align="absmiddle" class="wpdimg"/>
                             </span>&nbsp;
                             <a href="http://wpdiscuz.com/" target="_blank" id="bywpdiscuz" title="wpDiscuz v<?php echo get_option(WpdiscuzCore::OPTION_SLUG_VERSION); ?> - Supercharged native comments">wpDiscuz</a>

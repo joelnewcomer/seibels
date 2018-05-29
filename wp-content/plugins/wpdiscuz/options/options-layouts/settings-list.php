@@ -152,29 +152,6 @@ if (!defined('ABSPATH')) {
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label><?php _e('Show Share Buttons', 'wpdiscuz'); ?></label>
-                </th>
-                <th>
-                    <?php
-                    $shareButtons = $this->shareButtons;
-                    foreach ($shareButtons as $btn) {
-                        $checked = in_array($btn, $this->optionsSerialized->shareButtons) ? 'checked="checked"' : '';
-                        ?>
-                        <label class="wpdiscuz-share-buttons share-button-<?php echo $btn; ?>" for="wc_share_button_<?php echo $btn; ?>" style="display: inline-block;">
-                            <input type="checkbox" <?php echo $checked ?> value="<?php echo $btn; ?>" name="wpdiscuz_share_buttons[]" id="wc_share_button_<?php echo $btn; ?>" class="wc_share_button" />
-                        </label>
-                        <?php
-                    }
-                    ?>
-                    <div style="height: 8px;"></div><fieldset>
-                        <?php $facbookAppContShow = in_array('fb', $this->optionsSerialized->shareButtons) ? '' : 'style="display:none;"'; ?>
-                        <label for="facebookAppID"  id="wpc-fb-api-cont"  <?php echo $facbookAppContShow; ?> style="padding: 0px;">
-                            <input type="text" value="<?php echo $this->optionsSerialized->facebookAppID; ?>" name="facebookAppID" id="facebookAppID"  style="margin: 0px;"/> &nbsp; <?php _e('Facebook Application ID', 'wpdiscuz'); ?>
-                        </label></fieldset>
-                </th>
-            </tr>
-            <tr valign="top">
-                <th scope="row">
                     <label><?php _e('Display Ratings', 'wpdiscuz'); ?></label>
                 </th>
                 <th>

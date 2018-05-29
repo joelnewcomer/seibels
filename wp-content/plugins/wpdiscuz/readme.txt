@@ -3,7 +3,7 @@ Contributors: gVectors Team
 Tags: comment, comments, ajax comments, custom comment form, custom comment field
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 5.0.7
+Stable tag: 5.1.0
 Requires PHP: 5.4 and higher
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,9 +16,10 @@ AJAX realtime comment system with custom comment form and fields. Designed to su
 Comments - wpDiscuz is Multisite and RTL ready!
 
 * Support Forum: [https://gvectors.com/forum/](https://gvectors.com/forum/)
-* wpDiscuz Demo: [http://wpdiscuz.com/demo/](http://wpdiscuz.com/demo/)
-* wpDiscuz Addons: [http://wpdiscuz.com/addons/](http://wpdiscuz.com/addons)
-* wpDiscuz Documentation: [http://wpdiscuz.com/wpdiscuz-documentation/](http://wpdiscuz.com/wpdiscuz-documentation/)
+* wpDiscuz Demo: [https://wpdiscuz.com/demo/](https://wpdiscuz.com/demo/)
+* wpDiscuz GDPR: [https://wpdiscuz.com/gdpr/](https://wpdiscuz.com/gdpr/)
+* wpDiscuz Documentation: [https://wpdiscuz.com/documentation/](https://wpdiscuz.com/documentation/)
+* wpDiscuz Addons: [https://wpdiscuz.com/addons/](https://wpdiscuz.com/addons)
 
 Integration with User Profile Plugins - Please read the [Integrations] Tab in wpDiscuz Settings admin page
 
@@ -35,7 +36,6 @@ Integration with AntiSpam plugins
 
 = Comments - wpDiscuz "Coming soon" Features: =
 
-* New Feature : Social Login
 * New Feature : Follow Users
 
 = Comments - wpDiscuz Features: =
@@ -174,15 +174,37 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 
 == Changelog ==
 
-= Comments - wpDiscuz v5.0.7 =
+= Comments - wpDiscuz v5.1.0 =
 
-* Updated: Ultimate Member 2 integration code
-* Changed: JS code optimization to prevent json parse errors
-* Fixed Bug : Refresh CAPTCHA link jumps on top of site
+Please follow to this instruction to create an agreement checkbox for GDPR compliance:
+[https://wpdiscuz.com/docs/wpdiscuz-documentation/gdpr/right-to-be-informed/](https://wpdiscuz.com/docs/wpdiscuz-documentation/gdpr/right-to-be-informed/)
+
+* Added: [Documentation -beta-](https://wpdiscuz.com/docs/wpdiscuz-documentation/)
+* Added: Comment GDPR | New Custom Field - Agreement checkbox
+* Added: Comment GDPR | Pre-authorization social login agreement
+* Added: Comment GDPR | Individual and bulk comment deleting features
+* Added: Comment GDPR | Individual and bulk cancel subscription features
+* Added: Comment GDPR | Button [Delete Cookies] for guests
+* Added: Comment GDPR | Doesn't save IP for comment votes and likes
+* Added: Comment GDPR | [Documentation](https://wpdiscuz.com/docs/wpdiscuz-documentation/gdpr/)
+* Added: Comment Form | Redesigned
+* Added: Comment Form | My Content and Settings button
+* Added: Comment Form | Discussion statistic (threads, replies, followers)
+* Added: Comment Form | Button - Most reacted comment
+* Added: Comment Form | Button - Hottest comment thread
+* Added: Comment Form | Recent comment author avatars
+* Added: Social Login | built-in social login buttons
+* Added: Social Login | Social Login/Share admin Tab (in Comments > Settings)
+* Added: Social Login | Facebook, Twitter, Google plus, VK and OK
+* Fixed Bug: MyISAM engine type not supported
+* Fixed Bug: Wrong user mentioning in email notification
+* Fixed Bug: Undefined index on stick/unstick and close/open actions
+* Fixed Bug: Many small bugs
 
 
 IMPORTANT!
 
+- Please delete all caches and press CTRL+F5 on ebsite front-end after updating wpDiscuz
 - wpDiscuz uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
 - Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
 - If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
@@ -190,6 +212,13 @@ IMPORTANT!
 - If you have a Cache Plugin, please delete all caches after wpDiscuz update.
 - If you use CDN and found some issue please purge it.
 - If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
+
+
+= Comments - wpDiscuz v5.0.7 =
+
+* Updated: Ultimate Member 2 integration code
+* Changed: JS code optimization to prevent json parse errors
+* Fixed Bug : Refresh CAPTCHA link jumps on top of site
 
 = Comments - wpDiscuz v5.0.6 =
 

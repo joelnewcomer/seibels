@@ -28,6 +28,38 @@ if (!defined('ABSPATH')) {
             </tr>
             <tr valign="top">
                 <th scope="row">
+                    <label for="comment_form_components"><?php _e('Comment Form components', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc"><?php _e('These components can be found on the main comment form. The "My Content and Settings" button is located on the top left side, under the "Leave Reply" header text. The "Discussion Statistic" and "Recent Comment Authors" sections are located under the main comment form fields ont the left and right sides accordingly.', 'wpdiscuz'); ?></p>
+                </th>
+                <td>
+                    <fieldset>
+                        <div class="wpd-subopt" style="float: none; padding: 5px 0px;">
+                            <div style="display: inline-block; vertical-align: middle;">
+                                <input type="checkbox" value="1" <?php checked($this->optionsSerialized->hideUserSettingsButton == 1) ?> name="hideUserSettingsButton" id="hideUserSettingsButton" />
+                                <label for="hideUserSettingsButton"></label>
+                            </div> &nbsp;
+                            <span data-target="hideUserSettingsButton" style="display: inline-block"><?php _e('Hide "My Content and Settings" button', 'wpdiscuz'); ?></span>
+                        </div>
+                        <div class="wpd-subopt" style="float: none; padding: 5px 0px;">
+                            <div style="display: inline-block; vertical-align: middle;">
+                                <input type="checkbox" value="1" <?php checked($this->optionsSerialized->hideDiscussionStat == 1) ?> name="hideDiscussionStat" id="hideDiscussionStat" />
+                                <label for="hideDiscussionStat"></label>
+                            </div> &nbsp;
+                            <span data-target="hideDiscussionStat" style="display: inline-block"><?php _e('Hide "Discussion Statistic" section', 'wpdiscuz'); ?></span>
+                        </div>
+                        <div class="wpd-subopt" style="float: none; padding: 5px 0px;">
+                            <div style="display: inline-block; vertical-align: middle;">
+                                <input type="checkbox" value="1" <?php checked($this->optionsSerialized->hideRecentAuthors == 1) ?> name="hideRecentAuthors" id="hideRecentAuthors" />
+                                <label for="hideRecentAuthors"></label>
+                            </div> &nbsp;
+                            <span data-target="hideRecentAuthors" style="display: inline-block;"><?php _e('Hide "Recent Comment Authors" section', 'wpdiscuz'); ?></span>
+                        </div>
+                        <div style="clear: both;"></div>
+                    </fieldset>
+                </td>
+            </tr>
+            <tr valign="top">
+                <th scope="row">
                     <label for="storeCommenterData"><?php _e('Keep guest commenter credentials in browser cookies for x days', 'wpdiscuz'); ?></label>
                     <p class="wpd-desc">
                         <?php _e('wpDiscuz uses WordPress function to keep guest Name, Email and Website information in cookies to fill according fields of comment form on next commenting time.', 'wpdiscuz'); ?><br /> 
@@ -39,7 +71,7 @@ if (!defined('ABSPATH')) {
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label><?php _e('Comment author name min length (for guests only)', 'wpdiscuz'); ?></label>
+                    <label><?php _e('Comment author name length (for guests only)', 'wpdiscuz'); ?></label>
                 </th>
                 <td>                                
                     <span for="commenterNameMinLength">
@@ -79,7 +111,7 @@ if (!defined('ABSPATH')) {
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label for="antispamKey"><?php _e('Spam Protection', 'wpdiscuz'); ?></label>
+                    <label for="antispamKey"><?php _e('Invisible Spam Protection', 'wpdiscuz'); ?></label>
                     <p class="wpd-desc">
                         <?php _e('You should purge caches after each key generation otherwise the plugin may work not correctly', 'wpdiscuz'); ?>
                     </p>
@@ -91,6 +123,16 @@ if (!defined('ABSPATH')) {
                     <input type="text" value="<?php echo $this->optionsSerialized->antispamKey ?>" name="antispamKey" id="antispamKey" style="padding: 3px 5px;" size="35"/>
                     <button type="button" id="generateAntispamKey" class="button button-secondary"><?php _e('Generate', 'wpdiscuz') ?></button>                    
                 </th>
+            </tr>
+            <tr valign="top">
+                <th scope="row" style="width:55%;">
+                    <label for="displayAntispamNote"><?php _e('Display note about Invisible Spam Protection', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc"><?php _e('wpDiscuz has built-in invisible antispam protection based on server side and front-end unique key comparation. By default wpDiscuz display a small note in simple CAPTCHA area, saying the comment form is under antispam protection. The note text can be managed in Comments > Phrases > Form tab.', 'wpdiscuz'); ?></p>
+                </th>
+                <td>
+                    <input type="checkbox" value="1" <?php checked($this->optionsSerialized->displayAntispamNote == 1) ?> name="displayAntispamNote" id="displayAntispamNote" />
+                    <label for="displayAntispamNote"></label>
+                </td>
             </tr>
             <tr valign="top">
                 <th scope="row" style="width:55%;">
@@ -128,10 +170,6 @@ if (!defined('ABSPATH')) {
                     </select>
                 </td>
             </tr>
-
-
-
-
         </tbody>
     </table>
 </div>

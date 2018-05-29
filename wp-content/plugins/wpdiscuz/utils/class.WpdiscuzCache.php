@@ -38,6 +38,7 @@ class WpdiscuzCache implements WpDiscuzConstants {
         }
         add_action('admin_post_purgeExpiredGravatarsCaches', array(&$this, 'purgeExpiredGravatarsCaches'));
         add_action('admin_post_purgeGravatarsCaches', array(&$this, 'purgeGravatarsCaches'));
+        add_action('admin_post_purgeStatisticsCache', array(&$this, 'purgeStatisticsCache'));
     }
 
     public function preGetGravatar($avatar, $idOrEmail, $args) {
@@ -181,6 +182,13 @@ class WpdiscuzCache implements WpDiscuzConstants {
     public function purgeGravatarsCaches() {
         if (current_user_can('manage_options') && isset($_GET['_wpnonce']) && wp_verify_nonce($_GET['_wpnonce'], 'purgeGravatarsCaches')) {
             $this->deleteGravatars();
+        }
+        wp_redirect(admin_url('edit-comments.php?page=' . self::PAGE_SETTINGS));
+    }
+
+    public function purgeStatisticsCache() {
+        if (current_user_can('manage_options') && isset($_GET['_wpnonce']) && wp_verify_nonce($_GET['_wpnonce'], 'purgeStatisticsCache')) {
+            $this->dbManager->deleteStatisticCaches();
         }
         wp_redirect(admin_url('edit-comments.php?page=' . self::PAGE_SETTINGS));
     }

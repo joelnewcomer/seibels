@@ -84,7 +84,7 @@ class TextField extends Field {
             <?php $required = $args['required'] ? 'required="required"' : ''; ?>
             <input <?php echo $required; ?> class="<?php echo $name; ?> wpd-field wpd-field-text" type="text" name="<?php echo $name; ?>" value="" placeholder="<?php _e($args['name'], 'wpdiscuz'); ?>">
             <?php if ($args['desc']) { ?>
-            <div class="wpd-field-desc"><i class="far fa-question-circle" aria-hidden="true"></i><span><?php echo esc_html($args['desc']); ?></span></div>
+            <div class="wpd-field-desc"><i class="far fa-question-circle" aria-hidden="true"></i><span><?php echo $args['desc']; ?></span></div>
             <?php } ?>
         </div>
         <?php

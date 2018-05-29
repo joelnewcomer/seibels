@@ -1,5 +1,11 @@
 .wc-form table.wp-list-table td, .wc-form table.wp-list-table th{ padding: 12px 5px;}
-.wc-form tr:nth-child(even){background:#fff}.wc-form tr:nth-child(odd){background:#f9f9f9}.form-table.wc-form-table tr{background:transparent}.wpdiscuz_options_page .wc-phrases-settings-form input[type="text"],.wpdiscuz_options_page .wc-phrases-settings-form textarea{width:300px}.wpdiscuz_wrap {	height: 50px;width: 100%;}.wpdiscuz_progressbar {height: 50px;text-align: center;background: #f00;width: 0;}
+.wc-form tr:nth-child(even){background:#fff}
+.wc-form tr:nth-child(odd){background:#f9f9f9}
+.form-table.wc-form-table tr{background:transparent}
+.wpdiscuz_options_page .wc-phrases-settings-form input[type="text"],
+.wpdiscuz_options_page .wc-phrases-settings-form textarea{width:300px}
+.wpdiscuz_wrap {height: 50px;width: 100%;}
+.wpdiscuz_progressbar {height: 50px;text-align: center;background: #f00;width: 0;}
 .wpdiscuz-share-buttons {display: inline-block; width: 18px; height: 18px;}
 .wc-form input.wc_share_button {display: none;}
 .wc-form input[type="text"].regular-text{ width:160px; }
@@ -72,3 +78,19 @@
 .wpdiscuz-rating > input:checked ~ label:hover ~ label { color: #FFED85;  }
 
 .import-percentage {vertical-align: middle;color: #444;margin-left: 5px;}
+
+.wpd-social-login td label{margin-right: 5px; }
+.wc-form table.wp-list-table.wpd-social-login td, .wc-form table.wp-list-table.wpd-social-login th{padding: 9px 10px 5px 10px;}
+.wpd-social-login .wpd-social-lable {font-size: 18px;}
+.wpd-social-login .wpd-social-lable i{padding-right: 10px; font-size: 34px; display: inline-block; bottom: -5px; position: relative;}
+.wpd-social-login td input[type="text"]{width: 50%; padding: 5px 10px; font-size: 14px;}
+
+.wpd-social-login .wpd-social-lable.wpd-facebook{color: #4267B2; border-bottom: 2px solid #9fbbff; }
+.wpd-social-login .wpd-social-lable.wpd-twitter{color: #1DA1F2; border-bottom: 2px solid #97dafe; }
+.wpd-social-login .wpd-social-lable.wpd-google{color: #D84538; border-bottom: 2px solid #ffa48e;}
+.wpd-social-login .wpd-social-lable.wpd-ok{color: #EE7808; border-bottom: 2px solid #ffc369;}
+.wpd-social-login .wpd-social-lable.wpd-vk{color: #4A76A8; border-bottom: 2px solid #a3c1ff;}
+
+.widefat .wpd-color-wrap{padding: 7px 5px; min-width: 300px; float: left;}
+.widefat .wpd-color-wrap input{width: 80px!important; padding: 3px 5px!important; font-size: 13px!important; text-align: center!important;}
+.widefat .wpd-color-wrap label{font-weight: normal!important; display: inline-block!important; margin: 0px 5px!important;}

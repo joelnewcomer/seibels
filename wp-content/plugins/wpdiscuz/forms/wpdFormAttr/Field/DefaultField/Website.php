@@ -52,7 +52,7 @@ class Website extends Field {
                     <?php } ?>
                         <input value="<?php echo $authorUrl; ?>" class="<?php echo $name; ?> wpd-field" type="text" name="<?php echo $name; ?>" value="" placeholder="<?php echo $args['name']; ?>">
                     <?php if ($args['desc']) { ?>
-                        <div class="wpd-field-desc"><i class="far fa-question-circle" aria-hidden="true"></i><span><?php echo esc_html($args['desc']); ?></span></div>
+                        <div class="wpd-field-desc"><i class="far fa-question-circle" aria-hidden="true"></i><span><?php echo $args['desc']; ?></span></div>
                             <?php } ?>
                 </div>
                 <?php

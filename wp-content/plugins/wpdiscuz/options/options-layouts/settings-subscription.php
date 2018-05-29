@@ -36,18 +36,19 @@ if (!defined('ABSPATH')) {
                 <th>
                     <fieldset>
                         <?php $subscriptionType = isset($this->optionsSerialized->subscriptionType) ? $this->optionsSerialized->subscriptionType : 1; ?>
-                        <label title="<?php _e('Both', 'wpdiscuz') ?>">
-                            <input type="radio" value="1" <?php checked(1 == $subscriptionType); ?> name="subscriptionType" id="subscriptionTypeBoth" /> 
-                            <span><?php _e('Both post and all comments subscription', 'wpdiscuz') ?></span>
-                        </label> &nbsp;<br/>
-                        <label title="<?php _e('Show new comment/reply buttons to update manualy', 'wpdiscuz') ?>">
+                        <label>
                             <input type="radio" value="2" <?php checked(2 == $subscriptionType); ?> name="subscriptionType" id="subscriptionTypePost" /> 
-                            <span><?php _e('Post subscription', 'wpdiscuz') ?></span>
+                            <span><?php _e('Subscribe to all comments of this post', 'wpdiscuz') ?></span>
                         </label><br>    
-                        <label title="<?php _e('Always update', 'wpdiscuz') ?>">
+                        <label>
                             <input type="radio" value="3" <?php checked(3 == $subscriptionType); ?> name="subscriptionType" id="subscriptionTypeAllComments" /> 
-                            <span><?php _e('All comments subscription', 'wpdiscuz') ?></span>
-                        </label> &nbsp;<br/>          
+                            <span><?php _e('Subscribe to all replies to my comments ', 'wpdiscuz') ?></span>
+                        </label><br/>
+                        <label title="<?php _e('Both', 'wpdiscuz') ?>">
+                            <input type="radio" value="1" <?php checked(1 == $subscriptionType); ?> name="subscriptionType" id="subscriptionTypeBoth" />
+                            <span><?php _e('Both', 'wpdiscuz') ?></span>
+                        </label>
+                        &nbsp;<br/>
                     </fieldset>
                 </th>
             </tr>

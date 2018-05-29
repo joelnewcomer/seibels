@@ -28,7 +28,7 @@ interface WpDiscuzConstants {
     /* === TRANSIENT KEYS === */
     const TRS_POSTS_AUTHORS                           = 'wpdiscuz_posts_authors';
     /* === COOKIES === */
-    const COOKIE_LAST_VISIT                           = 'wpdiscuz_last_visit';
+    const COOKIE_LAST_VISIT                           = 'wordpress_last_visit';
     /* === CACHE === */
     const GRAVATARS_CACHE_DIR                         = '/wpdiscuz/cache/gravatars/';
     const GRAVATARS_CACHE_ADD_RECURRENCE              = 3;
@@ -42,4 +42,14 @@ interface WpDiscuzConstants {
     /* === TOOLS === */
     const OPTIONS_DIR                                 = '/wpdiscuz/options/';
     const OPTIONS_FILENAME                            = 'wpdiscuz-options';
+    /* === STATISTICS === */
+    const TRS_THREADS_COUNT                           = 'wpdiscuz_threads_count_';
+    const TRS_REPLIES_COUNT                           = 'wpdiscuz_replies_count_';
+    const TRS_FOLLOWERS_COUNT                         = 'wpdiscuz_followers_count_';
+    const TRS_MOST_REACTED                            = 'wpdiscuz_most_reacted_';
+    const TRS_HOTTEST                                 = 'wpdiscuz_hottest_';
+    const TRS_AUTHORS_COUNT                           = 'wpdiscuz_authors_count_';
+    const TRS_RECENT_AUTHORS                          = 'wpdiscuz_recent_authors_';
+    /* === USER CONTENT === */
+    const TRS_USER_HASH                               = 'wpdiscuz_user_hash_';
 }

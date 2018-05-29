@@ -20,26 +20,20 @@ class WpdiscuzCss {
         global $post;
         if ($this->helper->isLoadWpdiscuz($post)) {
             ?>
-            <style type="text/css">
-
-
+            <style>
                 #wpcomm .wc_new_comment{background:<?php echo $this->optionsSerialized->primaryColor; ?>;}
                 #wpcomm .wc_new_reply{background:<?php echo $this->optionsSerialized->primaryColor; ?>;}
                 #wpcomm .wc-form-wrapper{ background:none; } /* ->formBGColor */
                 #wpcomm .wpdiscuz-front-actions{background:<?php echo isset($this->optionsSerialized->formBGColor) ? $this->optionsSerialized->formBGColor : '#f9f9f9'; ?>;}
                 #wpcomm .wpdiscuz-subscribe-bar{background:<?php echo isset($this->optionsSerialized->formBGColor) ? $this->optionsSerialized->formBGColor : '#f9f9f9'; ?>;}
-
                 #wpcomm select,
                 #wpcomm input[type="text"],
                 #wpcomm input[type="email"],
                 #wpcomm input[type="url"],
                 #wpcomm input[type="date"],
                 #wpcomm input[type="color"]{border:<?php echo $this->optionsSerialized->inputBorderColor; ?> 1px solid;}
-
                 #wpcomm .wc-comment .wc-comment-right{background:<?php echo $this->optionsSerialized->commentBGColor; ?>;}
-
                 #wpcomm .wc-reply .wc-comment-right{background:<?php echo $this->optionsSerialized->replyBGColor; ?>;}
-
                 #wpcomm .wc-comment-right .wc-comment-text, 
                 #wpcomm .wc-comment-right .wc-comment-text *{
                     font-size:<?php echo isset($this->optionsSerialized->commentTextSize) ? $this->optionsSerialized->commentTextSize : '14px'; ?>;
@@ -54,7 +48,6 @@ class WpdiscuzCss {
                     echo '#wpcomm .wc-blog-' . $role . ' > .wc-comment-left .wc-comment-label{color:' . $color . '; border:none; border-bottom: 1px solid #dddddd; }';
                 }
                 ?>
-
                 #wpcomm .wc-comment .wc-comment-left .wc-comment-label{ background: #ffffff;}
                 #wpcomm .wc-load-more-submit{border:1px solid <?php echo $this->optionsSerialized->inputBorderColor; ?>;}
                 #wpcomm .wc-new-loaded-comment > .wc-comment-right{background:<?php echo $this->optionsSerialized->newLoadedCommentBGColor; ?>;}
@@ -65,13 +58,9 @@ class WpdiscuzCss {
                 #wpcomm .wpdiscuz-readmore{cursor:pointer;color:<?php echo $this->optionsSerialized->primaryColor; ?>;}<?php do_action('wpdiscuz_dynamic_css'); ?> 
                 #wpcomm .wpdiscuz-textarea-wrap{border:<?php echo $this->optionsSerialized->inputBorderColor; ?> 1px solid;} .wpd-custom-field .wcf-pasiv-star, #wpcomm .wpdiscuz-item .wpdiscuz-rating > label {color: <?php echo $this->optionsSerialized->ratingInactivColor; ?>;}
                 #wpcomm .wpdiscuz-item .wpdiscuz-rating:not(:checked) > label:hover,.wpdiscuz-rating:not(:checked) > label:hover ~ label {   }#wpcomm .wpdiscuz-item .wpdiscuz-rating > input ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:not(:checked) ~ label:hover ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:not(:checked) ~ label:hover ~ label{color: <?php echo $this->optionsSerialized->ratingHoverColor; ?>;} 
-                #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > label:hover ~ input:checked ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked + label:hover ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover ~ label, .wpd-custom-field .wcf-activ-star, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label{ color:<?php
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               echo $this->optionsSerialized->ratingActivColor;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ?>;} 
+                #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover, #wpcomm .wpdiscuz-item .wpdiscuz-rating > label:hover ~ input:checked ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked + label:hover ~ label, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label:hover ~ label, .wpd-custom-field .wcf-activ-star, #wpcomm .wpdiscuz-item .wpdiscuz-rating > input:checked ~ label{ color:<?php                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ?>;}
                 #wpcomm .wc-comment-header{border-bottom: 1px solid #dedede;}
                 #wpcomm .wc-reply .wc-comment-header{border-bottom: 1px solid #DDDDDD;}
-
                 /* Buttons */
                 #wpcomm button, 
                 #wpcomm input[type="button"], 
@@ -95,22 +84,20 @@ class WpdiscuzCss {
                 #wpcomm .wc-vote-link.wc-down{color:<?php echo $this->optionsSerialized->buttonColor['vote_down_link_color'] ?>;}
                 #wpcomm .wc-vote-result{color:#999999;}
                 #wpcomm .wpf-cta{color:#999999; }
+                #wpcomm .wc-comment-link .wc-share-link .wpf-cta{color:#eeeeee;}
                 #wpcomm .wpf-cta:hover{background:<?php echo $this->optionsSerialized->primaryColor; ?>!important; color:#FFFFFF;}
                 #wpcomm .wc-cta-active{background:<?php echo $this->optionsSerialized->primaryColor; ?>!important; color:#FFFFFF;}
                 #wpcomm .wc-cta-button:hover{background:<?php echo $this->optionsSerialized->primaryColor; ?>!important; color:#FFFFFF;} 
-                #wpcomm .wc-footer-right .wc-toggle, 
-                #wpcomm .wc-footer-right .wc-toggle a, 
+                #wpcomm .wc-footer-right .wc-toggle,
+                #wpcomm .wc-footer-right .wc-toggle a,
                 #wpcomm .wc-footer-right .wc-toggle i{color:<?php echo $this->optionsSerialized->primaryColor; ?>;}
-
                 /* STICKY COMMENT HEADER */
                 #wpcomm .wc-sticky-comment.wc-comment .wc-comment-header{background: #f2fcfb; border-bottom:1px dotted #00B38F;}
                 #wpcomm .wc-sticky-comment.wc-comment .wc-comment-header .wpd-sticky{color: #00B38F; border:1px dotted #00B38F;}
                 #wpcomm .wc-closed-comment.wc-comment .wc-comment-header .wpd-closed{color: #555555; border:1px dotted #555555;}
-
                 /* PRIVATE COMMENT HEADER */
                 #wpcomm .wc-private-comment.wc-comment .wc-comment-header{background: #eeeeee; border-bottom:1px solid #999999;}
                 #wpcomm .wc-private-comment.wc-comment .wc-comment-header .wpd-private{color: #000000; border:1px dotted #333333;}
-
                 <?php if ($this->optionsSerialized->theme == 'wpd-dark') { ?>
                     #comments{ background: url(<?php echo plugins_url(WPDISCUZ_DIR_NAME . '/assets/img/dark.png') ?>) #222222; padding: 3%; box-sizing: border-box; } #respond{background: url(<?php echo plugins_url(WPDISCUZ_DIR_NAME . '/assets/img/dark.png') ?>) #222222; padding: 3%; box-sizing: border-box;} .comments-area{background: url(<?php echo plugins_url(WPDISCUZ_DIR_NAME . '/assets/img/dark.png') ?>) #222222; padding: 3%; box-sizing: border-box; ba}
                 <?php } ?>

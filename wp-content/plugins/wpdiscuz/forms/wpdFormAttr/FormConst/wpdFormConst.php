@@ -23,4 +23,10 @@ interface wpdFormConst {
     /* === CAPTCHA === */
     const CAPTCHA_LENGTH                              = 5;
     const CAPTCHA_DIR                                 = '/wpdiscuz/captcha/';
+    /* === SOCIAL LOGIN */
+    const WPDISCUZ_SOCIAL_PROVIDER_KEY                = 'wpdiscuz_social_provider';
+    const WPDISCUZ_SOCIAL_AVATAR_KEY                  = 'wpdiscuz_social_avatar';
+    const WPDISCUZ_SOCIAL_USER_ID_KEY                 = 'wpdiscuz_social_userid';
+    const WPDISCUZ_OAUTH_STATE_PROVIDER               = '_wpdiscuz_social_oauth_token';
+    const WPDISCUZ_OAUTH_STATE_SECRET                 = '_wpdiscuz_social_oauth_secret';
 }

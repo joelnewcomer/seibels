@@ -11,6 +11,7 @@
                            'CheckboxField' => 'Multiple Choice (checkbox)',
                            'SelectField' => 'Select',
                            'RatingField' => 'Rating',
+                           'AgreementCheckbox' => 'Agreement Checkbox',
             )
     );
 

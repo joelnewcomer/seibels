@@ -3,6 +3,7 @@ include_once 'autoload.php';
 
 use wpdFormAttr\FormConst\wpdFormConst;
 use wpdFormAttr\Form;
+use wpdFormAttr\Login\SocialLogin;
 
 class wpDiscuzForm implements wpdFormConst {
 
@@ -12,6 +13,7 @@ class wpDiscuzForm implements wpdFormConst {
     private $form;
     private $formContentTypeRel;
     private $formPostRel;
+    private $socialLogin;
 
     public function __construct($options, $pluginVersion) {
         global $pagenow;
@@ -21,6 +23,7 @@ class wpDiscuzForm implements wpdFormConst {
         $this->initAdminPhrazes();
         $this->formContentTypeRel = $options->formContentTypeRel;
         $this->formPostRel = $options->formPostRel;
+        SocialLogin::getInstance($this->options);
         add_action('init', array(&$this, 'registerPostType'), 1);
         add_action('admin_init', array(&$this, 'custoFormRoleCaps'), 999);
         add_action('admin_menu', array(&$this, 'addFormToAdminMenu'), 874);
@@ -515,7 +518,10 @@ class wpDiscuzForm implements wpdFormConst {
 
     private function chagePostSingleRating($metaKey, $commentID, $difference, $postRatings) {
         $commentFieldRating = get_comment_meta($commentID, $metaKey, true);
-        if (key_exists($metaKey, $postRatings) && $commentFieldRating) {
+        if(!$postRatings){
+            $postRatings = array($metaKey => array());
+        }
+        if ($commentFieldRating) {
             if (key_exists($commentFieldRating, $postRatings[$metaKey])) {
                 $postRatings[$metaKey][$commentFieldRating] = $postRatings[$metaKey][$commentFieldRating] + $difference;
             } else {

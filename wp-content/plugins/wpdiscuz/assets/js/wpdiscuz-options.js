@@ -29,8 +29,22 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    $('#wpdiscuz-reset-phrases').click(function (e) {
+        if (!confirm(wpdiscuzObj.msgConfirmResetPhrases)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
     $('#wpdiscuz-purge-gravatars-cache').click(function (e) {
         if (!confirm(wpdiscuzObj.msgConfirmPurgeGravatarsCache)) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    $('#wpdiscuz-purge-statistics-cache').click(function (e) {
+        if (!confirm(wpdiscuzObj.msgConfirmPurgeStatisticsCache)) {
             e.preventDefault();
             return false;
         }

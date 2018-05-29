@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
             <tr valign="top">
                 <th scope="row" style="width:55%;">
                     <label><?php _e('Live update options', 'wpdiscuz'); ?></label>
-                    <p class="wpd-desc"><?php _e('wpDiscuz 3 live update is very smart and doesn\'t overload your server even if you\'re on Shared hosting plan and even your website is very active. However we recommend to monitor your server resources if you\'re on a Shared hosting plan. There are some very weak hosting plans which may not be able to perform very frequently live update requests. If you found some issue you can set the option below 30 seconds or more.', 'wpdiscuz'); ?></p>
+                    <p class="wpd-desc"><?php _e('wpDiscuz live update is very light and doesn\'t overload your server. However we recommend to monitor your server resources if you\'re on a Shared hosting plan. There are some very weak hosting plans which may not be able to perform very frequently live update requests. If you found some issue you can set the option below 30 seconds or more.', 'wpdiscuz'); ?></p>
                 </th>
                 <th>
                     <fieldset class="wc_comment_list_update_type">

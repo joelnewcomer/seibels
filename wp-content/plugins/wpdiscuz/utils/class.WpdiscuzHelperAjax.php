@@ -8,15 +8,25 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
 
     private $optionsSerialized;
     private $dbManager;
+    private $helper;
 
-    public function __construct($optionsSerialized, $dbManager) {
+    public function __construct($optionsSerialized, $dbManager, $helper) {
         $this->optionsSerialized = $optionsSerialized;
         $this->dbManager = $dbManager;
+        $this->helper = $helper;
+        add_filter('wp_update_comment_data', array(&$this, 'commentDataArr'), 10, 3);
         add_action('wp_ajax_wpdiscuzStickComment', array(&$this, 'stickComment'));
         add_action('wp_ajax_wpdiscuzCloseThread', array(&$this, 'closeThread'));
         add_action('wp_ajax_wpdDeactivate', array(&$this, 'deactivate'));
         add_action('wp_ajax_wpdImportSTCR', array(&$this, 'importSTCR'));
-        add_filter('wp_update_comment_data', array(&$this, 'commentDataArr'), 10, 3);
+    }
+
+    public function commentDataArr($data, $comment, $commentarr) {
+        if (isset($data['wpdiscuz_comment_update']) && $data['wpdiscuz_comment_update']) {
+            $data['comment_date'] = $comment['comment_date'];
+            $data['comment_date_gmt'] = $comment['comment_date_gmt'];
+        }
+        return $data;
     }
 
     public function stickComment() {
@@ -25,7 +35,13 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
         $commentId = isset($_POST['commentId']) ? intval($_POST['commentId']) : 0;
         if ($postId && $commentId) {
             $comment = get_comment($commentId);
-            if (current_user_can('moderate_comments') && $comment && isset($comment->comment_ID) && $comment->comment_ID && !$comment->comment_parent) {
+            $userCanStickComment = current_user_can('moderate_comments');
+            if (!$userCanStickComment) {
+                $post = get_post($postId);
+                $currentUser = WpdiscuzHelper::getCurrentUser();
+                $userCanStickComment = $post && isset($post->post_author) && $currentUser && isset($currentUser->ID) && $post->post_author == $currentUser->ID;
+            }
+            if ($userCanStickComment && $comment && isset($comment->comment_ID) && $comment->comment_ID && !$comment->comment_parent) {
                 $commentarr = array('comment_ID' => $commentId);
                 if ($comment->comment_type == self::WPDISCUZ_STICKY_COMMENT) {
                     $commentarr['comment_type'] = '';
@@ -49,7 +65,13 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
         $commentId = isset($_POST['commentId']) ? intval($_POST['commentId']) : 0;
         if ($postId && $commentId) {
             $comment = get_comment($commentId);
-            if (current_user_can('moderate_comments') && $comment && isset($comment->comment_ID) && $comment->comment_ID && !$comment->comment_parent) {
+            $userCanCloseComment = current_user_can('moderate_comments');
+            if (!$userCanCloseComment) {
+                $post = get_post($postId);
+                $currentUser = WpdiscuzHelper::getCurrentUser();
+                $userCanCloseComment = $post && isset($post->post_author) && $currentUser && isset($currentUser->ID) && $post->post_author == $currentUser->ID;
+            }
+            if ($userCanCloseComment && $comment && isset($comment->comment_ID) && $comment->comment_ID && !$comment->comment_parent) {
                 $children = $comment->get_children(array(
                     'format' => 'flat',
                     'status' => 'all',
@@ -106,6 +128,8 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
                 if (isset($data['deactivation_reason_desc']) && ($reasonDesc = trim($data['deactivation_reason_desc']))) {
                     $message .= "<strong>Deactivation reason description:</strong> " . $reasonDesc . "\r\n" . "<br/>";
                 }
+                $subject = html_entity_decode($subject, ENT_QUOTES);
+                $message = html_entity_decode($message, ENT_QUOTES);
                 $sent = wp_mail($to, $subject, $message, $headers);
                 $response['code'] = 'send_and_deactivate';
             }
@@ -141,12 +165,101 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
         wp_die(json_encode($response));
     }
 
-    public function commentDataArr($data, $comment, $commentarr) {
-        if (isset($data['wpdiscuz_comment_update']) && $data['wpdiscuz_comment_update']) {
-            $data['comment_date'] = $comment->comment_date;
-            $data['comment_date_gmt'] = $comment->comment_date_gmt;
+    public function deleteComment() {
+        $commentId = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        wp_delete_comment($commentId, true);
+        $this->helper->getActivityPage();
+    }
+
+    public function deleteSubscription() {
+        $subscriptionId = isset($_POST['id']) ? intval($_POST['id']) : 0;
+        $this->dbManager->unsubscribeById($subscriptionId);
+        $this->helper->getSubscriptionsPage();
+    }
+
+    public function emailDeleteLinks() {
+        global $wp_rewrite;
+        $postId = isset($_POST['postId']) ? intval($_POST['postId']) : 0;
+        $post = get_post($postId);
+        $currentUser = WpdiscuzHelper::getCurrentUser();
+        if ($post && $currentUser->exists()) {
+            $currentUserEmail = $currentUser->user_email;
+
+            if ($currentUserEmail) {
+                $hashValue = $this->generateUserActionHash($currentUserEmail);
+                $mainUrl = !$wp_rewrite->using_permalinks() ? get_permalink($post) . "&" : get_permalink($post) . "?";
+                $deleteCommentsUrl = $mainUrl . "delete&deleteComments=$hashValue";
+                $unsubscribeUrl = $mainUrl . "delete&deleteSubscriptions=$hashValue";
+
+                $subject = $this->optionsSerialized->phrases['wc_user_settings_delete_links'];
+                $message = $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments_message'] . '<br/><br/>';
+                $message .= "<a href='$deleteCommentsUrl' target='_blank'>" . $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments'] . "</a><br/><br/>";
+                $message .= $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions_message'] . '<br/><br/>';
+                $message .= "<a href='$unsubscribeUrl' target='_blank'>" . $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions'] . "</a>";
+
+                $this->userActionMail($currentUserEmail, $subject, $message);
+            }
         }
-        return $data;
+        wp_die();
+    }
+
+    public function guestAction() {
+        global $wp_rewrite;
+        $guestEmail = isset($_COOKIE['comment_author_email_' . COOKIEHASH]) ? $_COOKIE['comment_author_email_' . COOKIEHASH] : '';
+        $guestAction = filter_input(INPUT_POST, 'guestAction', FILTER_SANITIZE_STRING);
+        $postId = filter_input(INPUT_POST, 'postId', FILTER_SANITIZE_NUMBER_INT);
+        $post = get_post($postId);
+        $response = array(
+            'code' => 0,
+            'message' => '<div class="wpd-guest-action-message wpd-guest-action-error">' . $this->optionsSerialized->phrases['wc_user_settings_email_error'] . '</div>'
+        );
+        if ($post && $guestEmail) {
+            $hashValue = $this->generateUserActionHash($guestEmail);
+            $mainUrl = !$wp_rewrite->using_permalinks() ? get_permalink($post) . "&" : get_permalink($post) . "?";
+            $link = '';
+            if ($guestAction == 'deleteComments') {
+                $link = $mainUrl . "delete&deleteComments=$hashValue";
+                $subject = $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments'];
+                $message = $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments_message'] . '<br/><br/>';
+                $message .= "<a href='$link' target='_blank'>" . $subject . "</a>";
+            } elseif ($guestAction == 'deleteSubscriptions') {
+                $subject = $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions'];
+                $link = $mainUrl . "delete&deleteSubscriptions=$hashValue";
+                $message = $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions_message'] . '<br/><br/>';
+                $message .= "<a href='$link' target='_blank'>" . $subject . "</a>";
+            }
+            if ($this->userActionMail($guestEmail, $subject, $message)) {
+                $response['code'] = 1;
+                $parts = explode('@', $guestEmail);
+                $guestEmail = substr($parts[0], 0, min(1, strlen($parts[0])-1)) . str_repeat('*', max(1, strlen($parts[0]) - 1)) . '@' . $parts[1];
+                $response['message'] = '<div class="wpd-guest-action-message wpd-guest-action-success">' . $this->optionsSerialized->phrases['wc_user_settings_check_email'] . " ($guestEmail)" . '</div>';
+            }
+        }
+        wp_die(json_encode($response));
+    }
+
+    private function generateUserActionHash($email) {
+        $hashKey = self::TRS_USER_HASH . md5($email);
+        $hashValue = base64_encode($email);
+        $hashExpire = apply_filters('wpdiscuz_delete_all_content', 3 * DAY_IN_SECONDS);
+        set_transient($hashKey, $hashValue, $hashExpire);
+        return $hashValue;
+    }
+
+    private function userActionMail($email, $subject, $message) {
+        $siteUrl = get_site_url();
+        $blogTitle = get_option('blogname');
+        $mailContentType = apply_filters('wp_mail_content_type', 'text/html');
+        $fromName = apply_filters('wp_mail_from_name', $blogTitle);
+        $parsedUrl = parse_url($siteUrl);
+        $domain = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
+        $fromEmail = 'no-reply@' . $domain;
+        $fromEmail = apply_filters('wp_mail_from', $fromEmail);
+        $headers[] = "Content-Type:  $mailContentType; charset=UTF-8";
+        $headers[] = "From: " . $fromName . " <" . $fromEmail . "> \r\n";
+        $subject = html_entity_decode($subject, ENT_QUOTES);
+        $message = html_entity_decode($message, ENT_QUOTES);
+        return wp_mail($email, $subject, $message, $headers);
     }
 
 }

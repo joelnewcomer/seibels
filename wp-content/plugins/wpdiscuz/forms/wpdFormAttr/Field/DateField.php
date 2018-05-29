@@ -87,7 +87,7 @@ class DateField extends Field {
             <?php $required = $args['required'] ? 'required="required"' : ''; ?>
             <input <?php echo $required; ?> class="<?php echo $name; ?> wpd-field wpd-field-date" type="date" name="<?php echo $name; ?>" value="" placeholder="03/28/2016"  pattern="^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$" title="03/28/2016">
             <?php if ($args['desc']) { ?>
-                <div class="wpd-field-desc"><i class="far fa-question-circle" aria-hidden="true"></i><span><?php echo esc_html($args['desc']); ?></span></div>
+                <div class="wpd-field-desc"><i class="far fa-question-circle" aria-hidden="true"></i><span><?php echo $args['desc']; ?></span></div>
                     <?php } ?>
         </div>
         <?php

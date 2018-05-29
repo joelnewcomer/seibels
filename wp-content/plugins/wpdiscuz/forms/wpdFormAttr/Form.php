@@ -7,7 +7,7 @@ use wpdFormAttr\Field\DefaultField\Captcha;
 
 class Form {
 
-    private $wpdOptions;
+    public $wpdOptions;
     private $generalOptions;
     private $formeStructure;
     private $formPostTypes;
@@ -61,6 +61,10 @@ class Form {
                 }
             }
         }
+    }
+
+    public function getFormCustomFields() {
+        return $this->formCustomFields;
     }
 
     public function setFormID($formID) {
@@ -299,7 +303,7 @@ class Form {
         $html = '';
         if (key_exists($metakey, $this->formCustomFields)) {
             $icon = $this->formCustomFields[$metakey]['icon'];
-            $icon = strpos(trim($icon), ' ') ? $icon : 'fas '. $icon;
+            $icon = strpos(trim($icon), ' ') ? $icon : 'fas ' . $icon;
             $html .= '<div class="wpdiscuz-post-rating-wrap-' . $metakey . '">';
             if (filter_var($args['show-lable'], FILTER_VALIDATE_BOOLEAN)) {
                 $stat = '';
@@ -404,7 +408,11 @@ class Form {
         foreach ($this->formCustomFields as $fieldName => $fieldArgs) {
             $fieldType = $fieldArgs['type'];
             $field = call_user_func($fieldType . '::getInstance');
-            $this->fieldsBeforeSave[$fieldName] = $field->validateFieldData($fieldName, $fieldArgs, $this->wpdOptions, $currentUser);
+            if (isset($fieldArgs['no_insert_meta'])) {
+                $field->validateFieldData($fieldName, $fieldArgs, $this->wpdOptions, $currentUser);
+            } else {
+                $this->fieldsBeforeSave[$fieldName] = $field->validateFieldData($fieldName, $fieldArgs, $this->wpdOptions, $currentUser);
+            }
         }
     }
 
@@ -442,7 +450,9 @@ class Form {
             if ($top || $bottom) {
                 $htmlExists = true;
             }
-            $output = '<div class="wpd-top-custom-fields">' . $top . '</div>' . $output . '<div class="wpd-bottom-custom-fields">' . $bottom . '</div>';
+            $top = ( $top ) ? '<div class="wpd-top-custom-fields">' . $top . '</div>' : '';
+            $bottom = ( $bottom ) ? '<div class="wpd-bottom-custom-fields">' . $bottom . '</div>' : '';
+            $output = $top . $output . $bottom;
         }
         return $htmlExists;
     }
@@ -450,7 +460,7 @@ class Form {
     private function _renderFrontCommentMetaHtml($meta, $formCustomFields, $loc) {
         $html = '';
         foreach ($formCustomFields as $key => $value) {
-            if ($value['loc'] == $loc) {
+            if (isset($value['loc']) && $value['loc'] == $loc) {
                 $fieldType = $value['type'];
                 $metaValuen = isset($meta[$key][0]) ? maybe_unserialize($meta[$key][0]) : '';
                 if (is_callable($fieldType . '::getInstance') && $metaValuen) {
@@ -478,28 +488,31 @@ class Form {
         <div class="wc-form-wrapper <?php echo!$isMain ? 'wc-secondary-form-wrapper' : 'wc-main-form-wrapper'; ?>"  <?php echo!$isMain ? "id='wc-secondary-form-wrapper-$uniqueId'  style='display: none;'" : "id='wc-main-form-wrapper-$uniqueId'"; ?> >
             <div class="wpdiscuz-comment-message" style="display: block;"></div>
             <?php if (!$isMain) { ?>
-                <div class="wc-secondary-forms-social-content"></div>
+                <div class="wc-secondary-forms-social-content"><?php do_action('comment_reply_form_bar_top', $this); ?></div><div class="clearfix"></div>
             <?php } ?>
             <?php
             if ($this->isUserCanComment($currentUser, $message)) {
                 ?>
                 <form class="wc_comm_form <?php print $isMain ? 'wc_main_comm_form' : 'wc-secondary-form-wrapper'; ?>" method="post"  enctype="multipart/form-data">
                     <div class="wc-field-comment">
-                        <?php if ($this->wpdOptions->wordpressShowAvatars) { ?>
-                            <?php $authorName = $currentUser->ID ? $currentUser->display_name : 'avatar'; ?>
-                            <div class="wc-field-avatararea">
-                                <?php 
-                                $avatarSize = $isMain ? 64 : 48;
-                                echo get_avatar($currentUser->ID, $avatarSize, '', $authorName); ?>
-                            </div>
-                        <?php } ?>
                         <div class="wpdiscuz-item wc-field-textarea" <?php
                         if (!$this->wpdOptions->wordpressShowAvatars) {
                             echo ' style="margin-left: 0;"';
                         }
                         ?>>
                             <div class="wpdiscuz-textarea-wrap <?php if ($this->wpdOptions->isQuickTagsEnabled) echo 'wpdiscuz-quicktags-enabled'; ?>">
-                                <textarea id="wc-textarea-<?php echo $uniqueId; ?>" <?php echo $commentTextLengthRange . ' ' . $textareaMaxLength; ?> placeholder="<?php echo $textarea_placeholder; ?>" required name="wc_comment" class="wc_comment wpd-field"></textarea>
+
+                                <?php if ($this->wpdOptions->wordpressShowAvatars) { ?>
+                                    <?php $authorName = $currentUser->ID ? $currentUser->display_name : 'avatar'; ?>
+                                    <div class="wc-field-avatararea">
+                                        <?php
+                                        $avatarSize = $isMain ? 40 : 48;
+                                        echo get_avatar($currentUser->ID, $avatarSize, '', $authorName);
+                                        ?>
+                                    </div>
+                                <?php } ?>
+
+                                <textarea id="wc-textarea-<?php echo $uniqueId; ?>" <?php echo $commentTextLengthRange . ' ' . $textareaMaxLength; ?> placeholder="<?php echo $textarea_placeholder; ?>..." required name="wc_comment" class="wc_comment wpd-field"></textarea>
                                 <?php if (intval($this->wpdOptions->commentTextMaxLength)) { ?>
                                     <div class="commentTextMaxLength"><?php echo $this->wpdOptions->commentTextMaxLength; ?></div>
                                 <?php } ?>
@@ -523,21 +536,27 @@ class Form {
                     <div class="clearfix"></div>
                     <input type="hidden" class="wpdiscuz_unique_id" value="<?php echo $uniqueId; ?>" name="wpdiscuz_unique_id">
                 </form>
-            <?php } else { ?>
-                <p class="wc-must-login">
-                    <?php
-                    if (!$message) {
-                        echo $this->wpdOptions->phrases['wc_you_must_be_text'];
-                        $login = wp_loginout(get_permalink(), false);
-                        $login = preg_replace('!>([^<]+)!is', '>' . $this->wpdOptions->phrases['wc_logged_in_text'], $login);
-                        echo ' ' . $login . ' ' . $this->wpdOptions->phrases['wc_to_post_comment_text'];
-                    } else {
-                        echo $message;
-                    }
-                    ?>
-                </p>
                 <?php
             }
+//            else {
+            ?>
+            <!--
+            <p class="wc-must-login">
+            <?php
+//                    if (!$message) {
+//                        echo $this->wpdOptions->phrases['wc_you_must_be_text'];
+//                        $login = wp_loginout(get_permalink(), false);
+//                        $login = preg_replace('!>([^<]+)!is', '>' . $this->wpdOptions->phrases['wc_logged_in_text'], $login);
+//                        echo ' ' . $login . ' ' . $this->wpdOptions->phrases['wc_to_post_comment_text'];
+//                    } else {
+//                        echo $message;
+//                    }
+            ?>
+            </p>
+            -->
+            <?php
+//            }
+            do_action('wpdiscuz_form_bottom', $isMain, $this, $currentUser, $commentsCount);
             ?>
         </div>
         <?php
@@ -791,7 +810,7 @@ class Form {
                     'type' => 'wpdFormAttr\Field\DefaultField\Captcha',
                     'name' => __('Code', 'wpdiscuz'),
                     'desc' => '',
-                    'show_for_guests' => '1',
+                    'show_for_guests' => '0',
                     'show_for_users' => '0'
                 ),
                 wpdFormConst::WPDISCUZ_FORMS_SUBMIT_FIELD => array(
