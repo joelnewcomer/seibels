@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: wpDiscuz\n"
-"POT-Creation-Date: 2018-05-25 01:33+0400\n"
-"PO-Revision-Date: 2018-05-25 01:33+0400\n"
+"POT-Creation-Date: 2018-05-30 22:54+0400\n"
+"PO-Revision-Date: 2018-05-30 22:54+0400\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,81 +20,81 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: class.WpdiscuzCore.php:256
+#: class.WpdiscuzCore.php:258
 msgid "Every 3 hours"
 msgstr ""
 
-#: class.WpdiscuzCore.php:260
+#: class.WpdiscuzCore.php:262
 msgid "Every 48 hours"
 msgstr ""
 
-#: class.WpdiscuzCore.php:373
+#: class.WpdiscuzCore.php:375
 msgid "We are sorry, but this comment cannot be posted. Please try later."
 msgstr ""
 
-#: class.WpdiscuzCore.php:441
+#: class.WpdiscuzCore.php:443
 msgid "This is closed comment thread"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1094 class.WpdiscuzCore.php:1326
+#: class.WpdiscuzCore.php:1096 class.WpdiscuzCore.php:1328
 msgid "Settings"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1096 class.WpdiscuzCore.php:1328
+#: class.WpdiscuzCore.php:1098 class.WpdiscuzCore.php:1330
 msgid "Phrases"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1098
+#: class.WpdiscuzCore.php:1100
 msgid "Tools"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1099 options/html-options.php:22
+#: class.WpdiscuzCore.php:1101 options/html-options.php:22
 #: options/html-options.php:64 options/options-layouts/settings-addons.php:14
 msgid "Addons"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1111
+#: class.WpdiscuzCore.php:1113
 msgid "Do you really want to reset all options?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1112
+#: class.WpdiscuzCore.php:1114
 msgid "Do you really want to remove voting data?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1113
+#: class.WpdiscuzCore.php:1115
 msgid "Do you really want to reset phrases?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1114
+#: class.WpdiscuzCore.php:1116
 msgid "Do you really want to delete gravatars cache?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1115
+#: class.WpdiscuzCore.php:1117
 msgid "Do you really want to delete statistics cache?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1152
+#: class.WpdiscuzCore.php:1154
 msgid "Please check one of reasons before sending feedback!"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1153 utils/deactivation-reason-modal.php:58
+#: class.WpdiscuzCore.php:1155 utils/deactivation-reason-modal.php:58
 msgid "Please provide more information"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1392 options/phrases-layouts/phrases-comment.php:56
+#: class.WpdiscuzCore.php:1402 options/phrases-layouts/phrases-comment.php:56
 msgid "Admin"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1394 class.WpdiscuzCore.php:1403
+#: class.WpdiscuzCore.php:1404 class.WpdiscuzCore.php:1413
 #: options/phrases-layouts/phrases-comment.php:58
 msgid "Author"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1398 options/phrases-layouts/phrases-comment.php:64
+#: class.WpdiscuzCore.php:1408 options/phrases-layouts/phrases-comment.php:64
 msgid "Member"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1404 options/phrases-layouts/phrases-comment.php:62
+#: class.WpdiscuzCore.php:1414 options/phrases-layouts/phrases-comment.php:62
 msgid "Guest"
 msgstr ""
 
@@ -146,7 +146,7 @@ msgstr ""
 msgid "Post IDs"
 msgstr ""
 
-#: forms/wpDiscuzForm.php:169 forms/wpdFormAttr/Form.php:620
+#: forms/wpDiscuzForm.php:169 forms/wpdFormAttr/Form.php:621
 msgid "Language"
 msgstr ""
 
@@ -176,7 +176,7 @@ msgid "Add Field"
 msgstr ""
 
 #: forms/wpDiscuzForm.php:220 forms/wpdFormAttr/Field/Field.php:63
-#: options/class.WpdiscuzOptionsSerialized.php:770
+#: options/class.WpdiscuzOptionsSerialized.php:779
 #: options/phrases-layouts/phrases-comment.php:19
 msgid "Edit"
 msgstr ""
@@ -193,7 +193,7 @@ msgstr ""
 msgid "Permission Denied !!!"
 msgstr ""
 
-#: forms/wpDiscuzForm.php:254 forms/wpdFormAttr/Form.php:590
+#: forms/wpDiscuzForm.php:254 forms/wpdFormAttr/Form.php:591
 #: forms/wpdFormAttr/html/admin-form-fields-list.php:18
 #: options/options-layouts/settings-customfields.php:7
 msgid "Custom Fields"
@@ -208,13 +208,14 @@ msgid "Default Form"
 msgstr ""
 
 #: forms/wpDiscuzForm.php:391 forms/wpDiscuzForm.php:399
-#: forms/wpdFormAttr/Form.php:676
+#: forms/wpdFormAttr/Form.php:677
 msgid "Leave a Reply"
 msgstr ""
 
 #: forms/wpDiscuzForm.php:414 forms/wpdFormAttr/Field/AgreementCheckbox.php:12
 #: forms/wpdFormAttr/Field/CheckboxField.php:12
 #: forms/wpdFormAttr/Field/ColorField.php:12
+#: forms/wpdFormAttr/Field/CookiesConsent.php:14
 #: forms/wpdFormAttr/Field/DateField.php:12
 #: forms/wpdFormAttr/Field/DefaultField/Captcha.php:27
 #: forms/wpdFormAttr/Field/DefaultField/Email.php:19
@@ -228,13 +229,13 @@ msgstr ""
 #: forms/wpdFormAttr/Field/SelectField.php:12
 #: forms/wpdFormAttr/Field/TextAreaField.php:13
 #: forms/wpdFormAttr/Field/TextField.php:12
-#: forms/wpdFormAttr/Field/UrlField.php:12 forms/wpdFormAttr/Form.php:788
+#: forms/wpdFormAttr/Field/UrlField.php:12 forms/wpdFormAttr/Form.php:789
 msgid "Name"
 msgstr ""
 
 #: forms/wpDiscuzForm.php:416 forms/wpdFormAttr/Field/DefaultField/Email.php:65
-#: forms/wpdFormAttr/Form.php:795
-#: options/class.WpdiscuzOptionsSerialized.php:755 options/html-phrases.php:25
+#: forms/wpdFormAttr/Form.php:796
+#: options/class.WpdiscuzOptionsSerialized.php:764 options/html-phrases.php:25
 msgid "Email"
 msgstr ""
 
@@ -244,7 +245,7 @@ msgstr ""
 
 #: forms/wpDiscuzForm.php:421
 #: forms/wpdFormAttr/Field/DefaultField/Submit.php:116
-#: forms/wpdFormAttr/Form.php:818
+#: forms/wpdFormAttr/Form.php:819
 msgid "Post Comment"
 msgstr ""
 
@@ -269,6 +270,7 @@ msgstr ""
 #: forms/wpdFormAttr/Field/AgreementCheckbox.php:16
 #: forms/wpdFormAttr/Field/CheckboxField.php:17
 #: forms/wpdFormAttr/Field/ColorField.php:17
+#: forms/wpdFormAttr/Field/CookiesConsent.php:18
 #: forms/wpdFormAttr/Field/DateField.php:17
 #: forms/wpdFormAttr/Field/DefaultField/Captcha.php:32
 #: forms/wpdFormAttr/Field/DefaultField/Email.php:24
@@ -287,6 +289,7 @@ msgstr ""
 #: forms/wpdFormAttr/Field/AgreementCheckbox.php:18
 #: forms/wpdFormAttr/Field/CheckboxField.php:19
 #: forms/wpdFormAttr/Field/ColorField.php:19
+#: forms/wpdFormAttr/Field/CookiesConsent.php:20
 #: forms/wpdFormAttr/Field/DateField.php:19
 #: forms/wpdFormAttr/Field/DefaultField/Captcha.php:34
 #: forms/wpdFormAttr/Field/DefaultField/Email.php:26
@@ -307,6 +310,7 @@ msgid ""
 msgstr ""
 
 #: forms/wpdFormAttr/Field/AgreementCheckbox.php:21
+#: forms/wpdFormAttr/Field/CookiesConsent.php:23
 msgid "Checkbox Label"
 msgstr ""
 
@@ -357,7 +361,7 @@ msgstr ""
 msgid "Don't show again if the agreement is accepted once"
 msgstr ""
 
-#: forms/wpdFormAttr/Field/AgreementCheckbox.php:89
+#: forms/wpdFormAttr/Field/AgreementCheckbox.php:101
 #: forms/wpdFormAttr/Field/CheckboxField.php:153
 #: forms/wpdFormAttr/Field/ColorField.php:115
 #: forms/wpdFormAttr/Field/DateField.php:115
@@ -473,6 +477,10 @@ msgstr ""
 msgid "Font-awesome icon library."
 msgstr ""
 
+#: forms/wpdFormAttr/Field/CookiesConsent.php:92
+msgid "Save my data for the next time I comment"
+msgstr ""
+
 #: forms/wpdFormAttr/Field/DefaultField/Captcha.php:37
 msgid ""
 "For an advanced antispam protection please check <a target=\"blank\" href="
@@ -489,7 +497,7 @@ msgid "Show for logged in users"
 msgstr ""
 
 #: forms/wpdFormAttr/Field/DefaultField/Captcha.php:117
-#: forms/wpdFormAttr/Form.php:811
+#: forms/wpdFormAttr/Form.php:812
 msgid "Code"
 msgstr ""
 
@@ -530,7 +538,7 @@ msgid "Enable"
 msgstr ""
 
 #: forms/wpdFormAttr/Field/DefaultField/Website.php:84
-#: forms/wpdFormAttr/Form.php:802
+#: forms/wpdFormAttr/Form.php:803
 msgid "Website"
 msgstr ""
 
@@ -567,59 +575,59 @@ msgstr ""
 msgid "New value new line"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:629
+#: forms/wpdFormAttr/Form.php:630
 msgid "Disable commenting for roles"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:650
+#: forms/wpdFormAttr/Form.php:651
 msgid "Allow guests to comment"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:654 forms/wpdFormAttr/Form.php:665
+#: forms/wpdFormAttr/Form.php:655 forms/wpdFormAttr/Form.php:666
 msgid "Yes"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:656 forms/wpdFormAttr/Form.php:667
+#: forms/wpdFormAttr/Form.php:657 forms/wpdFormAttr/Form.php:668
 msgid "No"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:661
+#: forms/wpdFormAttr/Form.php:662
 msgid "Enable subscription bar"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:672
+#: forms/wpdFormAttr/Form.php:673
 msgid "Comment form header text"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:681
+#: forms/wpdFormAttr/Form.php:682
 msgid "Display comment form for post types"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:688
+#: forms/wpdFormAttr/Form.php:689
 msgid ""
 "The red marked post types are already attached to other comment form. If you "
 "set this form too, the old forms will not be used for them."
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:710
+#: forms/wpdFormAttr/Form.php:711
 msgid "Display comment form for post IDs"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:711
+#: forms/wpdFormAttr/Form.php:712
 msgid ""
 "You can use this form for certain posts/pages specified by comma separated "
 "IDs."
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:722
+#: forms/wpdFormAttr/Form.php:723
 msgid "Comment Text Field"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:737
+#: forms/wpdFormAttr/Form.php:738
 msgid "ADD ROW"
 msgstr ""
 
-#: forms/wpdFormAttr/Form.php:769
+#: forms/wpdFormAttr/Form.php:770
 msgid ""
 "Only logged in customers who have purchased this product may leave a review."
 msgstr ""
@@ -672,19 +680,19 @@ msgstr ""
 msgid "VK authentication failed (<code>user_id</code> does not exist)."
 msgstr ""
 
-#: forms/wpdFormAttr/Login/SocialLogin.php:264
+#: forms/wpdFormAttr/Login/SocialLogin.php:265
 msgid "OK Application ID, Application Key  and Application Secret  required."
 msgstr ""
 
-#: forms/wpdFormAttr/Login/SocialLogin.php:289
+#: forms/wpdFormAttr/Login/SocialLogin.php:290
 msgid "OK authentication failed (OAuth <code>state</code> does not exist)."
 msgstr ""
 
-#: forms/wpdFormAttr/Login/SocialLogin.php:292
+#: forms/wpdFormAttr/Login/SocialLogin.php:293
 msgid "OK authentication failed (<code>code</code> does not exist)."
 msgstr ""
 
-#: forms/wpdFormAttr/Login/SocialLogin.php:311
+#: forms/wpdFormAttr/Login/SocialLogin.php:312
 msgid "OK authentication failed (<code>access_token</code> does not exist)."
 msgstr ""
 
@@ -692,7 +700,7 @@ msgstr ""
 msgid "Comment Form Fields"
 msgstr ""
 
-#: options/addons/al/title.php:7 options/class.WpdiscuzOptions.php:389
+#: options/addons/al/title.php:7 options/class.WpdiscuzOptions.php:393
 msgid "Advanced Likers"
 msgstr ""
 
@@ -708,11 +716,11 @@ msgstr ""
 msgid "More Addons..."
 msgstr ""
 
-#: options/addons/mu/title.php:7 options/class.WpdiscuzOptions.php:413
+#: options/addons/mu/title.php:7 options/class.WpdiscuzOptions.php:417
 msgid "Media Uploader"
 msgstr ""
 
-#: options/addons/raf/title.php:7 options/class.WpdiscuzOptions.php:393
+#: options/addons/raf/title.php:7 options/class.WpdiscuzOptions.php:397
 msgid "Report and Flagging"
 msgstr ""
 
@@ -720,150 +728,150 @@ msgstr ""
 msgid "Mentioning"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:22 options/class.WpdiscuzOptions.php:134
-#: options/class.WpdiscuzOptions.php:340
+#: options/class.WpdiscuzOptions.php:22 options/class.WpdiscuzOptions.php:135
+#: options/class.WpdiscuzOptions.php:344
 msgid "Hacker?"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:125
+#: options/class.WpdiscuzOptions.php:126
 msgid "Settings updated"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:287
+#: options/class.WpdiscuzOptions.php:291
 msgid "Phrases updated"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:314
+#: options/class.WpdiscuzOptions.php:318
 msgid "Options were backed up!"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:316
+#: options/class.WpdiscuzOptions.php:320
 msgid "Cannot back up the options!"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:327
+#: options/class.WpdiscuzOptions.php:331
 msgid "Options Imported Successfully!"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:329
+#: options/class.WpdiscuzOptions.php:333
 msgid "Error occured! File content is empty or data is not valid!"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:332
+#: options/class.WpdiscuzOptions.php:336
 msgid "Error occured! Can not get file content!"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:335
+#: options/class.WpdiscuzOptions.php:339
 msgid "Error occured! Please choose file!"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:351
+#: options/class.WpdiscuzOptions.php:355
 msgid ""
 "Brings an ocean of emotions to your comments. It comes with an awesome smile "
 "package."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:352
+#: options/class.WpdiscuzOptions.php:356
 msgid ""
 "Extended information about comment author with Profile, Activity, Votes and "
 "Subscriptions Tabs on pop-up window."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:353
+#: options/class.WpdiscuzOptions.php:357
 msgid ""
 "Real-time online user checking, pop-up notification of new online users and "
 "online/offline badges."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:354
+#: options/class.WpdiscuzOptions.php:358
 msgid ""
 "Allows to create private comment threads. Rich management options in "
 "dashboard by user roles."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:355
+#: options/class.WpdiscuzOptions.php:359
 msgid ""
 "Total control over comment subscriptions. Full list, monitor, manage, "
 "filter, unsubscribe, confirm..."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:356
+#: options/class.WpdiscuzOptions.php:360
 msgid ""
 "A full-fledged tool-kit for advertising in comment section of your website. "
 "Separate banner and ad managment."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:357
+#: options/class.WpdiscuzOptions.php:361
 msgid ""
 "Allows to mention comments and users in comment text using #comment-id and "
 "@username tags."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:358
+#: options/class.WpdiscuzOptions.php:362
 msgid ""
 "See comment likers and voters of each comment. Adds user reputation and "
 "badges based on received likes."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:359
+#: options/class.WpdiscuzOptions.php:363
 msgid ""
 "Comment reporting tools. Auto-moderates comments based on number of flags "
 "and dislikes."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:360
+#: options/class.WpdiscuzOptions.php:364
 msgid ""
 "Adds a smart and intuitive AJAX \"Translate\" button with 60 language "
 "options. Uses free translation API."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:361
+#: options/class.WpdiscuzOptions.php:365
 msgid ""
 "AJAX powered front-end comment search. It starts searching while you type "
 "search words. "
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:362
+#: options/class.WpdiscuzOptions.php:366
 msgid ""
 "Most voted comments, Active comment threads, Most commented posts, Active "
 "comment authors"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:363
+#: options/class.WpdiscuzOptions.php:367
 msgid ""
 "All in one powerful yet simple admin toolkit to moderate comments on front-"
 "end."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:364
+#: options/class.WpdiscuzOptions.php:368
 msgid ""
 "Extended comment attachment system. Allows to upload images, videos, audios "
 "and other file types."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:365
+#: options/class.WpdiscuzOptions.php:369
 msgid ""
 "Adds No CAPTCHA on all comment forms. Stops spam and bot comments with "
 "Google reCAPTCHA"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:366
+#: options/class.WpdiscuzOptions.php:370
 msgid ""
 "Integrates myCRED Badges and Ranks. Converts wpDiscuz comment votes/likes to "
 "myCRED points. "
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:367
+#: options/class.WpdiscuzOptions.php:371
 msgid ""
 "Allows censoring comment words. Filters comments and replaces those phrases "
 "with custom words."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:373
+#: options/class.WpdiscuzOptions.php:377
 msgid "Custom Comment Forms"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:374
+#: options/class.WpdiscuzOptions.php:378
 msgid ""
 "You can create custom comment forms with wpDiscuz. wpDiscuz 4 comes with "
 "custom comment forms and fields. You can create custom comment forms for "
@@ -871,55 +879,55 @@ msgid ""
 "eaxample: text, dropdown, rating, checkboxes, etc..."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:377
+#: options/class.WpdiscuzOptions.php:381
 msgid "Emoticons"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:378
+#: options/class.WpdiscuzOptions.php:382
 msgid ""
 "You can add more emotions to your comments using wpDiscuz Emoticons addon."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:381
+#: options/class.WpdiscuzOptions.php:385
 msgid "Ads Manager"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:382
+#: options/class.WpdiscuzOptions.php:386
 msgid ""
 "Increase your income using ad banners. Comment area is the most active "
 "sections for advertising. wpDiscuz Ads Manager addon is designed to help you "
 "add banners and control ads in this section."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:385
+#: options/class.WpdiscuzOptions.php:389
 msgid "User and Comment Mentioning"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:386
+#: options/class.WpdiscuzOptions.php:390
 msgid ""
 "Using wpDiscuz User &amp; Comment Mentioning addon you can allow commenters "
 "mention comments and users in comment text using #comment-id and @username "
 "tags."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:390
+#: options/class.WpdiscuzOptions.php:394
 msgid ""
 "wpDiscuz Advanced Likers addon displays likers and voters of each comment. "
 "Adds user reputation and badges based on received likes."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:394
+#: options/class.WpdiscuzOptions.php:398
 msgid ""
 "Let your commenters help you to determine and remove spam comments. wpDiscuz "
 "Report and Flagging addon comes with comment reporting tools. Automaticaly "
 "auto-moderates comments based on number of flags and dislikes."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:397
+#: options/class.WpdiscuzOptions.php:401
 msgid "Comment Translate"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:398
+#: options/class.WpdiscuzOptions.php:402
 msgid ""
 "In most cases the big part of your visitors are not a native speakers of "
 "your language. Make your comments comprehensible for all visitors using "
@@ -928,11 +936,11 @@ msgid ""
 "translation API."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:401
+#: options/class.WpdiscuzOptions.php:405
 msgid "Comment Search"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:402
+#: options/class.WpdiscuzOptions.php:406
 msgid ""
 "You can let website visitor search in comments. It's always more attractive "
 "to find a comment about something that interest you. Using wpDiscuz Comment "
@@ -940,293 +948,293 @@ msgid ""
 "above comment list."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:405
+#: options/class.WpdiscuzOptions.php:409
 msgid "wpDiscuz Widgets"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:406
+#: options/class.WpdiscuzOptions.php:410
 msgid ""
 "More Comment Widgets! Most voted comments, Active comment threads, Most "
 "commented posts, Active comment authors widgets are available in wpDiscuz "
 "Widgets Addon"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:409
+#: options/class.WpdiscuzOptions.php:413
 msgid "Front-end Moderation"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:410
+#: options/class.WpdiscuzOptions.php:414
 msgid ""
 "You can moderate comments on front-end using all in one powerful yet simple "
 "wpDiscuz Frontend Moderation addon."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:414
+#: options/class.WpdiscuzOptions.php:418
 msgid ""
 "You can let website visitors attach images and files to comments and embed "
 "video/audio content using wpDiscuz Media Uploader addon."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:417
+#: options/class.WpdiscuzOptions.php:421
 msgid "Google ReCaptcha"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:418
+#: options/class.WpdiscuzOptions.php:422
 msgid ""
 "Advanced spam protection with wpDiscuz Google reCAPTCHA addon. This addon "
 "adds No-CAPTCHA reCAPTCHA on all comment forms. Stops spam and bot comments."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:434
+#: options/class.WpdiscuzOptions.php:438
 msgid "New Addons are available for wpDiscuz Comments Plugin"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:441 options/class.WpdiscuzOptions.php:447
+#: options/class.WpdiscuzOptions.php:445 options/class.WpdiscuzOptions.php:451
 msgid "Go to wpDiscuz Addons subMenu"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:479
+#: options/class.WpdiscuzOptions.php:483
 msgid "Do you know?"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:492
+#: options/class.WpdiscuzOptions.php:496
 msgid "More info"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:745
+#: options/class.WpdiscuzOptionsSerialized.php:754
 msgid "Be the First to Comment!"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:746
+#: options/class.WpdiscuzOptionsSerialized.php:755
 msgid "Start the discussion"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:747
+#: options/class.WpdiscuzOptionsSerialized.php:756
 msgid "Join the discussion"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:748
+#: options/class.WpdiscuzOptionsSerialized.php:757
 #: options/phrases-layouts/phrases-form.php:19
 msgid "Comment threads"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:749
+#: options/class.WpdiscuzOptionsSerialized.php:758
 #: options/phrases-layouts/phrases-form.php:23
 msgid "Thread replies"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:750
+#: options/class.WpdiscuzOptionsSerialized.php:759
 #: options/phrases-layouts/phrases-form.php:27
 msgid "Followers"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:751
+#: options/class.WpdiscuzOptionsSerialized.php:760
 #: options/phrases-layouts/phrases-form.php:31
 msgid "Most reacted comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:752
+#: options/class.WpdiscuzOptionsSerialized.php:761
 #: options/phrases-layouts/phrases-form.php:35
 msgid "Hottest comment thread"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:753
+#: options/class.WpdiscuzOptionsSerialized.php:762
 #: options/phrases-layouts/phrases-form.php:39
 msgid "Comment authors"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:754
+#: options/class.WpdiscuzOptionsSerialized.php:763
 #: options/phrases-layouts/phrases-form.php:43
 msgid "Recent comment authors"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:756
+#: options/class.WpdiscuzOptionsSerialized.php:765
 #: options/phrases-layouts/phrases-form.php:51
 msgid "Subscribe"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:757
+#: options/class.WpdiscuzOptionsSerialized.php:766
 #: options/phrases-layouts/phrases-form.php:55
 msgid "Notify of"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:758
+#: options/class.WpdiscuzOptionsSerialized.php:767
 msgid "new follow-up comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:759
+#: options/class.WpdiscuzOptionsSerialized.php:768
 msgid "new replies to my comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:760
+#: options/class.WpdiscuzOptionsSerialized.php:769
 msgid "Notify of new replies to this comment - (on)"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:761
+#: options/class.WpdiscuzOptionsSerialized.php:770
 msgid "Notify of new replies to this comment - (off)"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:762
+#: options/class.WpdiscuzOptionsSerialized.php:771
 #: options/phrases-layouts/phrases-form.php:75
 msgid "Sort by"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:763
+#: options/class.WpdiscuzOptionsSerialized.php:772
 #: options/phrases-layouts/phrases-form.php:79
 msgid "newest"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:764
+#: options/class.WpdiscuzOptionsSerialized.php:773
 #: options/phrases-layouts/phrases-form.php:83
 msgid "oldest"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:765
+#: options/class.WpdiscuzOptionsSerialized.php:774
 #: options/phrases-layouts/phrases-form.php:87
 msgid "most voted"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:766
+#: options/class.WpdiscuzOptionsSerialized.php:775
 msgid "Load More Comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:767
+#: options/class.WpdiscuzOptionsSerialized.php:776
 #: options/phrases-layouts/phrases-general.php:19
 msgid "Load Rest of Comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:768
+#: options/class.WpdiscuzOptionsSerialized.php:777
 #: options/phrases-layouts/phrases-comment.php:11
 msgid "Reply"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:769
+#: options/class.WpdiscuzOptionsSerialized.php:778
 #: options/phrases-layouts/phrases-comment.php:15
 msgid "Share"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:771
+#: options/class.WpdiscuzOptionsSerialized.php:780
 #: options/phrases-layouts/phrases-comment.php:23
 msgid "Share On Facebook"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:772
+#: options/class.WpdiscuzOptionsSerialized.php:781
 #: options/phrases-layouts/phrases-comment.php:27
 msgid "Share On Twitter"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:773
+#: options/class.WpdiscuzOptionsSerialized.php:782
 #: options/phrases-layouts/phrases-comment.php:31
 msgid "Share On Google"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:774
+#: options/class.WpdiscuzOptionsSerialized.php:783
 #: options/phrases-layouts/phrases-comment.php:35
 msgid "Share On VKontakte"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:775
+#: options/class.WpdiscuzOptionsSerialized.php:784
 #: options/phrases-layouts/phrases-comment.php:39
 msgid "Share On Odnoklassniki"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:776
+#: options/class.WpdiscuzOptionsSerialized.php:785
 #: options/phrases-layouts/phrases-comment.php:43
 msgid "Hide Replies"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:777
+#: options/class.WpdiscuzOptionsSerialized.php:786
 #: options/phrases-layouts/phrases-comment.php:47
 msgid "View Replies"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:778
+#: options/class.WpdiscuzOptionsSerialized.php:787
 msgid "New Comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:779
-#: options/class.WpdiscuzOptionsSerialized.php:781
-#: options/class.WpdiscuzOptionsSerialized.php:783
-#: options/class.WpdiscuzOptionsSerialized.php:787
+#: options/class.WpdiscuzOptionsSerialized.php:788
+#: options/class.WpdiscuzOptionsSerialized.php:790
+#: options/class.WpdiscuzOptionsSerialized.php:792
+#: options/class.WpdiscuzOptionsSerialized.php:796
 #: options/phrases-layouts/phrases-email.php:120
 msgid "Unsubscribe"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:779
+#: options/class.WpdiscuzOptionsSerialized.php:788
 msgid ""
 "Hi [SUBSCRIBER_NAME],<br/><br/>new comment on the discussion section you've "
 "been interested in<br/><br/><a href=\"[COMMENT_URL]\">[COMMENT_URL]</a><br/"
 "><br/>[COMMENT_CONTENT]<br/><br/><a href=\"[UNSUBSCRIBE_URL]\">"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:780
-#: options/class.WpdiscuzOptionsSerialized.php:782
+#: options/class.WpdiscuzOptionsSerialized.php:789
+#: options/class.WpdiscuzOptionsSerialized.php:791
 msgid "New Reply"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:781
+#: options/class.WpdiscuzOptionsSerialized.php:790
 msgid ""
 "Hi [SUBSCRIBER_NAME],<br/><br/>new reply on the discussion section you've "
 "been interested in<br/><br/><a href=\"[COMMENT_URL]\">[COMMENT_URL]</a><br/"
 "><br/>[COMMENT_CONTENT]<br/><br/><a href=\"[UNSUBSCRIBE_URL]\">"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:783
+#: options/class.WpdiscuzOptionsSerialized.php:792
 msgid ""
 "Hi [COMMENT_AUTHOR],<br/><br/>new reply on the discussion section you've "
 "been interested in<br/><br/><a href=\"[COMMENT_URL]\">[COMMENT_URL]</a><br/"
 "><br/>[COMMENT_CONTENT]<br/><br/><a href=\"[UNSUBSCRIBE_URL]\">"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:784
+#: options/class.WpdiscuzOptionsSerialized.php:793
 msgid "You're subscribed for new replies on this comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:785
+#: options/class.WpdiscuzOptionsSerialized.php:794
 msgid "You're subscribed for new replies on all your comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:786
+#: options/class.WpdiscuzOptionsSerialized.php:795
 msgid "You're subscribed for new follow-up comments on this post"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:788
+#: options/class.WpdiscuzOptionsSerialized.php:797
 msgid "Cancel subscription"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:789
+#: options/class.WpdiscuzOptionsSerialized.php:798
 #: options/phrases-layouts/phrases-notification.php:19
 msgid "You've successfully unsubscribed."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:790
+#: options/class.WpdiscuzOptionsSerialized.php:799
 #: options/phrases-layouts/phrases-notification.php:15
 msgid "You've successfully subscribed."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:791
+#: options/class.WpdiscuzOptionsSerialized.php:800
 #: options/phrases-layouts/phrases-email.php:128
 msgid "Confirm your subscription"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:792
+#: options/class.WpdiscuzOptionsSerialized.php:801
 #: options/phrases-layouts/phrases-email.php:132
 msgid "You've successfully confirmed your subscription."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:793
+#: options/class.WpdiscuzOptionsSerialized.php:802
 msgid "Subscription Confirmation"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:794
+#: options/class.WpdiscuzOptionsSerialized.php:803
 msgid "Confirm Your Subscrption"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:794
+#: options/class.WpdiscuzOptionsSerialized.php:803
 msgid "Cancel Subscription"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:794
+#: options/class.WpdiscuzOptionsSerialized.php:803
 msgid ""
 "Hi, <br/> You just subscribed for new comments on our website. This means "
 "you will receive an email when new comments are posted according to "
@@ -1236,289 +1244,300 @@ msgid ""
 "href=\"[CONFIRM_URL]\">"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:795
+#: options/class.WpdiscuzOptionsSerialized.php:804
 msgid "please fill out this field to comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:796
+#: options/class.WpdiscuzOptionsSerialized.php:805
 msgid "email address is invalid"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:797
+#: options/class.WpdiscuzOptionsSerialized.php:806
 msgid "url is invalid"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:798
+#: options/class.WpdiscuzOptionsSerialized.php:807
 msgid "year"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:799
+#: options/class.WpdiscuzOptionsSerialized.php:808
 msgid "years"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:800
+#: options/class.WpdiscuzOptionsSerialized.php:809
 msgid "month"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:801
+#: options/class.WpdiscuzOptionsSerialized.php:810
 msgid "months"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:802
+#: options/class.WpdiscuzOptionsSerialized.php:811
 msgid "day"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:803
+#: options/class.WpdiscuzOptionsSerialized.php:812
 msgid "days"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:804
+#: options/class.WpdiscuzOptionsSerialized.php:813
 msgid "hour"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:805
+#: options/class.WpdiscuzOptionsSerialized.php:814
 msgid "hours"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:806
+#: options/class.WpdiscuzOptionsSerialized.php:815
 msgid "minute"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:807
+#: options/class.WpdiscuzOptionsSerialized.php:816
 msgid "minutes"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:808
+#: options/class.WpdiscuzOptionsSerialized.php:817
 msgid "second"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:809
+#: options/class.WpdiscuzOptionsSerialized.php:818
 msgid "seconds"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:810
+#: options/class.WpdiscuzOptionsSerialized.php:819
 msgid "right now"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:811
+#: options/class.WpdiscuzOptionsSerialized.php:820
 msgid "ago"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:812
-#: options/phrases-layouts/phrases-notification.php:29
+#: options/class.WpdiscuzOptionsSerialized.php:821
+#: options/phrases-layouts/phrases-notification.php:38
 msgid "You must be"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:813
+#: options/class.WpdiscuzOptionsSerialized.php:822
 msgid "You are logged in as"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:814
-#: options/phrases-layouts/phrases-notification.php:45
+#: options/class.WpdiscuzOptionsSerialized.php:823
+#: options/phrases-layouts/phrases-notification.php:29
+msgid "Login"
+msgstr ""
+
+#: options/class.WpdiscuzOptionsSerialized.php:824
+#: options/phrases-layouts/phrases-notification.php:33
+#, php-format
+msgid "Please %s to comment"
+msgstr ""
+
+#: options/class.WpdiscuzOptionsSerialized.php:825
+#: options/phrases-layouts/phrases-notification.php:54
 msgid "Log out"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:815
+#: options/class.WpdiscuzOptionsSerialized.php:826
 msgid "logged in"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:816
+#: options/class.WpdiscuzOptionsSerialized.php:827
 msgid "to post a comment."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:817
+#: options/class.WpdiscuzOptionsSerialized.php:828
 #: options/phrases-layouts/phrases-comment.php:75
 msgid "Vote Up"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:818
+#: options/class.WpdiscuzOptionsSerialized.php:829
 #: options/phrases-layouts/phrases-comment.php:79
 msgid "Vote Down"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:819
-#: options/phrases-layouts/phrases-notification.php:49
+#: options/class.WpdiscuzOptionsSerialized.php:830
+#: options/phrases-layouts/phrases-notification.php:58
 msgid "Vote Counted"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:820
+#: options/class.WpdiscuzOptionsSerialized.php:831
 msgid "You've already voted for this comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:821
+#: options/class.WpdiscuzOptionsSerialized.php:832
 #: options/phrases-layouts/phrases-error.php:27
 msgid "Voting Error"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:822
+#: options/class.WpdiscuzOptionsSerialized.php:833
 msgid "You Must Be Logged In To Vote"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:823
+#: options/class.WpdiscuzOptionsSerialized.php:834
 msgid "You cannot vote for your comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:824
+#: options/class.WpdiscuzOptionsSerialized.php:835
 msgid "You are not allowed to vote for this comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:825
+#: options/class.WpdiscuzOptionsSerialized.php:836
 #: options/phrases-layouts/phrases-error.php:39
 msgid "Invalid Captcha Code"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:826
+#: options/class.WpdiscuzOptionsSerialized.php:837
 #: options/phrases-layouts/phrases-error.php:43
 msgid "Some of field value is invalid"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:827
+#: options/class.WpdiscuzOptionsSerialized.php:838
 msgid "new comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:828
+#: options/class.WpdiscuzOptionsSerialized.php:839
 msgid "new comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:829
+#: options/class.WpdiscuzOptionsSerialized.php:840
 msgid "Comment awaiting moderation"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:830
+#: options/class.WpdiscuzOptionsSerialized.php:841
 msgid "new reply on your comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:831
+#: options/class.WpdiscuzOptionsSerialized.php:842
 msgid "new replies on your comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:832
+#: options/class.WpdiscuzOptionsSerialized.php:843
 msgid "Sorry, the comment was not updated"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:833
+#: options/class.WpdiscuzOptionsSerialized.php:844
 msgid "Sorry, this comment no longer possible to edit"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:834
+#: options/class.WpdiscuzOptionsSerialized.php:845
 msgid "You've not made any changes"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:835
+#: options/class.WpdiscuzOptionsSerialized.php:846
 msgid "Save"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:836
+#: options/class.WpdiscuzOptionsSerialized.php:847
 msgid "Cancel"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:837
+#: options/class.WpdiscuzOptionsSerialized.php:848
 msgid "Input is too short"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:838
+#: options/class.WpdiscuzOptionsSerialized.php:849
 msgid "Input is too long"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:839
+#: options/class.WpdiscuzOptionsSerialized.php:850
 msgid "Read more &raquo;"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:840
+#: options/class.WpdiscuzOptionsSerialized.php:851
 msgid "Anonymous"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:841
+#: options/class.WpdiscuzOptionsSerialized.php:852
 #: options/phrases-layouts/phrases-error.php:67
 msgid "Please fill out required fields"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:842
+#: options/class.WpdiscuzOptionsSerialized.php:853
 #: options/phrases-layouts/phrases-social-login.php:11
 msgid "Connect with"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:843
+#: options/class.WpdiscuzOptionsSerialized.php:854
 #: options/phrases-layouts/phrases-notification.php:11
 msgid "You're subscribed to"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:844
+#: options/class.WpdiscuzOptionsSerialized.php:855
 msgid "Participate in this discussion via email"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:845
+#: options/class.WpdiscuzOptionsSerialized.php:856
 #: utils/layouts/pagination.php:46
 msgid "&rsaquo;"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:846
+#: options/class.WpdiscuzOptionsSerialized.php:857
 msgid "Your comment is approved!"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:847
+#: options/class.WpdiscuzOptionsSerialized.php:858
 msgid ""
 "Hi [COMMENT_AUTHOR],<br/><br/>your comment was approved.<br/><br/><a href="
 "\"[COMMENT_URL]\">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:848
+#: options/class.WpdiscuzOptionsSerialized.php:859
 msgid "Comments are closed."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:849
+#: options/class.WpdiscuzOptionsSerialized.php:860
 #: options/phrases-layouts/phrases-comment.php:99
 msgid "Stick this comment - (on)"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:850
+#: options/class.WpdiscuzOptionsSerialized.php:861
 #: options/phrases-layouts/phrases-comment.php:103
 msgid "Stick this comment - (off)"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:851
+#: options/class.WpdiscuzOptionsSerialized.php:862
 #: options/phrases-layouts/phrases-comment.php:107
 msgid "Stick"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:852
+#: options/class.WpdiscuzOptionsSerialized.php:863
 #: options/phrases-layouts/phrases-comment.php:111
 msgid "Unstick"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:853
+#: options/class.WpdiscuzOptionsSerialized.php:864
 msgid "Sticky comment thread"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:854
+#: options/class.WpdiscuzOptionsSerialized.php:865
 #: options/phrases-layouts/phrases-comment.php:119
 msgid "Close this comment - (on)"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:855
+#: options/class.WpdiscuzOptionsSerialized.php:866
 #: options/phrases-layouts/phrases-comment.php:123
 msgid "Close this comment - (off)"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:856
+#: options/class.WpdiscuzOptionsSerialized.php:867
 #: options/phrases-layouts/phrases-comment.php:127
 msgid "Close"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:857
+#: options/class.WpdiscuzOptionsSerialized.php:868
 #: options/phrases-layouts/phrases-comment.php:131
 msgid "Open"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:858
+#: options/class.WpdiscuzOptionsSerialized.php:869
 msgid "Closed comment thread"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:859
+#: options/class.WpdiscuzOptionsSerialized.php:870
 msgid "I allow to create an account"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:860
+#: options/class.WpdiscuzOptionsSerialized.php:871
 msgid ""
 "When you login first time using a Social Login button, we collect your "
 "account public profile information shared by Social Login provider, based on "
@@ -1527,118 +1546,124 @@ msgid ""
 "you'll be logged-in to this account."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:861
+#: options/class.WpdiscuzOptionsSerialized.php:872
 msgid "This comment form is under antispam protection"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:862
+#: options/class.WpdiscuzOptionsSerialized.php:873
 #: options/phrases-layouts/phrases-social-login.php:23
 msgid "Disagree"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:863
+#: options/class.WpdiscuzOptionsSerialized.php:874
 #: options/phrases-layouts/phrases-social-login.php:27
 msgid "Agree"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:865
+#: options/class.WpdiscuzOptionsSerialized.php:875
 #: options/phrases-layouts/phrases-user-settings.php:11
 msgid "My content and settings"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:866
+#: options/class.WpdiscuzOptionsSerialized.php:876
 #: options/phrases-layouts/phrases-user-settings.php:15
 msgid "Activity"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:867
+#: options/class.WpdiscuzOptionsSerialized.php:877
 #: options/phrases-layouts/phrases-user-settings.php:19
 msgid "Subscriptions"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:868
+#: options/class.WpdiscuzOptionsSerialized.php:878
 #: options/phrases-layouts/phrases-user-settings.php:23
 msgid "In response to:"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:869
-#: options/class.WpdiscuzOptionsSerialized.php:874
+#: options/class.WpdiscuzOptionsSerialized.php:879
+#: options/class.WpdiscuzOptionsSerialized.php:885
 #: options/phrases-layouts/phrases-user-settings.php:27
-#: options/phrases-layouts/phrases-user-settings.php:47
+#: options/phrases-layouts/phrases-user-settings.php:51
 msgid "Bulk management via email"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:870
-#: options/phrases-layouts/phrases-user-settings.php:31
+#: options/class.WpdiscuzOptionsSerialized.php:880
+msgid ""
+"Click the button above to get an email with bulk delete and unsubscribe "
+"links."
+msgstr ""
+
+#: options/class.WpdiscuzOptionsSerialized.php:881
+#: options/phrases-layouts/phrases-user-settings.php:35
 msgid "No data found!"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:871
-#: options/class.WpdiscuzOptionsSerialized.php:875
-#: options/phrases-layouts/phrases-user-settings.php:35
-#: options/phrases-layouts/phrases-user-settings.php:51
+#: options/class.WpdiscuzOptionsSerialized.php:882
+#: options/class.WpdiscuzOptionsSerialized.php:886
+#: options/phrases-layouts/phrases-user-settings.php:39
+#: options/phrases-layouts/phrases-user-settings.php:55
 msgid "Delete all my comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:872
-#: options/phrases-layouts/phrases-user-settings.php:39
+#: options/class.WpdiscuzOptionsSerialized.php:883
+#: options/phrases-layouts/phrases-user-settings.php:43
 msgid "Cancel all comment subscriptions"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:873
-#: options/phrases-layouts/phrases-user-settings.php:43
+#: options/class.WpdiscuzOptionsSerialized.php:884
+#: options/phrases-layouts/phrases-user-settings.php:47
 msgid "Clear cookies with my personal data"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:876
+#: options/class.WpdiscuzOptionsSerialized.php:887
 msgid ""
 "Please use this link to delete all your comments. Please note, that this "
 "action cannot be undone."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:877
-#: options/phrases-layouts/phrases-user-settings.php:59
+#: options/class.WpdiscuzOptionsSerialized.php:888
+#: options/phrases-layouts/phrases-user-settings.php:63
 msgid "Delete all my subscriptions"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:878
+#: options/class.WpdiscuzOptionsSerialized.php:889
 msgid ""
 "Please use this link to cancel all subscriptions for new comments. Please "
 "note, that this action cannot be undone."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:879
-#: options/phrases-layouts/phrases-user-settings.php:67
+#: options/class.WpdiscuzOptionsSerialized.php:890
+#: options/phrases-layouts/phrases-user-settings.php:71
 msgid "subscribed to this comment"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:880
-#: options/phrases-layouts/phrases-user-settings.php:71
+#: options/class.WpdiscuzOptionsSerialized.php:891
+#: options/phrases-layouts/phrases-user-settings.php:75
 msgid "subscribed to my comments"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:881
-#: options/phrases-layouts/phrases-user-settings.php:75
+#: options/class.WpdiscuzOptionsSerialized.php:892
+#: options/phrases-layouts/phrases-user-settings.php:79
 msgid "subscribed to all follow-up comments of this post"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:882
-#: options/phrases-layouts/phrases-user-settings.php:79
+#: options/class.WpdiscuzOptionsSerialized.php:893
+#: options/phrases-layouts/phrases-user-settings.php:83
 msgid "Please check your email."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:883
-#: options/phrases-layouts/phrases-user-settings.php:83
+#: options/class.WpdiscuzOptionsSerialized.php:894
+#: options/phrases-layouts/phrases-user-settings.php:87
 msgid "Error : Can't send email."
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:884
-#: options/phrases-layouts/phrases-user-settings.php:87
+#: options/class.WpdiscuzOptionsSerialized.php:895
+#: options/phrases-layouts/phrases-user-settings.php:91
 msgid "Are you sure you want to delete this comment?"
 msgstr ""
 
-#: options/class.WpdiscuzOptionsSerialized.php:885
-#: options/phrases-layouts/phrases-user-settings.php:91
+#: options/class.WpdiscuzOptionsSerialized.php:896
+#: options/phrases-layouts/phrases-user-settings.php:95
 msgid "Are you sure you want to cancel this subscription?"
 msgstr ""
 
@@ -1813,6 +1838,10 @@ msgstr ""
 msgid "Import subscriptions"
 msgstr ""
 
+#: options/html-tools.php:18 utils/deactivation-reason-modal.php:57
+msgid "Other"
+msgstr ""
+
 #: options/options-layouts/settings-addons.php:20
 msgid ""
 "Here you can find wpDiscuz Addons' setting options in vertical subTabs with "
@@ -1920,96 +1949,100 @@ msgid ""
 "right sides accordingly."
 msgstr ""
 
-#: options/options-layouts/settings-form.php:41
+#: options/options-layouts/settings-form.php:42
+msgid "Hide \"Please login to comment\" text"
+msgstr ""
+
+#: options/options-layouts/settings-form.php:49
 msgid "Hide \"My Content and Settings\" button"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:48
+#: options/options-layouts/settings-form.php:56
 msgid "Hide \"Discussion Statistic\" section"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:55
+#: options/options-layouts/settings-form.php:63
 msgid "Hide \"Recent Comment Authors\" section"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:63
+#: options/options-layouts/settings-form.php:71
 msgid "Keep guest commenter credentials in browser cookies for x days"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:65
+#: options/options-layouts/settings-form.php:73
 msgid ""
 "wpDiscuz uses WordPress function to keep guest Name, Email and Website "
 "information in cookies to fill according fields of comment form on next "
 "commenting time."
 msgstr ""
 
-#: options/options-layouts/settings-form.php:66
+#: options/options-layouts/settings-form.php:74
 msgid "Set this option value -1 to make it unlimited."
 msgstr ""
 
-#: options/options-layouts/settings-form.php:67
+#: options/options-layouts/settings-form.php:75
 msgid "Set this option value 0 to clear those data when user closes browser."
 msgstr ""
 
-#: options/options-layouts/settings-form.php:74
+#: options/options-layouts/settings-form.php:82
 msgid "Comment author name length (for guests only)"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:78
-#: options/options-layouts/settings-form.php:92
+#: options/options-layouts/settings-form.php:86
+#: options/options-layouts/settings-form.php:100
 msgid "Min"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:81
-#: options/options-layouts/settings-form.php:95
+#: options/options-layouts/settings-form.php:89
+#: options/options-layouts/settings-form.php:103
 msgid "Max"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:87
+#: options/options-layouts/settings-form.php:95
 msgid "Comment text length"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:88
+#: options/options-layouts/settings-form.php:96
 msgid ""
 "Allows to set minimum and maximum number of chars can be inserted in comment "
 "textarea. Leave the max value empty to remove the limit."
 msgstr ""
 
-#: options/options-layouts/settings-form.php:101
+#: options/options-layouts/settings-form.php:109
 msgid "Captcha generation type"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:106
+#: options/options-layouts/settings-form.php:114
 msgid "File system"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:107
+#: options/options-layouts/settings-form.php:115
 msgid "WP Session"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:114
+#: options/options-layouts/settings-form.php:122
 msgid "Invisible Spam Protection"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:116
+#: options/options-layouts/settings-form.php:124
 msgid ""
 "You should purge caches after each key generation otherwise the plugin may "
 "work not correctly"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:119
+#: options/options-layouts/settings-form.php:127
 msgid "Leave the field empty if you don't want to use this feature"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:124
+#: options/options-layouts/settings-form.php:132
 msgid "Generate"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:129
+#: options/options-layouts/settings-form.php:137
 msgid "Display note about Invisible Spam Protection"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:130
+#: options/options-layouts/settings-form.php:138
 msgid ""
 "wpDiscuz has built-in invisible antispam protection based on server side and "
 "front-end unique key comparation. By default wpDiscuz display a small note "
@@ -2017,47 +2050,47 @@ msgid ""
 "protection. The note text can be managed in Comments > Phrases > Form tab."
 msgstr ""
 
-#: options/options-layouts/settings-form.php:139
+#: options/options-layouts/settings-form.php:147
 msgid "Enable Quicktags"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:140
+#: options/options-layouts/settings-form.php:148
 msgid ""
 "Quicktag is a on-click button that inserts HTML in to comment textarea. For "
 "example the \"b\" Quicktag will insert the HTML bold tags < b > < /b >."
 msgstr ""
 
-#: options/options-layouts/settings-form.php:149
+#: options/options-layouts/settings-form.php:157
 msgid "Enable automatic image URL to image HTML conversion"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:158
+#: options/options-layouts/settings-form.php:166
 msgid "Allow comment editing for"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:163
+#: options/options-layouts/settings-form.php:171
 msgid "Do not allow"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:164
-#: options/options-layouts/settings-form.php:165
+#: options/options-layouts/settings-form.php:172
+#: options/options-layouts/settings-form.php:173
 #: options/options-layouts/settings-live-update.php:53
 #: options/options-layouts/settings-live-update.php:54
 #: options/options-layouts/settings-live-update.php:55
 msgid "Minutes"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:166
+#: options/options-layouts/settings-form.php:174
 #: options/phrases-layouts/phrases-datetime.php:35
 msgid "Hour"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:167
-#: options/options-layouts/settings-form.php:168
+#: options/options-layouts/settings-form.php:175
+#: options/options-layouts/settings-form.php:176
 msgid "Hours"
 msgstr ""
 
-#: options/options-layouts/settings-form.php:169
+#: options/options-layouts/settings-form.php:177
 msgid "Unlimit"
 msgstr ""
 
@@ -3052,27 +3085,27 @@ msgstr ""
 msgid "Postmatic subscription label"
 msgstr ""
 
-#: options/phrases-layouts/phrases-notification.php:33
+#: options/phrases-layouts/phrases-notification.php:42
 msgid "Logged In"
 msgstr ""
 
-#: options/phrases-layouts/phrases-notification.php:37
+#: options/phrases-layouts/phrases-notification.php:46
 msgid "To post a comment"
 msgstr ""
 
-#: options/phrases-layouts/phrases-notification.php:41
+#: options/phrases-layouts/phrases-notification.php:50
 msgid "Logged in as"
 msgstr ""
 
-#: options/phrases-layouts/phrases-notification.php:53
+#: options/phrases-layouts/phrases-notification.php:62
 msgid "Login To Vote"
 msgstr ""
 
-#: options/phrases-layouts/phrases-notification.php:57
+#: options/phrases-layouts/phrases-notification.php:66
 msgid "Comment waiting moderation"
 msgstr ""
 
-#: options/phrases-layouts/phrases-notification.php:61
+#: options/phrases-layouts/phrases-notification.php:70
 msgid "Message if commenting disabled by user role"
 msgstr ""
 
@@ -3088,11 +3121,15 @@ msgstr ""
 msgid "User Settings Phrases"
 msgstr ""
 
-#: options/phrases-layouts/phrases-user-settings.php:55
+#: options/phrases-layouts/phrases-user-settings.php:31
+msgid "\"Bulk management via email\" description"
+msgstr ""
+
+#: options/phrases-layouts/phrases-user-settings.php:59
 msgid "Delete all comments email text"
 msgstr ""
 
-#: options/phrases-layouts/phrases-user-settings.php:63
+#: options/phrases-layouts/phrases-user-settings.php:67
 msgid "Delete all subscriptions email text"
 msgstr ""
 
@@ -3133,6 +3170,27 @@ msgstr ""
 msgid "Import subscriptions from \"Subscribe To Comments Reloaded\" plugin"
 msgstr ""
 
+#: options/tools-layouts/tools-other.php:16
+msgid "Update vote data"
+msgstr ""
+
+#: options/tools-layouts/tools-other.php:18
+msgid ""
+"We recommend use this tool to do one way hashing of commenter IP addresses "
+"to 32 bit strings, so you'll keep less personal information of your "
+"commenters. This tool only hashes voter IP addresses. You also can stop "
+"saving of commenter IP addresses in comments database table using this "
+"instruction "
+msgstr ""
+
+#: options/tools-layouts/tools-other.php:26
+msgid "Start Hashing"
+msgstr ""
+
+#: options/tools-layouts/tools-other.php:27
+msgid "Hash users IP addresses"
+msgstr ""
+
 #: templates/comment/comment-form.php:61
 msgid "Your comments have been deleted from database"
 msgstr ""
@@ -3149,27 +3207,20 @@ msgstr ""
 msgid "Subscription Fault"
 msgstr ""
 
-#: templates/comment/comment-form.php:172
-msgid "Login"
-msgstr ""
-
-#: templates/comment/comment-form.php:173
-#, php-format
-msgid "Please %s to comment"
-msgstr ""
-
 #: utils/class.WpdiscuzHelper.php:216 utils/class.WpdiscuzHelper.php:219
 msgid "Spoiler"
 msgstr ""
 
-#: utils/class.WpdiscuzHelper.php:310
+#: utils/class.WpdiscuzHelper.php:312
 msgid "Sticky"
 msgstr ""
 
-#: utils/class.WpdiscuzHelper.php:417
-msgid ""
-"Click the button above to get an email with bulk delete and unsubscribe "
-"links."
+#: utils/class.WpdiscuzHelper.php:524
+msgid "Before using wpDiscuz you should update your data"
+msgstr ""
+
+#: utils/class.WpdiscuzHelper.php:525
+msgid "Go to update data"
 msgstr ""
 
 #: utils/deactivation-reason-modal.php:10
@@ -3235,10 +3286,6 @@ msgstr ""
 
 #: utils/deactivation-reason-modal.php:53
 msgid "Please provide a plugin name or URL"
-msgstr ""
-
-#: utils/deactivation-reason-modal.php:57
-msgid "Other"
 msgstr ""
 
 #: utils/deactivation-reason-modal.php:62

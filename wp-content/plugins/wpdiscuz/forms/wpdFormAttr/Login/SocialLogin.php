@@ -200,7 +200,7 @@ class SocialLogin {
             'response_type' => 'code',
             'scope' => 'email',
             'state' => $state,
-            'v' => '5.74');
+            'v' => '5.78');
         $oautURL = add_query_arg($oautAttributs, $vkAuthorizeURL);
         $response['code'] = 200;
         $response['message'] = '';
@@ -242,15 +242,16 @@ class SocialLogin {
         $email = isset($vkAccesTokenData['email']) ? $vkAccesTokenData['email'] : $userID . '_anonymous@vk.com';
         $vkGetUserDataURL = 'https://api.vk.com/method/users.get';
         $vkGetUserDataAttr = array('user_ids' => $userID,
+            'access_token' => $vkAccesTokenData['access_token'],
             'fields' => 'first_name,last_name,screen_name,photo_100',
-            'v' => '5.74');
+            'v' => '5.78');
         $getVkUserResponse = wp_remote_post($vkGetUserDataURL, array('body' => $vkGetUserDataAttr));
         if (is_wp_error($getVkUserResponse)) {
             $this->redirect($postURL, $getVkUserResponse->get_error_message());
         }
         $vkUserData = json_decode(wp_remote_retrieve_body($getVkUserResponse), true);
         if (isset($vkUserData['error'])) {
-            $this->redirect($postURL, $vkUserData['error_description']);
+            $this->redirect($postURL, $vkUserData['error_msg']);
         }
         $vkUser = $vkUserData['response'][0];
         $vkUser['email'] = $email;

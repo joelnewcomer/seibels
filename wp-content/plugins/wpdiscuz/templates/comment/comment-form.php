@@ -167,10 +167,10 @@ if (!post_password_required($post->ID)) {
                                 $logout = preg_replace('!>([^<]+)!is', '>' . $wpdiscuz->optionsSerialized->phrases['wc_log_out'], $logout);
                                 echo $wpdiscuz->optionsSerialized->phrases['wc_logged_in_as'] . ' <a href="' . $user_url . '">' . $wpdiscuz->helper->getCurrentUserDisplayName($currentUser) . '</a> | ' . $logout;
                             } else {
-                                if (!$form->isUserCanComment($currentUser, $post->ID)) {
+                                if (!$form->isUserCanComment($currentUser, $post->ID) || !$wpdiscuz->optionsSerialized->hideLoginLinkForGuests) {
                                     $login = wp_loginout(get_permalink(), false);
-                                    $login = preg_replace('!>([^<]+)!is', '>' . __('Login', 'wpdiscuz'), $login);
-                                    $login = sprintf(__('Please %s to comment', 'wpdiscuz'), $login);
+                                    $login = preg_replace('!>([^<]+)!is', '>' . $wpdiscuz->optionsSerialized->phrases['wc_log_in'], $login);
+                                    $login = sprintf($wpdiscuz->optionsSerialized->phrases['wc_login_please'], $login);
                                     echo '<i class="fas fa-sign-in-alt"></i> <span>' . $login . '</span>';
                                 }
                             }

@@ -4,13 +4,9 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb940a290d158e84baa903bd7ffddf591
+class ComposerStaticInit476c0da3579050434375f221c015cc6f
 {
     public static $prefixLengthsPsr4 = array (
-        'a' => 
-        array (
-            'archon810\\' => 10,
-        ),
         'F' => 
         array (
             'FlorianBrinkmann\\LazyLoadResponsiveImages\\' => 42,
@@ -18,10 +14,6 @@ class ComposerStaticInitb940a290d158e84baa903bd7ffddf591
     );
 
     public static $prefixDirsPsr4 = array (
-        'archon810\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/archon810/smartdomdocument/src',
-        ),
         'FlorianBrinkmann\\LazyLoadResponsiveImages\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -32,15 +24,14 @@ class ComposerStaticInitb940a290d158e84baa903bd7ffddf591
         'FlorianBrinkmann\\LazyLoadResponsiveImages\\Helpers' => __DIR__ . '/../..' . '/src/Helpers.php',
         'FlorianBrinkmann\\LazyLoadResponsiveImages\\Plugin' => __DIR__ . '/../..' . '/src/Plugin.php',
         'FlorianBrinkmann\\LazyLoadResponsiveImages\\Settings' => __DIR__ . '/../..' . '/src/Settings.php',
-        'archon810\\SmartDOMDocument' => __DIR__ . '/..' . '/archon810/smartdomdocument/src/SmartDOMDocument.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitb940a290d158e84baa903bd7ffddf591::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitb940a290d158e84baa903bd7ffddf591::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitb940a290d158e84baa903bd7ffddf591::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit476c0da3579050434375f221c015cc6f::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit476c0da3579050434375f221c015cc6f::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit476c0da3579050434375f221c015cc6f::$classMap;
 
         }, null, ClassLoader::class);
     }

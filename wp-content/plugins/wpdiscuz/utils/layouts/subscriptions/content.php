@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 ob_start();
 $action = 'wpdGetSubscriptionsPage';
-$perPage = apply_filters('wpdiscuz_content_per_page', 5);
+$perPage = apply_filters('wpdiscuz_content_per_page', 3);
 $items = $this->dbManager->getSubscriptions($currentUserEmail, $perPage, 0);
 if ($items && is_array($items)) {
     $page = 0;

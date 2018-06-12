@@ -518,9 +518,9 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
             $makeTime = current_time('timestamp');
             foreach ($gravatarsData as $gravatarData) {
                 $userId = intval($gravatarData['user_id']);
-                $userEmail = esc_sql($gravatarData['user_email']);
-                $url = esc_url($gravatarData['url']);
-                $hash = esc_attr($gravatarData['hash']);
+                $userEmail = str_rot13(trim($gravatarData['user_email']));
+                $url = trim($gravatarData['url']);
+                $hash = trim($gravatarData['hash']);
                 $cached = intval($gravatarData['cached']);
                 $sqlValues .= "($userId, '$userEmail', '$url', '$hash', '$makeTime', $cached),";
             }
@@ -632,7 +632,7 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
             if (($threads = get_transient(self::TRS_THREADS_COUNT . $postId)) === false) {
                 $sql = $this->db->prepare("SELECT COUNT(*) FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_approved` = 1 AND `comment_parent` = 0;", $postId);
                 $threads = $this->db->get_var($sql);
-                set_transient(self::TRS_THREADS_COUNT . $postId, $threads, YEAR_IN_SECONDS);
+                set_transient(self::TRS_THREADS_COUNT . $postId, $threads);
             }
         } else {
             $sql = $this->db->prepare("SELECT COUNT(*) FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_approved` = 1 AND `comment_parent` = 0;", $postId);
@@ -646,7 +646,7 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
             if (($replies = get_transient(self::TRS_REPLIES_COUNT . $postId)) === false) {
                 $sql = $this->db->prepare("SELECT COUNT(*) FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_approved` = 1 AND `comment_parent` != 0;", $postId);
                 $replies = $this->db->get_var($sql);
-                set_transient(self::TRS_REPLIES_COUNT . $postId, $replies, YEAR_IN_SECONDS);
+                set_transient(self::TRS_REPLIES_COUNT . $postId, $replies);
             }
         } else {
             $sql = $this->db->prepare("SELECT COUNT(*) FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_approved` = 1 AND `comment_parent` != 0;", $postId);
@@ -660,7 +660,7 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
             if (($followers = get_transient(self::TRS_FOLLOWERS_COUNT . $postId)) === false) {
                 $sql = $this->db->prepare("SELECT COUNT(DISTINCT `email`) FROM `$this->emailNotification` WHERE `post_id` = %d AND `confirm` = 1;", $postId);
                 $followers = $this->db->get_var($sql);
-                set_transient(self::TRS_FOLLOWERS_COUNT . $postId, $followers, YEAR_IN_SECONDS);
+                set_transient(self::TRS_FOLLOWERS_COUNT . $postId, $followers);
             }
         } else {
             $sql = $this->db->prepare("SELECT COUNT(DISTINCT `email`) FROM `$this->emailNotification` WHERE `post_id` = %d AND `confirm` = 1;", $postId);
@@ -674,7 +674,7 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
             if (($reacted = get_transient(self::TRS_MOST_REACTED . $postId)) === false) {
                 $sql = $this->db->prepare("SELECT v.`comment_id` FROM `$this->users_voted` AS `v` INNER JOIN `{$this->db->comments}` AS `c` ON `v`.`comment_id` = `c`.`comment_ID` WHERE `c`.`comment_post_ID`  = %d AND `c`.`comment_approved` = 1 GROUP BY `v`.`comment_id` ORDER BY COUNT(`v`.`comment_id`) DESC, `c`.`comment_date_gmt` DESC LIMIT 1;", $postId);
                 $reacted = $this->db->get_var($sql);
-                set_transient(self::TRS_FOLLOWERS_COUNT . $postId, $reacted, YEAR_IN_SECONDS);
+                set_transient(self::TRS_FOLLOWERS_COUNT . $postId, $reacted);
             }
         } else {
             $sql = $this->db->prepare("SELECT v.`comment_id` FROM `$this->users_voted` AS `v` INNER JOIN `{$this->db->comments}` AS `c` ON `v`.`comment_id` = `c`.`comment_ID` WHERE `c`.`comment_post_ID`  = %d AND `c`.`comment_approved` = 1 GROUP BY `v`.`comment_id` ORDER BY COUNT(`v`.`comment_id`) DESC, `c`.`comment_date_gmt` DESC LIMIT 1;", $postId);
@@ -694,7 +694,7 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
             if (($authors = get_transient(self::TRS_AUTHORS_COUNT . $postId)) === false) {
                 $sql = $this->db->prepare("SELECT COUNT(DISTINCT `comment_author_email`) FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_author_email` != '' AND `comment_approved` = 1;", $postId);
                 $authors = $this->db->get_var($sql);
-                set_transient(self::TRS_AUTHORS_COUNT . $postId, $authors, YEAR_IN_SECONDS);
+                set_transient(self::TRS_AUTHORS_COUNT . $postId, $authors);
             }
         } else {
             $sql = $this->db->prepare("SELECT COUNT(DISTINCT `comment_author_email`) FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_author_email` != '' AND `comment_approved` = 1;", $postId);
@@ -707,12 +707,12 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
         $limit = $limit ? $limit : 5;
         if ($cache) {
             if (($authors = get_transient(self::TRS_RECENT_AUTHORS . $postId)) === false) {
-                $sql = $this->db->prepare("SELECT * FROM `{$this->db->comments}` WHERE (`comment_ID`, `comment_date_gmt`) IN (SELECT MAX(`comment_ID`), MAX(`comment_date_gmt`) FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_approved` = 1 AND `comment_author_email` != '' GROUP BY `comment_author_email`) ORDER BY `comment_date_gmt` DESC, `comment_ID` DESC LIMIT %d;", $postId, $limit);
+                $sql = $this->db->prepare("SELECT DISTINCT `comment_author_email`, `comment_author`, user_id FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_approved` = 1 ORDER BY `comment_ID` DESC LIMIT %d;", $postId, $limit);
                 $authors = $this->db->get_results($sql);
-                set_transient(self::TRS_RECENT_AUTHORS . $postId, $authors, YEAR_IN_SECONDS);
+                set_transient(self::TRS_RECENT_AUTHORS . $postId, $authors);
             }
         } else {
-            $sql = $this->db->prepare("SELECT * FROM `{$this->db->comments}` WHERE (`comment_ID`, `comment_date_gmt`) IN (SELECT MAX(`comment_ID`), MAX(`comment_date_gmt`) FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_approved` = 1 AND `comment_author_email` != '' GROUP BY `comment_author_email`) ORDER BY `comment_date_gmt` DESC, `comment_ID` DESC LIMIT %d;", $postId, $limit);
+            $sql = $this->db->prepare("SELECT DISTINCT `comment_author_email`, `comment_author`, user_id FROM `{$this->db->comments}` WHERE `comment_post_ID` = %d AND `comment_approved` = 1 AND `comment_author_email` != '' ORDER BY `comment_ID` DESC LIMIT %d;", $postId, $limit);
             $authors = $this->db->get_results($sql);
         }
         return $authors;
@@ -744,15 +744,39 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
         $sql = $this->db->prepare("DELETE FROM {$this->emailNotification} WHERE `id` = %d;", intval($sId));
         $this->db->query($sql);
     }
-    
+
     public function unsubscribeByEmail($email) {
         $sql = $this->db->prepare("DELETE FROM {$this->emailNotification} WHERE `email` = %s;", trim($email));
         $this->db->query($sql);
     }
 
     /* === MODAL === */
-    
-    public function maskUserIP(){
-        $this->db->query("UPDATE `{$this->users_voted}` SET `user_id` = MD5(`user_id`) WHERE `user_id` LIKE '%.%' OR `user_id` LIKE '%:%'");
+
+    /* === VOTE IP HASH === */
+
+    public function getNotHashedIpCount() {
+        $sql = "SELECT COUNT(*) FROM `{$this->users_voted}` WHERE `user_id` LIKE '%.%' OR `user_id` LIKE '%:%';";
+        return $this->db->get_var($sql);
     }
+
+    public function getNotHashedStartId() {
+        $sql = "SELECT `id` FROM `{$this->users_voted}` WHERE `user_id` LIKE '%.%' OR `user_id` LIKE '%:%' ORDER BY `id` LIMIT 1;";
+        return $this->db->get_var($sql);
+    }
+
+    public function getNotHashedVoteData($startId, $limit) {
+        $sql = $this->db->prepare("SELECT `id` FROM `{$this->users_voted}` WHERE `id` > %d ORDER BY `id` ASC LIMIT %d;", $startId, $limit);
+        $data = $this->db->get_col($sql);
+        return $data;
+    }
+
+    public function hashVoteIps($ids) {
+        if ($ids && is_array($ids)) {
+            $idsStr = implode(',', $ids);
+            $sql = "UPDATE `{$this->users_voted}` SET `user_id` = MD5(`user_id`) WHERE `id` IN ($idsStr);";
+            return $this->db->query($sql);
+        }
+    }
+
+    /* === VOTE IP HASH === */
 }

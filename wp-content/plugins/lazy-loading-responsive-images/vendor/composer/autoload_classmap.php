@@ -9,5 +9,4 @@ return array(
     'FlorianBrinkmann\\LazyLoadResponsiveImages\\Helpers' => $baseDir . '/src/Helpers.php',
     'FlorianBrinkmann\\LazyLoadResponsiveImages\\Plugin' => $baseDir . '/src/Plugin.php',
     'FlorianBrinkmann\\LazyLoadResponsiveImages\\Settings' => $baseDir . '/src/Settings.php',
-    'archon810\\SmartDOMDocument' => $vendorDir . '/archon810/smartdomdocument/src/SmartDOMDocument.php',
 );

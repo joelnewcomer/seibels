@@ -6,6 +6,5 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'archon810\\' => array($vendorDir . '/archon810/smartdomdocument/src'),
     'FlorianBrinkmann\\LazyLoadResponsiveImages\\' => array($baseDir . '/src'),
 );

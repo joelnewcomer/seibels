@@ -33,6 +33,14 @@ if (!defined('ABSPATH')) {
                 </th>
                 <td>
                     <fieldset>
+
+                        <div class="wpd-subopt" style="float: none; padding: 5px 0px;">
+                            <div style="display: inline-block; vertical-align: middle;">
+                                <input type="checkbox" <?php checked($this->optionsSerialized->hideLoginLinkForGuests == 1) ?> value="1" name="hideLoginLinkForGuests" id="hideLoginLinkForGuests" />
+                                <label for="hideLoginLinkForGuests"></label>
+                            </div> &nbsp;
+                            <span for="hideLoginLinkForGuests"><?php _e('Hide "Please login to comment" text', 'wpdiscuz'); ?></span>
+                        </div>
                         <div class="wpd-subopt" style="float: none; padding: 5px 0px;">
                             <div style="display: inline-block; vertical-align: middle;">
                                 <input type="checkbox" value="1" <?php checked($this->optionsSerialized->hideUserSettingsButton == 1) ?> name="hideUserSettingsButton" id="hideUserSettingsButton" />

@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 ob_start();
 $action = 'wpdGetActivityPage';
-$perPage = apply_filters('wpdiscuz_content_per_page', 5);
+$perPage = apply_filters('wpdiscuz_content_per_page', 3);
 $lrItemsCount = 3;
 $args = array('number' => $perPage, 'status' => 'all', 'user_id' => '', 'author_email' => '');
 if ($currentUserId) {

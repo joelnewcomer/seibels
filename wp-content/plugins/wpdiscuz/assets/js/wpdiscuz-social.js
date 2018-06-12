@@ -93,13 +93,6 @@ jQuery(document).ready(function ($) {
         } else {
             container.parents('.wpdiscuz-ftb-right').next().slideDown(700);
         }
-
-        if (confirm(agreementTitle + ' ' + agreementDesc)) {
-            if (wpdiscuzAjaxObj.wpdiscuz_options.isCookiesEnabled) {
-                Cookies.set('socialLoginAgreementConfirmed', 1, {expires: 30, path: '/'});
-            }
-            return true;
-        }
         return false;
     }
 
@@ -154,12 +147,12 @@ jQuery(document).ready(function ($) {
                 postID: wpdiscuzAjaxObj.wpdiscuz_options.wc_post_id
             }
         }).done(function (wpdiscuz_response) {
-            wpdHandleRespons(wpdiscuz_response, container);
+            wpdHandleResponse(wpdiscuz_response, container);
         });
         return response;
     }
 
-    function wpdHandleRespons(respons, container) {
+    function wpdHandleResponse(respons, container) {
         try {
             var obj = $.parseJSON(respons);
             var code = obj.code;

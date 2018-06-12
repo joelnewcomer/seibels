@@ -3,7 +3,7 @@
 /*
  * Plugin Name: wpDiscuz
  * Description: Better comment system. Wordpress post comments and discussion plugin. Allows your visitors discuss, vote for comments and share.
- * Version: 5.1.0
+ * Version: 5.1.2
  * Author: gVectors Team (A. Chakhoyan, G. Zakaryan, H. Martirosyan)
  * Author URI: https://gvectors.com/
  * Plugin URI: http://wpdiscuz.com/
@@ -92,7 +92,7 @@ class WpdiscuzCore implements WpDiscuzConstants {
         add_action('wp_head', array(&$this, 'initCurrentPostType'));
         add_action('wp_head', array(&$this->css, 'initCustomCss'));
         if (!$this->optionsSerialized->hideUserSettingsButton) {
-            add_action('wp_footer', array(&$this->helper, 'addContentModal'));
+            add_action('wp_footer', array(&$this, 'addContentModal'));
             add_action('wp_ajax_wpdGetInfo', array(&$this->helper, 'wpdGetInfo'));
             add_action('wp_ajax_nopriv_wpdGetInfo', array(&$this->helper, 'wpdGetInfo'));
             add_action('wp_ajax_wpdGetActivityPage', array(&$this->helper, 'getActivityPage'));
@@ -112,6 +112,8 @@ class WpdiscuzCore implements WpDiscuzConstants {
         add_action('admin_enqueue_scripts', array(&$this, 'adminPageStylesScripts'), 100);
         add_action('wp_enqueue_scripts', array(&$this, 'frontEndStylesScripts'));
         add_action('admin_menu', array(&$this, 'addPluginOptionsPage'), 8);
+        add_action('admin_notices', array(&$this->helper, 'hashVotesNote'));
+
 
         $wp_version = get_bloginfo('version');
         if (version_compare($wp_version, '4.2.0', '>=')) {
@@ -1268,11 +1270,6 @@ class WpdiscuzCore implements WpDiscuzConstants {
                 $this->dbManager->alterVotingTable();
             }
 
-            if (version_compare($this->version, '5.1.0', '<=') && version_compare($this->version, '1.0.0', '!=')) {
-                $this->dbManager->maskUserIP();
-            }
-
-
             $this->dbManager->alterNotificationTable($this->version);
         }
         do_action('wpdiscuz_check_version');
@@ -1336,6 +1333,14 @@ class WpdiscuzCore implements WpDiscuzConstants {
         if ($this->isWpdiscuzLoaded) {
             $this->form = $this->wpdiscuzForm->getForm($post->ID);
             add_filter('comments_template', array(&$this, 'addCommentForm'), 10);
+        }
+    }
+
+    public function addContentModal() {
+        if ($this->isWpdiscuzLoaded) {
+            $html = "<a id='wpdUserContentInfoAnchor' style='display:none;' rel='#wpdUserContentInfo' data-wpd-lity>wpDiscuz</a>";
+            $html .= "<div id='wpdUserContentInfo' style='overflow:auto;background:#FDFDF6;padding:20px;width:600px;max-width:100%;border-radius:6px;' class='lity-hide'></div>";
+            echo $html;
         }
     }
 

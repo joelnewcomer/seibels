@@ -275,7 +275,8 @@ wpdtip{display: inline-block; position: inherit; width: auto;}
 #wpcomm input[type="reset"]:focus,
 #wpcomm input[type="submit"]:hover,
 #wpcomm input[type="submit"]:focus{ opacity: 1; }
-#wpcomm .wc-field-submit{padding:7px 5px 0 0; clear:right}
+#wpcomm .wc-field-submit{padding:15px 5px 0 0; clear:right}
+#wpcomm.wpdiscuz_auth .wc-field-submit{padding:7px 5px 0 0; clear:left}
 #wpcomm .wc-load-more-submit-wrap{width:100%; text-align:center; margin-bottom:20px; margin-top:25px}
 #wpcomm .wc-load-more-submit{width:auto!important; font-size: 14px; padding:10px 30px; text-align:center; cursor:pointer}
 #wpcomm .wpd_label, #wpcomm .wpd_label{margin:0px; padding: 0px;display:inline-block;}
@@ -355,7 +356,8 @@ wpdtip{display: inline-block; position: inherit; width: auto;}
 #wpcomm .wpd-field-radio .wpd-item, #wpcomm .wpd-field-checkbox .wpd-item{ display:inline-block; padding:1px; margin:1px 0px; min-width:60px; }
 #wpcomm .wpd-field-radio .wpd-field, #wpcomm .wpd-field-checkbox .wpd-field { width:auto; height:25px; display:inline-block; float:right; padding:0px; line-height:20px; vertical-align:baseline; margin:0px 0px 0px 6px; }
 #wpcomm .wpd-field-radio .wpd-field-label, #wpcomm .wpd-field-checkbox .wpd-field-label{ width:auto; height:22px; display:inline; float:none; padding:0px; line-height:20px; font-size:12px; margin:0px; vertical-align:middle; }
-#wpcomm .wpd-form-row .wpd-form-col-full{}
+#wpcomm .wpdiscuz-item.wpd-field-checkbox.wpd-field-agreement,
+#wpcomm .wpdiscuz-item.wpd-field-checkbox.wpd-field-cookies-consent{padding-bottom:0px;}
 
 /* COMMENT FORM | SELECT */
 #wpcomm .wpd-form-row .wpd-form-col-right .wpdiscuz-item.wpd-field-select{ text-align:right; }

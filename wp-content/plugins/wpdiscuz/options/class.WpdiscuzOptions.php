@@ -40,6 +40,7 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->headerTextShowHide = isset($_POST['wc_header_text_show_hide']) ? $_POST['wc_header_text_show_hide'] : 0;
             $this->optionsSerialized->storeCommenterData = isset($_POST['storeCommenterData']) && (intval($_POST['storeCommenterData']) || $_POST['storeCommenterData'] == 0) ? $_POST['storeCommenterData'] : -1;
             $this->optionsSerialized->showHideLoggedInUsername = isset($_POST['wc_show_hide_loggedin_username']) ? $_POST['wc_show_hide_loggedin_username'] : 0;
+            $this->optionsSerialized->hideLoginLinkForGuests = isset($_POST['hideLoginLinkForGuests']) ? $_POST['hideLoginLinkForGuests'] : 0;
             $this->optionsSerialized->hideUserSettingsButton = isset($_POST['hideUserSettingsButton']) ? $_POST['hideUserSettingsButton'] : 0;
             $this->optionsSerialized->hideDiscussionStat = isset($_POST['hideDiscussionStat']) ? $_POST['hideDiscussionStat'] : 0;
             $this->optionsSerialized->hideRecentAuthors = isset($_POST['hideRecentAuthors']) ? $_POST['hideRecentAuthors'] : 0;
@@ -207,6 +208,8 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_you_must_be_text'] = esc_attr($_POST['wc_you_must_be_text']);
             $this->optionsSerialized->phrases['wc_logged_in_as'] = esc_attr($_POST['wc_logged_in_as']);
             $this->optionsSerialized->phrases['wc_log_out'] = esc_attr($_POST['wc_log_out']);
+            $this->optionsSerialized->phrases['wc_log_in'] = esc_attr($_POST['wc_log_in']);
+            $this->optionsSerialized->phrases['wc_login_please'] = esc_attr($_POST['wc_login_please']);
             $this->optionsSerialized->phrases['wc_logged_in_text'] = esc_attr($_POST['wc_logged_in_text']);
             $this->optionsSerialized->phrases['wc_to_post_comment_text'] = esc_attr($_POST['wc_to_post_comment_text']);
             $this->optionsSerialized->phrases['wc_vote_counted'] = esc_attr($_POST['wc_vote_counted']);
@@ -260,6 +263,7 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_user_settings_subscriptions'] = esc_attr($_POST['wc_user_settings_subscriptions']);
             $this->optionsSerialized->phrases['wc_user_settings_response_to'] = esc_attr($_POST['wc_user_settings_response_to']);
             $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links'] = esc_attr($_POST['wc_user_settings_email_me_delete_links']);
+            $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links_desc'] = esc_attr($_POST['wc_user_settings_email_me_delete_links_desc']);
             $this->optionsSerialized->phrases['wc_user_settings_no_data'] = esc_attr($_POST['wc_user_settings_no_data']);
             $this->optionsSerialized->phrases['wc_user_settings_request_deleting_comments'] = esc_attr($_POST['wc_user_settings_request_deleting_comments']);
             $this->optionsSerialized->phrases['wc_user_settings_cancel_subscriptions'] = esc_attr($_POST['wc_user_settings_cancel_subscriptions']);

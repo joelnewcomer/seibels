@@ -20,7 +20,7 @@ class AgreementCheckbox extends Field {
             <div class="wpd-field-option">
                 <label><?php _e('Checkbox Label', 'wpdiscuz'); ?>:</label>
                 <p class="wpd-info"><?php _e('You can use HTML tags to add links to website Terms and Privacy Policy pages. For example: ', 'wpdiscuz'); ?><br>
-                <code><?php echo esc_html('I agree to the <a href="https://example.com/terms/" target="_blank">Terms</a> and <a href="https://example.com/privacy/" target="_blank">Privacy Policy</a>'); ?></code>
+                    <code><?php echo esc_html('I agree to the <a href="https://example.com/terms/" target="_blank">Terms</a> and <a href="https://example.com/privacy/" target="_blank">Privacy Policy</a>'); ?></code>
                 </p>
                 <textarea required="required" type="text" name="<?php echo $this->fieldInputName; ?>[label]"  style="height: 75px;width:100%"><?php echo $this->fieldData['label']; ?></textarea>
             </div>
@@ -50,7 +50,19 @@ class AgreementCheckbox extends Field {
     }
 
     public function editCommentHtml($key, $value, $data, $comment) {
-        
+        if (current_user_can('moderate_comments') || (!$this->isCommentParentZero() && !$data['is_show_sform']) || !$this->displayField($key, $data)) {
+            return '';
+        }
+        $showAagainClass = $data['donot_show_again_if_checked'] == 1 ? ' wpd_agreement_hide ' : '';
+        $uniqueId = uniqid();
+        $html = '<tr><td class="first">';
+        $html .= '</td><td>';
+        $required = $data['required'] ? ' wpd-required-group ' : '';
+        $html .= '<div class="wpdiscuz-item ' . $required . ' wpd-field-group">';
+        $html .= '<input checked="checked"  id="' . $key . '-1_' . $uniqueId . '" type="checkbox" name="' . $key . '" value="1" class="' . $key . ' wpd-field wpd-agreement-chackbox '.$showAagainClass.'" > <label class="wpd-field-label wpd-cursor-pointer" for="' . $key . '-1_' . $uniqueId . '">' . $data['label'] . '</label>';
+        $html .= '</div>';
+        $html .= '</td></tr >';
+        return $html;
     }
 
     public function frontFormHtml($name, $args, $options, $currentUser, $uniqueId, $isMainForm) {
@@ -60,18 +72,18 @@ class AgreementCheckbox extends Field {
         $hasDesc = $args['desc'] ? true : false;
         $required = $args['required'] ? ' wpd-required-group ' : '';
         ?>
-        <div class="wpdiscuz-item wpd-field-group wpd-field-checkbox wpd-field-single  <?php echo $required; ?>  <?php echo $hasDesc ? 'wpd-has-desc' : '' ?>">
+        <div class="wpdiscuz-item wpd-field-group wpd-field-checkbox wpd-field-agreement wpd-field-single  <?php echo $required; ?>  <?php echo $hasDesc ? 'wpd-has-desc' : '' ?>">
             <div class="wpd-field-group-title">
                 <div class="wpd-item">
                     <input id="<?php echo $name . '-1_' . $uniqueId; ?>" type="checkbox" name="<?php echo $name; ?>" value="1" class="<?php echo $name; ?> wpd-field wpd-agreement-chackbox <?php echo $showAagainClass; ?>"  <?php echo $args['required'] ? 'required' : ''; ?>>
                     <label class="wpd-field-label wpd-cursor-pointer" for="<?php echo $name . '-1_' . $uniqueId; ?>"><?php echo $args['label']; ?></label>
                 </div>
             </div>
-        <?php if ($args['desc']) { ?>
+            <?php if ($args['desc']) { ?>
                 <div class="wpd-field-desc">
                     <i class="far fa-question-circle" aria-hidden="true"></i><span><?php echo $args['desc']; ?></span>
                 </div>
-        <?php } ?>
+            <?php } ?>
         </div>
         <?php
     }
@@ -81,8 +93,8 @@ class AgreementCheckbox extends Field {
     }
 
     public function validateFieldData($fieldName, $args, $options, $currentUser) {
-        if ((!$this->isCommentParentZero() && !$args['is_show_sform']) || !$this->displayField($fieldName, $args)) {
-           return;
+        if (current_user_can('moderate_comments') || (!$this->isCommentParentZero() && !$args['is_show_sform']) || !$this->displayField($fieldName, $args)) {
+            return;
         }
         $value = filter_input(INPUT_POST, $fieldName, FILTER_VALIDATE_INT, FILTER_SANITIZE_NUMBER_INT);
         if (($args['show_for_users'] && $currentUser->exists() && $args['required'] && !$value ) || ($args['show_for_guests'] && !$currentUser->exists() && $args['required'] && !$value)) {
@@ -128,9 +140,9 @@ class AgreementCheckbox extends Field {
         }
         return wp_parse_args($cleanData, $this->fieldDefaultData);
     }
-    
-    private function displayField($name,$args){
-        if($args['donot_show_again_if_checked'] == 1 && isset($_COOKIE) && key_exists($name.'_'.COOKIEHASH, $_COOKIE)){
+
+    private function displayField($name, $args) {
+        if ($args['donot_show_again_if_checked'] == 1 && isset($_COOKIE) && key_exists($name . '_' . COOKIEHASH, $_COOKIE)) {
             return false;
         }
         return true;

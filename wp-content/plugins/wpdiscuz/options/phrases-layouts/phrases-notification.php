@@ -26,6 +26,15 @@ if (!defined('ABSPATH')) {
                 </tr>
             <?php } ?>
             <tr valign="top">
+                <th scope="row"><label for="wc_log_in"><?php _e('Login', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_log_in']; ?>" name="wc_log_in" id="wc_log_in" /></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row"><label for="wc_login_please"><?php _e('Please %s to comment', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_login_please']; ?>" name="wc_login_please" id="wc_login_please" /></td>
+            </tr>
+            
+            <tr valign="top">
                 <th scope="row"><label for="wc_you_must_be_text"><?php _e('You must be', 'wpdiscuz'); ?></label></th>
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_you_must_be_text']; ?>" name="wc_you_must_be_text" id="wc_you_must_be_text" /></td>
             </tr>

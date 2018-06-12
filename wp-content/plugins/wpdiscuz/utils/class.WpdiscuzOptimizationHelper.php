@@ -132,11 +132,14 @@ class WpdiscuzOptimizationHelper implements WpDiscuzConstants {
             $authorsCount = $this->dbManager->getAuthorsCount($comment->comment_post_ID, false);
             set_transient(self::TRS_AUTHORS_COUNT . $comment->comment_post_ID, $authorsCount);
             $followers = $this->dbManager->getAllSubscriptionsCount($comment->comment_post_ID, false);
-            set_transient(self::TRS_FOLLOWERS_COUNT . $comment->comment_post_ID, $followers, YEAR_IN_SECONDS);
+            set_transient(self::TRS_FOLLOWERS_COUNT . $comment->comment_post_ID, $followers);
             $repliesCount = $this->dbManager->getRepliesCount($comment->comment_post_ID, false);
             set_transient(self::TRS_REPLIES_COUNT . $comment->comment_post_ID, $repliesCount);
             $threadsCount = $this->dbManager->getThreadsCount($comment->comment_post_ID, false);
             set_transient(self::TRS_THREADS_COUNT . $comment->comment_post_ID, $threadsCount);
+            $authorsLimit = apply_filters('wpdiscuz_recent_authors_limit', 5);
+            $recentAuthors = $this->dbManager->getRecentAuthors($comment->comment_post_ID, $authorsLimit, false);
+            set_transient(self::TRS_RECENT_AUTHORS . $comment->comment_post_ID, $recentAuthors);
         }
     }
 

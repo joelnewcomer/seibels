@@ -28,6 +28,10 @@ if (!defined('ABSPATH')) {
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links']; ?>" name="wc_user_settings_email_me_delete_links" id="wc_user_settings_email_me_delete_links" /></td>
             </tr>
             <tr valign="top">
+                <th scope="row"><label for="wc_user_settings_email_me_delete_links_desc"><?php _e('"Bulk management via email" description', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><textarea type="text"  name="wc_user_settings_email_me_delete_links_desc" id="wc_user_settings_email_me_delete_links_desc"><?php echo $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links_desc']; ?></textarea></td>
+            </tr>
+            <tr valign="top">
                 <th scope="row"><label for="wc_user_settings_no_data"><?php _e('No data found!', 'wpdiscuz'); ?></label></th>
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_no_data']; ?>" name="wc_user_settings_no_data" id="wc_user_settings_no_data" /></td>
             </tr>

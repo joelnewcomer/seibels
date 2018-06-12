@@ -1,9 +1,9 @@
 === Comments - wpDiscuz ===
 Contributors: gVectors Team
-Tags: comment, comments, ajax comments, custom comment form, custom comment field
+Tags: GDPR, comments, ajax comments, custom comment form, custom comment field
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 5.1.0
+Stable tag: 5.1.2
 Requires PHP: 5.4 and higher
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -18,8 +18,8 @@ Comments - wpDiscuz is Multisite and RTL ready!
 * Support Forum: [https://gvectors.com/forum/](https://gvectors.com/forum/)
 * wpDiscuz Demo: [https://wpdiscuz.com/demo/](https://wpdiscuz.com/demo/)
 * wpDiscuz GDPR: [https://wpdiscuz.com/gdpr/](https://wpdiscuz.com/gdpr/)
-* wpDiscuz Documentation: [https://wpdiscuz.com/documentation/](https://wpdiscuz.com/documentation/)
 * wpDiscuz Addons: [https://wpdiscuz.com/addons/](https://wpdiscuz.com/addons)
+* wpDiscuz Documentation: [https://wpdiscuz.com/documentation/](https://wpdiscuz.com/documentation/)
 
 Integration with User Profile Plugins - Please read the [Integrations] Tab in wpDiscuz Settings admin page
 
@@ -174,10 +174,49 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 
 == Changelog ==
 
-= Comments - wpDiscuz v5.1.0 =
+
+= Comments - wpDiscuz v5.1.2 =
+
+* Fixed Bug : Quotes in emails
+* Fixed Bug : Problems with hashing user IP addresses
+* Fixed Bug : Comment styling issues after editing
+* Fixed Bug : Social login issue
+* Fixed Bug : Cookies Consent checkbox
+
+
+IMPORTANT!
+
+- Please delete all caches and press CTRL+F5 on ebsite front-end after updating wpDiscuz
+- wpDiscuz uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
+- Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
+- If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
+- If you have JetPack installed please deactivate Jetpack comments, it affects wpDiscuz
+- If you have a Cache Plugin, please delete all caches after wpDiscuz update.
+- If you use CDN and found some issue please purge it.
+- If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
+
+
+= Comments - wpDiscuz v5.1.1 =
 
 Please follow to this instruction to create an agreement checkbox for GDPR compliance:
 [https://wpdiscuz.com/docs/wpdiscuz-documentation/gdpr/right-to-be-informed/](https://wpdiscuz.com/docs/wpdiscuz-documentation/gdpr/right-to-be-informed/)
+
+Please follow to this instruction to create a Cookies Consent checkbox:
+[https://wpdiscuz.com/docs/wpdiscuz-documentation/gdpr/cookies/](https://wpdiscuz.com/docs/wpdiscuz-documentation/gdpr/cookies/#checkbox)
+
+* Added: Cookies Consent checkbox (custom field in comment form)
+* Added: Option to display "Please login to comment" on comment form
+* Added: Redirect back to comment area after social login
+* Added: Vote ips hashing via ajax from tools page
+* Added: Tool to hash voter IP addresses in database (Comments > Tools > Other)
+* Fixed Bug: Gravatar caching problem
+* Fixed Bug: VK social login issue
+* Fixed Bug: Empty space under the footer area
+* Fixed Bug: Issue with active rating stars color
+* Fixed Bug: Update process overloads MySQL server on websites with a large database
+
+
+= Comments - wpDiscuz v5.1.0 =
 
 * Added: [Documentation -beta-](https://wpdiscuz.com/docs/wpdiscuz-documentation/)
 * Added: Comment GDPR | New Custom Field - Agreement checkbox
@@ -200,19 +239,6 @@ Please follow to this instruction to create an agreement checkbox for GDPR compl
 * Fixed Bug: Wrong user mentioning in email notification
 * Fixed Bug: Undefined index on stick/unstick and close/open actions
 * Fixed Bug: Many small bugs
-
-
-IMPORTANT!
-
-- Please delete all caches and press CTRL+F5 on ebsite front-end after updating wpDiscuz
-- wpDiscuz uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
-- Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
-- If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
-- If you have JetPack installed please deactivate Jetpack comments, it affects wpDiscuz
-- If you have a Cache Plugin, please delete all caches after wpDiscuz update.
-- If you use CDN and found some issue please purge it.
-- If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
-
 
 = Comments - wpDiscuz v5.0.7 =
 

@@ -12,6 +12,7 @@
                            'SelectField' => 'Select',
                            'RatingField' => 'Rating',
                            'AgreementCheckbox' => 'Agreement Checkbox',
+                           'CookiesConsent' => 'Cookies Consent',
             )
     );
 

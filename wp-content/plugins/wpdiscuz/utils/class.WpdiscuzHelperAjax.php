@@ -19,6 +19,7 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
         add_action('wp_ajax_wpdiscuzCloseThread', array(&$this, 'closeThread'));
         add_action('wp_ajax_wpdDeactivate', array(&$this, 'deactivate'));
         add_action('wp_ajax_wpdImportSTCR', array(&$this, 'importSTCR'));
+        add_action('wp_ajax_wpdHashVoteIps', array(&$this, 'hashVoteIps'));
     }
 
     public function commentDataArr($data, $comment, $commentarr) {
@@ -113,11 +114,13 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
                 $response['code'] = 'dismiss_and_deactivate';
             } else if (isset($data['deactivation_reason']) && ($reason = trim($data['deactivation_reason']))) {
                 $pluginData = get_plugin_data(WPDISCUZ_DIR_PATH . "/class.WpdiscuzCore.php");
+                $blogTitle = get_option('blogname');
                 $to = 'feedback@wpdiscuz.com';
                 $subject = '[wpDiscuz Feedback - ' . $pluginData['Version'] . '] - ' . $reason;
                 $headers = array();
                 $contentType = 'text/html';
-                $fromName = apply_filters('wp_mail_from_name', get_option('blogname'));
+                $fromName = apply_filters('wp_mail_from_name', $blogTitle);
+                $fromName = html_entity_decode($fromName, ENT_QUOTES);
                 $siteUrl = get_site_url();
                 $parsedUrl = parse_url($siteUrl);
                 $domain = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
@@ -160,6 +163,34 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
                         $response['progress'] = 100;
                     }
                 }
+            }
+        }
+        wp_die(json_encode($response));
+    }
+
+    public function hashVoteIps() {
+        $response = array('progress' => 0);
+        $notHashedData = isset($_POST['notHashedData']) ? $_POST['notHashedData'] : '';
+        if ($notHashedData) {
+            parse_str($notHashedData, $data);
+            $limit = 200;
+            $step = isset($data['hashing-step']) ? intval($data['hashing-step']) : 0;
+            $notHashedCount = isset($data['not-hashed-count']) ? intval($data['not-hashed-count']) : 0;
+            $notHashedStartId = isset($data['not-hashed-start-id']) ? intval($data['not-hashed-start-id']) : 0;
+            $nonce = isset($data['_wpnonce']) ? trim($data['_wpnonce']) : '';
+            if (wp_verify_nonce($nonce, 'wc_tools_form') && $notHashedCount && $notHashedStartId >= 0) {
+                $notHashedVoteData = $this->dbManager->getNotHashedVoteData($notHashedStartId, $limit);
+                if ($notHashedVoteData) {
+                    $this->dbManager->hashVoteIps($notHashedVoteData);
+                    ++$step;
+                    $progress = $step * $limit * 100 / $notHashedCount;
+                    $response['progress'] = ($p = intval($progress)) > 100 ? 100 : $p;
+                    $response['startId'] = $notHashedVoteData[count($notHashedVoteData) - 1];
+                } else {
+                    $response['progress'] = 100;
+                    $response['startId'] = 0;
+                }
+                $response['step'] = $step;
             }
         }
         wp_die(json_encode($response));
@@ -231,7 +262,7 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
             if ($this->userActionMail($guestEmail, $subject, $message)) {
                 $response['code'] = 1;
                 $parts = explode('@', $guestEmail);
-                $guestEmail = substr($parts[0], 0, min(1, strlen($parts[0])-1)) . str_repeat('*', max(1, strlen($parts[0]) - 1)) . '@' . $parts[1];
+                $guestEmail = substr($parts[0], 0, min(1, strlen($parts[0]) - 1)) . str_repeat('*', max(1, strlen($parts[0]) - 1)) . '@' . $parts[1];
                 $response['message'] = '<div class="wpd-guest-action-message wpd-guest-action-success">' . $this->optionsSerialized->phrases['wc_user_settings_check_email'] . " ($guestEmail)" . '</div>';
             }
         }
@@ -251,6 +282,7 @@ class WpdiscuzHelperAjax implements WpDiscuzConstants {
         $blogTitle = get_option('blogname');
         $mailContentType = apply_filters('wp_mail_content_type', 'text/html');
         $fromName = apply_filters('wp_mail_from_name', $blogTitle);
+        $fromName = html_entity_decode($fromName, ENT_QUOTES);
         $parsedUrl = parse_url($siteUrl);
         $domain = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
         $fromEmail = 'no-reply@' . $domain;

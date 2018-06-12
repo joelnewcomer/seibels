@@ -16,7 +16,7 @@ if ($currentUser && $currentUser->ID) {
 if ($action && $currentUserEmail) {
     $page = isset($_POST['page']) ? intval($_POST['page']) : 0;
     $lrItemsCount = 3;
-    $perPage = apply_filters('wpdiscuz_content_per_page', 5);
+    $perPage = apply_filters('wpdiscuz_content_per_page', 3);
     $offset = $page * $perPage;
     $args = array('number' => $perPage, 'status' => 'all', 'user_id' => '', 'author_email' => '', 'offset' => $offset);
 

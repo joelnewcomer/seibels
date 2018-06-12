@@ -11,8 +11,6 @@ use FlorianBrinkmann\LazyLoadResponsiveImages\Helpers as Helpers;
 
 use FlorianBrinkmann\LazyLoadResponsiveImages\Settings as Settings;
 
-use archon810\SmartDOMDocument as SmartDOMDocument;
-
 /**
  * Class Plugin
  *
@@ -156,11 +154,15 @@ class Plugin {
 			return $content;
 		} // End if().
 
-		// Create new SmartDomDocument object.
-		$dom = new SmartDOMDocument();
+		// Disable libxml errors.
+		libxml_use_internal_errors( true );
+
+		// Create new \DOMDocument object.
+		$dom = new \DOMDocument();
 
 		// Load the HTML.
-		$dom->loadHTML( $content );
+		// Trick with <?xml endocing="utf-8" loadHTML() method of https://github.com/ivopetkov/html5-dom-document-php
+		$dom->loadHTML( '<?xml encoding="utf-8" ?>' . $content, 0 | LIBXML_NOENT );
 
 		$xpath = new \DOMXPath( $dom );
 
@@ -216,10 +218,10 @@ class Plugin {
 	/**
 	 * Modifies img markup to enable lazy loading.
 	 *
-	 * @param \DOMNode         $img The img dom node.
-	 * @param SmartDomDocument $dom SmartDomDocument() object of the HTML.
+	 * @param \DOMNode     $img The img dom node.
+	 * @param \DOMDocument $dom \DOMDocument() object of the HTML.
 	 *
-	 * @return SmartDomDocument The updated DOM.
+	 * @return \DOMDocument The updated DOM.
 	 */
 	public function modify_img_markup( $img, $dom ) {
 		// Save the image original attributes.
@@ -274,8 +276,8 @@ class Plugin {
 		// Set the class string.
 		$img->setAttribute( 'class', $classes );
 
-		// Remove the src attribute.
-		$img->removeAttribute( 'src' );
+		// Set data URI for src attribute.
+		$img->setAttribute( 'src', 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' );
 
 		return $dom;
 	}
@@ -283,10 +285,10 @@ class Plugin {
 	/**
 	 * Modifies iframe markup to enable lazy loading.
 	 *
-	 * @param \DOMNode         $iframe The iframe dom node.
-	 * @param SmartDomDocument $dom    SmartDomDocument() object of the HTML.
+	 * @param \DOMNode     $iframe The iframe dom node.
+	 * @param \DOMDocument $dom    \DOMDocument() object of the HTML.
 	 *
-	 * @return SmartDomDocument The updated DOM.
+	 * @return \DOMDocument The updated DOM.
 	 */
 	public function modify_iframe_markup( $iframe, $dom ) {
 		// Save the iframe original attributes.
@@ -324,10 +326,10 @@ class Plugin {
 	/**
 	 * Modifies video markup to enable lazy loading.
 	 *
-	 * @param \DOMNode         $video The video dom node.
-	 * @param SmartDomDocument $dom   SmartDomDocument() object of the HTML.
+	 * @param \DOMNode     $video The video dom node.
+	 * @param \DOMDocument $dom   \DOMDocument() object of the HTML.
 	 *
-	 * @return SmartDomDocument The updated DOM.
+	 * @return \DOMDocument The updated DOM.
 	 */
 	public function modify_video_markup( $video, $dom ) {
 		// Save the original attributes.
@@ -366,10 +368,10 @@ class Plugin {
 	/**
 	 * Modifies audio markup to enable lazy loading.
 	 *
-	 * @param \DOMNode         $audio The audio dom node.
-	 * @param SmartDomDocument $dom   SmartDomDocument() object of the HTML.
+	 * @param \DOMNode     $audio The audio dom node.
+	 * @param \DOMDocument $dom   \DOMDocument() object of the HTML.
 	 *
-	 * @return SmartDomDocument The updated DOM.
+	 * @return \DOMDocument The updated DOM.
 	 */
 	public function modify_audio_markup( $audio, $dom ) {
 		// Save the original attributes.
@@ -398,14 +400,14 @@ class Plugin {
 	 *
 	 * @param \DOMNamedNodeMap $orig_elem_attr Object of the original element’s
 	 *                                         attributes.
-	 * @param SmartDomDocument $dom            SmartDomDocument() object of the
+	 * @param \DOMDocument     $dom            \DOMDocument() object of the
 	 *                                         HTML.
 	 * @param \DOMNode         $elem           Single DOM node.
 	 * @param string           $tag_name       Tag name which needs to be
 	 *                                         created inside the noscript
 	 *                                         element.
 	 *
-	 * @return SmartDomDocument The updates DOM.
+	 * @return \DOMDocument The updates DOM.
 	 */
 	public function add_noscript_element( $orig_elem_attr, $dom, $elem, $tag_name ) {
 		$noscript = $dom->createElement( 'noscript' );

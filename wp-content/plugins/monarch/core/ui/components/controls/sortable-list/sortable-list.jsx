@@ -95,25 +95,18 @@ class ETCoreSortableList extends PureComponent {
       event.preventDefault();
     }
 
-    let value     = this.state.items || [];
-    let items     = JSON.parse(value);
-    let itemValue = '';
-    let dragID    = this._nextDragID();
-
-    if (0 !== items.length && false !== index) {
-      itemValue = items[index].value;
-    }
+    const value     = this.state.items || [];
+    const items     = JSON.parse(value);
+    const itemValue = items.length && false !== index && !resetValue ? items[index] : {};
+    const dragID    = this._nextDragID();
+    const checked   = 0;
 
     if (false !== index) {
-      items.splice(index + 1, 0, {
-        value:   resetValue ? '' : itemValue,
-        checked: 0,
-        dragID,
-      });
+      items.splice(index + 1, 0, { ...itemValue, dragID });
     } else {
       items.push({
         value:   '',
-        checked: 0,
+        checked,
         dragID,
       });
     }

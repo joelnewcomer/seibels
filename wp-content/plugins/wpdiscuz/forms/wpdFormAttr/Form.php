@@ -166,6 +166,7 @@ class Form {
     public function saveCommentMeta($commentID) {
         $comment = get_comment($commentID);
         $commentApproved = $comment->comment_approved;
+        do_action('wpdiscuz_before_save_commentmeta',$comment,$this->fieldsBeforeSave);
         foreach ($this->fieldsBeforeSave as $mettaKey => $data) {
             if ($this->ratingsExists && $this->formCustomFields[$mettaKey]['type'] == 'wpdFormAttr\Field\RatingField') {
                 $oldCommentRating = get_comment_meta($commentID, $mettaKey, true);

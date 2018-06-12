@@ -129,6 +129,14 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
      * Default Value - Checked
      */
     public $showHideLoggedInUsername;
+    
+    /**
+     * Type - Checkbox
+     * Available Values - Checked/Unchecked
+     * Description - Show login link for guests
+     * Default Value - Checked
+     */
+    public $hideLoginLinkForGuests;
 
     /**
      * Type - Checkbox
@@ -653,6 +661,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $this->headerTextShowHide = isset($options['wc_header_text_show_hide']) ? $options['wc_header_text_show_hide'] : 0;
         $this->storeCommenterData = isset($options['storeCommenterData']) ? $options['storeCommenterData'] : 0;
         $this->showHideLoggedInUsername = isset($options['wc_show_hide_loggedin_username']) ? $options['wc_show_hide_loggedin_username'] : 0;
+        $this->hideLoginLinkForGuests = isset($options['hideLoginLinkForGuests']) ? $options['hideLoginLinkForGuests'] : 1;
         $this->hideUserSettingsButton = isset($options['hideUserSettingsButton']) ? $options['hideUserSettingsButton'] : 0;
         $this->hideDiscussionStat = isset($options['hideDiscussionStat']) ? $options['hideDiscussionStat'] : 0;
         $this->hideRecentAuthors = isset($options['hideRecentAuthors']) ? $options['hideRecentAuthors'] : 0;
@@ -811,6 +820,8 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_ago_text' => __('ago', 'wpdiscuz'),
             'wc_you_must_be_text' => __('You must be', 'wpdiscuz'),
             'wc_logged_in_as' => __('You are logged in as', 'wpdiscuz'),
+            'wc_log_in' => __('Login', 'wpdiscuz'),
+            'wc_login_please' => __('Please %s to comment', 'wpdiscuz'),
             'wc_log_out' => __('Log out', 'wpdiscuz'),
             'wc_logged_in_text' => __('logged in', 'wpdiscuz'),
             'wc_to_post_comment_text' => __('to post a comment.', 'wpdiscuz'),
@@ -861,12 +872,12 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_invisible_antispam_note' => __('This comment form is under antispam protection', 'wpdiscuz'),
             'wc_agreement_button_disagree' => __('Disagree', 'wpdiscuz'),
             'wc_agreement_button_agree' => __('Agree', 'wpdiscuz'),
-            /*             * =========================================================================* */
             'wc_content_and_settings' => __('My content and settings', 'wpdiscuz'),
             'wc_user_settings_activity' => __('Activity', 'wpdiscuz'),
             'wc_user_settings_subscriptions' => __('Subscriptions', 'wpdiscuz'),
             'wc_user_settings_response_to' => __('In response to:', 'wpdiscuz'),
             'wc_user_settings_email_me_delete_links' => __('Bulk management via email', 'wpdiscuz'),
+            'wc_user_settings_email_me_delete_links_desc' => __('Click the button above to get an email with bulk delete and unsubscribe links.', 'wpdiscuz'),
             'wc_user_settings_no_data' => __('No data found!', 'wpdiscuz'),
             'wc_user_settings_request_deleting_comments' => __('Delete all my comments', 'wpdiscuz'),
             'wc_user_settings_cancel_subscriptions' => __('Cancel all comment subscriptions', 'wpdiscuz'),
@@ -904,6 +915,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_header_text_show_hide' => $this->headerTextShowHide,
             'storeCommenterData' => $this->storeCommenterData,
             'wc_show_hide_loggedin_username' => $this->showHideLoggedInUsername,
+            'hideLoginLinkForGuests' => $this->hideLoginLinkForGuests,
             'hideUserSettingsButton' => $this->hideUserSettingsButton,
             'hideDiscussionStat' => $this->hideDiscussionStat,
             'hideRecentAuthors' => $this->hideRecentAuthors,
@@ -1064,6 +1076,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'isGravatarCacheEnabled' => '1',
             'gravatarCacheMethod' => 'cronjob',
             'gravatarCacheTimeout' => '10',
+            'hideLoginLinkForGuests'=> '1',
             'theme' => 'wpd-default',
             'reverseChildren' => 0,
             'antispamKey' => $this->generateUniqueKey(),

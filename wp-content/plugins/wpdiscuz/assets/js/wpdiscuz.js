@@ -26,6 +26,7 @@ jQuery(document).ready(function ($) {
     var wpdGoogleRecaptchaValid = true;
     var wpdiscuzReplyButton = '';
     var isCookiesEnabled = wpdiscuzAjaxObj.wpdiscuz_options.isCookiesEnabled;
+    var wpdCookiesConsent = true;
     var wpdiscuzCookiehash = wpdiscuzAjaxObj.wpdiscuz_options.cookiehash;
     var isLoadOnlyParentComments = wpdiscuzAjaxObj.wpdiscuz_options.isLoadOnlyParentComments;
     var wpdiscuzAgreementFields = [];
@@ -293,6 +294,10 @@ jQuery(document).ready(function ($) {
                 data.append('wpdiscuz_zs', wpdiscuzAjaxObj.wpdiscuz_options.wpdiscuz_zs);
             }
 
+            if ($('.wpd-cookies-chackbox', wcForm).length && !$('.wpd-cookies-chackbox', wcForm).prop("checked")) {
+                wpdCookiesConsent = false;
+            }
+
             getAjaxObj(true, data).done(function (response) {
                 $(currentSubmitBtn).addClass('wc_not_clicked');
                 var messageKey = '';
@@ -334,8 +339,10 @@ jQuery(document).ready(function ($) {
                         }
                         notifySubscribers(obj);
                         wpdiscuzRedirect(obj);
-                        if (isCookiesEnabled) {
+                        if (isCookiesEnabled && wpdCookiesConsent) {
                             addCookie(wcForm, obj);
+                        } else if (!wpdCookiesConsent) {
+                            $('.wpd-cookies-chackbox').removeAttr('checked');
                         }
                         wcForm.get(0).reset();
                         setCookieInForm(obj);
@@ -441,6 +448,9 @@ jQuery(document).ready(function ($) {
                 Cookies.set('comment_author_url_' + wpdiscuzCookiehash, weburl, {expires: storeCommenterData, path: '/'});
             }
         }
+        if ($('.wpd-cookies-chackbox').length) {
+            $('.wpd-cookies-chackbox').attr('checked', 'checked');
+        }
     }
 //============================== ADD COMMENT FUNCTION ============================== // 
 //============================== EDIT COMMENT FUNCTION ============================== // 
@@ -458,7 +468,7 @@ jQuery(document).ready(function ($) {
         wcCommentTextBeforeEditing = wcCommentTextBeforeEditingTop.length ? '<div class="wpd-top-custom-fields">' + wcCommentTextBeforeEditingTop.html() + '</div>' : '';
         wcCommentTextBeforeEditing += '<div class="wc-comment-text">' + $('#wc-comm-' + uniqueID + ' .wc-comment-text').html() + '</div>';
         wcCommentTextBeforeEditing += wcCommentTextBeforeEditingBottom.length ? '<div class="wpd-bottom-custom-fields">' + $('#wc-comm-' + uniqueID + ' .wpd-bottom-custom-fields').html() + '</div>' : '';
-
+        console.log(wcCommentTextBeforeEditing);
         getAjaxObj(true, data).done(function (response) {
             try {
                 var obj = $.parseJSON(response);
@@ -551,7 +561,7 @@ jQuery(document).ready(function ($) {
     function wcCancelOrSave(uniqueID, content) {
         $('#wc-comm-' + uniqueID + ' > .wc-comment-right .wc-comment-footer .wc_editable_comment').show();
         $('#wc-comm-' + uniqueID + ' > .wc-comment-right .wc-comment-footer .wc_cancel_edit').hide();
-        $('#wc-comm-' + uniqueID + ' #wpdiscuz-edit-form').replaceWith(content);
+        $('#wc-comm-' + uniqueID + ' .wpdiscuz-edit-form-wrap').replaceWith(content);
     }
 
     function nl2br(str, is_xhtml) {

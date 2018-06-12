@@ -95,7 +95,7 @@ class WpdiscuzEmailHelper implements WpDiscuzConstants {
         $headers = array();
         $mailContentType = apply_filters('wp_mail_content_type', 'text/html');
         $fromName = apply_filters('wp_mail_from_name', $blogTitle);
-
+        $fromName = html_entity_decode($fromName, ENT_QUOTES);
         $parsedUrl = parse_url($siteUrl);
         $domain = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
         $fromEmail = 'no-reply@' . $domain;
@@ -180,7 +180,7 @@ class WpdiscuzEmailHelper implements WpDiscuzConstants {
             $headers = array();
             $mailContentType = apply_filters('wp_mail_content_type', 'text/html');
             $fromName = apply_filters('wp_mail_from_name', $blogTitle);
-
+            $fromName = html_entity_decode($fromName, ENT_QUOTES);
             $parsedUrl = parse_url($siteUrl);
             $domain = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
             $fromEmail = 'no-reply@' . $domain;
@@ -356,6 +356,7 @@ class WpdiscuzEmailHelper implements WpDiscuzConstants {
             $headers = array();
             $mailContentType = apply_filters('wp_mail_content_type', 'text/html');
             $fromName = apply_filters('wp_mail_from_name', $blogTitle);
+            $fromName = html_entity_decode($fromName, ENT_QUOTES);
             $parsedUrl = parse_url($siteUrl);
             $domain = isset($parsedUrl['host']) ? $parsedUrl['host'] : '';
             $fromEmail = 'no-reply@' . $domain;

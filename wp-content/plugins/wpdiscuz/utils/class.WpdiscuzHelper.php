@@ -252,7 +252,9 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                     $html .= '<div class="wp-social-login-widget">';
                     $html .= '<div class="wp-social-login-connect-with_by_the_champ">' . $this->optionsSerialized->phrases['wc_connect_with'] . ':</div>';
                     $html .= '<div class="wp-social-login-provider-list">';
-                    $html .= '<div class="heateor_ss_sl_optin_container"><label><input type="checkbox" class="heateor_ss_social_login_optin" value="1" />'. str_replace($theChampLoginOptions['ppu_placeholder'], '<a href="'. $theChampLoginOptions['privacy_policy_url'] .'" target="_blank">'. $theChampLoginOptions['ppu_placeholder'] .'</a>', wp_strip_all_tags($theChampLoginOptions['privacy_policy_optin_text'])) .'</label></div>';
+                    if (isset($theChampLoginOptions['gdpr_enable'])) {
+                        $html .= '<div class="heateor_ss_sl_optin_container"><label><input type="checkbox" class="heateor_ss_social_login_optin" value="1" />' . str_replace($theChampLoginOptions['ppu_placeholder'], '<a href="' . $theChampLoginOptions['privacy_policy_url'] . '" target="_blank">' . $theChampLoginOptions['ppu_placeholder'] . '</a>', wp_strip_all_tags($theChampLoginOptions['privacy_policy_optin_text'])) . '</label></div>';
+                    }
                     $html .= '<ul class="wc_social_login_by_the_champ">';
                     foreach ($theChampLoginOptions['providers'] as $provider) {
                         $html .= '<li><i ';
@@ -379,15 +381,6 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                 include_once 'form-bottom-statistics.php';
             }
 
-            public function addContentModal() {
-                $html = "<a id='wpdInfoAnchor' style='display:none;' rel='#wpdInfo' data-wpd-lity>Comment Author Info</a>";
-                $html .= "<div id='wpdInfo' style='overflow:auto;background:#FDFDF6;padding:20px;width:600px;max-width:100%;border-radius:6px;' class='lity-hide'></div>";
-                $html .= "<style>";
-                $html .= ".wpd-wrapper .wpd-list-item.wpd-active{border-top: 3px solid {$this->optionsSerialized->primaryColor};}";
-                $html .= "</style>";
-                echo $html;
-            }
-
             public function wpdGetInfo() {
                 $response = '';
                 $currentUser = self::getCurrentUser();
@@ -414,7 +407,7 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                     $response .= $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links'];
                     $response .= "<span class='wpd-loading wpd-hide'><i class='fas fa-pulse fa-spinner'></i></span>";
                     $response .= "</a>";
-                    $response .= "<div class='wpd-bulk-desc'>" . __('Click the button above to get an email with bulk delete and unsubscribe links.', 'wpdiscuz') . "</div>";
+                    $response .= "<div class='wpd-bulk-desc'>" .  $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links_desc'] . "</div>";
                     $response .= "</div>";
                     $response .= "</div>";
                 } else if ($currentUserEmail) {
@@ -520,6 +513,20 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                 include_once 'layouts/subscriptions/subscriptions-page.php';
                 $html = ob_get_clean();
                 wp_die($html);
+            }
+
+            public function hashVotesNote() {
+                if ($this->dbManager->getNotHashedIpCount()) {
+                    $page = isset($_GET['page']) ? $_GET['page'] : '';
+                    if ($page != self::PAGE_TOOLS) {
+                        $goToHashUrl = get_admin_url(WpdiscuzCore::$CURRENT_BLOG_ID, 'edit-comments.php?page=') . self::PAGE_TOOLS . '#toolsTab4';
+                        $html = "<div class='error' style='padding:10px;'>";
+                        $html .= "<p>" . __('Before using wpDiscuz you should update your data', $goToHashUrl) . "</p>";
+                        $html .= "<a class='' href='$goToHashUrl'>" . __('Go to update data', 'wpdiscuz') . "</a>";
+                        $html .= "</div>";
+                        echo$html;
+                    }
+                }
             }
 
         }

@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 }
 global $post;
 $postId = isset($post->ID) ? intval($post->ID) : 0;
-if ($isMain && $commentsCount) {
+if ($isMain && $commentsCount && $postId) {
     ?>
     <div class="wpdiscuz-form-bottom-bar">
         <?php if (!$form->wpdOptions->hideDiscussionStat) { ?>
@@ -62,20 +62,20 @@ if ($isMain && $commentsCount) {
                 <?php $isShowRecentAuthors = apply_filters('wpdiscuz_show_recent_authors', true); ?>
                 <?php if ($isShowAuthorsCount && $this->optionsSerialized->wordpressShowAvatars) { ?>
                     <?php $authorsLimit = apply_filters('wpdiscuz_recent_authors_limit', 5); ?>
-                    <?php $recentAuthorsComments = $this->dbManager->getRecentAuthors($postId, $authorsLimit, false); ?>
+                    <?php $recentAuthors = $this->dbManager->getRecentAuthors($postId, $authorsLimit); ?>
                     <div class="wpdiscuz-users wpd-tooltip-right">
                         <?php
                         $gravatarSize = apply_filters('wpdiscuz_gravatar_size', 64);
-                        foreach ($recentAuthorsComments as $comment) {
-                            $authorAvatarField = apply_filters('wpdiscuz_author_avatar_field', $comment->comment_author_email, $comment, null, '');
+                        foreach ($recentAuthors as $recentAuthor) {
+                            $authorAvatarField = apply_filters('wpdiscuz_author_avatar_field', $recentAuthor->comment_author_email, $recentAuthor, null, '');
                             $gravatarArgs = array(
                                 'wpdiscuz_gravatar_field' => $authorAvatarField,
                                 'wpdiscuz_gravatar_size' => $gravatarSize,
-                                'wpdiscuz_gravatar_user_id' => $comment->user_id,
-                                'wpdiscuz_gravatar_user_email' => $comment->comment_author_email,
-                                'extra_attr' => "title='{$comment->comment_author}'",
+                                'wpdiscuz_gravatar_user_id' => $recentAuthor->user_id,
+                                'wpdiscuz_gravatar_user_email' => $recentAuthor->comment_author_email,
+                                'extra_attr' => "title='{$recentAuthor->comment_author}'",
                             );
-                            $authorAvatar = get_avatar($authorAvatarField, $gravatarSize, '', $comment->comment_author, $gravatarArgs);
+                            $authorAvatar = get_avatar($authorAvatarField, $gravatarSize, '', $recentAuthor->comment_author, $gravatarArgs);
                             echo $authorAvatar;
                         }
                         ?>

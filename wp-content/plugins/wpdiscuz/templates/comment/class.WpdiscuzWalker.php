@@ -99,13 +99,13 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
         $userKey = $comment->user_id . '_' . $comment->comment_author_email;
         if (isset($this->users[$userKey])) {
             $user = $this->users[$userKey];
-        } else {            
+        } else {
             if ($this->optionsSerialized->isUserByEmail) {
                 $user = get_user_by('email', $comment->comment_author_email);
             } else {
                 $user = $comment->user_id ? get_user_by('id', $comment->user_id) : '';
             }
-            $this->users[$userKey] = $user;          
+            $this->users[$userKey] = $user;
         }
 
         if ($user) {
@@ -127,7 +127,7 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
                         foreach ($user->roles as $role) {
                             if (array_key_exists($role, $blogRoles)) {
                                 $authorClass = 'wc-blog-user wc-blog-' . $role;
-                                $rolePhrase = $this->optionsSerialized->phrases['wc_blog_role_' . $role];
+                                $rolePhrase = isset($this->optionsSerialized->phrases['wc_blog_role_' . $role]) ? $this->optionsSerialized->phrases['wc_blog_role_' . $role] : '';
                                 $author_title = apply_filters('wpdiscuz_user_label', $rolePhrase, $user);
                                 break;
                             }
@@ -255,14 +255,15 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
             } else {
                 $twitt_content = '';
             }
+            $postLink = get_permalink($comment->comment_post_ID);
             $twitt_content = urlencode($twitt_content);
             $twCommentLink = urlencode($commentLink);
             $output .= '<wpdtip>';
             $output .= ( $this->optionsSerialized->enableFbShare && $this->optionsSerialized->fbAppID) ? '<span class="wc_fb"><i class="fab fa-facebook-f wpf-cta" aria-hidden="true" title="' . $this->optionsSerialized->phrases['wc_share_facebook'] . '"></i></span>' : '';
             $output .= $this->optionsSerialized->enableTwitterShare ? '<a class="wc_tw" target="_blank" href="https://twitter.com/intent/tweet?text=' . $twitt_content . '&url=' . $twCommentLink . '" title="' . $this->optionsSerialized->phrases['wc_share_twitter'] . '"><i class="fab fa-twitter wpf-cta" aria-hidden="true"></i></a>' : '';
-            $output .= $this->optionsSerialized->enableGoogleShare ? '<a class="wc_go" target="_blank" href="https://plus.google.com/share?url=' . get_permalink($comment->comment_post_ID) . '" title="' . $this->optionsSerialized->phrases['wc_share_google'] . '"><i class="fab fa-google wpf-cta" aria-hidden="true"></i></a>' : '';
-            $output .= $this->optionsSerialized->enableVkShare ? '<a class="wc_vk" target="_blank" href="http://vk.com/share.php?url=' . get_permalink($comment->comment_post_ID) . '" title="' . $this->optionsSerialized->phrases['wc_share_vk'] . '"><i class="fab fa-vk wpf-cta" aria-hidden="true"></i>' : '';
-            $output .= $this->optionsSerialized->enableOkShare ? '<a class="wc_ok" target="_blank" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=' . get_permalink($comment->comment_post_ID) . '" title="' . $this->optionsSerialized->phrases['wc_share_ok'] . '"><i class="fab fa-odnoklassniki wpf-cta" aria-hidden="true"></i></a>' : '';
+            $output .= $this->optionsSerialized->enableGoogleShare ? '<a class="wc_go" target="_blank" href="https://plus.google.com/share?url=' . $postLink . '" title="' . $this->optionsSerialized->phrases['wc_share_google'] . '"><i class="fab fa-google wpf-cta" aria-hidden="true"></i></a>' : '';
+            $output .= $this->optionsSerialized->enableVkShare ? '<a class="wc_vk" target="_blank" href="http://vk.com/share.php?url=' . $postLink . '" title="' . $this->optionsSerialized->phrases['wc_share_vk'] . '"><i class="fab fa-vk wpf-cta" aria-hidden="true"></i></a>' : '';
+            $output .= $this->optionsSerialized->enableOkShare ? '<a class="wc_ok" target="_blank" href="http://www.odnoklassniki.ru/dk?st.cmd=addShare&st.s=1&st._surl=' . $postLink . '" title=""><i class="fab fa-odnoklassniki wpf-cta" aria-hidden="true"></i></a>' : '';
             $output .= '</wpdtip></div>';
         }
 

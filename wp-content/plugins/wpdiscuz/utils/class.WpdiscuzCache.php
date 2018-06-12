@@ -107,10 +107,10 @@ class WpdiscuzCache implements WpDiscuzConstants {
                     $fileUrlHash = $cacheFileUrl . $fileNameHash;
                     $url = $fileUrlHash;
                     $this->gravatars[$md5FileName] = array(
-                        'user_id' => intval($args['wpdiscuz_gravatar_user_id']),
-                        'user_email' => trim($args['wpdiscuz_gravatar_user_email']),
-                        'url' => trim($url),
-                        'hash' => trim($md5FileName),
+                        'user_id' => $args['wpdiscuz_gravatar_user_id'],
+                        'user_email' => $args['wpdiscuz_gravatar_user_email'],
+                        'url' => $url,
+                        'hash' => $md5FileName,
                         'cached' => 1
                     );
                 }
@@ -130,10 +130,10 @@ class WpdiscuzCache implements WpDiscuzConstants {
             $md5FileName = $this->getMD5FieldName($args['wpdiscuz_gravatar_field']);
             if ($md5FileName) {
                 $this->gravatars[$md5FileName] = array(
-                    'user_id' => intval($args['wpdiscuz_gravatar_user_id']),
-                    'user_email' => trim($args['wpdiscuz_gravatar_user_email']),
-                    'url' => trim($url),
-                    'hash' => trim($md5FileName),
+                    'user_id' => $args['wpdiscuz_gravatar_user_id'],
+                    'user_email' => $args['wpdiscuz_gravatar_user_email'],
+                    'url' => $url,
+                    'hash' => $md5FileName,
                     'cached' => 0
                 );
             }
