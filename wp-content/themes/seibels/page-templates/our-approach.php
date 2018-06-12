@@ -34,7 +34,7 @@ get_header(); ?>
 			<div class="grid-x">
 		   	   <div class="large-6 medium-6 cell">
 			   	   <h2>Process</h2>
-			   	   <?php echo get_field('people_content'); ?>
+			   	   <?php echo get_field('process_content'); ?>
 		   	   </div>
 			</div>
 		</div>		
@@ -44,7 +44,7 @@ get_header(); ?>
 			<div class="grid-x">
 		   	   <div class="large-6 medium-6 cell">
 			   	   <h2>Technology</h2>
-			   	   <?php echo get_field('people_content'); ?>
+			   	   <?php echo get_field('tech_content'); ?>
 		   	   </div>
 			</div>
 		</div>		
