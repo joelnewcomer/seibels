@@ -225,7 +225,7 @@ class FFDB {
 					}
 				}
 				if ((empty($source['errors']) || is_string($source['errors'])) && $source['status'] === '0') {
-					$source['errors'] = array( array( 'type' => $source['type'], 'message' => 'Feed cache has not been built. Try to manually rebuild cache using three dots menu on the right.' ) );
+					$source['errors'] = array( array( 'type' => $source['type'], 'message' => 'Feed cache has not been built. Try to manually rebuild cache using three dots menu on the left.' ) );
 				}
 			}
 			return $result;

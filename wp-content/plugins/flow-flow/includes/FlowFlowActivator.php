@@ -82,7 +82,7 @@ class FlowFlowActivator extends LAActivatorBase{
 				'plugin_url'        => plugin_dir_url(dirname($file).'/'),
 				'admin_url'         => admin_url('admin-ajax.php'),
 				'table_name_prefix' => $wpdb->prefix . 'ff_',
-				'version' 			=> '3.2.25',
+				'version' 			=> '3.2.26',
 				'faq_url' 			=> 'http://docs.social-streams.com/'
 		);
 		$adapter = new FFFacebookCacheAdapter();
@@ -136,8 +136,8 @@ class FlowFlowActivator extends LAActivatorBase{
 	}
 	
 	protected function registrationCronActions(){
-		$this->addCronInterval('minute', array('interval' => MINUTE_IN_SECONDS, 'display' => 'Once Minute'));
-		$this->addCronInterval('sex_hours', array('interval' => MINUTE_IN_SECONDS * 60 * 6, 'display' => 'Sex hours'));
+		$this->addCronInterval('minute', array('interval' => MINUTE_IN_SECONDS, 'display' => 'Every Minute'));
+		$this->addCronInterval('sex_hours', array('interval' => MINUTE_IN_SECONDS * 60 * 6, 'display' => 'Six hours'));
 		add_filter('cron_schedules', array($this, 'getCronIntervals'));
 		
 		$time = time();

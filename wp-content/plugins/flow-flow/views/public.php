@@ -67,6 +67,7 @@ $page = isset($_REQUEST['page']) ? $_REQUEST['page'] : '0';
 				}
 				streamOpts.isOverlay = true;
 			}
+			var test = '<div class="test"></div>'; // For some WP parsers problem with &&
 			if (FF_resource.scriptDeferred.state() === 'pending' && !FF_resource.scriptLoading) {
 				script = document.createElement('script');
 				script.src = "<?php echo $context['plugin_url'] . $context['slug'];?>/js/public.js";

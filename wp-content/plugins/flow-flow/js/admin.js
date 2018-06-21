@@ -912,7 +912,7 @@ var FlowFlowApp = (function($){
     },
 
     validateEmail: function (val) {
-      return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,8}$/.test(val);
+      return /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,20}$/.test(val);
     },
 
     validateCode: function (val) {
@@ -1532,6 +1532,8 @@ var FlowFlowApp = (function($){
         Controller.tabsCursor.initFor(this.$el, id);
 
         setTimeout(function () {
+          self.$preview = self.$el.find('.preview .ff-stream-wrapper');
+
           self.configDesign();
           self.applySavedTemplate();
           self.trigger('preview-update');

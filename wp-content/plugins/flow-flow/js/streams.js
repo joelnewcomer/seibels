@@ -554,9 +554,9 @@ Posts to load during update\
 <dt>FEED TYPE </dt>\
 <dd>\
 <input id="<%= uid %>-page-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="page_timeline" checked />\
-<label for="<%= uid %>-page-timeline-type">Page</label>\
-<input class="hide" id="<%= uid %>-group-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="group" />\
-<label class="hide" for="<%= uid %>-group-timeline-type">Group</label><br><br>\
+<label for="<%= uid %>-page-timeline-type">Page</label><br><br>\
+<input class="no-hide" id="<%= uid %>-group-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="group" />\
+<label class="no-hide" for="<%= uid %>-group-timeline-type">Group</label><br><br>\
 <input id="<%= uid %>-album-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="album" />\
 <label for="<%= uid %>-album-timeline-type">Album</label>\
 </dd>\
@@ -570,7 +570,7 @@ Content to show\
         <h1>Content to show</h1>\
         <ul>\
             <li><b>Page</b> — enter nickname of any public page or Page ID.</li>\
-            <li class="hide"><b>Group</b> — enter Group ID.</li>\
+            <li class="no-hide"><b>Group</b> — enter Group ID.</li>\
             <li><b>Album</b> — enter Album ID. <a href="http://docs.social-streams.com/article/50-find-facebook-album-id" target="_blank">What is it?</a> </li>\
         </ul><br>\
         Use <a href="http://lookup-id.com" target="_blank">Find my Facebook ID</a> tool to find your Page ID or Group ID.\
