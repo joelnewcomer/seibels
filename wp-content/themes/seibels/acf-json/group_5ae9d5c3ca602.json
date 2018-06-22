@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "",
+            "collapsed": "field_5ae9ef309be8b",
             "min": 0,
             "max": 0,
             "layout": "block",
@@ -189,5 +189,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1525793297
+    "modified": 1529680179
 }

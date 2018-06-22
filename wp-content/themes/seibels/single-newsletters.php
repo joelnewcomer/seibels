@@ -180,7 +180,7 @@ jQuery( document ).ready(function() {
 										</div>
 									<?php endif; ?>
 									
-									<?php if ($has_link || $image_id != '') : ?>
+									<?php if ($has_link || $image_id != '' || $modal_content != '') : ?>
 									</a>
 									<?php endif; ?>
 								</div> <!-- nl-block-inner -->
