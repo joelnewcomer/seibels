@@ -133,7 +133,7 @@ jQuery( document ).ready(function() {
 							<div class="<?php echo $width; ?> <?php echo $height; ?> cell nl-block <?php echo $no_photo; ?><?php echo $no_link; ?><?php echo $has_intro; ?><?php echo $is_modal; ?>">
 								<div class="nl-block-inner" <?php echo $photo; ?>>
 									<?php if ($has_link) : ?>
-										<a href="<?php echo $link; ?>">
+										<a href="<?php echo $link['url']; ?>" target="<?php echo $link['target']; ?>">
 									<?php elseif ($modal_content != '') : ?>
 										<div class="nl-modal" id="<?php echo $slug; ?>"><?php echo $modal_content; ?></div>
 										<a class="fl-modal-link" href="#" data-featherlight="#<?php echo $slug; ?>">		
