@@ -153,7 +153,7 @@ jQuery( document ).ready(function() {
 												<div style="display:table-cell;vertical-align:middle;">
 											    	<div style="text-align:center;">
 												    	<?php if ($intro != '') : ?>
-												    	
+												    		<?php echo $intro; ?>
 												    	<?php endif; ?>
 												    	<div class="faux-button"><span>Read More</span></div>
 													</div>
