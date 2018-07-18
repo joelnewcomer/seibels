@@ -16,6 +16,7 @@ if (!defined('ABSPATH')) {
                         <input <?php checked($this->optionsSerialized->theme == 'wpd-default'); ?> value="wpd-default" name="theme" id="themeDefault" type="radio"><label for="themeDefault"><?php _e('Default', 'wpdiscuz'); ?></label>
                         <input <?php checked($this->optionsSerialized->theme == 'wpd-dark'); ?> value="wpd-dark" name="theme" id="themeDark" type="radio"><label for="themeDark"><?php _e('Dark', 'wpdiscuz'); ?></label>
                     </div>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/styling/#form_and_list_style" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top">
@@ -55,6 +56,7 @@ if (!defined('ABSPATH')) {
                         <label><?php _e('Unread comments background', 'wpdiscuz'); ?></label>
                     </div>
                     <div style="clear: both"></div>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/styling/#colors" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top">
@@ -91,6 +93,7 @@ if (!defined('ABSPATH')) {
                         <input type="text" class="wpdiscuz-color-picker regular-text" value="<?php echo $buttonColor['vote_down_link_color']; ?>" id="wc_link_button_color" name="wc_link_button_color[vote_down_link_color]" placeholder="<?php _e('Down Vote Color', 'wpdiscuz'); ?>"/>
                         <label><?php _e('Down vote button', 'wpdiscuz'); ?></label>
                     </div>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/styling/#button_colors" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
 
@@ -113,7 +116,7 @@ if (!defined('ABSPATH')) {
                         <input type="text" class="wpdiscuz-color-picker regular-text" value="<?php echo $ratingActivColor; ?>" id="wc_comment_rating_activ_color" name="wc_comment_rating_activ_color" placeholder="<?php _e('Example: #00FF00', 'wpdiscuz'); ?>"/>
                         <label><?php _e('Rating Stars Active Color', 'wpdiscuz'); ?></label>
                     </div>
-
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/styling/#rating_star_colors" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top">
@@ -132,6 +135,7 @@ if (!defined('ABSPATH')) {
                     }
                     ?>
                     <div style="clear: both"></div>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/styling/#label_colors" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top" >
@@ -157,6 +161,7 @@ if (!defined('ABSPATH')) {
                 <td>                    
                     <input type="checkbox" <?php checked($this->optionsSerialized->disableFontAwesome == 1) ?> value="1" name="disableFontAwesome" id="disableFontAwesome" />
                     <label for="disableFontAwesome"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/styling/#fontawesome_lib" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -165,7 +170,8 @@ if (!defined('ABSPATH')) {
                 </th>
                 <td>
                     <textarea class="regular-text" id="wc_custom_css" name="wc_custom_css" placeholder="" style="width: 90%; height: 100px; color: #333333; font-family: 'Courier New', Courier, monospace; background: #f5f5f5;"><?php echo stripslashes($this->optionsSerialized->customCss); ?></textarea>
-                </td>   
+                    <a href="https://www.w3schools.com/css/default.asp" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
             </tr>           
         </tbody>
     </table>

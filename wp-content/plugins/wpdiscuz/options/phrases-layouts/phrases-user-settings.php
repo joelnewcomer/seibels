@@ -20,6 +20,10 @@ if (!defined('ABSPATH')) {
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_subscriptions']; ?>" name="wc_user_settings_subscriptions" id="wc_user_settings_subscriptions" /></td>
             </tr>
             <tr valign="top">
+                <th scope="row"><label for="wc_user_settings_follows"><?php _e('Follows', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_follows']; ?>" name="wc_user_settings_follows" id="wc_user_settings_follows" /></td>
+            </tr>
+            <tr valign="top">
                 <th scope="row"><label for="wc_user_settings_response_to"><?php _e('In response to:', 'wpdiscuz'); ?></label></th>
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_response_to']; ?>" name="wc_user_settings_response_to" id="wc_user_settings_response_to" /></td>
             </tr>
@@ -52,20 +56,79 @@ if (!defined('ABSPATH')) {
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_delete_links']; ?>" name="wc_user_settings_delete_links" id="wc_user_settings_delete_links" /></td>
             </tr>
             <tr valign="top">
-                <th scope="row"><label for="wc_user_settings_delete_all_comments"><?php _e('Delete all my comments', 'wpdiscuz'); ?></label></th>
+                <th scope="row">
+                    <label for="wc_user_settings_delete_all_comments"><?php _e('Delete all my comments', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc"><?php _e('Available shortcodes', 'wpdiscuz'); ?>:
+                    <div class="wc_available_variables">                                                
+                        <div class="wc_available_variable">[SITE_URL]</div>
+                        <div class="wc_available_variable">[BLOG_TITLE]</div>
+                    </div>
+                    </p>
+                </th>
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments']; ?>" name="wc_user_settings_delete_all_comments" id="wc_user_settings_delete_all_comments" /></td>
             </tr>
             <tr valign="top">
-                <th scope="row"><label for="wc_user_settings_delete_all_comments_message"><?php _e('Delete all comments email text', 'wpdiscuz'); ?></label></th>
-                <td colspan="3"><textarea   name="wc_user_settings_delete_all_comments_message" id="wc_user_settings_delete_all_comments_message" ><?php echo $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments_message']; ?></textarea></td>
+                <th scope="row">
+                    <label for="wc_user_settings_delete_all_comments_message"><?php _e('Delete all comments email text', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc"><?php _e('Available shortcodes', 'wpdiscuz'); ?>:
+                    <div class="wc_available_variables">                                                
+                        <div class="wc_available_variable">[SITE_URL]</div>
+                        <div class="wc_available_variable">[BLOG_TITLE]</div>
+                        <div class="wc_available_variable">[DELETE_COMMENTS_URL]</div>
+                    </div>
+                    </p>
+                </th>
+                <td colspan="3"><?php wp_editor($this->optionsSerialized->phrases['wc_user_settings_delete_all_comments_message'], "wc_user_settings_delete_all_comments_message", array('textarea_rows' => 7, 'teeny' => true)); ?></td>
             </tr>
             <tr valign="top">
-                <th scope="row"><label for="wc_user_settings_delete_all_subscriptions"><?php _e('Delete all my subscriptions', 'wpdiscuz'); ?></label></th>
+                <th scope="row">
+                    <label for="wc_user_settings_delete_all_subscriptions"><?php _e('Delete all my subscriptions', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc"><?php _e('Available shortcodes', 'wpdiscuz'); ?>:
+                    <div class="wc_available_variables">                                                
+                        <div class="wc_available_variable">[SITE_URL]</div>
+                        <div class="wc_available_variable">[BLOG_TITLE]</div>
+                    </div>
+                    </p>
+                </th>
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions']; ?>" name="wc_user_settings_delete_all_subscriptions" id="wc_user_settings_delete_all_subscriptions" /></td>
             </tr>
             <tr valign="top">
-                <th scope="row"><label for="wc_user_settings_delete_all_subscriptions_message"><?php _e('Delete all subscriptions email text', 'wpdiscuz'); ?></label></th>
-                <td colspan="3"><textarea   name="wc_user_settings_delete_all_subscriptions_message" id="wc_user_settings_delete_all_subscriptions_message" ><?php echo $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions_message']; ?></textarea></td>
+                <th scope="row">
+                    <label for="wc_user_settings_delete_all_subscriptions_message"><?php _e('Delete all subscriptions email text', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc"><?php _e('Available shortcodes', 'wpdiscuz'); ?>:
+                    <div class="wc_available_variables">                                                
+                        <div class="wc_available_variable">[SITE_URL]</div>
+                        <div class="wc_available_variable">[BLOG_TITLE]</div>
+                        <div class="wc_available_variable">[DELETE_SUBSCRIPTIONS_URL]</div>
+                    </div>
+                    </p>
+                </th>
+                <td colspan="3"><?php wp_editor($this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions_message'], "wc_user_settings_delete_all_subscriptions_message", array('textarea_rows' => 7, 'teeny' => true)); ?></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row">
+                    <label for="wc_user_settings_delete_all_follows"><?php _e('Delete all my follows', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc"><?php _e('Available shortcodes', 'wpdiscuz'); ?>:
+                    <div class="wc_available_variables">                                                
+                        <div class="wc_available_variable">[SITE_URL]</div>
+                        <div class="wc_available_variable">[BLOG_TITLE]</div>
+                    </div>
+                    </p>
+                </th>
+                <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_user_settings_delete_all_follows']; ?>" name="wc_user_settings_delete_all_follows" id="wc_user_settings_delete_all_follows" /></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row">
+                    <label for="wc_user_settings_delete_all_follows_message"><?php _e('Delete all follows email text', 'wpdiscuz'); ?></label>
+                    <p class="wpd-desc"><?php _e('Available shortcodes', 'wpdiscuz'); ?>:
+                    <div class="wc_available_variables">                                                
+                        <div class="wc_available_variable">[SITE_URL]</div>
+                        <div class="wc_available_variable">[BLOG_TITLE]</div>
+                        <div class="wc_available_variable">[DELETE_FOLLOWS_URL]</div>
+                    </div>
+                    </p>
+                </th>
+                <td colspan="3"><?php wp_editor($this->optionsSerialized->phrases['wc_user_settings_delete_all_follows_message'], "wc_user_settings_delete_all_follows_message", array('textarea_rows' => 7, 'teeny' => true)); ?></td>
             </tr>
             <tr valign="top">
                 <th scope="row"><label for="wc_user_settings_subscribed_to_replies"><?php _e('subscribed to this comment', 'wpdiscuz'); ?></label></th>
@@ -94,6 +157,10 @@ if (!defined('ABSPATH')) {
             <tr valign="top">
                 <th scope="row"><label for="wc_confirm_cancel_subscription"><?php _e('Are you sure you want to cancel this subscription?', 'wpdiscuz'); ?></label></th>
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_confirm_cancel_subscription']; ?>" name="wc_confirm_cancel_subscription" id="wc_confirm_cancel_subscription" /></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row"><label for="wc_confirm_cancel_follow"><?php _e('Are you sure you want to cancel this follow?', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_confirm_cancel_follow']; ?>" name="wc_confirm_cancel_follow" id="wc_confirm_cancel_follow" /></td>
             </tr>
 
         </tbody>

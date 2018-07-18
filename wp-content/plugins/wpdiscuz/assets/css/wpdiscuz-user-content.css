@@ -31,11 +31,14 @@
 .wpd-wrapper #wpd-content-item-1 .wpd-item-right{margin-left: 92%;text-align: center;vertical-align: middle;padding-top: 24px;color: #666;}
 /** SUBSCRIPTIONS **/
 .wpd-wrapper #wpd-content-item-2 .wpd-item-left{ float:left; width:88%; border-right: 1px dotted #ccc; margin-top:5px; }
+.wpd-wrapper #wpd-content-item-3 .wpd-item-left{ float:left; width:88%; border-right: 1px dotted #ccc; margin-top:5px; }
 .wpd-wrapper #wpd-content-item-2 .wpd-item-right{  margin-left:92%; text-align:center; vertical-align:middle; padding-top:24px; color:#666;}
+.wpd-wrapper #wpd-content-item-3 .wpd-item-right{  margin-left:92%; text-align:center; vertical-align:middle; padding:15px 0; color:#666;}
 .wpd-wrapper .wpd-item-right *,
 .wpd-wrapper .wpd-user-email-delete-links-wrap{outline: none!important;}
 .wpd-wrapper #wpd-content-item-1 .wpd-item-right i,
 .wpd-wrapper #wpd-content-item-2 .wpd-item-right i{ display:inline-block; vertical-align:middle; font-size:30px; line-height:30px;color: #e8484a;}
+.wpd-wrapper #wpd-content-item-3 .wpd-item-right i{ display:inline-block; vertical-align:middle; font-size:20px; line-height:20px;color: #e8484a;}
 .wpd-wrapper .wpd-user-email-delete-links-wrap{text-align: center;padding: 8px;}
 .wpd-wrapper .wpd-user-email-delete-links{font-size: 15px;}
 .wpd-wrapper .wpd-user-email-delete-links span{margin-left:5px;}

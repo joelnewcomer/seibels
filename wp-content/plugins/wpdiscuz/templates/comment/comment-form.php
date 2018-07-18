@@ -49,8 +49,8 @@ if (!post_password_required($post->ID)) {
     }
 
     if ((isset($_GET['deleteComments']) && $_GET['deleteComments'])) {
-        $decodedEmail = base64_decode($_GET['deleteComments']);
-        if (get_transient(WpDiscuzConstants::TRS_USER_HASH . md5($decodedEmail)) !== false) {
+        $decodedEmail = get_transient(WpDiscuzConstants::TRS_USER_HASH . trim($_GET['deleteComments']));
+        if ($decodedEmail) {
             $comments = get_comments(array('author_email' => $decodedEmail, 'status' => 'all', 'fields' => 'ids'));
             if ($comments) {
                 foreach ($comments as $cid) {
@@ -64,14 +64,42 @@ if (!post_password_required($post->ID)) {
             }
         }
     } else if (isset($_GET['deleteSubscriptions']) && $_GET['deleteSubscriptions']) {
-        $decodedEmail = base64_decode($_GET['deleteSubscriptions']);
-        if (get_transient(WpDiscuzConstants::TRS_USER_HASH . md5($decodedEmail)) !== false) {
+        $decodedEmail = get_transient(WpDiscuzConstants::TRS_USER_HASH . trim($_GET['deleteSubscriptions']));
+        if ($decodedEmail) {
             $wpdiscuz->dbManager->unsubscribeByEmail($decodedEmail);
             ?>
             <div id="wc_delete_content_message">
                 <span class="wc_delete_content_message"><?php _e('You cancel all your subscriptions successfully', 'wpdiscuz'); ?></span>
             </div>
             <?php
+        }
+    } else if (isset($_GET['deleteFollows']) && $_GET['deleteFollows']) {
+        $decodedEmail = get_transient(WpDiscuzConstants::TRS_USER_HASH . trim($_GET['deleteFollows']));
+        if (get_transient(WpDiscuzConstants::TRS_USER_HASH . md5($decodedEmail)) !== false) {
+            $wpdiscuz->dbManager->unfollowByEmail($decodedEmail);
+            ?>
+            <div id="wc_delete_content_message">
+                <span class="wc_delete_content_message"><?php _e('You cancel all your follows successfully', 'wpdiscuz'); ?></span>
+            </div>
+            <?php
+        }
+    } else if (isset($_GET['wpdiscuzFollowID']) && isset($_GET['wpdiscuzFollowKey']) && isset($_GET['wpDiscuzComfirm'])) {
+        if ($_GET['wpDiscuzComfirm']) {
+            if ($wpdiscuz->dbManager->confirmFollow($_GET['wpdiscuzFollowID'], $_GET['wpdiscuzFollowKey'])) {
+                ?>
+                <div id="wc_follow_message">
+                    <span class="wc_follow_message"><?php _e('Follow has been confirmed successfully', 'wpdiscuz'); ?></span>
+                </div>
+                <?php
+            }
+        } else {
+            if ($wpdiscuz->dbManager->cancelFollow($_GET['wpdiscuzFollowID'], $_GET['wpdiscuzFollowKey'])) {
+                ?>
+                <div id="wc_follow_message">
+                    <span class="wc_follow_message"><?php _e('Follow has been canceled successfully', 'wpdiscuz'); ?></span>
+                </div>
+                <?php
+            }
         }
     }
 
@@ -269,6 +297,12 @@ if (!post_password_required($post->ID)) {
                                 <div class="wpdiscuz-subscribe-form-button">
                                     <input id="wpdiscuz_subscription_button" type="submit" value="<?php echo $wpdiscuz->optionsSerialized->phrases['wc_form_subscription_submit']; ?>" name="wpdiscuz_subscription_button" />
                                 </div> 
+                                <?php if (!$currentUser->ID && $form->isShowSubscriptionBarAgreement()): ?>
+                                    <div class="wpdiscuz-subscribe-agreement">
+                                        <input id="show_subscription_agreement" type="checkbox" checked="checked" required="required" name="show_subscription_agreement" value="1">
+                                        <label for="show_subscription_agreement"><?php echo $form->subscriptionBarAgreementLabel(); ?></label>
+                                    </div>
+                                <?php endif; ?>
                                 <?php wp_nonce_field('wpdiscuz_subscribe_form_nonce_action', 'wpdiscuz_subscribe_form_nonce'); ?>
                                 <input type="hidden" value="<?php echo $post->ID; ?>" name="wpdiscuzSubscriptionPostId" />
                             </form>

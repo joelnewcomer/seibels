@@ -62,16 +62,6 @@ get_header(); ?>
 	</script>
 </section>
 
-<section class="benefits">
-	<div class="grid-container">
-		<div class="grid-x">
-	   		<div class="large-12 cell">
-		   	   <?php echo get_field('benefits_content'); ?>
-		   	   <div class="button yellow text-center"><a href="<?php echo get_field('join_our_team_link'); ?>" target="_blank"><span>Join our Team</span></a></div>
-	   		</div>
-		</div>
-	</div>	
-</section> <!-- benefits -->
 
 <section class="life">
 	<div class="grid-container">
@@ -166,5 +156,16 @@ get_header(); ?>
 		</div>
 	</div>	
 </section> <!-- continued-ed -->
+
+<section class="benefits">
+	<div class="grid-container">
+		<div class="grid-x">
+	   		<div class="large-12 cell">
+		   	   <?php echo get_field('benefits_content'); ?>
+		   	   <div class="button yellow text-center"><a href="<?php echo get_field('join_our_team_link'); ?>" target="_blank"><span>Join our Team</span></a></div>
+	   		</div>
+		</div>
+	</div>	
+</section> <!-- benefits -->
 
 <?php get_footer(); ?>

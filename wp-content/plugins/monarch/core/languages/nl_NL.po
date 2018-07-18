@@ -263,7 +263,7 @@ msgstr ""
 
 #: components/VersionRollback.php:299
 #, fuzzy
-msgid "An unknown error has occurred. Please try again later."
+msgid "An unknown has error occurred. Please try again later."
 msgstr "Er is iets misgegaan. Probeer het later nogmaals."
 
 #: components/VersionRollback.php:378 components/VersionRollback.php:426

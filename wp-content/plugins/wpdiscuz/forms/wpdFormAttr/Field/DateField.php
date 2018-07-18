@@ -108,7 +108,7 @@ class DateField extends Field {
             return '';
         }
         $value = trim(filter_input(INPUT_POST, $fieldName, FILTER_SANITIZE_STRING));
-        if ($value && !preg_match('@^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$@is', $value)) {
+        if ($value && !preg_match('@^[0-9]{4}-[0-9]{2}-[0-9]{2}$@is', $value)) {
             $value = '';
         }
         if (!$value && $args['required']) {

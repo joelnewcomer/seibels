@@ -100,7 +100,7 @@ jQuery(document).ready(function ($) {
     function wpdCallSocialLogin(provider, container) {
         var token, userID = '';
         wpdSocialLoginLoadingBar(container, 1);
-        if (provider === 'facebook') {
+       if (provider === 'facebook' && wpdiscuzAjaxObj.wpdiscuz_options.facebookUseOAuth2 == 0) {
             FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
                     token = response.authResponse.accessToken;
@@ -116,7 +116,8 @@ jQuery(document).ready(function ($) {
                     }, {scope: 'public_profile,email'});
                 }
             });
-        } else if (provider === 'google') {
+        } else 
+            if (provider === 'google') {
             var googleAuth = gapi.auth2.getAuthInstance();
             if (googleAuth.isSignedIn.get()) {
                 token = googleAuth.currentUser.get().getAuthResponse().id_token;
@@ -174,7 +175,8 @@ jQuery(document).ready(function ($) {
         if (errorMessage && errorMessage !== 'undefined') {
             Cookies.remove('wpdiscuz_social_login_message');
             var container = $('#wpcomm .wpdiscuz-social-login').first();
-            container.append('<div class="wpdiscuz-social-login-error">' + errorMessage.replace(/\+/g, ' ') + '</div>');
+            $('.wpdiscuz-social-login-error').remove();
+            container.append('<div class="wpdiscuz-social-login-error">' + decodeURIComponent(errorMessage.replace(/\+/g, '%20')) + '</div>');
             $('html, body').animate({
                 scrollTop: container.offset().top}, 700);
         }

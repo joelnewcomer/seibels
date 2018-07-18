@@ -108,10 +108,15 @@ class WpdiscuzHelper implements WpDiscuzConstants {
 
     /**
      * check if comment has been posted today or not
-     * return boolean
+     * @param type $comment WP_Comment object or Datetime value
+     * @return type
      */
     public static function isPostedToday($comment) {
-        return date('Ymd', strtotime(current_time('Ymd'))) <= date('Ymd', strtotime($comment->comment_date));
+        if ($comment && is_object($comment)) {
+            return date('Ymd', strtotime(current_time('Ymd'))) <= date('Ymd', strtotime($comment->comment_date));
+        } else {
+            return date('Ymd', strtotime(current_time('Ymd'))) <= date('Ymd', strtotime($comment));
+        }
     }
 
     /**
@@ -120,7 +125,7 @@ class WpdiscuzHelper implements WpDiscuzConstants {
      */
     public function isCommentEditable($comment) {
         $editableTimeLimit = isset($this->optionsSerialized->commentEditableTime) ? $this->optionsSerialized->commentEditableTime : 0;
-        $timeDiff = (time() - strtotime($comment->comment_date_gmt));
+        $timeDiff = (current_time('timestamp') - strtotime($comment->comment_date_gmt));
         $editableTimeLimit = ($editableTimeLimit == 'unlimit') ? $timeDiff + 1 : intval($editableTimeLimit);
         return $editableTimeLimit && ($timeDiff < $editableTimeLimit);
     }
@@ -330,10 +335,7 @@ class WpdiscuzHelper implements WpDiscuzConstants {
             }
 
             public function wpdDeactivationReasonModal() {
-                ob_start();
                 include_once 'deactivation-reason-modal.php';
-                $html = ob_get_clean();
-                echo $html;
             }
 
             public function disableAddonsDemo() {
@@ -373,6 +375,21 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                 return $postedDate;
             }
 
+            public function getDate($comment) {
+                if ($this->optionsSerialized->simpleCommentDate) {
+                    $dateFormat = $this->optionsSerialized->wordpressDateFormat;
+                    $timeFormat = $this->optionsSerialized->wordpressTimeFormat;
+                    if (self::isPostedToday($comment)) {
+                        $postedDate = $this->optionsSerialized->phrases['wc_posted_today_text'] . ' ' . mysql2date($timeFormat, $comment);
+                    } else {
+                        $postedDate = date($dateFormat . ' ' . $timeFormat, strtotime($comment));
+                    }
+                } else {
+                    $postedDate = $this->dateDiff($comment);
+                }
+                return $postedDate;
+            }
+
             private function isPostPostedToday($post) {
                 return date('Ymd', strtotime(current_time('Ymd'))) <= date('Ymd', strtotime($post->post_date));
             }
@@ -397,24 +414,26 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                     $response .= "<ul class='wpd-list'>";
                     $response .= $this->getActivityTitleHtml();
                     $response .= $this->getSubscriptionsTitleHtml();
+                    $response .= $this->getFollowsTitleHtml();
                     $response .= "</ul>";
                     $response .= "<div class='wpd-content'>";
                     $response .= $this->getActivityContentHtml($currentUserId, $currentUserEmail);
                     $response .= $this->getSubscriptionsContentHtml($currentUserId, $currentUserEmail);
+                    $response .= $this->getFollowsContentHtml($currentUserId, $currentUserEmail);
                     $response .= "</div>";
                     $response .= "<div class='wpd-user-email-delete-links-wrap'>";
                     $response .= "<a href='#' class='wpd-user-email-delete-links wpd-not-clicked'>";
                     $response .= $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links'];
                     $response .= "<span class='wpd-loading wpd-hide'><i class='fas fa-pulse fa-spinner'></i></span>";
                     $response .= "</a>";
-                    $response .= "<div class='wpd-bulk-desc'>" .  $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links_desc'] . "</div>";
+                    $response .= "<div class='wpd-bulk-desc'>" . $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links_desc'] . "</div>";
                     $response .= "</div>";
                     $response .= "</div>";
                 } else if ($currentUserEmail) {
                     $commentBtn = $this->getDeleteAllCommentsButton($currentUserEmail);
                     $subscribeBtn = $this->getDeleteAllSubscriptionsButton($currentUserEmail);
                     $cookieBtnClass = !$commentBtn && !$subscribeBtn ? 'wpd-show' : 'wpd-hide';
-                    $response .= "<div class='wpd-wrapper  wpd-guest-settings'>";
+                    $response .= "<div class='wpd-wrapper wpd-guest-settings'>";
                     $response .= $commentBtn;
                     $response .= $subscribeBtn;
                     $response .= $this->deleteCookiesButton($currentUserEmail, $cookieBtnClass);
@@ -515,6 +534,26 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                 wp_die($html);
             }
 
+            private function getFollowsTitleHtml() {
+                ob_start();
+                include_once 'layouts/follows/title.php';
+                return ob_get_clean();
+            }
+
+            private function getFollowsContentHtml($currentUserId, $currentUserEmail) {
+                $html = "<div id='wpd-content-item-3' class='wpd-content-item'>";
+                include_once 'layouts/follows/content.php';
+                $html .= "</div>";
+                return $html;
+            }
+
+            public function getFollowsPage() {
+                ob_start();
+                include_once 'layouts/follows/follows-page.php';
+                $html = ob_get_clean();
+                wp_die($html);
+            }
+
             public function hashVotesNote() {
                 if ($this->dbManager->getNotHashedIpCount()) {
                     $page = isset($_GET['page']) ? $_GET['page'] : '';
@@ -527,6 +566,14 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                         echo$html;
                     }
                 }
+            }
+
+            public static function fixEmailFrom($domain) {
+                $domain = strtolower($domain);
+                if (substr($domain, 0, 4) == 'www.') {
+                    $domain = substr($domain, 4);
+                }
+                return $domain;
             }
 
         }

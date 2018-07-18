@@ -28,6 +28,7 @@ if (!defined('ABSPATH')) {
                             <span><?php _e('Always check for new comments and update automatically', 'wpdiscuz') ?></span>
                         </label> &nbsp;<br/>          
                     </fieldset>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/live-update/" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top">

@@ -32,7 +32,11 @@ class SocialLogin {
         $response = array('code' => 'error', 'message' => __('Authentication failed.', 'wpdiscuz'), 'url' => '');
         switch ($provider) {
             case 'facebook':
-                $response = $this->facebookLogin($token, $userID, $response);
+                if ($this->generalOptions->fbUseOAuth2) {
+                    $response = $this->facebookLoginPHP($postID, $response);
+                } else {
+                    $response = $this->facebookLogin($token, $userID, $response);
+                }
                 break;
             case 'google':
                 $response = $this->googleLogin($token, $response);
@@ -57,6 +61,9 @@ class SocialLogin {
         $this->deleteCookie();
         $provider = filter_input(INPUT_GET, 'provider', FILTER_SANITIZE_STRING);
         switch ($provider) {
+            case 'facebook':
+                $response = $this->facebookLoginPHPCallBack();
+                break;
             case 'twitter':
                 $response = $this->twitterLoginCallBack();
                 break;
@@ -88,7 +95,7 @@ class SocialLogin {
             return $response;
         }
         $appsecret_proof = hash_hmac('sha256', $token, trim($this->generalOptions->fbAppSecret));
-        $url = add_query_arg(array('fields' => 'id,first_name,last_name,email,picture', 'access_token' => $token, 'appsecret_proof' => $appsecret_proof), 'https://graph.facebook.com/v2.8/' . $userID);
+        $url = add_query_arg(array('fields' => 'id,first_name,last_name,picture,email', 'access_token' => $token, 'appsecret_proof' => $appsecret_proof), 'https://graph.facebook.com/v2.8/' . $userID);
         $fb_response = wp_remote_get(esc_url_raw($url), array('timeout' => 30));
 
         if (is_wp_error($fb_response)) {
@@ -109,6 +116,75 @@ class SocialLogin {
         $response['code'] = 200;
         $response['message'] = '';
         return $response;
+    }
+
+    public function facebookLoginPHP($postID, $response) {
+        if (!$this->generalOptions->fbAppID || !$this->generalOptions->fbAppSecret) {
+            $response['message'] = __('Facebook Application ID and Application Secret  required.', 'wpdiscuz');
+            return $response;
+        }
+        $fbAuthorizeURL = 'https://www.facebook.com/v3.0/dialog/oauth';
+        $fbCallBack = $this->createCallBackURL('facebook');
+        $state = Utils::generateOAuthState($this->generalOptions->fbAppID);
+        Utils::addOAuthState('facebook', $state, $postID);
+        $oautAttributs = array(
+            'client_id' => $this->generalOptions->fbAppID,
+            'redirect_uri' => urlencode($fbCallBack),
+            'response_type' => 'code',
+            'scope' => 'email,public_profile',
+            'state' => $state);
+        $oautURL = add_query_arg($oautAttributs, $fbAuthorizeURL);
+        $response['code'] = 200;
+        $response['message'] = '';
+        $response['url'] = $oautURL;
+        return $response;
+    }
+
+    public function facebookLoginPHPCallBack() {
+        $code = filter_input(INPUT_GET, 'code', FILTER_SANITIZE_STRING);
+        $state = filter_input(INPUT_GET, 'state', FILTER_SANITIZE_STRING);
+        $providerData = Utils::getProviderByState($state);
+        $provider = $providerData['provider'];
+        $postID = $providerData['postID'];
+        $postURL = $this->getPostLink($postID);
+        if (!$state || ($provider != 'facebook')) {
+            $this->redirect($postURL, __('Facebook authentication failed (OAuth <code>state</code> does not exist).', 'wpdiscuz'));
+        }
+        if (!$code) {
+            $this->redirect($postURL, __('Facebook authentication failed (OAuth <code>code</code> does not exist).', 'wpdiscuz'));
+        }
+        $fbCallBack = $this->createCallBackURL('facebook');
+        $fbAccessTokenURL = 'https://graph.facebook.com/v3.0/oauth/access_token';
+        $accessTokenArgs = array('client_id' => $this->generalOptions->fbAppID,
+            'client_secret' => $this->generalOptions->fbAppSecret,
+            'redirect_uri' => urlencode($fbCallBack),
+            'code' => $code);
+        $fbAccessTokenURL = add_query_arg($accessTokenArgs, $fbAccessTokenURL);
+        $fbAccesTokenResponse = wp_remote_get($fbAccessTokenURL);
+
+        if (is_wp_error($fbAccesTokenResponse)) {
+            $this->redirect($postURL, $fbAccesTokenResponse->get_error_message());
+        }
+        $fbAccesTokenData = json_decode(wp_remote_retrieve_body($fbAccesTokenResponse), true);
+        if (isset($fbAccesTokenData['error'])) {
+            $this->redirect($postURL, $fbAccesTokenData['error']['message']);
+        }
+        $token = $fbAccesTokenData['access_token'];
+        $appsecret_proof = hash_hmac('sha256', $token, trim($this->generalOptions->fbAppSecret));
+        $fbGetUserDataURL = add_query_arg(array('fields' => 'id,first_name,last_name,picture,email', 'access_token' => $token, 'appsecret_proof' => $appsecret_proof), 'https://graph.facebook.com/v3.0/me');
+        $getFbUserResponse = wp_remote_get($fbGetUserDataURL);
+        if (is_wp_error($getFbUserResponse)) {
+            $this->redirect($postURL, $getFbUserResponse->get_error_message());
+        }
+        $fbUserData = json_decode(wp_remote_retrieve_body($getFbUserResponse), true);
+        if (isset($fbUserData['error'])) {
+            $this->redirect($postURL, $fbUserData['error']['message']);
+        }
+        if (empty($fbUserData['email']) && $fbUserData['id']) {
+            $fbUserData['email'] = $fbUserData['id'] . '_anonymous@facebook.com';
+        }
+        $this->setCurrentUser(Utils::addUser($fbUserData, 'facebook'));
+        $this->redirect($postURL);
     }
 
     // https://console.developers.google.com/
@@ -141,10 +217,10 @@ class SocialLogin {
     public function twitterLogin($postID, $response) {
         if ($this->generalOptions->twitterAppID && $this->generalOptions->twitterAppSecret) {
             $twitter = new TwitterOAuth($this->generalOptions->twitterAppID, $this->generalOptions->twitterAppSecret);
-            $twitterCallBack = $this->createCallBackURL('twitter', $postID);
+            $twitterCallBack = $this->createCallBackURL('twitter');
             try {
                 $requestToken = $twitter->oauth('oauth/request_token', array('oauth_callback' => $twitterCallBack));
-                Utils::addOAuthState($requestToken['oauth_token'], $requestToken['oauth_token_secret']);
+                Utils::addOAuthState($requestToken['oauth_token_secret'], $requestToken['oauth_token'], $postID);
                 $url = $twitter->url('oauth/authorize', array('oauth_token' => $requestToken['oauth_token']));
                 $response['code'] = 200;
                 $response['message'] = '';
@@ -159,11 +235,12 @@ class SocialLogin {
     }
 
     public function twitterLoginCallBack() {
-        $postID = filter_input(INPUT_GET, 'postID', FILTER_SANITIZE_NUMBER_INT);
-        $postURL = $this->getPostLink($postID);
         $oauthToken = filter_input(INPUT_GET, 'oauth_token', FILTER_SANITIZE_STRING);
         $oauthVerifier = filter_input(INPUT_GET, 'oauth_verifier', FILTER_SANITIZE_STRING);
-        $oauthSecret = Utils::getProviderByState($oauthToken);
+        $oauthSecretData = Utils::getProviderByState($oauthToken);
+        $oauthSecret = $oauthSecretData['provider'];
+        $postID = $oauthSecretData['postID'];
+        $postURL = $this->getPostLink($postID);
         if (!$oauthVerifier || !$oauthSecret) {
             $this->redirect($postURL, __('Twitter authentication failed (OAuth secret does not exist).', 'wpdiscuz'));
         }
@@ -174,7 +251,6 @@ class SocialLogin {
             $twitterUser = $connection->get('account/verify_credentials', array('include_email' => 'true'));
             if (is_object($twitterUser) && isset($twitterUser->id)) {
                 $this->setCurrentUser(Utils::addUser($twitterUser, 'twitter'));
-                $postURL = get_the_permalink($postID);
                 $this->redirect($postURL);
             } else {
                 $this->redirect($postURL, __('Twitter connection failed.', 'wpdiscuz'));
@@ -191,9 +267,9 @@ class SocialLogin {
             return $response;
         }
         $vkAuthorizeURL = 'https://oauth.vk.com/authorize';
-        $vkCallBack = $this->createCallBackURL('vk', $postID);
+        $vkCallBack = $this->createCallBackURL('vk');
         $state = Utils::generateOAuthState($this->generalOptions->vkAppID);
-        Utils::addOAuthState('vk', $state);
+        Utils::addOAuthState('vk', $state, $postID);
         $oautAttributs = array('client_id' => $this->generalOptions->vkAppID,
             'client_secret' => $this->generalOptions->vkAppSecret,
             'redirect_uri' => urlencode($vkCallBack),
@@ -209,18 +285,19 @@ class SocialLogin {
     }
 
     public function vkLoginCallBack() {
-        $postID = filter_input(INPUT_GET, 'postID', FILTER_SANITIZE_NUMBER_INT);
-        $postURL = $this->getPostLink($postID);
         $code = filter_input(INPUT_GET, 'code', FILTER_SANITIZE_STRING);
         $state = filter_input(INPUT_GET, 'state', FILTER_SANITIZE_STRING);
-        $provider = Utils::getProviderByState($state);
-        if (!$state || !($provider != 'vk')) {
+        $providerData = Utils::getProviderByState($state);
+        $provider = $providerData['provider'];
+        $postID = $providerData['postID'];
+        $postURL = $this->getPostLink($postID);
+        if (!$state || ($provider != 'vk')) {
             $this->redirect($postURL, __('VK authentication failed (OAuth <code>state</code> does not exist).', 'wpdiscuz'));
         }
         if (!$code) {
             $this->redirect($postURL, __('VK authentication failed (OAuth <code>code</code> does not exist).', 'wpdiscuz'));
         }
-        $vkCallBack = $this->createCallBackURL('vk', $postID);
+        $vkCallBack = $this->createCallBackURL('vk');
         $vkAccessTokenURL = 'https://oauth.vk.com/access_token';
         $accessTokenArgs = array('client_id' => $this->generalOptions->vkAppID,
             'client_secret' => $this->generalOptions->vkAppSecret,
@@ -266,8 +343,9 @@ class SocialLogin {
             return $response;
         }
         $okAuthorizeURL = 'https://connect.ok.ru/oauth/authorize';
-        $okCallBack = $this->createCallBackURL('ok', $postID);
+        $okCallBack = $this->createCallBackURL('ok');
         $state = Utils::generateOAuthState($this->generalOptions->okAppID);
+        Utils::addOAuthState('ok', $state, $postID);
         $oautAttributs = array('client_id' => $this->generalOptions->okAppID,
             'redirect_uri' => urlencode($okCallBack),
             'response_type' => 'code',
@@ -281,18 +359,19 @@ class SocialLogin {
     }
 
     public function okLoginCallBack() {
-        $postID = filter_input(INPUT_GET, 'postID', FILTER_SANITIZE_NUMBER_INT);
         $code = filter_input(INPUT_GET, 'code', FILTER_SANITIZE_STRING);
         $state = filter_input(INPUT_GET, 'state', FILTER_SANITIZE_STRING);
+        $providerData = Utils::getProviderByState($state);
+        $provider = $providerData['provider'];
+        $postID = $providerData['postID'];
         $postURL = $this->getPostLink($postID);
-        $provider = Utils::getProviderByState($state);
-        if (!$state || !($provider != 'ok')) {
+        if (!$state || ($provider != 'ok')) {
             $this->redirect($postURL, __('OK authentication failed (OAuth <code>state</code> does not exist).', 'wpdiscuz'));
         }
         if (!$code) {
             $this->redirect($postURL, __('OK authentication failed (<code>code</code> does not exist).', 'wpdiscuz'));
         }
-        $okCallBack = $this->createCallBackURL('ok', $postID);
+        $okCallBack = $this->createCallBackURL('ok');
         $okAccessTokenURL = 'https://api.ok.ru/oauth/token.do';
         $accessTokenArgs = array('client_id' => $this->generalOptions->okAppID,
             'client_secret' => $this->generalOptions->okAppSecret,
@@ -340,11 +419,10 @@ class SocialLogin {
         exit();
     }
 
-    private function createCallBackURL($provider, $postID) {
+    private function createCallBackURL($provider) {
         $adminAjaxURL = admin_url('admin-ajax.php');
         $urlAttributs = array('action' => 'wpd_login_callback',
-            'provider' => $provider,
-            'postID' => $postID);
+            'provider' => $provider);
         return add_query_arg($urlAttributs, $adminAjaxURL);
     }
 

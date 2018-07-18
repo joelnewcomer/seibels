@@ -64,12 +64,8 @@ if (!defined('ABSPATH')) {
                 <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_notify_on_all_new_reply']; ?>" name="wc_notify_on_all_new_reply" id="wc_notify_on_all_new_reply" /></td>
             </tr>
             <tr valign="top">
-                <th scope="row"><label for="wc_notify_on_new_reply_on"><?php _e('Notify on new replies (checkbox) - On', 'wpdiscuz'); ?></label></th>
-                <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_notify_on_new_reply_on']; ?>" name="wc_notify_on_new_reply_on" id="wc_notify_on_new_reply_on" /></td>
-            </tr>
-            <tr valign="top">
-                <th scope="row"><label for="wc_notify_on_new_reply_off"><?php _e('Notify on new replies (checkbox) - Off', 'wpdiscuz'); ?></label></th>
-                <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_notify_on_new_reply_off']; ?>" name="wc_notify_on_new_reply_off" id="wc_notify_on_new_reply_off" /></td>
+                <th scope="row"><label for="wc_notify_on_new_reply"><?php _e('Notify on new replies to this comment', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><input type="text" value="<?php echo $this->optionsSerialized->phrases['wc_notify_on_new_reply']; ?>" name="wc_notify_on_new_reply" id="wc_notify_on_new_reply" /></td>
             </tr>
             <tr valign="top">
                 <th scope="row"><label for="wc_sort_by"><?php _e('Sort by', 'wpdiscuz'); ?></label></th>

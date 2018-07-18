@@ -4,10 +4,10 @@ jQuery(document).ready(function ($) {
         e.preventDefault();
     });
 
-    $('#wc_delete_content_message').delay(3000).fadeOut(1500, function () {
-        $(this).remove();
-        location.href = location.href.substring(0, location.href.indexOf('delete') - 1);
-    });
+//    $('#wc_delete_content_message').delay(3000).fadeOut(1500, function () {
+//        $(this).remove();
+//        location.href = location.href.substring(0, location.href.indexOf('delete') - 1);
+//    });
 
     $(document).delegate('.wpd-info.wpd-not-clicked', 'click', function (e) {
         var btn = $(this);
@@ -76,6 +76,8 @@ jQuery(document).ready(function ($) {
             if (action == 'wpdDeleteComment' && !confirm(wpdiscuzUCObj.msgConfirmDeleteComment)) {
                 return false;
             } else if (action == 'wpdCancelSubscription' && !confirm(wpdiscuzUCObj.msgConfirmCancelSubscription)) {
+                return false;
+            } else if (action == 'wpdCancelFollow' && !confirm(wpdiscuzUCObj.msgConfirmCancelFollow)) {
                 return false;
             }
             var icon = $('i', btn);

@@ -8,17 +8,23 @@ if (!defined('ABSPATH')) {
     <table class="wp-list-table widefat plugins wpdxb"  style="margin-top:10px; border:none;">
         <tbody>
             <tr valign="top">
-                <th scope="row" style="width:50%;"><label for="isEnableOnHome"><?php _e('Enable wpdiscuz on home page', 'wpdiscuz'); ?></label></th>
-                <td><input type="checkbox" <?php checked($this->optionsSerialized->isEnableOnHome == 1) ?> value="1" name="isEnableOnHome" id="isEnableOnHome" /><label for="isEnableOnHome"></label></td>
+                <th scope="row" style="width:50%;"><label for="isEnableOnHome"><?php _e('Enable wpdiscuz on home page', 'wpdiscuz'); ?> </label></th>
+                <td>
+                    <input type="checkbox" <?php checked($this->optionsSerialized->isEnableOnHome == 1) ?> value="1" name="isEnableOnHome" id="isEnableOnHome" /><label for="isEnableOnHome"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/general-settings/#wpdiscuz_on_home_page" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label for="isUserByEmail"><?php _e('Use guest email to detect registered account', 'wpdiscuz'); ?></label>
+                    <label for="isUserByEmail"><?php _e('Use guest email to detect registered account', 'wpdiscuz'); ?> </label>
                     <p class="wpd-desc">
                         <?php _e('Sometimes registered users comment as guest using the same email address. wpDiscuz can detect the account role using guest email and display commenter label correctly.', 'wpdiscuz'); ?>
                     </p>
                 </th>
-                <td><input type="checkbox" <?php checked($this->optionsSerialized->isUserByEmail == 1) ?> value="1" name="isUserByEmail" id="isUserByEmail" /><label for="isUserByEmail"></label></td>
+                <td>
+                    <input type="checkbox" <?php checked($this->optionsSerialized->isUserByEmail == 1) ?> value="1" name="isUserByEmail" id="isUserByEmail" /><label for="isUserByEmail"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/general-settings/#guest_email_to_detect_account" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
             </tr>
 			<?php if(is_ssl()){?>
             <tr valign="top">
@@ -59,11 +65,12 @@ if (!defined('ABSPATH')) {
                         'option_none_value' => 0
                     ));
                     ?>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/general-settings/#redirect_on_first_comment_to" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label for="wc_simple_comment_date"><?php _e('Use WordPress Date/Time format', 'wpdiscuz'); ?></label>
+                    <label for="wc_simple_comment_date"><?php _e('Use WordPress Date/Time format', 'wpdiscuz'); ?> </label>
                     <p class="wpd-desc"><?php _e('wpDiscuz shows Human Readable date format. If you check this option it\'ll show the date/time format set in WordPress General Settings.', 'wpdiscuz'); ?></p>
                 </th>
                 <td>                                
@@ -72,14 +79,18 @@ if (!defined('ABSPATH')) {
                         <?php echo date(get_option('date_format')); ?> / <?php echo date(get_option('time_format')); ?><br />
                         <?php _e('Current Wordpress date/time format', 'wpdiscuz'); ?>
                     </span>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/general-settings/#wordPress_date_time_format" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
                 <th scope="row" >
-                    <label for="wc_is_use_po_mo"><?php _e('Use Plugin .PO/.MO files', 'wpdiscuz'); ?></label>
+                    <label for="wc_is_use_po_mo"><?php _e('Use Plugin .PO/.MO files', 'wpdiscuz'); ?> </label>
                     <p class="wpd-desc"><?php _e('wpDiscuz phrase system allows you to translate all front-end phrases. However if you have a multi-language website it\'ll not allow you to add more than one language translation. The only way to get it is the plugin translation files (.PO / .MO). If wpDiscuz has the languages you need you should check this option to disable phrase system and it\'ll automatically translate all phrases based on language files according to current language.', 'wpdiscuz'); ?></p>
                 </th>
-                <td colspan="3"><input type="checkbox" <?php checked($this->optionsSerialized->isUsePoMo == 1) ?> value="1" name="wc_is_use_po_mo" id="wc_is_use_po_mo" /><label for="wc_is_use_po_mo"></label></td>
+                <td colspan="3">
+                    <input type="checkbox" <?php checked($this->optionsSerialized->isUsePoMo == 1) ?> value="1" name="wc_is_use_po_mo" id="wc_is_use_po_mo" /><label for="wc_is_use_po_mo"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/general-settings/#use-po-files" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
             </tr>
             <tr valign="top">
                 <th scope="row" >

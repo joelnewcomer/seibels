@@ -101,6 +101,7 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->enableFbShare = isset($_POST['enableFbShare']) ? $_POST['enableFbShare'] : 0;
             $this->optionsSerialized->fbAppID = isset($_POST['fbAppID']) ? trim($_POST['fbAppID']) : '';
             $this->optionsSerialized->fbAppSecret = isset($_POST['fbAppSecret']) ? trim($_POST['fbAppSecret']) : '';
+            $this->optionsSerialized->fbUseOAuth2 = isset($_POST['fbUseOAuth2']) ? $_POST['fbUseOAuth2'] : 0;
             // twitter
             $this->optionsSerialized->enableTwitterLogin = isset($_POST['enableTwitterLogin']) ? $_POST['enableTwitterLogin'] : 0;
             $this->optionsSerialized->enableTwitterShare = isset($_POST['enableTwitterShare']) ? $_POST['enableTwitterShare'] : 0;
@@ -121,6 +122,9 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->enableVkShare = isset($_POST['enableVkShare']) ? $_POST['enableVkShare'] : 0;
             $this->optionsSerialized->vkAppID = isset($_POST['vkAppID']) ? trim($_POST['vkAppID']) : '';
             $this->optionsSerialized->vkAppSecret = isset($_POST['vkAppSecret']) ? trim($_POST['vkAppSecret']) : '';
+
+            $this->optionsSerialized->isFollowActive = isset($_POST['isFollowActive']) ? intval($_POST['isFollowActive']) : 0;
+            $this->optionsSerialized->disableFollowConfirmForUsers = isset($_POST['disableFollowConfirmForUsers']) ? intval($_POST['disableFollowConfirmForUsers']) : 0;
             do_action('wpdiscuz_save_options', $_POST);
             $this->optionsSerialized->updateOptions();
             add_settings_error('wpdiscuz', 'settings_updated', __('Settings updated', 'wpdiscuz'), 'updated');
@@ -153,8 +157,7 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_notify_of'] = esc_attr($_POST['wc_notify_of']);
             $this->optionsSerialized->phrases['wc_notify_on_new_comment'] = esc_attr($_POST['wc_notify_on_new_comment']);
             $this->optionsSerialized->phrases['wc_notify_on_all_new_reply'] = esc_attr($_POST['wc_notify_on_all_new_reply']);
-            $this->optionsSerialized->phrases['wc_notify_on_new_reply_on'] = esc_attr($_POST['wc_notify_on_new_reply_on']);
-            $this->optionsSerialized->phrases['wc_notify_on_new_reply_off'] = esc_attr($_POST['wc_notify_on_new_reply_off']);
+            $this->optionsSerialized->phrases['wc_notify_on_new_reply'] = esc_attr($_POST['wc_notify_on_new_reply']);
             $this->optionsSerialized->phrases['wc_sort_by'] = esc_attr($_POST['wc_sort_by']);
             $this->optionsSerialized->phrases['wc_newest'] = esc_attr($_POST['wc_newest']);
             $this->optionsSerialized->phrases['wc_oldest'] = esc_attr($_POST['wc_oldest']);
@@ -172,11 +175,11 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_hide_replies_text'] = esc_attr($_POST['wc_hide_replies_text']);
             $this->optionsSerialized->phrases['wc_show_replies_text'] = esc_attr($_POST['wc_show_replies_text']);
             $this->optionsSerialized->phrases['wc_email_subject'] = esc_attr($_POST['wc_email_subject']);
-            $this->optionsSerialized->phrases['wc_email_message'] = esc_attr($_POST['wc_email_message']);
+            $this->optionsSerialized->phrases['wc_email_message'] = wpautop($_POST['wc_email_message']);
             $this->optionsSerialized->phrases['wc_all_comment_new_reply_subject'] = esc_attr($_POST['wc_all_comment_new_reply_subject']);
-            $this->optionsSerialized->phrases['wc_all_comment_new_reply_message'] = esc_attr($_POST['wc_all_comment_new_reply_message']);
+            $this->optionsSerialized->phrases['wc_all_comment_new_reply_message'] = wpautop($_POST['wc_all_comment_new_reply_message']);
             $this->optionsSerialized->phrases['wc_new_reply_email_subject'] = esc_attr($_POST['wc_new_reply_email_subject']);
-            $this->optionsSerialized->phrases['wc_new_reply_email_message'] = esc_attr($_POST['wc_new_reply_email_message']);
+            $this->optionsSerialized->phrases['wc_new_reply_email_message'] = wpautop($_POST['wc_new_reply_email_message']);
             $this->optionsSerialized->phrases['wc_subscribed_on_comment'] = esc_attr($_POST['wc_subscribed_on_comment']);
             $this->optionsSerialized->phrases['wc_subscribed_on_all_comment'] = esc_attr($_POST['wc_subscribed_on_all_comment']);
             $this->optionsSerialized->phrases['wc_subscribed_on_post'] = esc_attr($_POST['wc_subscribed_on_post']);
@@ -187,7 +190,7 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_confirm_email'] = esc_attr($_POST['wc_confirm_email']);
             $this->optionsSerialized->phrases['wc_comfirm_success_message'] = esc_attr($_POST['wc_comfirm_success_message']);
             $this->optionsSerialized->phrases['wc_confirm_email_subject'] = esc_attr($_POST['wc_confirm_email_subject']);
-            $this->optionsSerialized->phrases['wc_confirm_email_message'] = esc_attr($_POST['wc_confirm_email_message']);
+            $this->optionsSerialized->phrases['wc_confirm_email_message'] = ($_POST['wc_confirm_email_message']);
             $this->optionsSerialized->phrases['wc_error_empty_text'] = esc_attr($_POST['wc_error_empty_text']);
             $this->optionsSerialized->phrases['wc_error_email_text'] = esc_attr($_POST['wc_error_email_text']);
             $this->optionsSerialized->phrases['wc_error_url_text'] = esc_attr($_POST['wc_error_url_text']);
@@ -241,15 +244,13 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_subscribed_to'] = esc_attr($_POST['wc_subscribed_to']);
             $this->optionsSerialized->phrases['wc_form_subscription_submit'] = esc_attr($_POST['wc_form_subscription_submit']);
             $this->optionsSerialized->phrases['wc_comment_approved_email_subject'] = esc_attr($_POST['wc_comment_approved_email_subject']);
-            $this->optionsSerialized->phrases['wc_comment_approved_email_message'] = esc_attr($_POST['wc_comment_approved_email_message']);
+            $this->optionsSerialized->phrases['wc_comment_approved_email_message'] = ($_POST['wc_comment_approved_email_message']);
             $this->optionsSerialized->phrases['wc_roles_cannot_comment_message'] = esc_attr($_POST['wc_roles_cannot_comment_message']);
-            $this->optionsSerialized->phrases['wc_stick_main_form_comment_on'] = esc_attr($_POST['wc_stick_main_form_comment_on']);
-            $this->optionsSerialized->phrases['wc_stick_main_form_comment_off'] = esc_attr($_POST['wc_stick_main_form_comment_off']);
+            $this->optionsSerialized->phrases['wc_stick_comment_btn_title'] = esc_attr($_POST['wc_stick_comment_btn_title']);
             $this->optionsSerialized->phrases['wc_stick_comment'] = esc_attr($_POST['wc_stick_comment']);
             $this->optionsSerialized->phrases['wc_unstick_comment'] = esc_attr($_POST['wc_unstick_comment']);
             $this->optionsSerialized->phrases['wc_sticky_comment_icon_title'] = esc_attr($_POST['wc_sticky_comment_icon_title']);
-            $this->optionsSerialized->phrases['wc_close_main_form_comment_on'] = esc_attr($_POST['wc_close_main_form_comment_on']);
-            $this->optionsSerialized->phrases['wc_close_main_form_comment_off'] = esc_attr($_POST['wc_close_main_form_comment_off']);
+            $this->optionsSerialized->phrases['wc_close_comment_btn_title'] = esc_attr($_POST['wc_close_comment_btn_title']);
             $this->optionsSerialized->phrases['wc_close_comment'] = esc_attr($_POST['wc_close_comment']);
             $this->optionsSerialized->phrases['wc_open_comment'] = esc_attr($_POST['wc_open_comment']);
             $this->optionsSerialized->phrases['wc_closed_comment_icon_title'] = esc_attr($_POST['wc_closed_comment_icon_title']);
@@ -261,6 +262,7 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_content_and_settings'] = esc_attr($_POST['wc_content_and_settings']);
             $this->optionsSerialized->phrases['wc_user_settings_activity'] = esc_attr($_POST['wc_user_settings_activity']);
             $this->optionsSerialized->phrases['wc_user_settings_subscriptions'] = esc_attr($_POST['wc_user_settings_subscriptions']);
+            $this->optionsSerialized->phrases['wc_user_settings_follows'] = esc_attr($_POST['wc_user_settings_follows']);
             $this->optionsSerialized->phrases['wc_user_settings_response_to'] = esc_attr($_POST['wc_user_settings_response_to']);
             $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links'] = esc_attr($_POST['wc_user_settings_email_me_delete_links']);
             $this->optionsSerialized->phrases['wc_user_settings_email_me_delete_links_desc'] = esc_attr($_POST['wc_user_settings_email_me_delete_links_desc']);
@@ -270,9 +272,11 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_user_settings_clear_cookie'] = esc_attr($_POST['wc_user_settings_clear_cookie']);
             $this->optionsSerialized->phrases['wc_user_settings_delete_links'] = esc_attr($_POST['wc_user_settings_delete_links']);
             $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments'] = esc_attr($_POST['wc_user_settings_delete_all_comments']);
-            $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments_message'] = esc_attr($_POST['wc_user_settings_delete_all_comments_message']);
+            $this->optionsSerialized->phrases['wc_user_settings_delete_all_comments_message'] = wpautop($_POST['wc_user_settings_delete_all_comments_message']);
             $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions'] = esc_attr($_POST['wc_user_settings_delete_all_subscriptions']);
-            $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions_message'] = esc_attr($_POST['wc_user_settings_delete_all_subscriptions_message']);
+            $this->optionsSerialized->phrases['wc_user_settings_delete_all_subscriptions_message'] = wpautop($_POST['wc_user_settings_delete_all_subscriptions_message']);
+            $this->optionsSerialized->phrases['wc_user_settings_delete_all_follows'] = esc_attr($_POST['wc_user_settings_delete_all_follows']);
+            $this->optionsSerialized->phrases['wc_user_settings_delete_all_follows_message'] = wpautop($_POST['wc_user_settings_delete_all_follows_message']);
             $this->optionsSerialized->phrases['wc_user_settings_subscribed_to_replies'] = esc_attr($_POST['wc_user_settings_subscribed_to_replies']);
             $this->optionsSerialized->phrases['wc_user_settings_subscribed_to_replies_own'] = esc_attr($_POST['wc_user_settings_subscribed_to_replies_own']);
             $this->optionsSerialized->phrases['wc_user_settings_subscribed_to_all_comments'] = esc_attr($_POST['wc_user_settings_subscribed_to_all_comments']);
@@ -280,6 +284,22 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->phrases['wc_user_settings_email_error'] = esc_attr($_POST['wc_user_settings_email_error']);
             $this->optionsSerialized->phrases['wc_confirm_comment_delete'] = esc_attr($_POST['wc_confirm_comment_delete']);
             $this->optionsSerialized->phrases['wc_confirm_cancel_subscription'] = esc_attr($_POST['wc_confirm_cancel_subscription']);
+            $this->optionsSerialized->phrases['wc_confirm_cancel_follow'] = esc_attr($_POST['wc_confirm_cancel_follow']);
+            $this->optionsSerialized->phrases['wc_follow_user'] = esc_attr($_POST['wc_follow_user']);
+            $this->optionsSerialized->phrases['wc_unfollow_user'] = esc_attr($_POST['wc_unfollow_user']);
+            $this->optionsSerialized->phrases['wc_follow_success'] = esc_attr($_POST['wc_follow_success']);
+            $this->optionsSerialized->phrases['wc_follow_canceled'] = esc_attr($_POST['wc_follow_canceled']);
+            $this->optionsSerialized->phrases['wc_follow_email_confirm'] = esc_attr($_POST['wc_follow_email_confirm']);
+            $this->optionsSerialized->phrases['wc_follow_email_confirm_fail'] = esc_attr($_POST['wc_follow_email_confirm_fail']);
+            $this->optionsSerialized->phrases['wc_follow_login_to_follow'] = esc_attr($_POST['wc_follow_login_to_follow']);
+            $this->optionsSerialized->phrases['wc_follow_impossible'] = esc_attr($_POST['wc_follow_impossible']);
+            $this->optionsSerialized->phrases['wc_follow_not_added'] = esc_attr($_POST['wc_follow_not_added']);
+            $this->optionsSerialized->phrases['wc_follow_confirm'] = esc_attr($_POST['wc_follow_confirm']);
+            $this->optionsSerialized->phrases['wc_follow_cancel'] = esc_attr($_POST['wc_follow_cancel']);
+            $this->optionsSerialized->phrases['wc_follow_confirm_email_subject'] = esc_attr($_POST['wc_follow_confirm_email_subject']);
+            $this->optionsSerialized->phrases['wc_follow_confirm_email_message'] = wpautop($_POST['wc_follow_confirm_email_message']);
+            $this->optionsSerialized->phrases['wc_follow_email_subject'] = esc_attr($_POST['wc_follow_email_subject']);
+            $this->optionsSerialized->phrases['wc_follow_email_message'] = wpautop($_POST['wc_follow_email_message']);
 
             if (class_exists('Prompt_Comment_Form_Handling') && $this->optionsSerialized->usePostmaticForCommentNotification) {
                 $this->optionsSerialized->phrases['wc_postmatic_subscription_label'] = esc_attr($_POST['wc_postmatic_subscription_label']);

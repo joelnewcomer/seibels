@@ -4,12 +4,19 @@ if (!defined('ABSPATH')) {
 }
 ?>
 <div>
-    <h2 class="wpd-subtitle"><?php _e('Email Subscription Settings', 'wpdiscuz'); ?> </h2>
+
     <table class="wp-list-table widefat plugins wpdxb" style="margin-top:10px; border:none;">
         <tbody>
             <tr valign="top">
+                <th scope="row" style="width:50%;"><h2 class="wpd-subtitle"><?php _e('Comment Subscription', 'wpdiscuz'); ?> </h2></th>
+                <td></td>
+            </tr>
+            <tr valign="top">
                 <th scope="row"><label for="isNotifyOnCommentApprove"><?php _e('Notify comment author once comment is approved', 'wpdiscuz'); ?></label></th>
-                <td><input type="checkbox" <?php checked($this->optionsSerialized->isNotifyOnCommentApprove == 1) ?> value="1" name="isNotifyOnCommentApprove" id="isNotifyOnCommentApprove" /><label for="isNotifyOnCommentApprove"></label></td>
+                <td>
+                    <input type="checkbox" <?php checked($this->optionsSerialized->isNotifyOnCommentApprove == 1) ?> value="1" name="isNotifyOnCommentApprove" id="isNotifyOnCommentApprove" /><label for="isNotifyOnCommentApprove"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/email-subscription/#notify_author" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
             </tr>
             <tr valign="top">
                 <th scope="row" style="width:50%;">
@@ -18,6 +25,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->disableMemberConfirm == 1) ?> value="1" name="wc_disable_member_confirm" id="wc_disable_member_confirm" />
                     <label for="wc_disable_member_confirm"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/email-subscription/#disable_subscription" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -27,6 +35,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->disableGuestsConfirm == 1) ?> value="1" name="disableGuestsConfirm" id="disableGuestsConfirm" />
                     <label for="disableGuestsConfirm"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/email-subscription/#disable_subscription" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -50,6 +59,7 @@ if (!defined('ABSPATH')) {
                         </label>
                         &nbsp;<br/>
                     </fieldset>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/email-subscription/#subscription-bar" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top">
@@ -62,6 +72,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->showHideReplyCheckbox == 1) ?> value="1" name="wc_show_hide_reply_checkbox" id="wc_show_hide_reply_checkbox" />
                     <label for="wc_show_hide_reply_checkbox"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/email-subscription/#notify_of_new_replies" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -71,6 +82,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->isReplyDefaultChecked == 1) ?> value="1" name="isReplyDefaultChecked" id="isReplyDefaultChecked" />
                     <label for="isReplyDefaultChecked"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/email-subscription/#notify_of_new_replies" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <?php if (class_exists('Prompt_Comment_Form_Handling')) { ?>
@@ -85,6 +97,30 @@ if (!defined('ABSPATH')) {
                     </td>
                 </tr>
             <?php } ?>
+            <tr valign="top">
+                <th scope="row" style="width:50%;"><h2 class="wpd-subtitle"><?php _e('User Subscription / Following', 'wpdiscuz'); ?> </h2></th>
+                <td></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row" style="width:50%;">
+                    <label for="isFollowActive"><?php _e('Enable user following feature', 'wpdiscuz'); ?></label>
+                </th>
+                <td>
+                    <input type="checkbox" <?php checked($this->optionsSerialized->isFollowActive == 1) ?> value="1" name="isFollowActive" id="isFollowActive" />
+                    <label for="isFollowActive"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/email-subscription/#user_follow" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
+            </tr>
+            <tr valign="top">
+                <th scope="row" style="width:50%;">
+                    <label for="disableFollowConfirmForUsers"><?php _e('Follow users without email confirmation', 'wpdiscuz'); ?></label>
+                </th>
+                <td>
+                    <input type="checkbox" <?php checked($this->optionsSerialized->disableFollowConfirmForUsers == 1) ?> value="1" name="disableFollowConfirmForUsers" id="disableFollowConfirmForUsers" />
+                    <label for="disableFollowConfirmForUsers"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/email-subscription/#follow_confirmation" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

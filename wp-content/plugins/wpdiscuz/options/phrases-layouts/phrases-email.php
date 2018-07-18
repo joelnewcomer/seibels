@@ -46,7 +46,7 @@ if (!defined('ABSPATH')) {
                     </div>
                     </p>
                 </th>
-                <td colspan="3"><textarea name="wc_email_message" id="wc_email_message" style="height: 120px; width:90%;"><?php echo $this->optionsSerialized->phrases['wc_email_message']; ?></textarea></td>
+                <td colspan="3"><?php wp_editor($this->optionsSerialized->phrases['wc_email_message'], "wc_email_message", array('textarea_rows' => 7, 'teeny' => true)); ?></td>
             </tr>
             <tr valign="top">
                 <th scope="row">
@@ -77,7 +77,7 @@ if (!defined('ABSPATH')) {
                     </div>
                     </p>
                 </th>
-                <td colspan="3"><textarea name="wc_all_comment_new_reply_message" id="wc_all_comment_new_reply_message" style="height: 120px; width:90%;"><?php echo $this->optionsSerialized->phrases['wc_all_comment_new_reply_message']; ?></textarea></td>
+                <td colspan="3"><?php wp_editor($this->optionsSerialized->phrases['wc_all_comment_new_reply_message'], "wc_all_comment_new_reply_message", array('textarea_rows' => 7, 'teeny' => true)); ?></td>
             </tr>
             <tr valign="top">
                 <th scope="row">
@@ -107,31 +107,8 @@ if (!defined('ABSPATH')) {
                     </div>
                     </p>
                 </th>
-                <td colspan="3"><textarea name="wc_new_reply_email_message" id="wc_new_reply_email_message" style="height: 120px; width:90%;"><?php echo $this->optionsSerialized->phrases['wc_new_reply_email_message']; ?></textarea></td>
-            </tr>
-
-
-
-
-
-
-
-            <tr valign="top">
-                <th scope="row"><label for="wc_unsubscribe"><?php _e('Unsubscribe', 'wpdiscuz'); ?></label></th>
-                <td colspan="3"><input type="text" name="wc_unsubscribe" id="wc_unsubscribe" value="<?php echo $this->optionsSerialized->phrases['wc_unsubscribe']; ?>" /></td>
-            </tr>
-            <tr valign="top">
-                <th scope="row"><label for="wc_ignore_subscription"><?php _e('Ignore subscription', 'wpdiscuz'); ?></label></th>
-                <td colspan="3"><input type="text" name="wc_ignore_subscription" id="wc_ignore_subscription" value="<?php echo $this->optionsSerialized->phrases['wc_ignore_subscription']; ?>" /></td>
-            </tr>
-            <tr valign="top">
-                <th scope="row"><label for="wc_confirm_email"><?php _e('Confirm your subscription', 'wpdiscuz'); ?></label></th>
-                <td colspan="3"><input type="text" name="wc_confirm_email" id="wc_confirm_email" value="<?php echo $this->optionsSerialized->phrases['wc_confirm_email']; ?>" /></td>
-            </tr>
-            <tr valign="top">
-                <th scope="row"><label for="wc_comfirm_success_message"><?php _e('You\'ve successfully confirmed your subscription.', 'wpdiscuz'); ?></label></th>
-                <td colspan="3"><textarea name="wc_comfirm_success_message" id="wc_comfirm_success_message"><?php echo $this->optionsSerialized->phrases['wc_comfirm_success_message']; ?></textarea></td>
-            </tr>
+                <td colspan="3"><?php wp_editor($this->optionsSerialized->phrases['wc_new_reply_email_message'], "wc_new_reply_email_message", array('textarea_rows' => 7, 'teeny' => true)); ?></td>
+            </tr>            
             <tr valign="top">
                 <th scope="row">
                     <label for="wc_confirm_email_subject"><?php _e('Subscription confirmation email subject', 'wpdiscuz'); ?></label>
@@ -157,7 +134,7 @@ if (!defined('ABSPATH')) {
                     </div>
                     </p>
                 </th>
-                <td colspan="3"><textarea name="wc_confirm_email_message" id="wc_confirm_email_message" style="height: 130px; width:90%;"><?php echo $this->optionsSerialized->phrases['wc_confirm_email_message']; ?></textarea></td>
+                <td colspan="3"><?php wp_editor($this->optionsSerialized->phrases['wc_confirm_email_message'], "wc_confirm_email_message", array('textarea_rows' => 7, 'teeny' => true)); ?></td>
             </tr>
             <tr valign="top">
                 <th scope="row">
@@ -186,7 +163,23 @@ if (!defined('ABSPATH')) {
                     </div>
                     </p>
                 </th>
-                <td colspan="3"><textarea name="wc_comment_approved_email_message" id="wc_comment_approved_email_message" style="height: 120px; width:90%;"><?php echo $this->optionsSerialized->phrases['wc_comment_approved_email_message']; ?></textarea></td>
+                <td colspan="3"><?php wp_editor($this->optionsSerialized->phrases['wc_comment_approved_email_message'], "wc_comment_approved_email_message", array('textarea_rows' => 7, 'teeny' => true)); ?></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row"><label for="wc_unsubscribe"><?php _e('Unsubscribe', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><input type="text" name="wc_unsubscribe" id="wc_unsubscribe" value="<?php echo $this->optionsSerialized->phrases['wc_unsubscribe']; ?>" /></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row"><label for="wc_ignore_subscription"><?php _e('Ignore subscription', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><input type="text" name="wc_ignore_subscription" id="wc_ignore_subscription" value="<?php echo $this->optionsSerialized->phrases['wc_ignore_subscription']; ?>" /></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row"><label for="wc_confirm_email"><?php _e('Confirm your subscription', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><input type="text" name="wc_confirm_email" id="wc_confirm_email" value="<?php echo $this->optionsSerialized->phrases['wc_confirm_email']; ?>" /></td>
+            </tr>
+            <tr valign="top">
+                <th scope="row"><label for="wc_comfirm_success_message"><?php _e('You\'ve successfully confirmed your subscription.', 'wpdiscuz'); ?></label></th>
+                <td colspan="3"><textarea name="wc_comfirm_success_message" id="wc_comfirm_success_message"><?php echo $this->optionsSerialized->phrases['wc_comfirm_success_message']; ?></textarea></td>
             </tr>
         </tbody>
     </table>

@@ -12,7 +12,7 @@ if (!defined('ABSPATH')) {
             </tr>
             <tr valign="top">
                 <th scope="row" style="width: 45%;">
-                    <label for="isGravatarCacheEnabled"><?php _e('Enable Grvatar caching', 'wpdiscuz'); ?></label>
+                    <label for="isGravatarCacheEnabled"><?php _e('Enable Gravatar caching', 'wpdiscuz'); ?></label>
                     <?php if (!$this->optionsSerialized->isFileFunctionsExists) { ?>
                         <p class="desc"><?php _e('It seems on of important functions ("file_get_contents", "file_put_contents") of php is not exists.<br/> Please enable these functions in your server settings to use gravatar caching feature.', 'wpdiscuz'); ?></p>
                     <?php } ?>
@@ -20,6 +20,7 @@ if (!defined('ABSPATH')) {
                 <td>   
                     <input type="checkbox" <?php checked($this->optionsSerialized->isGravatarCacheEnabled == 1) ?> value="1" name="isGravatarCacheEnabled" id="isGravatarCacheEnabled" />
                     <label for="isGravatarCacheEnabled"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/cache/#grvatar_caching" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -29,6 +30,7 @@ if (!defined('ABSPATH')) {
                         <input type="radio" <?php checked($this->optionsSerialized->gravatarCacheMethod == 'runtime') ?> value="runtime" name="gravatarCacheMethod" id="gravatarCacheMethodRuntime" /><label for="gravatarCacheMethodRuntime"><?php _e('Runtime', 'wpdiscuz'); ?></label> 
                         <input type="radio" <?php checked($this->optionsSerialized->gravatarCacheMethod == 'cronjob') ?> value="cronjob" name="gravatarCacheMethod" id="gravatarCacheMethodCronjob" /><label for="gravatarCacheMethodCronjob"><?php _e('Cron job', 'wpdiscuz'); ?></label>
                     </div>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/cache/#caching_method" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top">
@@ -36,6 +38,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <?php $gravatarCacheTimeout = isset($this->optionsSerialized->gravatarCacheTimeout) && ($days = absint($this->optionsSerialized->gravatarCacheTimeout)) ? $days : 10; ?>
                     <input type="number" id="gravatarCacheTimeout" name="gravatarCacheTimeout" value="<?php echo $gravatarCacheTimeout; ?>"/>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/cache/#cache_avatars_for_days" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr>

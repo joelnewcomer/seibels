@@ -46,14 +46,14 @@ class Utils {
     private static function updateUserData($userData) {
         $userProvider = get_user_meta($userData['ID'], wpdFormConst::WPDISCUZ_SOCIAL_PROVIDER_KEY, true);
         if ($userProvider !== $userData['provider']) {
-            wp_update_user( array( 'ID' => $userData['ID'], 'user_url' => $userData['user_url'] ) );
+            wp_update_user(array('ID' => $userData['ID'], 'user_url' => $userData['user_url']));
             update_user_meta($userData['ID'], wpdFormConst::WPDISCUZ_SOCIAL_PROVIDER_KEY, $userData['provider']);
             update_user_meta($userData['ID'], wpdFormConst::WPDISCUZ_SOCIAL_USER_ID_KEY, $userData['social_user_id']);
         }
     }
 
     private static function generateLogin($email) {
-        $username = str_replace('-','_',sanitize_title(strstr($email, '@', true)));
+        $username = str_replace('-', '_', sanitize_title(strstr($email, '@', true)));
         $username = sanitize_user($username);
         return self::saitizeUsername($username);
     }
@@ -77,7 +77,7 @@ class Utils {
             'first_name' => $fbUser['first_name'],
             'last_name' => $fbUser['last_name'],
             'display_name' => $fbUser['first_name'] . ' ' . $fbUser['last_name'],
-            'user_url' => 'https://www.facebook.com/' . $fbUser['id'],
+            'user_url' => '',
             'user_email' => $fbUser['email'],
             'provider' => 'facebook',
             'social_user_id' => $fbUser['id'],
@@ -85,13 +85,13 @@ class Utils {
         );
         return $userData;
     }
-    
-    private static function sanitizeGoogleUser($googleUser){
+
+    private static function sanitizeGoogleUser($googleUser) {
         $userData = array(
             'user_login' => self::generateLogin($googleUser['email']),
             'first_name' => $googleUser['given_name'],
             'last_name' => $googleUser['family_name'],
-            'display_name' => $googleUser['name'] ,
+            'display_name' => $googleUser['name'],
             'user_url' => 'https://plus.google.com/' . $googleUser['sub'],
             'user_email' => $googleUser['email'],
             'provider' => 'google',
@@ -115,14 +115,14 @@ class Utils {
         );
         return $userData;
     }
-    
-    private static function sanitizeVkUser($socialUser){
+
+    private static function sanitizeVkUser($socialUser) {
         $userData = array(
             'user_login' => self::generateLogin($socialUser['email']),
             'first_name' => $socialUser['first_name'],
             'last_name' => $socialUser['last_name'],
-            'display_name' => $socialUser['first_name'] .' '.$socialUser['last_name'],
-            'user_url' => 'https://vk.com/' . (isset($socialUser['screen_name']) && $socialUser['screen_name'] ? $socialUser['screen_name'] : 'id'.$socialUser['id']),
+            'display_name' => $socialUser['first_name'] . ' ' . $socialUser['last_name'],
+            'user_url' => 'https://vk.com/' . (isset($socialUser['screen_name']) && $socialUser['screen_name'] ? $socialUser['screen_name'] : 'id' . $socialUser['id']),
             'user_email' => $socialUser['email'],
             'provider' => 'vk',
             'social_user_id' => $socialUser['id'],
@@ -130,9 +130,9 @@ class Utils {
         );
         return $userData;
     }
-    
-    private static function sanitizeOkUser($socialUser){
-        $email = $socialUser['has_email'] ?  $socialUser['email']  : $socialUser['uid'] . '_anonymous@ok.ru';
+
+    private static function sanitizeOkUser($socialUser) {
+        $email = $socialUser['has_email'] ? $socialUser['email'] : $socialUser['uid'] . '_anonymous@ok.ru';
         $userData = array(
             'user_login' => self::generateLogin($email),
             'first_name' => $socialUser['first_name'],
@@ -147,33 +147,37 @@ class Utils {
         return $userData;
     }
 
-    public static function addOAuthState($provider, $secret) {
+    public static function addOAuthState($provider, $secret, $postID) {
         global $wpdb;
         $tempUserID = $wpdb->get_var("SELECT MAX(`user_id`) +1 FROM  {$wpdb->usermeta}");
         update_user_meta($tempUserID, wpdFormConst::WPDISCUZ_OAUTH_STATE_PROVIDER, $provider);
-        update_user_meta($tempUserID, wpdFormConst::WPDISCUZ_OAUTH_STATE_SECRET, $secret);
+        update_user_meta($tempUserID, wpdFormConst::WPDISCUZ_OAUTH_STATE_TOKEN, $secret);
+        update_user_meta($tempUserID, wpdFormConst::WPDISCUZ_OAUTH_CURRENT_POSTID, $postID);
         return $tempUserID;
     }
 
     private static function getTempUserID($token) {
         global $wpdb;
-        return $wpdb->get_var($wpdb->prepare("SELECT `user_id`  FROM  {$wpdb->usermeta} WHERE `meta_key`= %s  AND `meta_value` = %s", wpdFormConst::WPDISCUZ_OAUTH_STATE_PROVIDER, $token));
+        return $wpdb->get_var($wpdb->prepare("SELECT `user_id`  FROM  {$wpdb->usermeta} WHERE `meta_key`= %s  AND `meta_value` = %s", wpdFormConst::WPDISCUZ_OAUTH_STATE_TOKEN, $token));
     }
 
     private static function deleteTempUserData($userID) {
         delete_user_meta($userID, wpdFormConst::WPDISCUZ_OAUTH_STATE_PROVIDER);
-        delete_user_meta($userID, wpdFormConst::WPDISCUZ_OAUTH_STATE_SECRET);
+        delete_user_meta($userID, wpdFormConst::WPDISCUZ_OAUTH_STATE_TOKEN);
+        delete_user_meta($userID, wpdFormConst::WPDISCUZ_OAUTH_CURRENT_POSTID);
     }
-    
-    public static function generateOAuthState($appID){
-        return md5("appID=$appID;date=". time());
+
+    public static function generateOAuthState($appID) {
+        return md5("appID=$appID;date=" . time());
     }
-    
-    public static function getProviderByState($state){
+
+    public static function getProviderByState($state) {
         $tempUserID = self::getTempUserID($state);
-        $provider = get_user_meta($tempUserID, wpdFormConst::WPDISCUZ_OAUTH_STATE_PROVIDER, true);
+        $providerData = array();
+        $providerData['provider'] = get_user_meta($tempUserID, wpdFormConst::WPDISCUZ_OAUTH_STATE_PROVIDER, true);
+        $providerData['postID'] = get_user_meta($tempUserID, wpdFormConst::WPDISCUZ_OAUTH_CURRENT_POSTID, true);
         self::deleteTempUserData($tempUserID);
-        return $provider;
+        return $providerData;
     }
 
 }

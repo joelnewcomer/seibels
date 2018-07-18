@@ -1,9 +1,9 @@
 === Comments - wpDiscuz ===
 Contributors: gVectors Team
-Tags: GDPR, comments, ajax comments, custom comment form, custom comment field
+Tags: comment, comments, ajax comments, custom comment form, custom comment field
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 5.1.2
+Stable tag: 5.1.4
 Requires PHP: 5.4 and higher
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -33,10 +33,6 @@ Integration with AntiSpam plugins
 * Akismet 
 * WordPress Zero Spam 
 * WPBruiser {no-Captcha anti-Spam}
-
-= Comments - wpDiscuz "Coming soon" Features: =
-
-* New Feature : Follow Users
 
 = Comments - wpDiscuz Features: =
 
@@ -81,6 +77,7 @@ Integration with AntiSpam plugins
 * Built-in Gravatar caching
 * Sticky Comments
 * Closed Comments Threads (disable replies)
+* Subscribe to User / User Follow
 
 
 = Add-ons =
@@ -174,6 +171,38 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 
 == Changelog ==
 
+= Comments - wpDiscuz v5.1.4 =
+
+Fixed bug : Fatal error on update
+Fixed bug : Follow icon is visible for non logged in users
+
+
+IMPORTANT!
+
+- Please delete all caches and press CTRL+F5 on website front-end after updating wpDiscuz
+- wpDiscuz uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
+- Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
+- If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
+- If you have JetPack installed please deactivate Jetpack comments, it affects wpDiscuz
+- If you have a Cache Plugin, please delete all caches after wpDiscuz update.
+- If you use CDN and found some issue please purge it.
+- If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
+
+
+= Comments - wpDiscuz v5.1.3 =
+
+* Added: Subscribe to User / User Follow
+* Added: User Follow email configuration
+* Added: New HTML field type in comment form builder
+* Added: Facebook OAuth2 login type
+* Added: Privacy agreement checkbox for comment subscription bar
+* Added: Subscription email body editing with rich editor
+* Added: Content deleting request via email in more secure way
+* Fixed bug: Comment form statistic data caching optimization
+* Fixed bug: Change subscription email when profile email is updated
+* Fixed bug: Don't display unapproved comments by direct comment link
+* Fixed bug: Date field validation
+
 
 = Comments - wpDiscuz v5.1.2 =
 
@@ -182,18 +211,6 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 * Fixed Bug : Comment styling issues after editing
 * Fixed Bug : Social login issue
 * Fixed Bug : Cookies Consent checkbox
-
-
-IMPORTANT!
-
-- Please delete all caches and press CTRL+F5 on ebsite front-end after updating wpDiscuz
-- wpDiscuz uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
-- Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
-- If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
-- If you have JetPack installed please deactivate Jetpack comments, it affects wpDiscuz
-- If you have a Cache Plugin, please delete all caches after wpDiscuz update.
-- If you use CDN and found some issue please purge it.
-- If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
 
 
 = Comments - wpDiscuz v5.1.1 =

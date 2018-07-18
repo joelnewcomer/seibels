@@ -24,6 +24,7 @@ if (!defined('ABSPATH')) {
                 <li><?php _e('Date/Time', 'wpdiscuz'); ?></li>
                 <li><?php _e('Email', 'wpdiscuz'); ?></li>
                 <li><?php _e('Notification', 'wpdiscuz'); ?></li>
+                <li><?php _e('Follow', 'wpdiscuz'); ?></li>
                 <li><?php _e('Social Login', 'wpdiscuz'); ?></li>
                 <li><?php _e('User Settings', 'wpdiscuz'); ?></li>
                 <li><?php _e('Errors', 'wpdiscuz'); ?></li>
@@ -35,6 +36,7 @@ if (!defined('ABSPATH')) {
                 <?php include 'phrases-layouts/phrases-datetime.php'; ?>
                 <?php include 'phrases-layouts/phrases-email.php'; ?>
                 <?php include 'phrases-layouts/phrases-notification.php'; ?>
+                <?php include 'phrases-layouts/phrases-follow.php'; ?>
                 <?php include 'phrases-layouts/phrases-social-login.php'; ?>
                 <?php include 'phrases-layouts/phrases-user-settings.php'; ?>
                 <?php include 'phrases-layouts/phrases-error.php'; ?>

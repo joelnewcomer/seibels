@@ -223,7 +223,7 @@ msgid "Learn more here."
 msgstr ""
 
 #: components/VersionRollback.php:299
-msgid "An unknown error has occurred. Please try again later."
+msgid "An unknown has error occurred. Please try again later."
 msgstr ""
 
 #: components/VersionRollback.php:378 components/VersionRollback.php:426

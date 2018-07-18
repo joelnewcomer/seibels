@@ -10,11 +10,12 @@ if (!defined('ABSPATH')) {
             <tr valign="top">
                 <th scope="row" style="width: 50%;">
                     <label for="wc_header_text_show_hide"><?php _e('Hide Header Text', 'wpdiscuz'); ?></label>
-                    <p class="wpd-desc"><?php _e('This option hides "Leave Reply" header text on top of comment form. You can madify this text in Comments > Forms admin page.', 'wpdiscuz'); ?></p>
+                    <p class="wpd-desc"><?php _e('This option hides "Leave Reply" header text on top of comment form. You can change this text in Comments > Forms admin page.', 'wpdiscuz'); ?></p>
                 </th>
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->headerTextShowHide == 1) ?> value="1" name="wc_header_text_show_hide" id="wc_header_text_show_hide" />
                     <label for="wc_header_text_show_hide"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#hide_header_text" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -24,6 +25,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->showHideLoggedInUsername == 1) ?> value="1" name="wc_show_hide_loggedin_username" id="wc_show_hide_loggedin_username" />
                     <label for="wc_show_hide_loggedin_username"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#user_name_and_logout_link" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -33,7 +35,6 @@ if (!defined('ABSPATH')) {
                 </th>
                 <td>
                     <fieldset>
-
                         <div class="wpd-subopt" style="float: none; padding: 5px 0px;">
                             <div style="display: inline-block; vertical-align: middle;">
                                 <input type="checkbox" <?php checked($this->optionsSerialized->hideLoginLinkForGuests == 1) ?> value="1" name="hideLoginLinkForGuests" id="hideLoginLinkForGuests" />
@@ -64,6 +65,7 @@ if (!defined('ABSPATH')) {
                         </div>
                         <div style="clear: both;"></div>
                     </fieldset>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#components" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -75,7 +77,10 @@ if (!defined('ABSPATH')) {
                         <?php _e('Set this option value 0 to clear those data when user closes browser.', 'wpdiscuz'); ?>
                     </p>
                 </th>
-                <td><input type="number" value="<?php echo isset($this->optionsSerialized->storeCommenterData) ? $this->optionsSerialized->storeCommenterData : -1; ?>" name="storeCommenterData" id="storeCommenterData" style="width:100px;" /></td>
+                <td>
+                    <input type="number" value="<?php echo isset($this->optionsSerialized->storeCommenterData) ? $this->optionsSerialized->storeCommenterData : -1; ?>" name="storeCommenterData" id="storeCommenterData" style="width:100px;" />
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#guest_commenter_credentials" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
             </tr>
             <tr valign="top">
                 <th scope="row">
@@ -88,6 +93,7 @@ if (!defined('ABSPATH')) {
                     <span for="commenterNameMaxLength">
                         &nbsp; <?php _e('Max', 'wpdiscuz'); ?>: <input type="number" value="<?php echo $this->optionsSerialized->commenterNameMaxLength; ?>" name="commenterNameMaxLength" id="commenterNameMaxLength" style="width:70px;" />
                     </span>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#comment_author_name_length" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -102,6 +108,7 @@ if (!defined('ABSPATH')) {
                     <span for="wc_comment_text_max_length">
                         &nbsp; <?php _e('Max', 'wpdiscuz'); ?>: <input type="number" value="<?php echo isset($this->optionsSerialized->commentTextMaxLength) ? $this->optionsSerialized->commentTextMaxLength : ''; ?>" name="wc_comment_text_max_length" id="wc_comment_text_max_length" style="width:70px;" />
                     </span>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#comment_text_length" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -114,7 +121,7 @@ if (!defined('ABSPATH')) {
                         <input type="radio" value="0" <?php checked('0' == $isCaptchaInSession); ?> name="isCaptchaInSession" id="captchaByImageFile" /><label for="captchaByImageFile"><?php _e('File system', 'wpdiscuz') ?></label> &nbsp;
                         <input type="radio" value="1" <?php checked('1' == $isCaptchaInSession); ?> name="isCaptchaInSession" id="captchaInSession" /><label for="captchaInSession"><?php _e('WP Session', 'wpdiscuz') ?></label>
                     </div>
-
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#captcha_generation_type" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top">
@@ -129,7 +136,8 @@ if (!defined('ABSPATH')) {
                 </th>
                 <th>
                     <input type="text" value="<?php echo $this->optionsSerialized->antispamKey ?>" name="antispamKey" id="antispamKey" style="padding: 3px 5px;" size="35"/>
-                    <button type="button" id="generateAntispamKey" class="button button-secondary"><?php _e('Generate', 'wpdiscuz') ?></button>                    
+                    <button type="button" id="generateAntispamKey" class="button button-secondary"><?php _e('Generate', 'wpdiscuz') ?></button>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#invisible_spam_protection" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </th>
             </tr>
             <tr valign="top">
@@ -140,6 +148,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <input type="checkbox" value="1" <?php checked($this->optionsSerialized->displayAntispamNote == 1) ?> name="displayAntispamNote" id="displayAntispamNote" />
                     <label for="displayAntispamNote"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#note_about_spam_protection" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -150,6 +159,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->isQuickTagsEnabled == 1) ?> value="1" name="wc_quick_tags" id="wc_quick_tags" />
                     <label for="wc_quick_tags"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#quicktags" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -159,6 +169,7 @@ if (!defined('ABSPATH')) {
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->enableImageConversion == 1) ?> value="1" name="enableImageConversion" id="enableImageConversion" />
                     <label for="enableImageConversion"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#image-embed" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
             <tr valign="top">
@@ -176,6 +187,7 @@ if (!defined('ABSPATH')) {
                         <option value="86400" <?php selected($wc_comment_editable_time, '86400'); ?>>24 <?php _e('Hours', 'wpdiscuz'); ?></option>
                         <option value="unlimit" <?php selected($wc_comment_editable_time, 'unlimit'); ?>><?php _e('Unlimit', 'wpdiscuz'); ?></option>
                     </select>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/comment-form/#allow_editing" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
         </tbody>

@@ -129,7 +129,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
      * Default Value - Checked
      */
     public $showHideLoggedInUsername;
-    
+
     /**
      * Type - Checkbox
      * Available Values - Checked/Unchecked
@@ -589,6 +589,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
     public $enableFbShare;
     public $fbAppID;
     public $fbAppSecret;
+    public $fbUseOAuth2;
     //Twitter
     public $enableTwitterLogin;
     public $enableTwitterShare;
@@ -610,6 +611,10 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
     public $vkAppID;
     public $vkAppSecret;
 
+    /** == USERS FOLLOW ==* */
+    public $isFollowActive;
+    public $disableFollowConfirmForUsers;
+
     /**
      * wordpress options
      */
@@ -625,6 +630,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
 
     function __construct($dbmanager) {
         $this->dbManager = $dbmanager;
+        add_option(self::OPTION_SLUG_HASH_KEY, md5(time() . uniqid()), '', 'no');
         $this->initPhrases();
         $this->addOptions();
         $this->initOptions(get_option(self::OPTION_SLUG_OPTIONS));
@@ -723,6 +729,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $this->enableFbShare = isset($options['enableFbShare']) ? $options['enableFbShare'] : 0;
         $this->fbAppID = isset($options['fbAppID']) ? $options['fbAppID'] : '';
         $this->fbAppSecret = isset($options['fbAppSecret']) ? $options['fbAppSecret'] : '';
+        $this->fbUseOAuth2 = isset($options['fbUseOAuth2']) ? $options['fbUseOAuth2'] : 0;
         // twitter
         $this->enableTwitterLogin = isset($options['enableTwitterLogin']) ? $options['enableTwitterLogin'] : 0;
         $this->enableTwitterShare = isset($options['enableTwitterShare']) ? $options['enableTwitterShare'] : 0;
@@ -743,6 +750,9 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $this->enableVkShare = isset($options['enableVkShare']) ? $options['enableVkShare'] : 0;
         $this->vkAppID = isset($options['vkAppID']) ? $options['vkAppID'] : '';
         $this->vkAppSecret = isset($options['vkAppSecret']) ? $options['vkAppSecret'] : '';
+
+        $this->isFollowActive = isset($options['isFollowActive']) ? $options['isFollowActive'] : 0;
+        $this->disableFollowConfirmForUsers = isset($options['disableFollowConfirmForUsers']) ? $options['disableFollowConfirmForUsers'] : 0;
         do_action('wpdiscuz_init_options', $this);
     }
 
@@ -766,8 +776,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_notify_of' => __('Notify of', 'wpdiscuz'),
             'wc_notify_on_new_comment' => __('new follow-up comments', 'wpdiscuz'),
             'wc_notify_on_all_new_reply' => __('new replies to my comments', 'wpdiscuz'),
-            'wc_notify_on_new_reply_on' => __('Notify of new replies to this comment - (on)', 'wpdiscuz'),
-            'wc_notify_on_new_reply_off' => __('Notify of new replies to this comment - (off)', 'wpdiscuz'),
+            'wc_notify_on_new_reply' => __('Notify of new replies to this comment', 'wpdiscuz'),
             'wc_sort_by' => __('Sort by', 'wpdiscuz'),
             'wc_newest' => __('newest', 'wpdiscuz'),
             'wc_oldest' => __('oldest', 'wpdiscuz'),
@@ -856,14 +865,12 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_form_subscription_submit' => __('&rsaquo;', 'wpdiscuz'),
             'wc_comment_approved_email_subject' => __('Your comment is approved!', 'wpdiscuz'),
             'wc_comment_approved_email_message' => __('Hi [COMMENT_AUTHOR],<br/><br/>your comment was approved.<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]', 'wpdiscuz'),
-            'wc_roles_cannot_comment_message' => __('Comments are closed.', 'wpdiscuz'),
-            'wc_stick_main_form_comment_on' => __('Stick this comment - (on)', 'wpdiscuz'),
-            'wc_stick_main_form_comment_off' => __('Stick this comment - (off)', 'wpdiscuz'),
+            'wc_roles_cannot_comment_message' => __('Comments are closed.', 'wpdiscuz'),                       
+            'wc_stick_comment_btn_title' => __('Stick this comment', 'wpdiscuz'),           
             'wc_stick_comment' => __('Stick', 'wpdiscuz'),
             'wc_unstick_comment' => __('Unstick', 'wpdiscuz'),
-            'wc_sticky_comment_icon_title' => __('Sticky comment thread', 'wpdiscuz'),
-            'wc_close_main_form_comment_on' => __('Close this comment - (on)', 'wpdiscuz'),
-            'wc_close_main_form_comment_off' => __('Close this comment - (off)', 'wpdiscuz'),
+            'wc_sticky_comment_icon_title' => __('Sticky comment thread', 'wpdiscuz'),            
+            'wc_close_comment_btn_title' => __('Close this thread', 'wpdiscuz'),
             'wc_close_comment' => __('Close', 'wpdiscuz'),
             'wc_open_comment' => __('Open', 'wpdiscuz'),
             'wc_closed_comment_icon_title' => __('Closed comment thread', 'wpdiscuz'),
@@ -875,6 +882,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_content_and_settings' => __('My content and settings', 'wpdiscuz'),
             'wc_user_settings_activity' => __('Activity', 'wpdiscuz'),
             'wc_user_settings_subscriptions' => __('Subscriptions', 'wpdiscuz'),
+            'wc_user_settings_follows' => __('Follows', 'wpdiscuz'),
             'wc_user_settings_response_to' => __('In response to:', 'wpdiscuz'),
             'wc_user_settings_email_me_delete_links' => __('Bulk management via email', 'wpdiscuz'),
             'wc_user_settings_email_me_delete_links_desc' => __('Click the button above to get an email with bulk delete and unsubscribe links.', 'wpdiscuz'),
@@ -884,9 +892,11 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_user_settings_clear_cookie' => __('Clear cookies with my personal data', 'wpdiscuz'),
             'wc_user_settings_delete_links' => __('Bulk management via email', 'wpdiscuz'),
             'wc_user_settings_delete_all_comments' => __('Delete all my comments', 'wpdiscuz'),
-            'wc_user_settings_delete_all_comments_message' => __('Please use this link to delete all your comments. Please note, that this action cannot be undone.', 'wpdiscuz'),
+            'wc_user_settings_delete_all_comments_message' => __('Please use this link to delete all your comments. Please note, that this action cannot be undone.<br/><br/><a href="[DELETE_COMMENTS_URL]" target="_blank">Delete all my comments</a><br/><br/>', 'wpdiscuz'),
             'wc_user_settings_delete_all_subscriptions' => __('Delete all my subscriptions', 'wpdiscuz'),
-            'wc_user_settings_delete_all_subscriptions_message' => __('Please use this link to cancel all subscriptions for new comments. Please note, that this action cannot be undone.', 'wpdiscuz'),
+            'wc_user_settings_delete_all_subscriptions_message' => __('Please use this link to cancel all subscriptions for new comments. Please note, that this action cannot be undone.<br/><br/><a href="[DELETE_SUBSCRIPTIONS_URL]" target="_blank">Delete all my subscriptions</a><br/><br/>', 'wpdiscuz'),
+            'wc_user_settings_delete_all_follows' => __('Delete all my follows', 'wpdiscuz'),
+            'wc_user_settings_delete_all_follows_message' => __('Please use this link to cancel all follows for new comments. Please note, that this action cannot be undone.<br/><br/><a href="[DELETE_FOLLOWS_URL]" target="_blank">Delete all my follows</a><br/><br/>', 'wpdiscuz'),
             'wc_user_settings_subscribed_to_replies' => __('subscribed to this comment', 'wpdiscuz'),
             'wc_user_settings_subscribed_to_replies_own' => __('subscribed to my comments', 'wpdiscuz'),
             'wc_user_settings_subscribed_to_all_comments' => __('subscribed to all follow-up comments of this post', 'wpdiscuz'),
@@ -894,6 +904,22 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_user_settings_email_error' => __('Error : Can\'t send email.', 'wpdiscuz'),
             'wc_confirm_comment_delete' => __('Are you sure you want to delete this comment?', 'wpdiscuz'),
             'wc_confirm_cancel_subscription' => __('Are you sure you want to cancel this subscription?', 'wpdiscuz'),
+            'wc_confirm_cancel_follow' => __('Are you sure you want to cancel this follow?', 'wpdiscuz'),
+            'wc_follow_user' => __('Follow this user', 'wpdiscuz'),
+            'wc_unfollow_user' => __('Unfollow this user', 'wpdiscuz'),
+            'wc_follow_success' => __('You started following this comment author', 'wpdiscuz'),
+            'wc_follow_canceled' => __('You stopped following this comment author.', 'wpdiscuz'),
+            'wc_follow_email_confirm' => __('Please check your email and confirm the user following request.', 'wpdiscuz'),
+            'wc_follow_email_confirm_fail' => __('Sorry, we couldn\'t send confirmation email.', 'wpdiscuz'),
+            'wc_follow_login_to_follow' => __('Please login to follow users.', 'wpdiscuz'),
+            'wc_follow_impossible' => __('We are sorry, but you can\'t follow this user.', 'wpdiscuz'),
+            'wc_follow_not_added' => __('Following failed. Please try again later.', 'wpdiscuz'),
+            'wc_follow_confirm' => __('Confirm user following request', 'wpdiscuz'),
+            'wc_follow_cancel' => __('Cancel user following request', 'wpdiscuz'),
+            'wc_follow_confirm_email_subject' => __('User Following Confirmation', 'wpdiscuz'),
+            'wc_follow_confirm_email_message' => __('Hi, <br/> You just started following a new user. You\'ll get email notification once new comment is posted by this user. <br/> Please click on "user following confirmation" link to confirm your request. If you believe this is an error, ignore this message and we\'ll never bother you again. <br/><br/><a href="[POST_URL]">[POST_TITLE]</a><br/><br/><a href="[CONFIRM_URL]">' . __('Confirm Follow', 'wpdiscuz') . '</a><br/><br/><a href="[CANCEL_URL]">' . __('Cancel Follow', 'wpdiscuz') . '</a>', 'wpdiscuz'),
+            'wc_follow_email_subject' => __('New Comment', 'wpdiscuz'),
+            'wc_follow_email_message' => __('Hi [FOLLOWER_NAME],<br/><br/>new comment have been posted by the user you are following<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[CANCEL_URL]">' . __('Cancel Follow', 'wpdiscuz') . '</a>', 'wpdiscuz'),
         );
     }
 
@@ -976,6 +1002,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'enableFbShare' => $this->enableFbShare,
             'fbAppID' => $this->fbAppID,
             'fbAppSecret' => $this->fbAppSecret,
+            'fbUseOAuth2' => $this->fbUseOAuth2,
             // twitter
             'enableTwitterLogin' => $this->enableTwitterLogin,
             'enableTwitterShare' => $this->enableTwitterShare,
@@ -996,6 +1023,8 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'enableVkShare' => $this->enableVkShare,
             'vkAppID' => $this->vkAppID,
             'vkAppSecret' => $this->vkAppSecret,
+            'isFollowActive' => $this->isFollowActive,
+            'disableFollowConfirmForUsers' => $this->disableFollowConfirmForUsers,
         );
         return $options;
     }
@@ -1076,7 +1105,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'isGravatarCacheEnabled' => '1',
             'gravatarCacheMethod' => 'cronjob',
             'gravatarCacheTimeout' => '10',
-            'hideLoginLinkForGuests'=> '1',
+            'hideLoginLinkForGuests' => '1',
             'theme' => 'wpd-default',
             'reverseChildren' => 0,
             'antispamKey' => $this->generateUniqueKey(),
@@ -1089,6 +1118,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'enableFbShare' => '0',
             'fbAppID' => '',
             'fbAppSecret' => '',
+            'fbUseOAuth2' => 0,
             // twitter
             'enableTwitterLogin' => '0',
             'enableTwitterShare' => '1',
@@ -1109,6 +1139,8 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'enableVkShare' => '1',
             'vkAppID' => '',
             'vkAppSecret' => '',
+            'isFollowActive' => 1,
+            'disableFollowConfirmForUsers' => 1
         );
         add_option(self::OPTION_SLUG_OPTIONS, serialize($options));
     }
@@ -1155,6 +1187,17 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $js_options['wc_new_replies_button_text'] = $this->phrases['wc_new_replies_button_text'];
         $js_options['wc_msg_input_min_length'] = $this->phrases['wc_msg_input_min_length'];
         $js_options['wc_msg_input_max_length'] = $this->phrases['wc_msg_input_max_length'];
+        //<!-- follow phrases
+        $js_options['wc_follow_user'] = $this->phrases['wc_follow_user'];
+        $js_options['wc_unfollow_user'] = $this->phrases['wc_unfollow_user'];
+        $js_options['wc_follow_success'] = $this->phrases['wc_follow_success'];
+        $js_options['wc_follow_canceled'] = $this->phrases['wc_follow_canceled'];
+        $js_options['wc_follow_email_confirm'] = $this->phrases['wc_follow_email_confirm'];
+        $js_options['wc_follow_email_confirm_fail'] = $this->phrases['wc_follow_email_confirm_fail'];
+        $js_options['wc_follow_login_to_follow'] = $this->phrases['wc_follow_login_to_follow'];
+        $js_options['wc_follow_impossible'] = $this->phrases['wc_follow_impossible'];
+        $js_options['wc_follow_not_added'] = $this->phrases['wc_follow_not_added'];
+        //follow phrases -->
         $js_options['is_user_logged_in'] = is_user_logged_in();
         $js_options['commentListLoadType'] = $this->commentListLoadType;
         $js_options['commentListUpdateType'] = $this->commentListUpdateType;
@@ -1184,6 +1227,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $js_options['enableFbLogin'] = $this->enableFbLogin;
         $js_options['enableFbShare'] = $this->enableFbShare;
         $js_options['facebookAppID'] = $this->fbAppID;
+        $js_options['facebookUseOAuth2'] = $this->fbUseOAuth2;
         $js_options['enableGoogleLogin'] = $this->enableGoogleLogin;
         $js_options['googleAppID'] = $this->googleAppID;
         $js_options['cookiehash'] = COOKIEHASH;

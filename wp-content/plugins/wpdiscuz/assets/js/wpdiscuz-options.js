@@ -59,7 +59,7 @@ jQuery(document).ready(function ($) {
         var commentId = btn.data('comment');
         var postId = btn.data('post');
         var data = new FormData();
-        data.append('action', 'wpdiscuzStickComment');
+        data.append('action', 'wpdStickComment');
         data.append('commentId', commentId);
         data.append('postId', postId);
         $.ajax({
@@ -92,7 +92,7 @@ jQuery(document).ready(function ($) {
         var commentId = btn.data('comment');
         var postId = btn.data('post');
         var data = new FormData();
-        data.append('action', 'wpdiscuzCloseThread');
+        data.append('action', 'wpdCloseThread');
         data.append('commentId', commentId);
         data.append('postId', postId);
         $.ajax({

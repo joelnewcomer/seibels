@@ -6,14 +6,14 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
     public $tree_type = 'comment';
     public $db_fields = array('parent' => 'comment_parent', 'id' => 'comment_ID');
     private $helper;
-    private $optimizationHelper;
+    private $helperOptimization;
     private $dbManager;
     private $optionsSerialized;
     private $users;
 
-    public function __construct($helper, $optimizationHelper, $dbManager, $optionsSerialized) {
+    public function __construct($helper, $helperOptimization, $dbManager, $optionsSerialized) {
         $this->helper = $helper;
-        $this->optimizationHelper = $optimizationHelper;
+        $this->helperOptimization = $helperOptimization;
         $this->dbManager = $dbManager;
         $this->optionsSerialized = $optionsSerialized;
         $this->users = array();
@@ -57,7 +57,7 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
         $commentContent .= $comment->comment_approved == 0 ? '<p class="wc_held_for_moderate">' . $this->optionsSerialized->phrases['wc_held_for_moderate'] . '</p>' : '';
         $hideAvatarStyle = '';
         if (!$this->optionsSerialized->wordpressShowAvatars) {
-            if (is_rtl()) {
+            if ($args['is_rtl']) {
                 $hideAvatarStyle = 'style = "margin-right : 0;"';
             } else {
                 $hideAvatarStyle = 'style = "margin-left : 0;"';
@@ -65,14 +65,14 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
         }
 
         if ($this->optionsSerialized->wordpressIsPaginate && $comment->comment_parent) {
-            $rootComment = $this->optimizationHelper->getCommentRoot($comment->comment_parent);
+            $rootComment = $this->helperOptimization->getCommentRoot($comment->comment_parent);
         }
         if (isset($args['new_loaded_class'])) {
             $commentWrapperClass[] = $args['new_loaded_class'];
             if ($args['isSingle']) {
                 $commentWrapperClass[] = 'wpdiscuz_single';
             } else {
-                $depth = $this->optimizationHelper->getCommentDepth($comment->comment_ID);
+                $depth = $this->helperOptimization->getCommentDepth($comment->comment_ID);
             }
         }
 
@@ -182,16 +182,47 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
         }
 
         if ($profileUrl && !$this->optionsSerialized->disableProfileURLs) {
-            $commentAuthorAvatar = "<a href='$profileUrl' target='_blank'>$authorAvatar</a>";
+            $attributes = apply_filters('wpdiscuz_avatar_link_attributes', array('href' => $profileUrl, 'target' => '_blank'));
+            if ($attributes && is_array($attributes)) {
+                $attributesHtml = "";
+                foreach ($attributes as $attribute => $value) {
+                    $attributesHtml .= "$attribute='{$value}' ";
+                }
+                $attributesHtml = trim($attributesHtml);
+                $commentAuthorAvatar = "<a $attributesHtml>$authorAvatar</a>";
+            } else {
+                $commentAuthorAvatar = "<a href='$profileUrl' target='_blank'>$authorAvatar</a>";
+            }
         } else {
             $commentAuthorAvatar = $authorAvatar;
         }
 
         if (!$this->optionsSerialized->disableProfileURLs) {
             if ($commentAuthorUrl) {
-                $authorName = "<a rel='nofollow' href='$commentAuthorUrl' target='_blank'>$authorName</a>";
+                $attributes = apply_filters('wpdiscuz_author_link_attributes', array('href' => $commentAuthorUrl, 'rel' => 'nofollow', 'target' => '_blank'));
+                if ($attributes && is_array($attributes)) {
+                    $attributesHtml = "";
+                    foreach ($attributes as $attribute => $value) {
+                        $attributesHtml .= "$attribute='{$value}' ";
+                    }
+                    $attributesHtml = trim($attributesHtml);
+                    $authorName = "<a $attributesHtml>$authorName</a>";
+                } else {
+                    $authorName = "<a rel='nofollow' href='$commentAuthorUrl' target='_blank'>$authorName</a>";
+                }
             } else if ($profileUrl) {
-                $authorName = "<a rel='nofollow' href='$profileUrl' target='_blank'>$authorName</a>";
+                $attributes = apply_filters('wpdiscuz_author_link_attributes', array('href' => $profileUrl, 'rel' => 'nofollow', 'target' => '_blank'));
+
+                if ($attributes && is_array($attributes)) {
+                    $attributesHtml = "";
+                    foreach ($attributes as $attribute => $value) {
+                        $attributesHtml .= "$attribute='{$value}' ";
+                    }
+                    $attributesHtml = trim($attributesHtml);
+                    $authorName = "<a $attributesHtml>$authorName</a>";
+                } else {
+                    $authorName = "<a rel='nofollow' href='$profileUrl' target='_blank'>$authorName</a>";
+                }
             }
         }
 
@@ -235,7 +266,21 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
         $output .= '<div class="wc-comment-header">';
         $uNameClasses = apply_filters('wpdiscuz_username_classes', '');
         $afterCommentAuthorName = apply_filters('wpdiscuz_after_comment_author', '', $comment, $user);
+
         $output .= '<div class="wc-comment-author ' . $uNameClasses . '">' . $authorName . $afterCommentAuthorName . '</div>';
+        if ($this->optionsSerialized->isFollowActive && $args['is_user_logged_in'] && (isset($args['current_user_email'])) && $args['current_user_email'] && $args['current_user_email'] != $comment->comment_author_email) {
+            if (isset($args['user_follows']) && is_array($args['user_follows']) && in_array($comment->comment_author_email, $args['user_follows'])) {
+                $followClass = 'wc-unfollow wc-follow-active';
+                $followTip = $this->optionsSerialized->phrases['wc_unfollow_user'];
+            } else {
+                $followClass = 'wc-follow';
+                $followTip = $this->optionsSerialized->phrases['wc_follow_user'];
+            }
+            $output .= '<div class="wc-follow-link wpd-tooltip-right wc_not_clicked ' . $followClass . '">';
+            $output .= '<i class="fas fa-rss" aria-hidden="true"></i>';
+            $output .= '<wpdtip>' . $followTip . '</wpdtip>';
+            $output .= '</div>';
+        }
 
         $output .= '<div class="wc-comment-link">';
         if ($isSticky) {
@@ -247,8 +292,9 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
         }
 
         $output .= apply_filters('wpdiscuz_comment_type_icon', '', $comment, $user, $currentUser);
+
         if ($this->optionsSerialized->isEnabledShare()) {
-            $output .= '<div class="wc-share-link wpf-cta wpd-tooltip-right"><i class="fas fa-share-alt" aria-hidden="true" title="' . $shareText . '" ></i>';
+            $output .= '<div class="wc-share-link wpf-cta wpd-tooltip-right"><i class="fas fa-share-alt" aria-hidden="true" title="' . esc_attr($shareText) . '" ></i>';
             $commentLinkLength = strlen($commentLink);
             if ($commentLinkLength < 110) {
                 $twitt_content = mb_substr(esc_attr(strip_tags($commentContent)), 0, 135 - $commentLinkLength) . '... ';
@@ -326,7 +372,7 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
                     ((isset($args['can_user_comment']) && $args['can_user_comment']) ||
                     (isset($args['high_level_user']) && $args['high_level_user']))
             ) {
-                $output .= '<span class="wc-reply-button wc-cta-button" title="' . $replyText . '">' . '<i class="fas fa-reply" aria-hidden="true"></i> ' . $replyText . '</span>';
+                $output .= '<span class="wc-reply-button wc-cta-button" title="' . $replyText . '">' . '<i class="far fa-comments" aria-hidden="true"></i> ' . $replyText . '</span>';
             }
 
 

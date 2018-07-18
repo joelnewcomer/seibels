@@ -15,6 +15,7 @@ if (!defined('ABSPATH')) {
             <td style="padding-top: 20px;">
                 <input type="checkbox" value="1" <?php checked($this->optionsSerialized->socialLoginAgreementCheckbox == 1) ?> name="socialLoginAgreementCheckbox" id="socialLoginAgreementCheckbox" />
                 <label for="socialLoginAgreementCheckbox"></label>
+                <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/social-login-and-share/#agreement" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
             </td>
         </tr>
         <tr valign="top">
@@ -24,6 +25,7 @@ if (!defined('ABSPATH')) {
             <td>
                 <input type="checkbox" value="1" <?php checked($this->optionsSerialized->socialLoginInSecondaryForm == 1) ?> name="socialLoginInSecondaryForm" id="socialLoginInSecondaryForm" />
                 <label for="socialLoginInSecondaryForm"></label>
+                <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/social-login-and-share/#display_on_reply_forms" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
             </td>
         </tr>
         </tbody>
@@ -38,12 +40,13 @@ if (!defined('ABSPATH')) {
             <tr>
                 <td colspan="2">
                     <p style="font-size: 14px; font-style: italic;">
-                        <?php _e('To start using Facebook Login and Share Buttons you should get Facebook Application Key and Secret for your website. Please follow to this', 'wpdiscuz'); ?> <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/social-login-and-share/facebook-app-configuration/" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a>
+                        <?php _e('To start using Facebook Login and Share Buttons you should get Facebook Application Key and Secret for your website. Please follow to this', 'wpdiscuz'); ?> <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/social-login-and-share/facebook-app-configuration/" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a><br>
+                        <?php echo __('Valid OAuth Redirect URI','wpdiscuz') . ' : <code>' . admin_url('admin-ajax.php?action=wpd_login_callback&provider=facebook') . '</code>';?>
                     </p>
                 </td>
             </tr>
             <tr valign="top">
-                <th scope="row" style="width: 30%">
+                <th scope="row" style="width: 60%">
                     <label for="wpd-enable-fb-login"><?php _e('Enable Login Button', 'wpdiscuz'); ?></label>
                 </th>
                 <td scope="row">
@@ -51,6 +54,18 @@ if (!defined('ABSPATH')) {
                     <label for="wpd-enable-fb-login"></label>
                 </td>
             </tr>
+            <?php if( is_ssl() ): ?>
+                <tr valign="top">
+                    <th scope="row" style="width: 60%">
+                        <label for="wpd-use-fb-oauth"><?php _e('Use Facebook OAuth2', 'wpdiscuz'); ?></label>
+                        <p class="wpd-info"><?php _e('If you enable this option, please make sure you\'ve inserted the Valid OAuth Redirect URI in according field when you create Facebook Login App. Your website OAuth Redirect URI is displayed above.' , 'wpforo'); ?></p>
+                    </th>
+                    <td scope="row">
+                        <input type="checkbox" <?php  checked($this->optionsSerialized->fbUseOAuth2 == 1); ?> value="1" name="fbUseOAuth2" id="wpd-use-fb-oauth" />
+                        <label for="wpd-use-fb-oauth"></label>
+                    </td>
+                </tr>
+            <?php endif; ?>
             <tr>
                 <th scope="row">
                     <label for="wpd-enable-fb-share"><?php _e('Enable Share Button', 'wpdiscuz'); ?></label>
@@ -84,7 +99,8 @@ if (!defined('ABSPATH')) {
             <tr>
                 <td colspan="2">
                     <p style="font-size: 14px; font-style: italic;">
-                        <?php _e('To start using Twitter Login Button you should get Consumer Key and Secret for your website. Please follow to this', 'wpdiscuz'); ?> <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/social-login-and-share/twitter-api-key-and-consumer-secret/" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a>
+                        <?php _e('To start using Twitter Login Button you should get Consumer Key and Secret for your website. Please follow to this', 'wpdiscuz'); ?> <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/social-login-and-share/twitter-api-key-and-consumer-secret/" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a><br>
+                        <?php echo __('Callback URL','wpdiscuz') . ' : <code>' . admin_url('admin-ajax.php') . '</code>';?>
                     </p>
                 </td>
             </tr>
@@ -131,7 +147,8 @@ if (!defined('ABSPATH')) {
             <tr>
                 <td colspan="2">
                     <p style="font-size: 14px; font-style: italic;">
-                        <?php _e('To start using Google+ Login Button you should get Client ID for your website. Please follow to this', 'wpdiscuz'); ?> <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/social-login-and-share/google-client-id/" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a>
+                        <?php _e('To start using Google+ Login Button you should get Client ID for your website. Please follow to this', 'wpdiscuz'); ?> <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/social-login-and-share/google-client-id/" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a><br>
+                        <?php echo __('Authorized JavaScript Sources / Permitted URI redirects','wpdiscuz') . ' : <code>' . home_url() . '</code>';?>
                     </p>
                 </td>
             </tr>
@@ -170,7 +187,8 @@ if (!defined('ABSPATH')) {
             <tr>
                 <td colspan="2">
                     <p style="font-size: 14px; font-style: italic;">
-                        <?php _e('To start using VK Login Button you should get Application ID and Secure Key. Please follow to this ', 'wpdiscuz'); ?> <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/social-login-and-share/vk-application-id-and-secure-key/" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a>
+                        <?php _e('To start using VK Login Button you should get Application ID and Secure Key. Please follow to this ', 'wpdiscuz'); ?> <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/social-login-and-share/vk-application-id-and-secure-key/" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a><br>
+                        <?php echo __('Redirect URI','wpdiscuz') . ' : <code>' . admin_url('admin-ajax.php') . '</code>';?>
                     </p>
                 </td>
             </tr>
@@ -216,7 +234,8 @@ if (!defined('ABSPATH')) {
                 <td colspan="2">
                     <p style="font-size: 14px; font-style: italic;">
                         <?php _e('Getting started with','wpdiscuz');?> <a href="https://apiok.ru/en/ext/oauth/">OK API</a><br>
-                        <?php _e('To get the Aplication ID, Key and Secret, you should create an app using one of the supported types (external, Android, iOS), use this', 'wpdiscuz'); ?> <a href="https://apiok.ru/en/dev/app/create" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a>
+                        <?php _e('To get the Aplication ID, Key and Secret, you should create an app using one of the supported types (external, Android, iOS), use this', 'wpdiscuz'); ?> <a href="https://apiok.ru/en/dev/app/create" target="_blank"><?php _e('instruction &raquo;','wpdiscuz');?></a><br>
+                        <?php echo __('Redirect URI','wpdiscuz') . ' : <code>' . admin_url('admin-ajax.php') . '</code>';?>
                     </p>
                 </td>
             </tr>

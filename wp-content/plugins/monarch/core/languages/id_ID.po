@@ -260,7 +260,7 @@ msgstr "Masukkan keterangan di sini"
 
 #: components/VersionRollback.php:299
 #, fuzzy
-msgid "An unknown error has occurred. Please try again later."
+msgid "An unknown has error occurred. Please try again later."
 msgstr "Terjadi kesalahan. Silakan coba lagi nanti."
 
 #: components/VersionRollback.php:378 components/VersionRollback.php:426

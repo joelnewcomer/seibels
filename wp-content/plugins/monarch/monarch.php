@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Monarch Plugin
  * Plugin URI: http://www.elegantthemes.com
- * Version: 1.4.2
+ * Version: 1.4.3
  * Description: Social Media Plugin
  * Author: Elegant Themes
  * Author URI: http://www.elegantthemes.com
@@ -17,7 +17,7 @@ define( 'ET_MONARCH_PLUGIN_DIR', trailingslashit( dirname(__FILE__) ) );
 define( 'ET_MONARCH_PLUGIN_URI', plugins_url('', __FILE__) );
 
 class ET_Monarch {
-	var $plugin_version = '1.4.2';
+	var $plugin_version = '1.4.3';
 	var $db_version = '1.3';
 	var $monarch_options;
 	var $_options_pagename = 'et_monarch_options';
@@ -92,7 +92,7 @@ class ET_Monarch {
 		add_action( 'wp_ajax_ajax_save_settings', array( $this, 'ajax_save_settings' ) );
 
 		add_action( 'wp_ajax_monarch_save_updates_settings', array( $this, 'save_updates_settings' ) );
-		
+
 		add_action( 'wp_ajax_monarch_save_google_settings', array( $this, 'save_google_settings' ) );
 
 		// Exports/imports settings. Add them with low priority to make sure include_options() fired before them
@@ -219,7 +219,7 @@ class ET_Monarch {
 
 		die();
 	}
-	
+
 	/**
 	 * Saves the Updates Settings
 	 */
@@ -227,11 +227,11 @@ class ET_Monarch {
 		et_core_security_check( 'manage_options', 'google_settings' );
 
 		$google_fonts_value = ! empty( $_POST['et_monarch_use_google_fonts'] ) ? sanitize_text_field( $_POST['et_monarch_use_google_fonts'] ) : '';
-		
+
 		if ( '' !== $google_fonts_value ) {
 			$google_api_settings = get_option( 'et_google_api_settings' );
 			$google_api_settings['use_google_fonts'] = $google_fonts_value;
-			
+
 			update_option( 'et_google_api_settings', $google_api_settings );
 		}
 
@@ -5149,7 +5149,7 @@ class ET_Monarch {
 			'generate_all_window_nonce' => wp_create_nonce( 'generate_all_window' ),
 			'no_img_message'            => esc_html__( 'No images available for sharing on this page', 'Monarch' ),
 		) );
-		
+
 		if ( et_core_use_google_fonts() ) {
 			wp_enqueue_style( 'et-gf-open-sans', esc_url_raw( "{$this->protocol}://fonts.googleapis.com/css?family=Open+Sans:400,700" ), array(), null );
 		}

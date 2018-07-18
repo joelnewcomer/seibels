@@ -13,6 +13,7 @@
                            'RatingField' => 'Rating',
                            'AgreementCheckbox' => 'Agreement Checkbox',
                            'CookiesConsent' => 'Cookies Consent',
+                           'HTMLField' => 'HTML Field',
             )
     );
 
