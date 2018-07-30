@@ -168,24 +168,25 @@ class FFYoutube extends FFHttpRequestFeed implements LAFeedWithComments {
 	 */
 	protected function showImage($item){
 		$thumbnail = null;
-		if (isset($item->snippet->thumbnails->maxres)){
-			$thumbnail = $this->isSuitableThumbnail($item->snippet->thumbnails->maxres);
+		$thumbnails = $item->snippet->thumbnails;
+		if (property_exists($thumbnails, 'maxres')){
+			$thumbnail = $this->isSuitableThumbnail( $thumbnails->maxres);
 		}
 
-		if (is_null($this->image) && isset($item->snippet->thumbnails->standard)) {
-			$thumbnail = $this->isSuitableThumbnail($item->snippet->thumbnails->standard, is_null($thumbnail));
+		if (is_null($this->image) && isset( $thumbnails->standard)) {
+			$thumbnail = $this->isSuitableThumbnail( $thumbnails->standard, $thumbnail);
 		}
 
-		if (is_null($this->image) && isset($item->snippet->thumbnails->high)) {
-			$thumbnail = $this->isSuitableThumbnail($item->snippet->thumbnails->high, is_null($thumbnail));
+		if (is_null($this->image) && isset( $thumbnails->high)) {
+			$thumbnail = $this->isSuitableThumbnail( $thumbnails->high, $thumbnail);
 		}
 
-		if (is_null($this->image) && isset($item->snippet->thumbnails->medium)) {
-			$thumbnail = $this->isSuitableThumbnail($item->snippet->thumbnails->medium, is_null($thumbnail));
+		if (is_null($this->image) && isset( $thumbnails->medium)) {
+			$thumbnail = $this->isSuitableThumbnail( $thumbnails->medium, $thumbnail);
 		}
 
-		if (is_null($this->image) && isset($item->snippet->thumbnails->default)) {
-			$thumbnail = $this->isSuitableThumbnail($item->snippet->thumbnails->default, is_null($thumbnail));
+		if (is_null($this->image) && isset( $thumbnails->default)) {
+			$thumbnail = $this->isSuitableThumbnail( $thumbnails->default, $thumbnail);
 		}
 
 		if (is_null($this->image)){
@@ -306,14 +307,14 @@ class FFYoutube extends FFHttpRequestFeed implements LAFeedWithComments {
 		return $isSuitablePage && isset($pxml->items);
 	}
 
-	private function isSuitableThumbnail($thumbnail, $t_null = true){
+	private function isSuitableThumbnail($thumbnail, $current_thumbnail = null){
 		if ( round( $thumbnail->width / $thumbnail->height, 2) == 1.78) {
 			$this->image = $this->createImage($thumbnail->url, $thumbnail->width, $thumbnail->height);
 		}
-		if ($t_null){
+		if (is_null($current_thumbnail)){
 			return $thumbnail;
 		}
-		return null;
+		return $current_thumbnail;
 	}
 	
 	public function getComments($item) {

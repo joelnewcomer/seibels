@@ -772,6 +772,8 @@ abstract class LADBManager {
 					(time() > $registration_date + 604800)){
 						$ch = curl_init( 'http://flow.looks-awesome.com/wp-admin/admin-ajax.php?action=la_check&registration_id=' . $registration_id);
 						curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+						curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+						curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 5000);
 						curl_setopt($ch, CURLOPT_POST, false);
 						$result = curl_exec( $ch );
 						curl_close( $ch );

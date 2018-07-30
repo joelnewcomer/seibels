@@ -1,9 +1,9 @@
 === Media File Renamer ===
-Contributors: TigrouMeow
+Contributors: TigrouMeow, amekusa
 Tags: rename, file, files, media, manager, image, renamer, wpml, optimization, seo, retina, gutenberg
 Requires at least: 4.6
 Tested up to: 4.9.7
-Stable tag: 4.2.2
+Stable tag: 4.2.4
 
 Automatically rename files depending on Media titles dynamically + update links. Pro version has many more options. Check the description :)
 
@@ -47,15 +47,18 @@ Check the FAQ on the official website, [here](https://meowapps.com/media-file-re
 
 == Changelog ==
 
+= 4.2.4 =
+* Update: UTF-8 is handled by default, no need to have an option for it.
+* Add: Option for transliteration (cyrillic, accents, umlauts).
+* Note: If you like it, please review the plugin here: https://wordpress.org/support/plugin/media-file-renamer/reviews/?rate=5#new-post. It's important for us :) Thank you!
+
 = 4.2.2 =
 * Add: Polylang compatibility.
 * Update: UI enhancements and attempt to make the renaming faster.
-* Note: If you like it, please review the plugin here: https://wordpress.org/support/plugin/media-file-renamer/reviews/?rate=5#new-post. It's important for us :) Thank you!
 
 = 4.2.1 =
 * Add: All the actions in the Media Library are now asynchronous. No more page reload!
 * Update: Many changes and little enhancements in the code, for speed, security and code-tidyness.
-* Note: If you like it, please review the plugin here: https://wordpress.org/support/plugin/media-file-renamer/reviews/?rate=5#new-post. It's important for us :) Thank you!
 
 = 4.0.4 =
 * Fix: Renaming using filters (work in progress).

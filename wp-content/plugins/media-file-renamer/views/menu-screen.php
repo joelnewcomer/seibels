@@ -10,7 +10,7 @@
 	<?php if ( !$admin->is_registered() ): ?>
 		<div class="updated">
 			<p>
-				<?php _e( '<b>The Pro version</b> of the plugin allows you to <b>rename based on the title of the post</b> (product or whatever else) you media is attached to, <b>rename manually</b>, use <b>numbered files</b> (by adding a counter if the filenames are similar), <b>sync the title with your ALT text</b>, UTF8 support (if you need it), a force rename (to repair a broken install), and, more importantly, <b>supports the developer</b> :) Thank you!<br /><br /><a class="button-primary" href="https://store.meowapps.com/" target="_blank">Get the Pro</a>', 'media-file-renamer' ); ?>
+				<?php _e( '<b>The Pro version</b> of the plugin allows you to <b>rename based on the title of the post</b> (product or whatever else) you media is attached to, <b>rename manually</b>, use <b>numbered files</b> (by adding a counter if the filenames are similar), <b>sync the title with your ALT text</b>, a force rename (to repair a broken install), and, more importantly, <b>supports the developer</b> :) Thank you!<br /><br /><a class="button-primary" href="https://store.meowapps.com/" target="_blank">Get the Pro</a>', 'media-file-renamer' ); ?>
 			</p>
 		</div>
 	<?php endif; ?>
@@ -131,7 +131,7 @@
 						WHERE m.meta_key = '_original_filename'" );
 					foreach ( $results as $row ) {
 						$fullsize_path = wp_get_attachment_url( $row->ID );
-						$parts = pathinfo( $fullsize_path );
+						$parts = mfrh_pathinfo( $fullsize_path );
 						$shorten_url = trailingslashit( $parts['dirname'] ) . $row->original_filename;
 						if ( isset( $_GET['mfrh_beforeafter_filenames'] ) )
 							echo "<tr><td>{$shorten_url}</td><td>$fullsize_path</td></tr>";

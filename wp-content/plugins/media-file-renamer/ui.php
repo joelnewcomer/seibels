@@ -97,7 +97,7 @@ class Meow_MFRH_UI {
 			$this->core->rename( $mfrh_undo, $original_filename );
 
 			$fp = get_attached_file( $mfrh_undo );
-			$path_parts = pathinfo( $fp );
+			$path_parts = mfrh_pathinfo( $fp );
 			$basename = $path_parts['basename'];
 			if ( $basename == $original_filename )
 				delete_post_meta( $mfrh_undo, '_original_filename' );
@@ -159,7 +159,7 @@ class Meow_MFRH_UI {
 	}
 
 	function attachment_fields( $post ) {
-		$info = pathinfo( get_attached_file( $post->ID ) );
+		$info = mfrh_pathinfo( get_attached_file( $post->ID ) );
 		$basename = $info['basename'];
 		$is_manual = apply_filters( 'mfrh_manual', false );
 		$html = '<input type="text" readonly class="widefat" name="mfrh_new_filename" value="' . $basename. '" />';
@@ -318,7 +318,7 @@ class Meow_MFRH_UI {
 			$this->core->rename( $id, $newName );
 			$file = get_attached_file( $id );
 			wp_send_json_success( array (
-				'filename' => basename( $file ),
+				'filename' => mfrh_basename( $file ),
 				'ids' => $this->core->get_posts_by_attached_file( $file )
 			) );
 		}
@@ -346,7 +346,7 @@ class Meow_MFRH_UI {
 			delete_post_meta( $id, '_original_filename' );
 			$file = get_attached_file( $id );
 			wp_send_json_success( array (
-				'filename' => basename( $file ),
+				'filename' => mfrh_basename( $file ),
 				'ids' => $this->core->get_posts_by_attached_file( $file )
 			) );
 		}
