@@ -1,9 +1,9 @@
 === Media File Renamer ===
 Contributors: TigrouMeow, amekusa
 Tags: rename, file, files, media, manager, image, renamer, wpml, optimization, seo, retina, gutenberg
-Requires at least: 4.6
-Tested up to: 4.9.7
-Stable tag: 4.2.4
+Requires at least: 4.8
+Tested up to: 4.9
+Stable tag: 4.2.7
 
 Automatically rename files depending on Media titles dynamically + update links. Pro version has many more options. Check the description :)
 
@@ -17,7 +17,7 @@ The Media File Auto Renamer is a WordPress plugin that physically renames media 
 
 **PRO VERSION**. The [Pro Version](https://meowapps.com/media-file-renamer/) gives a few more features like manual renaming, renaming depending on the post the media is attached to or the content of the alternative text (ALT), logging of SQL queries and a few more options. A good process is to actually let the plugin do the renaming automatically (like in the free version) and to do manual renaming for the files that require fine tuning.
 
-**BE CAREFUL**. File renaming is a dangerous process. Before renaming everything automatically, try to rename a few files first and check carefully that all the references to those files have been properly updated on your website. WordPress has so many themes and plugins that this renaming process can't unfortunately cover all the cases, especially if other plugins are using unconventional ways. If references aren't updated properly, please write a nice post (not an angry one) in the support threads :) I will try my best to cover more and more special cases. In any case, always make a **backup** of your database and files before using a plugin that alter your install. For backup, you can use such a plugin as [UpdraftPlus](https://updraftplus.com/?afref=460). Also, if your website seems broken after a few renames, try to **clear your cache**. The cached HTML will indeed not be linked to the new filenames.
+**BE CAREFUL**. File renaming is a dangerous process. Before renaming everything automatically, try to rename a few files first and check carefully that all the references to those files have been properly updated on your website. WordPress has so many themes and plugins that this renaming process can't unfortunately cover all the cases, especially if other plugins are using unconventional ways. If references aren't updated properly, please write a nice post (not an angry one) in the support threads :) I will try my best to cover more and more special cases. In any case, always make a **backup** of your database and files before using a plugin that alter your install. For backup, I recommend use the excellent service called [BlogVault](https://meow.click/blogvault). Also, if your website seems broken after a few renames, try to **clear your cache**. The cached HTML will indeed not be linked to the new filenames.
 
 **FOR DEVELOPER**. The plugin can be tweaked and reference updates enhanced for your themes/plugins. Have a look [here](https://wordpress.org/plugins/media-file-renamer/faq/).
 
@@ -47,7 +47,8 @@ Check the FAQ on the official website, [here](https://meowapps.com/media-file-re
 
 == Changelog ==
 
-= 4.2.4 =
+= 4.2.7 =
+* Fix: Removed Updraft.
 * Update: UTF-8 is handled by default, no need to have an option for it.
 * Add: Option for transliteration (cyrillic, accents, umlauts).
 * Note: If you like it, please review the plugin here: https://wordpress.org/support/plugin/media-file-renamer/reviews/?rate=5#new-post. It's important for us :) Thank you!

@@ -3,7 +3,7 @@
 /*
  * Plugin Name: wpDiscuz
  * Description: Better comment system. Wordpress post comments and discussion plugin. Allows your visitors discuss, vote for comments and share.
- * Version: 5.1.4
+ * Version: 5.1.5
  * Author: gVectors Team (A. Chakhoyan, G. Zakaryan, H. Martirosyan)
  * Author URI: https://gvectors.com/
  * Plugin URI: http://wpdiscuz.com/
@@ -30,6 +30,8 @@ include_once 'includes/class.WpdiscuzCss.php';
 include_once 'forms/wpDiscuzForm.php';
 include_once 'utils/class.WpdiscuzCache.php';
 include_once 'utils/class.WpdiscuzHelperAjax.php';
+
+//include_once 'utils/ajax/most-active-thread.php';
 
 class WpdiscuzCore implements WpDiscuzConstants {
 
@@ -443,7 +445,6 @@ class WpdiscuzCore implements WpDiscuzConstants {
                 $website_url = $website_url ? urldecode($website_url) : '';
                 $stickyComment = isset($_POST['wc_sticky_comment']) && ($sticky = intval($_POST['wc_sticky_comment'])) ? $sticky : '';
                 $closedComment = isset($_POST['wc_closed_comment']) && ($closed = absint($_POST['wc_closed_comment'])) ? $closed : '';
-                $author_ip = $this->helper->getRealIPAddr();
                 $uid_data = $this->helper->getUIDData($uniqueId);
                 $comment_parent = intval($uid_data[0]);
                 $parentComment = $comment_parent ? get_comment($comment_parent) : null;
@@ -459,7 +460,6 @@ class WpdiscuzCore implements WpDiscuzConstants {
                     'comment_author_email' => $email,
                     'comment_content' => $comment_content,
                     'comment_author_url' => $website_url,
-                    'comment_author_IP' => $author_ip,
                     'comment_agent' => $wc_user_agent,
                     'comment_type' => $stickyComment ? self::WPDISCUZ_STICKY_COMMENT : '',
                     'comment_karma' => $closedComment
@@ -592,12 +592,10 @@ class WpdiscuzCore implements WpDiscuzConstants {
                     if ($trimmedContent != $comment->comment_content) {
                         $trimmedContent = $this->helper->replaceCommentContentCode($trimmedContent);
                         $commentContent = $this->helper->filterCommentText($trimmedContent);
-                        $author_ip = $this->helper->getRealIPAddr();
                         $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : '';
                         $commentarr = array(
                             'comment_ID' => $commentId,
                             'comment_content' => $commentContent,
-                            'comment_author_IP' => $author_ip,
                             'comment_agent' => $userAgent,
                             'comment_approved' => $comment->comment_approved
                         );
@@ -1235,7 +1233,7 @@ class WpdiscuzCore implements WpDiscuzConstants {
             wp_enqueue_script('jquery-form');
             wp_register_script('wpdiscuz-ajax-js', plugins_url(WPDISCUZ_DIR_NAME . '/assets/js/wpdiscuz.js'), array('jquery'), $this->version);
             wp_enqueue_script('wpdiscuz-ajax-js');
-            wp_localize_script('wpdiscuz-ajax-js', 'wpdiscuzAjaxObj', array('url' => admin_url('admin-ajax.php'), 'wpdiscuz_options' => $this->wpdiscuzOptionsJs));
+            wp_localize_script('wpdiscuz-ajax-js', 'wpdiscuzAjaxObj', array('url' => admin_url('admin-ajax.php'), 'customAjaxUrl' => plugins_url(WPDISCUZ_DIR_NAME . '/utils/ajax/wpdiscuz-ajax.php'), 'wpdiscuz_options' => $this->wpdiscuzOptionsJs));
 
             if ($this->optionsSerialized->isQuickTagsEnabled) {
                 wp_enqueue_script('quicktags');

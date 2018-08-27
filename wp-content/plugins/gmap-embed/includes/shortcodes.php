@@ -146,7 +146,7 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
                 <div class="ui-bar-c ui-corner-all ui-shadow" style="padding:1em;">
                     <div data-role="fieldcontain" class="fieldcontain">
                         <label for="from"><?php _e('From','gmap-embed') ?></label>
-                        <input type="text" id="from_<?php echo $count; ?>" value="<?php echo $wpgmap_map_address; ?>"/>
+                        <input type="text" id="from_<?php echo $count; ?>" value=""/>
                     </div>
                     <div data-role="fieldcontain" class="fieldcontain">
                         <label for="to"><?php _e('To','gmap-embed') ?></label>

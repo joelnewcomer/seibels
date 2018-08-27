@@ -18,7 +18,7 @@
 	<h2>Rename in Bulk</h2>
 
 	<p>
-		<?php _e( 'You might have noticed that some of your media are locked by the file renamer, others are unlocked. Automatically, the plugin locks the media you renamed manually. By default, they are unlocked. Here, you have the choice of rename all the media in your DB or only the ones which are unlocked (to keep the files you renamed manually). <span style="color: red; font-weight: bold;">Please backup your uploads folder + DB before using this.</span> If you don\'t know how, give a try to this: <a href="https://updraftplus.com/?afref=460" target="_blank">UpdraftPlus</a>.', 'media-file-renamer' ); ?>
+		<?php _e( 'You might have noticed that some of your media are locked by the file renamer, others are unlocked. Automatically, the plugin locks the media you renamed manually. By default, they are unlocked. Here, you have the choice of rename all the media in your DB or only the ones which are unlocked (to keep the files you renamed manually). <span style="color: red; font-weight: bold;">Please backup your uploads folder + DB before using this.</span> If you don\'t know how, give a try to this backup service: <a href="https://meow.click/blogvault" target="_blank">BlogVault</a>.', 'media-file-renamer' ); ?>
 	</p>
 
 	<div style='margin-top: 12px; background: #FFF; padding: 5px; border-radius: 4px; height: 28px; box-shadow: 0px 0px 6px #C2C2C2;'>

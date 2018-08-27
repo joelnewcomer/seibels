@@ -1,3 +1,16 @@
+version 1.4.5 ( updated 08-13-2018 )
+- Fixed WSOD that occurred in some cases.
+	* monarch.php
+
+version 1.4.4 ( updated 08-13-2018 )
+- Corrected German translation of button text in WP Admin.
+- Fixed PHP notice that was occurring since introduction of rollback feature.
+- Fixed "et_social_stats" table missing error.
+	* core/components/VersionRollback.php
+	* core/languages/de_DE.mo
+	* core/languages/de_DE.po
+	* monarch.php
+
 version 1.4.3 ( updated 7-13-2018 )
 - Updated core framework to the latest version.
 	* core/*

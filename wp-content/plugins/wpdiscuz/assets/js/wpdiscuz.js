@@ -29,6 +29,7 @@ jQuery(document).ready(function ($) {
     var wpdCookiesConsent = true;
     var wpdiscuzCookiehash = wpdiscuzAjaxObj.wpdiscuz_options.cookiehash;
     var isLoadOnlyParentComments = wpdiscuzAjaxObj.wpdiscuz_options.isLoadOnlyParentComments;
+    var enableDropAnimation = wpdiscuzAjaxObj.wpdiscuz_options.enableDropAnimation ? 500 : 0;
     var wpdiscuzAgreementFields = [];
     loginButtonsClone();
 
@@ -56,7 +57,7 @@ jQuery(document).ready(function ($) {
     $(document).delegate('.wc-reply-button', 'click', function () {
         wpdiscuzReplyButton = $(this);
         if ($(this).hasClass('wpdiscuz-clonned')) {
-            $('#wc-secondary-form-wrapper-' + getUniqueID($(this), 0)).slideToggle(700);
+            $('#wc-secondary-form-wrapper-' + getUniqueID($(this), 0)).slideToggle(enableDropAnimation);
         } else {
             cloneSecondaryForm($(this));
         }
@@ -70,7 +71,7 @@ jQuery(document).ready(function ($) {
     $(document).delegate('textarea.wc_comment', 'focus', function () {
         var parent = $(this).parents('.wc-form-wrapper');
         $('.commentTextMaxLength', parent).show();
-        $('.wc-form-footer', parent).slideDown(700);
+        $('.wc-form-footer', parent).slideDown(enableDropAnimation);
     });
 
     $(document).delegate('#wpcomm textarea', 'focus', function () {
@@ -133,7 +134,7 @@ jQuery(document).ready(function ($) {
     });
 
     $(document).delegate('.wpdiscuz-sbs-wrap', 'click', function () {
-        $('.wpdiscuz-subscribe-bar').slideToggle(500);
+        $('.wpdiscuz-subscribe-bar').slideToggle(enableDropAnimation);
     });
     //============================== CAPTCHA ============================== //
     $(document).delegate('.wc_captcha_refresh_img', 'click', function (e) {
@@ -271,7 +272,7 @@ jQuery(document).ready(function ($) {
                 data.append('wpdiscuz_zs', wpdiscuzAjaxObj.wpdiscuz_options.wpdiscuz_zs);
             }
 
-            if ($('.wpd-cookies-chackbox', wcForm).length && !$('.wpd-cookies-chackbox', wcForm).prop("checked")) {
+            if ($('.wpd-cookies-checkbox', wcForm).length && !$('.wpd-cookies-checkbox', wcForm).prop("checked")) {
                 wpdCookiesConsent = false;
             }
 
@@ -319,7 +320,7 @@ jQuery(document).ready(function ($) {
                         if (isCookiesEnabled && wpdCookiesConsent) {
                             addCookie(wcForm, obj);
                         } else if (!wpdCookiesConsent) {
-                            $('.wpd-cookies-chackbox').removeAttr('checked');
+                            $('.wpd-cookies-checkbox').removeAttr('checked');
                         }
                         wcForm.get(0).reset();
                         setCookieInForm(obj);
@@ -425,8 +426,8 @@ jQuery(document).ready(function ($) {
                 Cookies.set('comment_author_url_' + wpdiscuzCookiehash, weburl, {expires: storeCommenterData, path: '/'});
             }
         }
-        if ($('.wpd-cookies-chackbox').length) {
-            $('.wpd-cookies-chackbox').attr('checked', 'checked');
+        if ($('.wpd-cookies-checkbox').length) {
+            $('.wpd-cookies-checkbox').attr('checked', 'checked');
         }
     }
 //============================== ADD COMMENT FUNCTION ============================== // 
@@ -914,7 +915,7 @@ jQuery(document).ready(function ($) {
         $('#wpdiscuz_form_anchor-' + uniqueId).before(replaceUniqueId(uniqueId));
         var secondaryFormWrapper = $('#wc-secondary-form-wrapper-' + uniqueId);
         //wpdiscuzReplaceValidationUI($('.wc_comm_form', secondaryFormWrapper)[0]);
-        secondaryFormWrapper.slideToggle(700, function () {
+        secondaryFormWrapper.slideToggle(enableDropAnimation, function () {
             field.addClass('wpdiscuz-clonned');
         });
         changeCaptchaImage($('.wc_captcha_refresh_img', secondaryFormWrapper));
@@ -1058,53 +1059,53 @@ jQuery(document).ready(function ($) {
     //============================== FUNCTIONS ============================== // 
 
     //=================== FORM VALIDATION ================================//
-   /* function wpdiscuzReplaceValidationUI(form) {
-        form.addEventListener("invalid", function (event) {
-            event.preventDefault();
-        }, true);
-        form.addEventListener("submit", function (event) {
-            if (!this.checkValidity()) {
-                event.preventDefault();
-            }
-        });
-    }
-
-    $(document).delegate('.wc_comm_submit, .wc_save_edited_comment', 'click', function () {
-        var curentForm = $(this).parents('form');
-        var invalidFields = $(':invalid', curentForm),
-                errorMessages = $('.error-message', curentForm),
-                parent;
-
-        for (var i = 0; i < errorMessages.length; i++) {
-            errorMessages[ i ].parentNode.removeChild(errorMessages[ i ]);
-        }
-        for (var i = 0; i < invalidFields.length; i++) {
-            parent = invalidFields[ i ].parentNode;
-            var oldMsg = parent.querySelector('.wpd-field-invalid');
-            if (oldMsg) {
-                parent.removeChild(oldMsg);
-            }
-            if (invalidFields[ i ].validationMessage !== '') {
-                parent.insertAdjacentHTML("beforeend", "<div class='wpd-field-invalid'><span>" +
-                        invalidFields[ i ].validationMessage +
-                        "</span></div>");
-            }
-        }
-    });
-
-    function wpdiscuzRemoveError(field) {
-        var wpdiscuzErrorDiv = $(field).parents('div.wpdiscuz-item').find('.wpd-field-invalid');
-        if (wpdiscuzErrorDiv) {
-            wpdiscuzErrorDiv.remove();
-        }
-    }
-    $(document).delegate('.wpdiscuz-item input,.wpdiscuz-item textarea,.wpdiscuz-item select', 'click', function () {
-        wpdiscuzRemoveError($(this));
-    });
-
-    $(document).delegate('.wpdiscuz-item input,.wpdiscuz-item textarea,.wpdiscuz-item select', 'focus', function () {
-        wpdiscuzRemoveError($(this));
-    });*/
+    /* function wpdiscuzReplaceValidationUI(form) {
+     form.addEventListener("invalid", function (event) {
+     event.preventDefault();
+     }, true);
+     form.addEventListener("submit", function (event) {
+     if (!this.checkValidity()) {
+     event.preventDefault();
+     }
+     });
+     }
+     
+     $(document).delegate('.wc_comm_submit, .wc_save_edited_comment', 'click', function () {
+     var curentForm = $(this).parents('form');
+     var invalidFields = $(':invalid', curentForm),
+     errorMessages = $('.error-message', curentForm),
+     parent;
+     
+     for (var i = 0; i < errorMessages.length; i++) {
+     errorMessages[ i ].parentNode.removeChild(errorMessages[ i ]);
+     }
+     for (var i = 0; i < invalidFields.length; i++) {
+     parent = invalidFields[ i ].parentNode;
+     var oldMsg = parent.querySelector('.wpd-field-invalid');
+     if (oldMsg) {
+     parent.removeChild(oldMsg);
+     }
+     if (invalidFields[ i ].validationMessage !== '') {
+     parent.insertAdjacentHTML("beforeend", "<div class='wpd-field-invalid'><span>" +
+     invalidFields[ i ].validationMessage +
+     "</span></div>");
+     }
+     }
+     });
+     
+     function wpdiscuzRemoveError(field) {
+     var wpdiscuzErrorDiv = $(field).parents('div.wpdiscuz-item').find('.wpd-field-invalid');
+     if (wpdiscuzErrorDiv) {
+     wpdiscuzErrorDiv.remove();
+     }
+     }
+     $(document).delegate('.wpdiscuz-item input,.wpdiscuz-item textarea,.wpdiscuz-item select', 'click', function () {
+     wpdiscuzRemoveError($(this));
+     });
+     
+     $(document).delegate('.wpdiscuz-item input,.wpdiscuz-item textarea,.wpdiscuz-item select', 'focus', function () {
+     wpdiscuzRemoveError($(this));
+     });*/
 
     $(document).delegate('.wpd-required-group', 'change', function () {
         if ($('input:checked', this).length !== 0) {
@@ -1228,8 +1229,10 @@ jQuery(document).ready(function ($) {
         var btn = $(this);
         $('.fas', btn).addClass('fa-pulse fa-spinner');
         var data = new FormData();
-        data.append('action', 'wpdMostReacted');
-        var ajax = getAjaxObj(false, data);
+        data.append('action', 'wpdMostReactedComment');
+//        data.append('action', 'wpdMostReacted');
+        var ajax = getCustomAjaxObj(false, data);
+//        var ajax = getAjaxObj(false, data);
 
         ajax.done(function (response) {
             try {
@@ -1265,8 +1268,10 @@ jQuery(document).ready(function ($) {
         var btn = $(this);
         $('.fab', btn).addClass('fas fa-pulse fa-spinner');
         var data = new FormData();
-        data.append('action', 'wpdHottest');
-        var ajax = getAjaxObj(false, data);
+        data.append('action', 'wpdMostActiveThread');
+//        data.append('action', 'wpdHottest');
+        var ajax = getCustomAjaxObj(false, data);
+//        var ajax = getAjaxObj(false, data);
 
         ajax.done(function (response) {
             try {
@@ -1302,7 +1307,7 @@ jQuery(document).ready(function ($) {
     });
 
     function addAgreementInCookie(wcForm) {
-        $('.wpd-agreement-chackbox', wcForm).each(function () {
+        $('.wpd-agreement-checkbox', wcForm).each(function () {
             if ($(this).hasClass('wpd_agreement_hide') && isCookiesEnabled && $(this).prop('checked')) {
                 Cookies.set($(this).attr('name') + '_' + wpdiscuzCookiehash, 1, {expires: 30, path: '/'});
                 $('input[name=' + $(this).attr('name') + ']').each(function () {
@@ -1343,7 +1348,7 @@ jQuery(document).ready(function ($) {
                         btn.removeClass('wc-follow-active');
                         if (r.data.followTip) {
                             $('wpdtip', btn).html(r.data.followTip);
-                        }                        
+                        }
                         if (r.data && r.data.followClass) {
                             btn.addClass(r.data.followClass);
                         }
@@ -1369,6 +1374,25 @@ jQuery(document).ready(function ($) {
         return $.ajax({
             type: 'POST',
             url: wpdiscuzAjaxObj.url,
+            data: data,
+            contentType: false,
+            processData: false,
+        });
+    }
+
+    /**
+     * @param {type} action the action key 
+     * @param {type} data the request properties
+     * @returns {jqXHR}
+     */
+    function getCustomAjaxObj(isShowTopLoading, data) {
+        if (isShowTopLoading) {
+            $('.wpdiscuz-loading-bar').show();
+        }
+        data.append('postId', wpdiscuzPostId);
+        return $.ajax({
+            type: 'POST',
+            url: wpdiscuzAjaxObj.customAjaxUrl,
             data: data,
             contentType: false,
             processData: false,

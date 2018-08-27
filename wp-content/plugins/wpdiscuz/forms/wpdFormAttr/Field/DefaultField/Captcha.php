@@ -248,7 +248,7 @@ class Captcha extends Field {
                         $mTime = substr($file, wpdFormConst::CAPTCHA_LENGTH + 1, 10);
                         if (file_exists($fileName) && is_file($fileName) && $mTime) {
                             $expired = $mTime + ($minutes * 60);
-                            if ($expired < current_time('timestamp') || $deactivate) {
+                            if ($expired < time() || $deactivate) {
                                 @unlink($fileName);
                             }
                         }

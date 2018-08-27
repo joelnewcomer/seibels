@@ -16,6 +16,7 @@ class WpdiscuzHelper implements WpDiscuzConstants {
         $this->wpdiscuzForm = $wpdiscuzForm;
         add_filter('the_champ_login_interface_filter', array(&$this, 'wpDiscuzSuperSocializerLogin'), 15, 2);
         add_action('wpdiscuz_form_bottom', array(&$this, 'formBottom'), 10, 4);
+        add_filter('pre_comment_user_ip', array(&$this, 'fixLocalhostIp'), 10);
     }
 
     public function filterKses() {
@@ -123,9 +124,10 @@ class WpdiscuzHelper implements WpDiscuzConstants {
      * check if comment is still editable or not
      * return boolean
      */
-    public function isCommentEditable($comment) {
+    public function isCommentEditable($comment) {               
         $editableTimeLimit = isset($this->optionsSerialized->commentEditableTime) ? $this->optionsSerialized->commentEditableTime : 0;
-        $timeDiff = (current_time('timestamp') - strtotime($comment->comment_date_gmt));
+        $commentTimestamp = strtotime($comment->comment_date);
+        $timeDiff = (current_time('timestamp') - $commentTimestamp);
         $editableTimeLimit = ($editableTimeLimit == 'unlimit') ? $timeDiff + 1 : intval($editableTimeLimit);
         return $editableTimeLimit && ($timeDiff < $editableTimeLimit);
     }
@@ -152,6 +154,8 @@ class WpdiscuzHelper implements WpDiscuzConstants {
         } else {
             $ip = $_SERVER['REMOTE_ADDR'];
         }
+
+        $ip = apply_filters('pre_comment_user_ip', $ip);
 
         if ($ip == '::1') {
             $ip = '127.0.0.1';
@@ -574,6 +578,13 @@ class WpdiscuzHelper implements WpDiscuzConstants {
                     $domain = substr($domain, 4);
                 }
                 return $domain;
+            }
+
+            public function fixLocalhostIp($ip) {
+                if (trim($ip) == '::1') {
+                    $ip = '127.0.0.1';
+                }
+                return $ip;
             }
 
         }

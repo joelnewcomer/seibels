@@ -59,7 +59,7 @@ class AgreementCheckbox extends Field {
         $html .= '</td><td>';
         $required = $data['required'] ? ' wpd-required-group ' : '';
         $html .= '<div class="wpdiscuz-item ' . $required . ' wpd-field-group">';
-        $html .= '<input checked="checked"  id="' . $key . '-1_' . $uniqueId . '" type="checkbox" name="' . $key . '" value="1" class="' . $key . ' wpd-field wpd-agreement-chackbox '.$showAagainClass.'" > <label class="wpd-field-label wpd-cursor-pointer" for="' . $key . '-1_' . $uniqueId . '">' . $data['label'] . '</label>';
+        $html .= '<input checked="checked"  id="' . $key . '-1_' . $uniqueId . '" type="checkbox" name="' . $key . '" value="1" class="' . $key . ' wpd-field wpd-agreement-checkbox '.$showAagainClass.'" > <label class="wpd-field-label wpd-cursor-pointer" for="' . $key . '-1_' . $uniqueId . '">' . $data['label'] . '</label>';
         $html .= '</div>';
         $html .= '</td></tr >';
         return $html;
@@ -75,7 +75,7 @@ class AgreementCheckbox extends Field {
         <div class="wpdiscuz-item wpd-field-group wpd-field-checkbox wpd-field-agreement wpd-field-single  <?php echo $required; ?>  <?php echo $hasDesc ? 'wpd-has-desc' : '' ?>">
             <div class="wpd-field-group-title">
                 <div class="wpd-item">
-                    <input id="<?php echo $name . '-1_' . $uniqueId; ?>" type="checkbox" name="<?php echo $name; ?>" value="1" class="<?php echo $name; ?> wpd-field wpd-agreement-chackbox <?php echo $showAagainClass; ?>"  <?php echo $args['required'] ? 'required' : ''; ?>>
+                    <input id="<?php echo $name . '-1_' . $uniqueId; ?>" type="checkbox" name="<?php echo $name; ?>" value="1" class="<?php echo $name; ?> wpd-field wpd-agreement-checkbox <?php echo $showAagainClass; ?>"  <?php echo $args['required'] ? 'required' : ''; ?>>
                     <label class="wpd-field-label wpd-cursor-pointer" for="<?php echo $name . '-1_' . $uniqueId; ?>"><?php echo $args['label']; ?></label>
                 </div>
             </div>

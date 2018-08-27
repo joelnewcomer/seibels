@@ -3,7 +3,7 @@ Contributors: gVectors Team
 Tags: comment, comments, ajax comments, custom comment form, custom comment field
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 5.1.4
+Stable tag: 5.1.5
 Requires PHP: 5.4 and higher
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -171,10 +171,13 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 
 == Changelog ==
 
-= Comments - wpDiscuz v5.1.4 =
+= Comments - wpDiscuz v5.1.5 =
 
-Fixed bug : Fatal error on update
-Fixed bug : Follow icon is visible for non logged in users
+* Added: Option to hide/show Stick comment button
+* Added: Option to hide/show Close comment button
+* Added: Option to disable Drop Animation on comment form and subscription bar
+* Fixed bug: Follow users table not created on <= MySQL 5.5 versions
+* Fixed bug: Edit comments issue
 
 
 IMPORTANT!
@@ -187,6 +190,12 @@ IMPORTANT!
 - If you have a Cache Plugin, please delete all caches after wpDiscuz update.
 - If you use CDN and found some issue please purge it.
 - If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
+
+
+= Comments - wpDiscuz v5.1.4 =
+
+* Fixed bug : Fatal error on update
+* Fixed bug : Follow icon is visible for non logged in users
 
 
 = Comments - wpDiscuz v5.1.3 =

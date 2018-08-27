@@ -581,6 +581,30 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
      */
     public $displayAntispamNote;
 
+    /**
+     * Type - Checkbox
+     * Available Values - Checked / Unchecked
+     * Description - Hide stick comment button
+     * Default Value - Unchecked
+     */
+    public $enableStickButton;
+
+    /**
+     * Type - Checkbox
+     * Available Values - Checked / Unchecked
+     * Description - Hide close comment button
+     * Default Value - Unchecked
+     */
+    public $enableCloseButton;
+
+    /**
+     * Type - Checkbox
+     * Available Values - Checked/Unchecked
+     * Description - Enable/disable form drop animation
+     * Default Value - Checked
+     */
+    public $enableDropAnimation;
+
     /** == SOCIAL ==* */
     public $socialLoginAgreementCheckbox;
     public $socialLoginInSecondaryForm;
@@ -753,6 +777,9 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
 
         $this->isFollowActive = isset($options['isFollowActive']) ? $options['isFollowActive'] : 0;
         $this->disableFollowConfirmForUsers = isset($options['disableFollowConfirmForUsers']) ? $options['disableFollowConfirmForUsers'] : 0;
+        $this->enableStickButton = isset($options['enableStickButton']) ? $options['enableStickButton'] : 0;
+        $this->enableCloseButton = isset($options['enableCloseButton']) ? $options['enableCloseButton'] : 0;
+        $this->enableDropAnimation = isset($options['enableDropAnimation']) ? $options['enableDropAnimation'] : 0;
         do_action('wpdiscuz_init_options', $this);
     }
 
@@ -865,11 +892,11 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_form_subscription_submit' => __('&rsaquo;', 'wpdiscuz'),
             'wc_comment_approved_email_subject' => __('Your comment is approved!', 'wpdiscuz'),
             'wc_comment_approved_email_message' => __('Hi [COMMENT_AUTHOR],<br/><br/>your comment was approved.<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]', 'wpdiscuz'),
-            'wc_roles_cannot_comment_message' => __('Comments are closed.', 'wpdiscuz'),                       
-            'wc_stick_comment_btn_title' => __('Stick this comment', 'wpdiscuz'),           
+            'wc_roles_cannot_comment_message' => __('Comments are closed.', 'wpdiscuz'),
+            'wc_stick_comment_btn_title' => __('Stick this comment', 'wpdiscuz'),
             'wc_stick_comment' => __('Stick', 'wpdiscuz'),
             'wc_unstick_comment' => __('Unstick', 'wpdiscuz'),
-            'wc_sticky_comment_icon_title' => __('Sticky comment thread', 'wpdiscuz'),            
+            'wc_sticky_comment_icon_title' => __('Sticky comment thread', 'wpdiscuz'),
             'wc_close_comment_btn_title' => __('Close this thread', 'wpdiscuz'),
             'wc_close_comment' => __('Close', 'wpdiscuz'),
             'wc_open_comment' => __('Open', 'wpdiscuz'),
@@ -1025,6 +1052,9 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'vkAppSecret' => $this->vkAppSecret,
             'isFollowActive' => $this->isFollowActive,
             'disableFollowConfirmForUsers' => $this->disableFollowConfirmForUsers,
+            'enableStickButton' => $this->enableStickButton,
+            'enableCloseButton' => $this->enableCloseButton,
+            'enableDropAnimation' => $this->enableDropAnimation,
         );
         return $options;
     }
@@ -1140,7 +1170,10 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'vkAppID' => '',
             'vkAppSecret' => '',
             'isFollowActive' => 1,
-            'disableFollowConfirmForUsers' => 1
+            'disableFollowConfirmForUsers' => 1,
+            'enableStickButton' => 1,
+            'enableCloseButton' => 1,
+            'enableDropAnimation' => 1,
         );
         add_option(self::OPTION_SLUG_OPTIONS, serialize($options));
     }
@@ -1233,6 +1266,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $js_options['cookiehash'] = COOKIEHASH;
         $js_options['isLoadOnlyParentComments'] = $this->isLoadOnlyParentComments;
         $js_options['ahk'] = $this->antispamKey;
+        $js_options['enableDropAnimation'] = $this->enableDropAnimation;
         return $js_options;
     }
 

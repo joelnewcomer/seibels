@@ -165,7 +165,7 @@ msgstr "Import abbrechen"
 
 #: components/Portability.php:1281
 msgid "Import & Export"
-msgstr "Importiereb & Exportieren"
+msgstr "Importieren & Exportieren"
 
 #: components/Portability.php:1413
 msgid "The export process failed. Please refresh the page and try again."

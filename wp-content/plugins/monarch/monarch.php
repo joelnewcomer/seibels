@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Monarch Plugin
  * Plugin URI: http://www.elegantthemes.com
- * Version: 1.4.3
+ * Version: 1.4.5
  * Description: Social Media Plugin
  * Author: Elegant Themes
  * Author URI: http://www.elegantthemes.com
@@ -17,7 +17,7 @@ define( 'ET_MONARCH_PLUGIN_DIR', trailingslashit( dirname(__FILE__) ) );
 define( 'ET_MONARCH_PLUGIN_URI', plugins_url('', __FILE__) );
 
 class ET_Monarch {
-	var $plugin_version = '1.4.3';
+	var $plugin_version = '1.4.5';
 	var $db_version = '1.3';
 	var $monarch_options;
 	var $_options_pagename = 'et_monarch_options';
@@ -135,6 +135,7 @@ class ET_Monarch {
 		add_action( 'admin_init', array( $this, 'include_options' ) );
 
 		$this->maybe_load_core();
+
 		et_core_enable_automatic_updates( ET_MONARCH_PLUGIN_URI, $this->plugin_version );
 	}
 

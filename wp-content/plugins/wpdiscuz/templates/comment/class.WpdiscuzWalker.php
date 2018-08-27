@@ -386,10 +386,14 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
             if (!$comment->comment_parent &&
                     ((isset($args['high_level_user']) && $args['high_level_user']) ||
                     (isset($args['can_stick_or_close']) && $args['can_stick_or_close']))) {
-                $stickText = $isSticky ? $this->optionsSerialized->phrases['wc_unstick_comment'] : $this->optionsSerialized->phrases['wc_stick_comment'];
-                $closeText = $isClosed ? $this->optionsSerialized->phrases['wc_open_comment'] : $this->optionsSerialized->phrases['wc_close_comment'];
-                $output .= '<span class="wc_stick_btn wc-cta-button"><i class="fas fa-thumbtack"></i><span class="wc_stick_text">' . $stickText . '</span></span>';
-                $output .= '<span class="wc_close_btn wc-cta-button"><i class="far fa-comments"></i><span class="wc_close_text">' . $closeText . '</span></span>';
+                if ($this->optionsSerialized->enableStickButton) {
+                    $stickText = $isSticky ? $this->optionsSerialized->phrases['wc_unstick_comment'] : $this->optionsSerialized->phrases['wc_stick_comment'];
+                    $output .= '<span class="wc_stick_btn wc-cta-button"><i class="fas fa-thumbtack"></i><span class="wc_stick_text">' . $stickText . '</span></span>';
+                }
+                if ($this->optionsSerialized->enableCloseButton) {
+                    $closeText = $isClosed ? $this->optionsSerialized->phrases['wc_open_comment'] : $this->optionsSerialized->phrases['wc_close_comment'];
+                    $output .= '<span class="wc_close_btn wc-cta-button"><i class="far fa-comments"></i><span class="wc_close_text">' . $closeText . '</span></span>';
+                }
             }
             $output .= '</div>';
             $output .= '<div class="wc-footer-right">';
