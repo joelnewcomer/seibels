@@ -98,8 +98,9 @@ if (!defined('ABSPATH')) {
                         <div class="wc_available_variable">[POST_URL]</div>
                         <div class="wc_available_variable">[BLOG_TITLE]</div>
                         <div class="wc_available_variable">[POST_TITLE]</div>
-                        <div class="wc_available_variable">[COMMENT_URL]</div>
                         <div class="wc_available_variable">[FOLLOWER_NAME]</div>                        
+                        <div class="wc_available_variable">[COMMENT_URL]</div>
+                        <div class="wc_available_variable">[COMMENT_AUTHOR]</div>
                         <div class="wc_available_variable">[COMMENT_CONTENT]</div>
                         <div class="wc_available_variable">[CANCEL_URL]</div>
                     </div>

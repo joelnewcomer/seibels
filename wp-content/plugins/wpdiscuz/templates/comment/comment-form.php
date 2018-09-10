@@ -128,7 +128,8 @@ if (!post_password_required($post->ID)) {
         } elseif (!$_GET['subscriptionSuccess']) {
             $subscriptionMsg = __('Subscription Fault', 'wpdiscuz');
         } else {
-            if (isset($_GET['subscriptionID']) && ($subscriptionID = trim($_GET['subscriptionID']))) {
+            $errorClass = '';
+            if (isset($_GET['subscriptionID']) && ($subscriptionID = intval($_GET['subscriptionID']))) {
                 $noNeedMemberConfirm = ($currentUser->ID && $wpdiscuz->optionsSerialized->disableMemberConfirm);
                 $noNeedGuestsConfirm = (!$currentUser->ID && $wpdiscuz->optionsSerialized->disableGuestsConfirm);
                 if ($noNeedMemberConfirm || $noNeedGuestsConfirm) {
@@ -136,8 +137,6 @@ if (!post_password_required($post->ID)) {
                 } else {
                     $subscriptionMsg = $wpdiscuz->optionsSerialized->phrases['wc_confirm_email'];
                 }
-            } else {
-                $errorClass = '';
             }
         }
         ?>
@@ -152,22 +151,48 @@ if (!post_password_required($post->ID)) {
     $form = $wpdiscuz->wpdiscuzForm->getForm($post->ID);
     $isShowSubscribeBar = $form->isShowSubscriptionBar();
     $isPostmaticActive = !class_exists('Prompt_Comment_Form_Handling') || (class_exists('Prompt_Comment_Form_Handling') && !$wpdiscuz->optionsSerialized->usePostmaticForCommentNotification);
-    if (comments_open($post)) {
+    $wpdiscuzCommentsOrder = $wpdiscuz->optionsSerialized->wordpressCommentOrder;
+    if (!$wpdiscuz->optionsSerialized->wordpressIsPaginate && $wpdiscuz->optionsSerialized->showSortingButtons && $wpdiscuz->optionsSerialized->mostVotedByDefault) {
+        $wpdiscuzCommentsOrderBy = 'by_vote';
+    } else {
+        $wpdiscuzCommentsOrderBy = 'comment_date_gmt';
+    }
+
+
+    if (isset($_COOKIE[WpDiscuzCore::COOKIE_COMMENTS_SORTING . '_' . $post->ID]) && $_COOKIE[WpDiscuzCore::COOKIE_COMMENTS_SORTING . '_' . $post->ID] && !$wpdiscuz->optionsSerialized->wordpressIsPaginate) {
+        $cookieOrderData = json_decode(stripslashes(trim($_COOKIE[WpDiscuzCore::COOKIE_COMMENTS_SORTING . '_' . $post->ID])));
+        if ($cookieOrderData && isset($cookieOrderData->orderBy) && isset($cookieOrderData->order)) {
+            $cookieOrderBy = strtolower(trim($cookieOrderData->orderBy));
+            $cookieOrder = strtolower(trim($cookieOrderData->order));
+            if (in_array($cookieOrder, array('asc', 'desc'))) {
+                $wpdiscuzCommentsOrderBy = $cookieOrderBy;
+                $wpdiscuzCommentsOrder = $cookieOrder;
+            }
+        }
+    }
+
+    $commentsOpen = comments_open($post);
+
+    if ($commentsOpen) {
         $wpdiscuz->helper->superSocializerFix();
         $formCustomCss = $form->getCustomCSS();
         if ($formCustomCss) {
             echo '<style type="text/css">' . $formCustomCss . '</style>';
         }
+        if (!$wpdiscuz->optionsSerialized->headerTextShowHide) {
+            ?>
+            <h3 id="wc-comment-header">
+                <?php if ($commentsCount) { ?>
+                    <div class="wpdiscuz-comment-count">
+                        <div class="wpd-cc-value"><?php echo $commentsCount; ?></div>
+                        <div class="wpd-cc-arrow"></div>
+                    </div>
+                <?php } ?>
+                <?php echo $form->getHeaderText(); ?>
+            </h3>
+            <?php
+        }
         ?>
-        <h3 id="wc-comment-header">
-            <?php if ($commentsCount) { ?>
-                <div class="wpdiscuz-comment-count">
-                    <div class="wpd-cc-value"><?php echo $commentsCount; ?></div>
-                    <div class="wpd-cc-arrow"></div>
-                </div>
-            <?php } ?>
-            <?php echo $form->getHeaderText(); ?>
-        </h3>
         <div id="wpcomm" class="<?php echo $wpCommClasses; ?>">
             <div class="wpdiscuz-form-top-bar">
                 <div class="wpdiscuz-ftb-left">
@@ -242,25 +267,26 @@ if (!post_password_required($post->ID)) {
                 <?php } ?>
                 <?php do_action('wpdiscuz_before_comments', $post, $currentUser, $commentsCount); ?>                   
 
-                <div class="wpdiscuz-front-actions">
-                    <?php if ($isShowSubscribeBar && $isPostmaticActive) { ?>
-                        <div class="wpdiscuz-sbs-wrap">
-                            <span><i class="far fa-envelope" aria-hidden="true"></i>&nbsp; <?php echo $wpdiscuz->optionsSerialized->phrases['wc_subscribe_anchor']; ?> &nbsp;<i class="fas fa-caret-down" aria-hidden="true"></i></span>
-                        </div>
-                    <?php } ?>
-                    <?php if ($commentsCount && $wpdiscuz->optionsSerialized->showSortingButtons && !$wpdiscuz->optionsSerialized->wordpressIsPaginate) { ?>
-                        <div class="wpdiscuz-sort-buttons" style="font-size:14px; color: #777;">
-                            <i class="fas fa-caret-up" aria-hidden="true"></i> 
-                            <span class="wpdiscuz-sort-button wpdiscuz-date-sort-desc"><?php echo $wpdiscuz->optionsSerialized->phrases['wc_newest']; ?></span> <i class="fas fa-caret-up" aria-hidden="true"></i> 
-                            <span class="wpdiscuz-sort-button wpdiscuz-date-sort-asc"><?php echo $wpdiscuz->optionsSerialized->phrases['wc_oldest']; ?></span>
-                            <?php if (!$wpdiscuz->optionsSerialized->votingButtonsShowHide) { ?>
-                                <i class="fas fa-caret-up" aria-hidden="true"></i> <span class="wpdiscuz-sort-button wpdiscuz-vote-sort-up"><?php echo $wpdiscuz->optionsSerialized->phrases['wc_most_voted']; ?></span>
-                            <?php } ?>
-                        </div>
-                    <?php } ?>
-                    <div class="clearfix"></div>
-                </div>
-
+                <?php if ($isShowSubscribeBar || $wpdiscuz->optionsSerialized->showSortingButtons) { ?>
+                    <div class="wpdiscuz-front-actions">
+                        <?php if ($isShowSubscribeBar && $isPostmaticActive && $commentsOpen) { ?>
+                            <div class="wpdiscuz-sbs-wrap">
+                                <span><i class="far fa-envelope" aria-hidden="true"></i>&nbsp; <?php echo $wpdiscuz->optionsSerialized->phrases['wc_subscribe_anchor']; ?> &nbsp;<i class="fas fa-caret-down" aria-hidden="true"></i></span>
+                            </div>
+                        <?php } ?>
+                        <?php if ($commentsCount && $wpdiscuz->optionsSerialized->showSortingButtons && !$wpdiscuz->optionsSerialized->wordpressIsPaginate) { ?>                        
+                            <div class="wpdiscuz-sort-buttons" style="font-size:14px; color: #777;">
+                                <i class="fas fa-caret-up" aria-hidden="true"></i> 
+                                <span class="wpdiscuz-sort-button wpdiscuz-date-sort-desc <?php print ($wpdiscuzCommentsOrderBy == 'comment_date_gmt' && $wpdiscuzCommentsOrder == 'desc') ? 'wpdiscuz-sort-button-active' : ''  ?>"><?php echo $wpdiscuz->optionsSerialized->phrases['wc_newest']; ?></span> <i class="fas fa-caret-up" aria-hidden="true"></i> 
+                                <span class="wpdiscuz-sort-button wpdiscuz-date-sort-asc <?php print ($wpdiscuzCommentsOrderBy == 'comment_date_gmt' && $wpdiscuzCommentsOrder == 'asc') ? 'wpdiscuz-sort-button-active' : ''  ?>"><?php echo $wpdiscuz->optionsSerialized->phrases['wc_oldest']; ?></span>
+                                <?php if (!$wpdiscuz->optionsSerialized->votingButtonsShowHide) { ?>
+                                    <i class="fas fa-caret-up" aria-hidden="true"></i> <span class="wpdiscuz-sort-button wpdiscuz-vote-sort-up <?php print ($wpdiscuzCommentsOrderBy == 'by_vote') ? 'wpdiscuz-sort-button-active' : ''  ?>"><?php echo $wpdiscuz->optionsSerialized->phrases['wc_most_voted']; ?></span>
+                                <?php } ?>
+                            </div>
+                        <?php } ?>
+                        <div class="clearfix"></div>
+                    </div>
+                <?php } ?>
                 <?php
                 if ($isShowSubscribeBar && $isPostmaticActive) {
                     $wpdiscuz->subscriptionData = $wpdiscuz->dbManager->hasSubscription($post->ID, $currentUser->user_email);
@@ -333,16 +359,16 @@ if (!post_password_required($post->ID)) {
                 <?php } ?>
                 <div id="wcThreadWrapper" class="wc-thread-wrapper">
                     <?php
-                    $args = array('first_load' => 1);
+                    $args = array('first_load' => 1, 'orderby' => $wpdiscuzCommentsOrderBy);
                     $showLoadeMore = 1;
-
-                    if ($wpdiscuz->optionsSerialized->showSortingButtons && $wpdiscuz->optionsSerialized->mostVotedByDefault && !$wpdiscuz->optionsSerialized->votingButtonsShowHide) {
-                        $args['orderby'] = 'by_vote';
-                    }
 
                     if (isset($_COOKIE[WpDiscuzCore::COOKIE_LAST_VISIT])) {
                         $args[WpDiscuzCore::COOKIE_LAST_VISIT] = $_COOKIE[WpDiscuzCore::COOKIE_LAST_VISIT];
                     }
+
+                    $args['orderby'] = $wpdiscuzCommentsOrderBy;
+                    $args['order'] = $wpdiscuzCommentsOrder;
+
 
                     $commentData = $wpdiscuz->getWPComments($args);
                     echo $commentData['comment_list'];
@@ -373,7 +399,7 @@ if (!post_password_required($post->ID)) {
                     <?php if ($wpdiscuz->optionsSerialized->showPluginPoweredByLink) { ?>
                         <div class="by-wpdiscuz">
                             <span id="awpdiscuz" onclick='javascript:document.getElementById("bywpdiscuz").style.display = "inline";
-                                                document.getElementById("awpdiscuz").style.display = "none";'>
+                                    document.getElementById("awpdiscuz").style.display = "none";'>
                                 <img alt="wpdiscuz" src="<?php echo plugins_url(WPDISCUZ_DIR_NAME . '/assets/img/plugin-icon/icon_info.png'); ?>"  align="absmiddle" class="wpdimg"/>
                             </span>&nbsp;
                             <a href="http://wpdiscuz.com/" target="_blank" id="bywpdiscuz" title="wpDiscuz v<?php echo get_option(WpdiscuzCore::OPTION_SLUG_VERSION); ?> - Supercharged native comments">wpDiscuz</a>

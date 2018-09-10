@@ -288,6 +288,9 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
     }
 
     public function addEmailNotification($subsriptionId, $postId, $email, $subscriptionType, $confirm = 0) {
+        if (strpos($email, '@example.com') !== false) {
+            return false;
+        }
         if ($subscriptionType != self::SUBSCRIPTION_COMMENT) {
             $this->deleteCommentNotifications($subsriptionId, $email);
         }
@@ -789,17 +792,17 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
         $result = $this->db->get_results($sql);
         return $result;
     }
-    
+
     public function unfollowById($fId) {
         $sql = $this->db->prepare("DELETE FROM {$this->followUsers} WHERE `id` = %d;", intval($fId));
         $this->db->query($sql);
     }
-    
+
     public function unfollowByEmail($email) {
         $sql = $this->db->prepare("DELETE FROM {$this->followUsers} WHERE `follower_email` = %s;", trim($email));
         $this->db->query($sql);
     }
-    
+
     /**
      * remove user related follows
      * @param type $email the user email who other users following
@@ -878,6 +881,10 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
         $followerEmail = isset($args['follower_email']) ? trim($args['follower_email']) : '';
         $followerName = isset($args['follower_name']) ? trim($args['follower_name']) : '';
         $confirm = isset($args['confirm']) ? intval($args['confirm']) : 0;
+
+        if (strpos($followerEmail, '@example.com') !== false) {
+            return false;
+        }
 
         if ($userEmail && $followerId && $followerEmail) {
             $currentDate = current_time('mysql');

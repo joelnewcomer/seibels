@@ -149,21 +149,23 @@ class WpdiscuzHelperEmail implements WpDiscuzConstants {
             if (strpos($message, '[POST_TITLE]') !== false) {
                 $message = str_replace('[POST_TITLE]', $postTitle, $message);
             }
+            if (strpos($message, '[SUBSCRIBER_NAME]') !== false) {
+                if ($subscriptionType == self::SUBSCRIPTION_COMMENT) {
+                    $parentComment = get_comment($comment->comment_parent);
+                    $subscriber = $parentComment && $parentComment->comment_author ? $parentComment->comment_author : $this->optionsSerialized->phrases['wc_anonymous'];
+                } else {
+                    $user = get_user_by('email', $emailData['email']);
+                    $subscriber = $user && $user->display_name ? $user->display_name : '';
+                }
+                $message = str_replace('[SUBSCRIBER_NAME]', $subscriber, $message);
+            }
             if (strpos($message, '[COMMENT_URL]') !== false) {
                 $commentPermalink = get_comment_link($commentId);
                 $message = str_replace('[COMMENT_URL]', $commentPermalink, $message);
             }
-
-            if ((strpos($message, '[COMMENT_AUTHOR]') !== false) && ($subscriptionType == self::SUBSCRIPTION_COMMENT)) {
-                $parentComment = get_comment($comment->comment_parent);
-                $commentAuthor = $parentComment && $parentComment->comment_author ? $parentComment->comment_author : '';
+            if (strpos($message, '[COMMENT_AUTHOR]') !== false) {
+                $commentAuthor = $comment->comment_author ? $comment->comment_author : $this->optionsSerialized->phrases['wc_anonymous'];
                 $message = str_replace('[COMMENT_AUTHOR]', $commentAuthor, $message);
-            } else {
-                if ((strpos($message, '[SUBSCRIBER_NAME]') !== false) && ($subscriptionType == self::SUBSCRIPTION_ALL_COMMENT || $subscriptionType == self::SUBSCRIPTION_POST)) {
-                    $user = get_user_by('email', $emailData['email']);
-                    $commentAuthor = $user && $user->display_name ? $user->display_name : '';
-                    $message = str_replace('[SUBSCRIBER_NAME]', $commentAuthor, $message);
-                }
             }
             if (strpos($message, '[COMMENT_CONTENT]') !== false) {
                 $message = str_replace('[COMMENT_CONTENT]', $comment->comment_content, $message);
@@ -495,6 +497,9 @@ class WpdiscuzHelperEmail implements WpDiscuzConstants {
             if (($followerData['follower_email'] == $postAuthor->user_email) && (($moderationNotify && !$comment->comment_approved) || ($commentsNotify && $comment->comment_approved))) {
                 return;
             }
+            if (strpos($message, '[COMMENT_AUTHOR]') !== false) {
+                $message = str_replace('[COMMENT_AUTHOR]', $followerData['user_name'], $message);
+            }
             if (strpos($message, '[FOLLOWER_NAME]') !== false) {
                 $message = str_replace('[FOLLOWER_NAME]', $followerData['follower_name'], $message);
             }
@@ -520,7 +525,7 @@ class WpdiscuzHelperEmail implements WpDiscuzConstants {
             $headers[] = "From: " . $fromName . " <" . $fromEmail . "> \r\n";
             $subject = html_entity_decode($subject, ENT_QUOTES);
             $message = html_entity_decode($message, ENT_QUOTES);
-            wp_mail($followerData['follower_email'], $subject, do_shortcode($message), $headers);            
+            wp_mail($followerData['follower_email'], $subject, do_shortcode($message), $headers);
         }
     }
 

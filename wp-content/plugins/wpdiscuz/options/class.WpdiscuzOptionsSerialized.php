@@ -639,6 +639,9 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
     public $isFollowActive;
     public $disableFollowConfirmForUsers;
 
+    /** == == * */
+    public $isNativeAjaxEnabled;
+
     /**
      * wordpress options
      */
@@ -663,7 +666,8 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $this->wordpressThreadComments = get_option('thread_comments');
         $this->wordpressThreadCommentsDepth = get_option('thread_comments_depth');
         $this->wordpressIsPaginate = get_option('page_comments');
-        $this->wordpressCommentOrder = get_option('comment_order');
+        $wordpressCommentOrder = strtolower(get_option('comment_order'));
+        $this->wordpressCommentOrder = in_array($wordpressCommentOrder, array('asc', 'desc')) ? $wordpressCommentOrder : 'desc';
         $this->wordpressCommentPerPage = get_option('comments_per_page');
         $this->wordpressShowAvatars = get_option('show_avatars');
         $this->wordpressDefaultCommentsPage = get_option('default_comments_page');
@@ -780,6 +784,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $this->enableStickButton = isset($options['enableStickButton']) ? $options['enableStickButton'] : 0;
         $this->enableCloseButton = isset($options['enableCloseButton']) ? $options['enableCloseButton'] : 0;
         $this->enableDropAnimation = isset($options['enableDropAnimation']) ? $options['enableDropAnimation'] : 0;
+        $this->isNativeAjaxEnabled = isset($options['isNativeAjaxEnabled']) ? $options['isNativeAjaxEnabled'] : 0;
         do_action('wpdiscuz_init_options', $this);
     }
 
@@ -821,11 +826,11 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_hide_replies_text' => __('Hide Replies', 'wpdiscuz'),
             'wc_show_replies_text' => __('View Replies', 'wpdiscuz'),
             'wc_email_subject' => __('New Comment', 'wpdiscuz'),
-            'wc_email_message' => __('Hi [SUBSCRIBER_NAME],<br/><br/>new comment on the discussion section you\'ve been interested in<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[UNSUBSCRIBE_URL]">' . __('Unsubscribe', 'wpdiscuz') . '</a>', 'wpdiscuz'),
+            'wc_email_message' => __('Hi [SUBSCRIBER_NAME],<br/><br/> new comment have been posted by the <em><strong>[COMMENT_AUTHOR]</em></strong> on the discussion section you\'ve been interested in<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[UNSUBSCRIBE_URL]">Unsubscribe</a>', 'wpdiscuz'),
             'wc_all_comment_new_reply_subject' => __('New Reply', 'wpdiscuz'),
-            'wc_all_comment_new_reply_message' => __('Hi [SUBSCRIBER_NAME],<br/><br/>new reply on the discussion section you\'ve been interested in<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[UNSUBSCRIBE_URL]">' . __('Unsubscribe', 'wpdiscuz') . '</a>', 'wpdiscuz'),
+            'wc_all_comment_new_reply_message' => __('Hi [SUBSCRIBER_NAME],<br/><br/> new reply have been posted by the <em><strong>[COMMENT_AUTHOR]</em></strong> on the discussion section you\'ve been interested in<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[UNSUBSCRIBE_URL]">Unsubscribe</a>', 'wpdiscuz'),
             'wc_new_reply_email_subject' => __('New Reply', 'wpdiscuz'),
-            'wc_new_reply_email_message' => __('Hi [COMMENT_AUTHOR],<br/><br/>new reply on the discussion section you\'ve been interested in<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[UNSUBSCRIBE_URL]">' . __('Unsubscribe', 'wpdiscuz') . '</a>', 'wpdiscuz'),
+            'wc_new_reply_email_message' => __('Hi [SUBSCRIBER_NAME],<br/><br/> new reply have been posted by the <em><strong>[COMMENT_AUTHOR]</em></strong> on the discussion section you\'ve been interested in<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[UNSUBSCRIBE_URL]">Unsubscribe</a>', 'wpdiscuz'),
             'wc_subscribed_on_comment' => __('You\'re subscribed for new replies on this comment', 'wpdiscuz'),
             'wc_subscribed_on_all_comment' => __('You\'re subscribed for new replies on all your comments', 'wpdiscuz'),
             'wc_subscribed_on_post' => __('You\'re subscribed for new follow-up comments on this post', 'wpdiscuz'),
@@ -836,7 +841,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_confirm_email' => __('Confirm your subscription', 'wpdiscuz'),
             'wc_comfirm_success_message' => __('You\'ve successfully confirmed your subscription.', 'wpdiscuz'),
             'wc_confirm_email_subject' => __('Subscription Confirmation', 'wpdiscuz'),
-            'wc_confirm_email_message' => __('Hi, <br/> You just subscribed for new comments on our website. This means you will receive an email when new comments are posted according to subscription option you\'ve chosen. <br/> To activate, click confirm below. If you believe this is an error, ignore this message and we\'ll never bother you again. <br/><br/><a href="[POST_URL]">[POST_TITLE]</a><br/><br/><a href="[CONFIRM_URL]">' . __('Confirm Your Subscrption', 'wpdiscuz') . '</a><br/><br/><a href="[CANCEL_URL]">' . __('Cancel Subscription', 'wpdiscuz') . '</a>', 'wpdiscuz'),
+            'wc_confirm_email_message' => __('Hi, <br/> You just subscribed for new comments on our website. This means you will receive an email when new comments are posted according to subscription option you\'ve chosen. <br/> To activate, click confirm below. If you believe this is an error, ignore this message and we\'ll never bother you again. <br/><br/><a href="[POST_URL]">[POST_TITLE]</a><br/><br/><a href="[CONFIRM_URL]">Confirm Your Subscrption</a><br/><br/><a href="[CANCEL_URL]">Cancel Subscription</a>', 'wpdiscuz'),
             'wc_error_empty_text' => __('please fill out this field to comment', 'wpdiscuz'),
             'wc_error_email_text' => __('email address is invalid', 'wpdiscuz'),
             'wc_error_url_text' => __('url is invalid', 'wpdiscuz'),
@@ -946,7 +951,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'wc_follow_confirm_email_subject' => __('User Following Confirmation', 'wpdiscuz'),
             'wc_follow_confirm_email_message' => __('Hi, <br/> You just started following a new user. You\'ll get email notification once new comment is posted by this user. <br/> Please click on "user following confirmation" link to confirm your request. If you believe this is an error, ignore this message and we\'ll never bother you again. <br/><br/><a href="[POST_URL]">[POST_TITLE]</a><br/><br/><a href="[CONFIRM_URL]">' . __('Confirm Follow', 'wpdiscuz') . '</a><br/><br/><a href="[CANCEL_URL]">' . __('Cancel Follow', 'wpdiscuz') . '</a>', 'wpdiscuz'),
             'wc_follow_email_subject' => __('New Comment', 'wpdiscuz'),
-            'wc_follow_email_message' => __('Hi [FOLLOWER_NAME],<br/><br/>new comment have been posted by the user you are following<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[CANCEL_URL]">' . __('Cancel Follow', 'wpdiscuz') . '</a>', 'wpdiscuz'),
+            'wc_follow_email_message' => __('Hi [FOLLOWER_NAME],<br/><br/> new comment have been posted by the <em><strong>[COMMENT_AUTHOR]</em></strong> you are following<br/><br/><a href="[COMMENT_URL]">[COMMENT_URL]</a><br/><br/>[COMMENT_CONTENT]<br/><br/><a href="[CANCEL_URL]">' . __('Cancel Follow', 'wpdiscuz') . '</a>', 'wpdiscuz'),
         );
     }
 
@@ -1055,6 +1060,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'enableStickButton' => $this->enableStickButton,
             'enableCloseButton' => $this->enableCloseButton,
             'enableDropAnimation' => $this->enableDropAnimation,
+            'isNativeAjaxEnabled' => $this->isNativeAjaxEnabled,
         );
         return $options;
     }
@@ -1174,6 +1180,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'enableStickButton' => 1,
             'enableCloseButton' => 1,
             'enableDropAnimation' => 1,
+            'isNativeAjaxEnabled' => 0,
         );
         add_option(self::OPTION_SLUG_OPTIONS, serialize($options));
     }
@@ -1191,7 +1198,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $this->formPostRel = get_option('wpdiscuz_form_post_rel', array());
     }
 
-    public function isEnabledShare() {
+    public function isShareEnabled() {
         return ($this->enableFbShare || $this->enableTwitterShare || $this->enableGoogleShare || $this->enableVkShare || $this->enableOkShare);
     }
 
@@ -1238,7 +1245,12 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $js_options['liveUpdateGuests'] = $this->liveUpdateGuests;
         $js_options['wc_comment_bg_color'] = $this->commentBGColor;
         $js_options['wc_reply_bg_color'] = $this->replyBGColor;
-        $js_options['wordpress_comment_order'] = $this->wordpressCommentOrder;
+        $js_options['wpdiscuzCommentsOrder'] = $this->wordpressCommentOrder;
+        if (!$this->wordpressIsPaginate && $this->showSortingButtons && $this->mostVotedByDefault) {
+            $js_options['wpdiscuzCommentOrderBy'] = 'by_vote';
+        } else {
+            $js_options['wpdiscuzCommentOrderBy'] = 'comment_date_gmt';
+        }
         $js_options['commentsVoteOrder'] = $this->showSortingButtons && $this->mostVotedByDefault;
         $js_options['wordpressThreadCommentsDepth'] = $this->wordpressThreadCommentsDepth;
         $js_options['wordpressIsPaginate'] = $this->wordpressIsPaginate;
@@ -1267,6 +1279,8 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
         $js_options['isLoadOnlyParentComments'] = $this->isLoadOnlyParentComments;
         $js_options['ahk'] = $this->antispamKey;
         $js_options['enableDropAnimation'] = $this->enableDropAnimation;
+        $js_options['isNativeAjaxEnabled'] = $this->isNativeAjaxEnabled;
+        $js_options['cookieCommentsSorting'] = self::COOKIE_COMMENTS_SORTING;
         return $js_options;
     }
 

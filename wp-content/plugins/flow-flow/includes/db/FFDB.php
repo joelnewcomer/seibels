@@ -1,6 +1,5 @@
 <?php namespace flow\db;
 use flow\settings\FFSettingsUtils;
-use flow\social\FFFeedUtils;
 
 if ( ! defined( 'WPINC' ) ) die;
 
@@ -188,7 +187,7 @@ class FFDB {
 				$source['enabled'] = $source['system_enabled'] == 1 ? ($source['enabled'] == 1 ? FFSettingsUtils::YEP : FFSettingsUtils::NOPE) : FFSettingsUtils::NOPE;
 				$offset = get_option('gmt_offset', 0);
 				$date = $source['last_update'] + $offset * 3600;
-				$source['last_update'] = $source['last_update'] == 0 ? 'N/A' : FFFeedUtils::classicStyleDate($date);
+				$source['last_update'] = $source['last_update'] == 0 ? 'N/A' : FFSettingsUtils::classicStyleDate($date);
 				if (!isset($source['errors']) || is_null($source['errors'])) {
 					$source['errors'] = array();
 				}

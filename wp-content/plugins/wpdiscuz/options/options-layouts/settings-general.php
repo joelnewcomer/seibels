@@ -16,6 +16,18 @@ if (!defined('ABSPATH')) {
             </tr>
             <tr valign="top">
                 <th scope="row">
+                    <label for="isNativeAjaxEnabled"><?php _e('Enable WordPress native ajax', 'wpdiscuz'); ?> </label>
+                    <p class="wpd-desc">
+                        <?php _e('Enable Wordpress native ajax', 'wpdiscuz'); ?>
+                    </p>
+                </th>
+                <td>
+                    <input type="checkbox" <?php checked($this->optionsSerialized->isNativeAjaxEnabled == 1) ?> value="1" name="isNativeAjaxEnabled" id="isNativeAjaxEnabled" /><label for="isNativeAjaxEnabled"></label>
+                    <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/general-settings/#use_wordpress_native_ajax" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
+                </td>
+            </tr>            
+            <tr valign="top">
+                <th scope="row">
                     <label for="isUserByEmail"><?php _e('Use guest email to detect registered account', 'wpdiscuz'); ?> </label>
                     <p class="wpd-desc">
                         <?php _e('Sometimes registered users comment as guest using the same email address. wpDiscuz can detect the account role using guest email and display commenter label correctly.', 'wpdiscuz'); ?>
@@ -26,7 +38,7 @@ if (!defined('ABSPATH')) {
                     <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/general-settings/#guest_email_to_detect_account" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
                 </td>
             </tr>
-			<?php if(is_ssl()){?>
+            <?php if(is_ssl()){?>
             <tr valign="top">
                 <th scope="row"><?php _e('Secure comment content in HTTPS protocol.', 'wpdiscuz'); ?>
                     <p class="wpd-desc">

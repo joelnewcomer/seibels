@@ -438,7 +438,7 @@ class SocialLogin {
             $user = get_user_by('id', $userID);
             wp_set_current_user($userID, $user->user_login);
             wp_set_auth_cookie($userID);
-            do_action('wp_login', $user->user_login);
+            do_action('wp_login', $user->user_login, $user);
         }
     }
 

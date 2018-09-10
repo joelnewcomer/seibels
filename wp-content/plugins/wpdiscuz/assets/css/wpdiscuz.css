@@ -512,7 +512,7 @@ wpdtip{display: inline-block; position: inherit; width: auto;}
 #wpcomm .wpdiscuz_subscribe_status{font-size:12px; padding-top:6px}
 #wpcomm .wpdiscuz_subscribe_status a{font-size:12px}
 #wpcomm .wc-comment.wc-no-left-margin{margin-left:0!important}
-#wc_unsubscribe_message,#wc_delete_content_message,#wc_follow_message{margin:10px auto 1px auto; padding:10px; text-align:center; border:#0d0 1px dotted; background:#cfc}
+#wc_unsubscribe_message,#wc_delete_content_message,#wc_follow_message{margin:10px auto 1px auto; padding:10px; text-align:center; border:#0d0 1px dotted; background:#cfc;clear:both;}
 .wc_unsubscribe_message,.wc_delete_content_message,.wc_follow_message{font-size:14px; color:#444}
 #wpcomm .wc_editable_div{-moz-appearance:textfield-multiline; -webkit-appearance:textarea; border:1px solid #ccc; border-radius:0; font:medium -moz-fixed; font:-webkit-small-control; overflow:auto; resize:both; box-sizing:border-box; height:46px; max-width:100%; min-height:46px!important; padding:5px; width:100%}
 .wpdiscuz-nofollow,.wpdiscuz-nofollow:hover{text-decoration:none!important}

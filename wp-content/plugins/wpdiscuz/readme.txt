@@ -3,7 +3,7 @@ Contributors: gVectors Team
 Tags: comment, comments, ajax comments, custom comment form, custom comment field
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 5.1.5
+Stable tag: 5.1.7
 Requires PHP: 5.4 and higher
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -171,13 +171,27 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 
 == Changelog ==
 
-= Comments - wpDiscuz v5.1.5 =
 
-* Added: Option to hide/show Stick comment button
-* Added: Option to hide/show Close comment button
-* Added: Option to disable Drop Animation on comment form and subscription bar
-* Fixed bug: Follow users table not created on <= MySQL 5.5 versions
-* Fixed bug: Edit comments issue
+= Comments - wpDiscuz v5.1.6 / v5.1.7 =
+
+* Fixed Bug : Guests commenting issue
+* Fixed Bug : Avatar displaying issue
+
+* Added: More speed based on custom AJAX processor (30% faster).
+* Added: Option to enable/disable WP native ajax processor (admin-ajax.php)
+* Added: Remembers comment ordering type you've selected on your last visit.
+* Added: Allows post authors to post comments in closed comment threads.
+* Added: New shortcodes for email notification templates.
+* Added: Unapproved comments are now editable for comment authors (owners).
+* Added: Ignore subscriptions with @example.com email addresses.
+* Fixed: Bug: Media uploader addon attached images are not displaying:
+	- on single comment load via ajax
+	- on most reacted comment thread
+	- on hottest comment thread
+* Fixed Bug: CSS issue on subscription success action
+* Fixed Bug: Hide comment subscription bar if commenting is closed.
+* Fixed Bug: Facebook login issues
+* Fixed Bug: Problem with Hide Header Text option
 
 
 IMPORTANT!
@@ -190,6 +204,15 @@ IMPORTANT!
 - If you have a Cache Plugin, please delete all caches after wpDiscuz update.
 - If you use CDN and found some issue please purge it.
 - If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
+
+
+= Comments - wpDiscuz v5.1.5 =
+
+* Added: Option to hide/show Stick comment button
+* Added: Option to hide/show Close comment button
+* Added: Option to disable Drop Animation on comment form and subscription bar
+* Fixed bug: Follow users table not created on <= MySQL 5.5 versions
+* Fixed bug: Edit comments issue
 
 
 = Comments - wpDiscuz v5.1.4 =

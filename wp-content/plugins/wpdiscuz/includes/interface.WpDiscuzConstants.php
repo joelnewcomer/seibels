@@ -30,6 +30,7 @@ interface WpDiscuzConstants {
     const TRS_POSTS_AUTHORS                           = 'wpdiscuz_posts_authors';
     /* === COOKIES === */
     const COOKIE_LAST_VISIT                           = 'wordpress_last_visit';
+    const COOKIE_COMMENTS_SORTING                     = 'wpdiscuz_comments_sorting';
     /* === CACHE === */
     const GRAVATARS_CACHE_DIR                         = '/wpdiscuz/cache/gravatars/';
     const GRAVATARS_CACHE_ADD_RECURRENCE              = 3;

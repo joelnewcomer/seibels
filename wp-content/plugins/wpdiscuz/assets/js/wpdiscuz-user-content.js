@@ -1,5 +1,6 @@
 ;
 jQuery(document).ready(function ($) {
+    var isNativeAjaxEnabled = wpdiscuzAjaxObj.wpdiscuz_options.isNativeAjaxEnabled;
     $(document).delegate('.wpd-info,.wpd-page-link,.wpd-delete-content,.wpd-user-email-delete-links', 'click', function (e) {
         e.preventDefault();
     });
@@ -19,17 +20,18 @@ jQuery(document).ready(function ($) {
     });
 
     function wpdFullInfo(btn, data) {
+        console.log(btn);
         var icon = $('.fas', btn);
         var oldClass = icon.attr('class');
         icon.removeClass();
         icon.addClass('fas fa-pulse fa-spinner');
-        var ajax = getUCAjaxObj(false, data);
-        ajax.done(function (resp) {
+        var ajax = isNativeAjaxEnabled ? getUCAjaxObj(false, data) : getUCACustomAjaxObj(false, data);
+        ajax.done(function (response) {
             btn.addClass('wpd-not-clicked');
             icon.removeClass();
             icon.addClass(oldClass);
-            if (resp) {
-                $('#wpdUserContentInfo').html(resp);
+            if (response) {
+                $('#wpdUserContentInfo').html(response);
                 $('#wpdUserContentInfo ul.wpd-list .wpd-list-item:first-child').addClass('wpd-active');
                 $('#wpdUserContentInfo div.wpd-content .wpd-content-item:first-child').addClass('wpd-active');
 
@@ -57,11 +59,11 @@ jQuery(document).ready(function ($) {
         var data = new FormData();
         data.append('action', action);
         data.append('page', goToPage);
-        var ajax = getUCAjaxObj(true, data);
-        ajax.done(function (resp) {
+        var ajax = isNativeAjaxEnabled ? getUCAjaxObj(true, data) : getUCACustomAjaxObj(true, data);
+        ajax.done(function (response) {
             btn.addClass('wpd-not-clicked');
-            if (resp) {
-                $('.wpd-content-item.wpd-active').html(resp);
+            if (response) {
+                $('.wpd-content-item.wpd-active').html(response);
             }
             $('.wpdiscuz-loading-bar').hide();
         });
@@ -96,7 +98,7 @@ jQuery(document).ready(function ($) {
             data.append('action', action);
 
 
-            var ajax = getUCAjaxObj(false, data);
+            var ajax = isNativeAjaxEnabled ? getUCAjaxObj(false, data) : getUCACustomAjaxObj(false, data);
             ajax.done(function (response) {
                 btn.addClass('wpd-not-clicked');
                 icon.removeClass().addClass(oldClass);
@@ -112,7 +114,7 @@ jQuery(document).ready(function ($) {
         $('.wpd-loading', btn).addClass('wpd-show');
         var data = new FormData();
         data.append('action', 'wpdEmailDeleteLinks');
-        var ajax = getUCAjaxObj(false, data);
+        var ajax = isNativeAjaxEnabled ? getUCAjaxObj(false, data) : getUCACustomAjaxObj(false, data);
         ajax.done(function (response) {
             btn.addClass('wpd-not-clicked');
             $('[data-lity-close]', window.parent.document).trigger('click');
@@ -129,7 +131,7 @@ jQuery(document).ready(function ($) {
             var data = new FormData();
             data.append('action', 'wpdGuestAction');
             data.append('guestAction', guestAction);
-            var ajax = getUCAjaxObj(false, data);
+            var ajax = isNativeAjaxEnabled ? getUCAjaxObj(false, data) : getUCACustomAjaxObj(false, data);
             ajax.done(function (response) {
                 btn.addClass('wpd-not-clicked');
                 btn.find('.wpd-loading').removeClass('wpd-show');
@@ -184,6 +186,25 @@ jQuery(document).ready(function ($) {
         return $.ajax({
             type: 'POST',
             url: wpdiscuzAjaxObj.url,
+            data: data,
+            contentType: false,
+            processData: false,
+        });
+    }
+
+    /**
+     * @param {type} action the action key 
+     * @param {type} data the request properties
+     * @returns {jqXHR}
+     */
+    function getUCACustomAjaxObj(isShowTopLoading, data) {
+        if (isShowTopLoading) {
+            $('.wpdiscuz-loading-bar').show();
+        }
+        data.append('postId', wpdiscuzAjaxObj.wpdiscuz_options.wc_post_id);
+        return $.ajax({
+            type: 'POST',
+            url: wpdiscuzAjaxObj.customAjaxUrl,
             data: data,
             contentType: false,
             processData: false,

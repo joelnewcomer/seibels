@@ -128,6 +128,7 @@ class WpdiscuzOptions implements WpDiscuzConstants {
             $this->optionsSerialized->enableStickButton = isset($_POST['enableStickButton']) ? intval($_POST['enableStickButton']) : 0;
             $this->optionsSerialized->enableCloseButton = isset($_POST['enableCloseButton']) ? intval($_POST['enableCloseButton']) : 0;
             $this->optionsSerialized->enableDropAnimation = isset($_POST['enableDropAnimation']) ? intval($_POST['enableDropAnimation']) : 0;
+            $this->optionsSerialized->isNativeAjaxEnabled = isset($_POST['isNativeAjaxEnabled']) ? intval($_POST['isNativeAjaxEnabled']) : 0;
             do_action('wpdiscuz_save_options', $_POST);
             $this->optionsSerialized->updateOptions();
             add_settings_error('wpdiscuz', 'settings_updated', __('Settings updated', 'wpdiscuz'), 'updated');

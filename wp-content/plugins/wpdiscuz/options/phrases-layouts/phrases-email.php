@@ -38,9 +38,10 @@ if (!defined('ABSPATH')) {
                         <div class="wc_available_variable">[POST_URL]</div>
                         <div class="wc_available_variable">[BLOG_TITLE]</div>
                         <div class="wc_available_variable">[POST_TITLE]</div>
-                        <div class="wc_available_variable">[COMMENT_URL]</div>
                         <div class="wc_available_variable">[SUBSCRIBER_NAME]</div>
                         <p class="wpd-desc"><?php _e('Shortcode above will work for registered users only', 'wpdiscuz'); ?>
+                        <div class="wc_available_variable">[COMMENT_URL]</div>
+                        <div class="wc_available_variable">[COMMENT_AUTHOR]</div>
                         <div class="wc_available_variable">[COMMENT_CONTENT]</div>
                         <div class="wc_available_variable">[UNSUBSCRIBE_URL]</div>
                     </div>
@@ -69,9 +70,10 @@ if (!defined('ABSPATH')) {
                         <div class="wc_available_variable">[POST_URL]</div>
                         <div class="wc_available_variable">[BLOG_TITLE]</div>
                         <div class="wc_available_variable">[POST_TITLE]</div>
-                        <div class="wc_available_variable">[COMMENT_URL]</div>
                         <div class="wc_available_variable">[SUBSCRIBER_NAME]</div>
                         <p class="wpd-desc"><?php _e('Shortcode above will work for registered users only', 'wpdiscuz'); ?>
+                        <div class="wc_available_variable">[COMMENT_URL]</div>
+                        <div class="wc_available_variable">[COMMENT_AUTHOR]</div>
                         <div class="wc_available_variable">[COMMENT_CONTENT]</div>
                         <div class="wc_available_variable">[UNSUBSCRIBE_URL]</div>
                     </div>
@@ -100,6 +102,7 @@ if (!defined('ABSPATH')) {
                         <div class="wc_available_variable">[POST_URL]</div>
                         <div class="wc_available_variable">[BLOG_TITLE]</div>
                         <div class="wc_available_variable">[POST_TITLE]</div>
+                        <div class="wc_available_variable">[SUBSCRIBER_NAME]</div>
                         <div class="wc_available_variable">[COMMENT_URL]</div>
                         <div class="wc_available_variable">[COMMENT_AUTHOR]</div>
                         <div class="wc_available_variable">[COMMENT_CONTENT]</div>

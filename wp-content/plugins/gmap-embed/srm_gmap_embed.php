@@ -7,7 +7,7 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: http://www.srmilon.com
-  Version: 1.3.4
+  Version: 1.3.6
  */
 
 if (!defined('ABSPATH')) exit;
@@ -18,7 +18,7 @@ if (!class_exists('srm_gmap_embed_main')) {
     {
 
         private $plugin_name = 'Google Map SRM';
-        public $wpgmap_api_key = 'AIzaSyBcVcz5OZ6eNBi5d7CFYHIdtsEI5BQlm68';
+        public $wpgmap_api_key = 'AIzaSyD79uz_fsapIldhWBl0NqYHHGBWkxlabro';
 
 
         /**
@@ -26,7 +26,7 @@ if (!class_exists('srm_gmap_embed_main')) {
          */
         function __construct()
         {
-            $this->wpgmap_api_key = get_option('wpgmap_api_key');
+            //$this->wpgmap_api_key = get_option('wpgmap_api_key');
             add_action('activated_plugin', array($this, 'wpgmap_do_after_activation'), 10, 2);
             add_action('wp_enqueue_scripts', array($this, 'gmap_enqueue_scripts'));
             add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_gmap_scripts'));

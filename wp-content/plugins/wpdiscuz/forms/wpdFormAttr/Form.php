@@ -185,7 +185,7 @@ class Form {
                 $oldCommentRating = get_comment_meta($commentID, $mettaKey, true);
                 if ($oldCommentRating && $commentApproved) {
                     $postID = $comment->comment_post_ID;
-                    $postRatingMeta = get_post_meta($postID, wpdFormConst::WPDISCUZ_RATING_COUNT , true);
+                    $postRatingMeta = get_post_meta($postID, wpdFormConst::WPDISCUZ_RATING_COUNT, true);
                     $oldCommentRatingCount = $postRatingMeta[$mettaKey][$oldCommentRating] - 1;
                     if ($oldCommentRatingCount > 0) {
                         $postRatingMeta[$mettaKey][$oldCommentRating] = $oldCommentRatingCount;
@@ -303,8 +303,8 @@ class Form {
             $results = $wpdb->get_results($sql, ARRAY_A);
             if ($results) {
                 foreach ($results as $result) {
-                    $rating = intval($result['rating']); 
-                    if ($result['rcount'] > 0 &&  $rating >= 1 && $rating <= 5) {
+                    $rating = intval($result['rating']);
+                    if ($result['rcount'] > 0 && $rating >= 1 && $rating <= 5) {
                         $ratingData[$key][$rating] = $result['rcount'];
                     }
                 }
@@ -830,17 +830,22 @@ class Form {
 
     public function isUserCanComment($currentUser, $postId = 0, &$message = '') {
         global $post;
+        if (!$post) {
+            $post = get_post($postId);
+        }
         $user_can_comment = true;
         $this->initFormMeta();
-        if ($currentUser && $currentUser->ID && $currentUser->roles && is_array($currentUser->roles)) {
-            $postId = $post && isset($post->ID) ? $post->ID : $postId;
-            $this->generalOptions['roles_cannot_comment'] = isset($this->generalOptions['roles_cannot_comment']) ? $this->generalOptions['roles_cannot_comment'] : array();
-            foreach ($currentUser->roles as $role) {
-                if (in_array($role, $this->generalOptions['roles_cannot_comment'])) {
-                    //Filter hook to add extra conditions in user role dependent restriction.
-                    $user_can_comment = apply_filters('wpdiscuz_user_role_can_comment', false, $role);
-                    $message = $this->wpdOptions->phrases['wc_roles_cannot_comment_message'];
-                    break;
+        if ($currentUser && $currentUser->ID) {
+            if ($post->post_author && $post->post_author != $currentUser->ID && $currentUser->roles && is_array($currentUser->roles)) {
+                $postId = $post && isset($post->ID) ? $post->ID : $postId;
+                $this->generalOptions['roles_cannot_comment'] = isset($this->generalOptions['roles_cannot_comment']) ? $this->generalOptions['roles_cannot_comment'] : array();
+                foreach ($currentUser->roles as $role) {
+                    if (in_array($role, $this->generalOptions['roles_cannot_comment'])) {
+                        //Filter hook to add extra conditions in user role dependent restriction.
+                        $user_can_comment = apply_filters('wpdiscuz_user_role_can_comment', false, $role);
+                        $message = $this->wpdOptions->phrases['wc_roles_cannot_comment_message'];
+                        break;
+                    }
                 }
             }
         } else {

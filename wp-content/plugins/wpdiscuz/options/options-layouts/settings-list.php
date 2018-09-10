@@ -115,7 +115,7 @@ if (!defined('ABSPATH')) {
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label><?php _e('Hide Voting buttons', 'wpdiscuz'); ?></label>
+                    <label for="wc_voting_buttons_show_hide"><?php _e('Hide Voting buttons', 'wpdiscuz'); ?></label>
                 </th>
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->votingButtonsShowHide == 1) ?> value="1" name="wc_voting_buttons_show_hide" id="wc_voting_buttons_show_hide" /> <label for="wc_voting_buttons_show_hide"></label>
