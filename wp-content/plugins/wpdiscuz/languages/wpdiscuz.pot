@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: wpDiscuz\n"
-"POT-Creation-Date: 2018-09-06 11:45+0000\n"
+"POT-Creation-Date: 2018-09-14 11:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,69 +37,69 @@ msgstr ""
 msgid "We are sorry, you are not allowed to comment more than one time!"
 msgstr ""
 
-#: class.WpdiscuzCore.php:451
+#: class.WpdiscuzCore.php:452
 msgid "This is closed comment thread"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1113 class.WpdiscuzCore.php:1345
+#: class.WpdiscuzCore.php:1025 class.WpdiscuzCore.php:1261
 msgid "Settings"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1115 class.WpdiscuzCore.php:1347
+#: class.WpdiscuzCore.php:1027 class.WpdiscuzCore.php:1263
 msgid "Phrases"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1117
+#: class.WpdiscuzCore.php:1029
 msgid "Tools"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1118 options/html-options.php:22
+#: class.WpdiscuzCore.php:1030 options/html-options.php:22
 #: options/html-options.php:64 options/options-layouts/settings-addons.php:14
 msgid "Addons"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1130
+#: class.WpdiscuzCore.php:1042
 msgid "Do you really want to reset all options?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1131
+#: class.WpdiscuzCore.php:1043
 msgid "Do you really want to remove voting data?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1132
+#: class.WpdiscuzCore.php:1044
 msgid "Do you really want to reset phrases?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1133
+#: class.WpdiscuzCore.php:1045
 msgid "Do you really want to delete gravatars cache?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1134
+#: class.WpdiscuzCore.php:1046
 msgid "Do you really want to delete statistics cache?"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1171
+#: class.WpdiscuzCore.php:1083
 msgid "Please check one of reasons before sending feedback!"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1172 utils/deactivation-reason-modal.php:58
+#: class.WpdiscuzCore.php:1084 utils/deactivation-reason-modal.php:58
 msgid "Please provide more information"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1434 options/phrases-layouts/phrases-comment.php:56
+#: class.WpdiscuzCore.php:1350 options/phrases-layouts/phrases-comment.php:56
 msgid "Admin"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1436 class.WpdiscuzCore.php:1445
+#: class.WpdiscuzCore.php:1352 class.WpdiscuzCore.php:1361
 #: options/phrases-layouts/phrases-comment.php:58
 msgid "Author"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1440 options/phrases-layouts/phrases-comment.php:64
+#: class.WpdiscuzCore.php:1356 options/phrases-layouts/phrases-comment.php:64
 msgid "Member"
 msgstr ""
 
-#: class.WpdiscuzCore.php:1446 options/phrases-layouts/phrases-comment.php:62
+#: class.WpdiscuzCore.php:1362 options/phrases-layouts/phrases-comment.php:62
 msgid "Guest"
 msgstr ""
 
@@ -296,104 +296,104 @@ msgstr ""
 
 #: options/class.WpdiscuzOptions.php:379
 msgid ""
+"All 16 addons in one bundle. Save 90% and get Unlimited Site License with "
+"one year premium support."
+msgstr ""
+
+#: options/class.WpdiscuzOptions.php:380
+msgid ""
 "Brings an ocean of emotions to your comments. It comes with an awesome smile "
 "package."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:380
+#: options/class.WpdiscuzOptions.php:381
 msgid ""
 "Extended information about comment author with Profile, Activity, Votes and "
 "Subscriptions Tabs on pop-up window."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:381
+#: options/class.WpdiscuzOptions.php:382
 msgid ""
 "Real-time online user checking, pop-up notification of new online users and "
 "online/offline badges."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:382
+#: options/class.WpdiscuzOptions.php:383
 msgid ""
 "Allows to create private comment threads. Rich management options in "
 "dashboard by user roles."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:383
+#: options/class.WpdiscuzOptions.php:384
 msgid ""
 "Total control over comment subscriptions. Full list, monitor, manage, filter,"
 " unsubscribe, confirm..."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:384
+#: options/class.WpdiscuzOptions.php:385
 msgid ""
 "A full-fledged tool-kit for advertising in comment section of your website. "
 "Separate banner and ad managment."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:385
+#: options/class.WpdiscuzOptions.php:386
 msgid ""
 "Allows to mention comments and users in comment text using #comment-id and "
 "@username tags."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:386
+#: options/class.WpdiscuzOptions.php:387
 msgid ""
 "See comment likers and voters of each comment. Adds user reputation and "
 "badges based on received likes."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:387
+#: options/class.WpdiscuzOptions.php:388
 msgid ""
 "Comment reporting tools. Auto-moderates comments based on number of flags "
 "and dislikes."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:388
+#: options/class.WpdiscuzOptions.php:389
 msgid ""
 "Adds a smart and intuitive AJAX \"Translate\" button with 60 language "
 "options. Uses free translation API."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:389
+#: options/class.WpdiscuzOptions.php:390
 msgid ""
 "AJAX powered front-end comment search. It starts searching while you type "
 "search words. "
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:390
+#: options/class.WpdiscuzOptions.php:391
 msgid ""
 "Most voted comments, Active comment threads, Most commented posts, Active "
 "comment authors"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:391
+#: options/class.WpdiscuzOptions.php:392
 msgid ""
 "All in one powerful yet simple admin toolkit to moderate comments on front-"
 "end."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:392
+#: options/class.WpdiscuzOptions.php:393
 msgid ""
 "Extended comment attachment system. Allows to upload images, videos, audios "
 "and other file types."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:393
+#: options/class.WpdiscuzOptions.php:394
 msgid ""
 "Adds No CAPTCHA on all comment forms. Stops spam and bot comments with "
 "Google reCAPTCHA"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:394
+#: options/class.WpdiscuzOptions.php:395
 msgid ""
 "Integrates myCRED Badges and Ranks. Converts wpDiscuz comment votes/likes to "
 "myCRED points. "
-msgstr ""
-
-#: options/class.WpdiscuzOptions.php:395
-msgid ""
-"Allows censoring comment words. Filters comments and replaces those phrases "
-"with custom words."
 msgstr ""
 
 #: options/class.WpdiscuzOptions.php:401
@@ -526,11 +526,19 @@ msgid ""
 "adds No-CAPTCHA reCAPTCHA on all comment forms. Stops spam and bot comments."
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:507
+#: options/class.WpdiscuzOptions.php:467
+msgid "Finally wpDiscuz Addons Bundle is ready for You!"
+msgstr ""
+
+#: options/class.WpdiscuzOptions.php:476
+msgid "View Addons Bundle"
+msgstr ""
+
+#: options/class.WpdiscuzOptions.php:514
 msgid "Do you know?"
 msgstr ""
 
-#: options/class.WpdiscuzOptions.php:520
+#: options/class.WpdiscuzOptions.php:527
 msgid "More info"
 msgstr ""
 
@@ -1279,7 +1287,15 @@ msgstr ""
 msgid " Thank you!<br/> Sincerely yours,<br/> gVectors Team&nbsp;"
 msgstr ""
 
-#: options/html-addons.php:60
+#: options/html-addons.php:41
+msgid "View wpDiscuz Addons Bundle"
+msgstr ""
+
+#: options/html-addons.php:64
+msgid "More Info &raquo;"
+msgstr ""
+
+#: options/html-addons.php:66
 msgid "Live Preview | Buy"
 msgstr ""
 
@@ -1905,15 +1921,18 @@ msgid "General Settings"
 msgstr ""
 
 #: options/options-layouts/settings-general.php:11
-msgid "Enable wpdiscuz on home page"
+msgid "Enable wpDiscuz on home page"
 msgstr ""
 
 #: options/options-layouts/settings-general.php:19
-msgid "Enable WordPress native ajax"
+msgid "Use WordPress native AJAX functions"
 msgstr ""
 
 #: options/options-layouts/settings-general.php:21
-msgid "Enable Wordpress native ajax"
+msgid ""
+"By disabling this option you're automatically enabling wpDiscuz custom AJAX "
+"functions, which are many times faster that the default WordPress functions. "
+"Just make sure it doesn't conflict with your plugins."
 msgstr ""
 
 #: options/options-layouts/settings-general.php:31

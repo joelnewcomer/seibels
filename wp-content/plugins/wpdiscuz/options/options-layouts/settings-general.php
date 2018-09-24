@@ -8,7 +8,7 @@ if (!defined('ABSPATH')) {
     <table class="wp-list-table widefat plugins wpdxb"  style="margin-top:10px; border:none;">
         <tbody>
             <tr valign="top">
-                <th scope="row" style="width:50%;"><label for="isEnableOnHome"><?php _e('Enable wpdiscuz on home page', 'wpdiscuz'); ?> </label></th>
+                <th scope="row" style="width:50%;"><label for="isEnableOnHome"><?php _e('Enable wpDiscuz on home page', 'wpdiscuz'); ?> </label></th>
                 <td>
                     <input type="checkbox" <?php checked($this->optionsSerialized->isEnableOnHome == 1) ?> value="1" name="isEnableOnHome" id="isEnableOnHome" /><label for="isEnableOnHome"></label>
                     <a href="https://wpdiscuz.com/docs/wpdiscuz-documentation/settings/general-settings/#wpdiscuz_on_home_page" title="<?php _e('Read the documentation', 'wpdiscuz') ?>" target="_blank"><i class="far fa-question-circle"></i></a>
@@ -16,9 +16,9 @@ if (!defined('ABSPATH')) {
             </tr>
             <tr valign="top">
                 <th scope="row">
-                    <label for="isNativeAjaxEnabled"><?php _e('Enable WordPress native ajax', 'wpdiscuz'); ?> </label>
+                    <label for="isNativeAjaxEnabled"><?php _e('Use WordPress native AJAX functions', 'wpdiscuz'); ?> </label>
                     <p class="wpd-desc">
-                        <?php _e('Enable Wordpress native ajax', 'wpdiscuz'); ?>
+                        <?php _e('By disabling this option you\'re automatically enabling wpDiscuz custom AJAX functions, which are many times faster that the default WordPress functions. Just make sure it doesn\'t conflict with your plugins.', 'wpdiscuz'); ?>
                     </p>
                 </th>
                 <td>

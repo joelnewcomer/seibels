@@ -3,7 +3,7 @@ Contributors: gVectors Team
 Tags: comment, comments, ajax comments, custom comment form, custom comment field
 Requires at least: 4.4
 Tested up to: 4.9
-Stable tag: 5.1.7
+Stable tag: 5.2.1
 Requires PHP: 5.4 and higher
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -19,6 +19,7 @@ Comments - wpDiscuz is Multisite and RTL ready!
 * wpDiscuz Demo: [https://wpdiscuz.com/demo/](https://wpdiscuz.com/demo/)
 * wpDiscuz GDPR: [https://wpdiscuz.com/gdpr/](https://wpdiscuz.com/gdpr/)
 * wpDiscuz Addons: [https://wpdiscuz.com/addons/](https://wpdiscuz.com/addons)
+* wpDiscuz Addons Bundle: [https://gvectors.com/product/wpdiscuz-addons-bundle/)
 * wpDiscuz Documentation: [https://wpdiscuz.com/documentation/](https://wpdiscuz.com/documentation/)
 
 Integration with User Profile Plugins - Please read the [Integrations] Tab in wpDiscuz Settings admin page
@@ -36,6 +37,7 @@ Integration with AntiSpam plugins
 
 = Comments - wpDiscuz Features: =
 
+* Brings fastest commenting experience (boosted core).
 * Adds interactive comment box on posts and other content types
 * Commenting can be allowed/disallowed on posts and other content types
 * Responsive comments form and comment threads design
@@ -82,6 +84,7 @@ Integration with AntiSpam plugins
 
 = Add-ons =
 
+* | [wpDiscuz - Bundle](https://gvectors.com/product/wpdiscuz-addons-bundle/)
 * | [wpDiscuz - Emoticons](https://gvectors.com/product/wpdiscuz-emoticons/)
 * | [wpDiscuz - Media Uploader](https://gvectors.com/product/wpdiscuz-media-uploader/)
 * | [wpDiscuz - Comment Author Info](https://gvectors.com/product/wpdiscuz-comment-author-info/)
@@ -171,11 +174,31 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 
 == Changelog ==
 
+= Comments - wpDiscuz v5.2.0 / v5.2.1 =
+
+* Fixed Bug: Comment replies not displaying
+
+* Boosted: Revolutionary changes in core made for rocket speed.
+* Boosted: Database queries with custom AJAX processor (disabled by default)
+* Fixed Bug: Guests commenting issue
+* Fixed Bug: Avatar displaying issue
+* Fixed Bug: Comment editing issue for high level of users
+* Fixed Bug: Issue with Rating custom comment field
+
+
+IMPORTANT!
+
+- Please delete all caches and press CTRL+F5 on website front-end after updating wpDiscuz
+- wpDiscuz uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
+- Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
+- If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
+- If you have JetPack installed please deactivate Jetpack comments, it affects wpDiscuz
+- If you have a Cache Plugin, please delete all caches after wpDiscuz update.
+- If you use CDN and found some issue please purge it.
+- If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
+
 
 = Comments - wpDiscuz v5.1.6 / v5.1.7 =
-
-* Fixed Bug : Guests commenting issue
-* Fixed Bug : Avatar displaying issue
 
 * Added: More speed based on custom AJAX processor (30% faster).
 * Added: Option to enable/disable WP native ajax processor (admin-ajax.php)
@@ -192,18 +215,8 @@ Nothing will be lost!  **Comments - wpDiscuz** will show all old comments.
 * Fixed Bug: Hide comment subscription bar if commenting is closed.
 * Fixed Bug: Facebook login issues
 * Fixed Bug: Problem with Hide Header Text option
-
-
-IMPORTANT!
-
-- Please delete all caches and press CTRL+F5 on website front-end after updating wpDiscuz
-- wpDiscuz uses FontAwesome version 5. If you have created custom comment fields with custom icons, please edit and update with new version icons.
-- Please update all addons once the wpDiscuz is updated to 5 version. Old addons are not compatible with wpDiscuz 5.
-- If you have customized wpDiscuz CSS or comment walker php file in WordPress theme folder please remove those. wpDiscuz 5.x.x versions don't support old template files.
-- If you have JetPack installed please deactivate Jetpack comments, it affects wpDiscuz
-- If you have a Cache Plugin, please delete all caches after wpDiscuz update.
-- If you use CDN and found some issue please purge it.
-- If your server PHP version is lower than 5.4, [please change it to higher](https://wordpress.org/support/topic/wpdiscuz-4-requires-php-5-4-and-higher/)
+* Fixed Bug: Guests commenting issue
+* Fixed Bug: Avatar displaying issue
 
 
 = Comments - wpDiscuz v5.1.5 =

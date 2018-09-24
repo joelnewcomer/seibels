@@ -155,7 +155,8 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
             'wpdiscuz_gravatar_size' => $gravatarSize,
             'wpdiscuz_gravatar_user_id' => $gravatarUserId,
             'wpdiscuz_gravatar_user_email' => $gravatarUserEmail,
-        ); 
+            'wpdiscuz_current_user' => $user,
+        );
 
         $trackOrPingback = $comment->comment_type == 'pingback' || $comment->comment_type == 'trackback';
         if ($this->optionsSerialized->wordpressShowAvatars) {
@@ -221,10 +222,6 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
             $voteDown = $this->optionsSerialized->phrases['wc_vote_down'];
         }
 
-        $hasChildren = isset($args['wpdiscuz_root_comment_' . $comment->comment_ID]) ? $args['wpdiscuz_root_comment_' . $comment->comment_ID] : '';
-        if ($hasChildren) {
-            $commentWrapperClass[] = $hasChildren;
-        }
         $commentWrapperClass[] = $authorClass;
         $commentWrapperClass[] = 'wc_comment_level-' . $depth;
         $commentWrapperClass = apply_filters('wpdiscuz_comment_wrap_classes', $commentWrapperClass, $comment);
@@ -313,7 +310,6 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
 
         $output .= apply_filters('wpdiscuz_comment_text', '<div class="wc-comment-text">' . $commentContent . '</div>', $comment, $args);
         $output = apply_filters('wpdiscuz_after_comment_text', $output, $comment);
-//        if (isset($args['comment_status']) && is_array($args['comment_status']) && in_array($comment->comment_approved, $args['comment_status'])) {
         $output .= '<div class="wc-comment-footer">';
         $output .= '<div class="wc-footer-left">';
         if (!$this->optionsSerialized->votingButtonsShowHide) {
@@ -388,30 +384,23 @@ class WpdiscuzWalker extends Walker_Comment implements WpDiscuzConstants {
             $output .= '<div class="wc-comment-date"><i class="far fa-clock" aria-hidden="true"></i>' . $postedDate . '</div>';
         }
         if ($depth < $this->optionsSerialized->wordpressThreadCommentsDepth && $this->optionsSerialized->wordpressThreadComments) {
-            $chevron = '';
             $output .= '<div class="wc-toggle">';
-            if ($hasChildren) {
-                $countChildren = isset($args['wpdiscuz_child_count_' . $comment->comment_ID]) ? $args['wpdiscuz_child_count_' . $comment->comment_ID] : 0;
-                $hideChildCountClass = isset($args['wpdiscuz_hide_child_count_' . $comment->comment_ID]) ? $args['wpdiscuz_hide_child_count_' . $comment->comment_ID] : '';
-                if ($countChildren) {
-                    $chevron = '<a href="#" title="' . $this->optionsSerialized->phrases['wc_show_replies_text'] . '">';
-                    $chevron .= '<span class="wcsep">|</span> <span class="wpdiscuz-children ' . $hideChildCountClass . '"><span class="wpdiscuz-children-button-text">' . $this->optionsSerialized->phrases['wc_show_replies_text'] . '</span> (<span class="wpdiscuz-children-count">' . $countChildren . '</span>)</span> ';
-                    $chevron .= '<i class="fas fa-chevron-down wpdiscuz-show-replies"></i>';
-                    $chevron .= '</a>';
-                } else {
-                    $chevron = '<i class="fas fa-chevron-up" title="' . $this->optionsSerialized->phrases['wc_hide_replies_text'] . '"></i>';
-                }
+            $countChildren = isset($args['wpdiscuz_child_count_' . $comment->comment_ID]) ? $args['wpdiscuz_child_count_' . $comment->comment_ID] : 0;
+            if ($countChildren) {
+                $chevron = '<a href="#" title="' . $this->optionsSerialized->phrases['wc_show_replies_text'] . '">';
+                $chevron .= '<span class="wcsep">|</span> <span class="wpdiscuz-children"><span class="wpdiscuz-children-button-text">' . $this->optionsSerialized->phrases['wc_show_replies_text'] . '</span> (<span class="wpdiscuz-children-count">' . $countChildren . '</span>)</span> ';
+                $chevron .= '<i class="fas fa-chevron-down wpdiscuz-show-replies"></i>';
+                $chevron .= '</a>';
             } else {
-                $commentChildren = $comment->get_children();
-                $chevron = $commentChildren ? '<i class="fas fa-chevron-up" title="' . $this->optionsSerialized->phrases['wc_hide_replies_text'] . '"></i>' : '';
+                $chevron = $comment->get_children() ? '<i class="fas fa-chevron-up" title="' . $this->optionsSerialized->phrases['wc_hide_replies_text'] . '"></i>' : '';
             }
+
             $output .= $chevron;
             $output .= '</div>';
         }
         $output .= '</div>';
         $output .= '<div class="wpdiscuz_clear"></div>';
         $output .= '</div>';
-//        }
         $output .= '</div>';
         $output .= '<div class="wpdiscuz-comment-message"></div>';
         $output .= '<div id="wpdiscuz_form_anchor-' . $uniqueId . '"  style="clear:both"></div>';

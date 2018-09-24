@@ -2311,7 +2311,7 @@ msgid "General Settings"
 msgstr "Allgemeine Einstellungen"
 
 #: options/options-layouts/settings-general.php:11
-msgid "Enable wpdiscuz on home page"
+msgid "Enable wpDiscuz on home page"
 msgstr "wpDiscuz auf der Homepage aktivieren"
 
 #: options/options-layouts/settings-general.php:16

@@ -20,7 +20,6 @@ jQuery(document).ready(function ($) {
     });
 
     function wpdFullInfo(btn, data) {
-        console.log(btn);
         var icon = $('.fas', btn);
         var oldClass = icon.attr('class');
         icon.removeClass();

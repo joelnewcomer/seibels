@@ -73,7 +73,6 @@ if ($isMain && $commentsCount && $postId) {
                         $authorsCount = $this->dbManager->getAuthorsCount($postId);
                     }
                     ?>
-                    <?php ?>
                     <div class="wpdiscuz-stat wpd-stat-users wpd-tooltip">
                         <i class="fas fa-user-circle"></i> <span class="wpd-stat-authors-count"><?php echo $authorsCount; ?></span>
                         <wpdtip><?php echo $form->wpdOptions->phrases['wc_comment_authors']; ?></wpdtip>

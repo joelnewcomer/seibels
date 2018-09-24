@@ -505,15 +505,21 @@ class SocialLogin {
 
     public function userAvatar($avatar, $id_or_email, $size, $default, $alt, $args) {
         $userID = false;
-        if (is_numeric($id_or_email)) {
-            $userID = (int) $id_or_email;
-        } elseif (is_object($id_or_email)) {
-            if (!empty($id_or_email->user_id)) {
-                $userID = (int) $id_or_email->user_id;
+        if (isset($args['wpdiscuz_current_user'])) {
+            if ($args['wpdiscuz_current_user']) {
+                $userID = $args['wpdiscuz_current_user']->ID;
             }
         } else {
-            $user = get_user_by('email', $id_or_email);
-            $userID = isset($user->ID) ? $user->ID : 0;
+            if (is_numeric($id_or_email)) {
+                $userID = (int) $id_or_email;
+            } elseif (is_object($id_or_email)) {
+                if (!empty($id_or_email->user_id)) {
+                    $userID = (int) $id_or_email->user_id;
+                }
+            } else {
+                $user = get_user_by('email', $id_or_email);
+                $userID = isset($user->ID) ? $user->ID : 0;
+            }
         }
 
         if ($userID && $avatarURL = get_user_meta($userID, wpdFormConst::WPDISCUZ_SOCIAL_AVATAR_KEY, true)) {

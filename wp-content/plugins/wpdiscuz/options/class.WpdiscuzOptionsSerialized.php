@@ -1180,7 +1180,7 @@ class WpdiscuzOptionsSerialized implements WpDiscuzConstants {
             'enableStickButton' => 1,
             'enableCloseButton' => 1,
             'enableDropAnimation' => 1,
-            'isNativeAjaxEnabled' => 0,
+            'isNativeAjaxEnabled' => 1,
         );
         add_option(self::OPTION_SLUG_OPTIONS, serialize($options));
     }

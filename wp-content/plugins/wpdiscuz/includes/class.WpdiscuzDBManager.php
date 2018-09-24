@@ -234,13 +234,37 @@ class WpdiscuzDBManager implements WpDiscuzConstants {
     /**
      * get comment list ordered by date or comments votes
      */
-    public function getCommentList($args) {
+    public function getRootCommentIds($args) {
         if ($args['orderby'] == 'by_vote') {
             $parentIds = $this->getPostVotedCommentIds($args);
         } else {
             $parentIds = $this->getPostParentComments($args);
         }
         return $parentIds;
+    }
+
+    /**
+     * get child comment ids
+     * @param array $parentIds parent comment ids
+     * @return array array of child comment ids
+     */
+    public function getChildrenIds($parentIds) {
+        $getChildCommentIdsSql = "SELECT `c`.`comment_ID` FROM (SELECT `comment_ID`, `comment_parent`, `comment_approved` FROM `{$this->db->comments}`) `c`, (SELECT @pv := ('" . implode(',', $parentIds) . "')) AS `init` WHERE FIND_IN_SET(`c`.`comment_parent`, @pv) AND LENGTH(@pv := CONCAT(@pv, ',', `c`.`comment_ID`)) AND `c`.`comment_approved` = 1;";
+        return $this->db->get_col($getChildCommentIdsSql);
+    }
+
+    /**
+     * get child comment count
+     * @param array $parentCommentIds parent comment ids
+     * @param array $commentListArgs comment list args
+     * @return array comment list args with child count
+     */
+    public function getChildrenCount($parentCommentIds, $commentListArgs) {
+        foreach ($parentCommentIds as $parentCommentId) {
+            $getChildCommentCountSql = "SELECT COUNT(`c`.`comment_ID`) FROM (SELECT `comment_ID`, `comment_parent`, `comment_approved` FROM `{$this->db->comments}`) `c`, (SELECT @pv := " . $parentCommentId . ") AS `init` WHERE FIND_IN_SET(`c`.`comment_parent`, @pv) AND LENGTH(@pv := CONCAT(@pv, ',', `c`.`comment_ID`)) AND `c`.`comment_approved` = 1;";
+            $commentListArgs['wpdiscuz_child_count_' . $parentCommentId] = $this->db->get_var($getChildCommentCountSql);
+        }
+        return $commentListArgs;
     }
 
     /**

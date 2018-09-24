@@ -87,9 +87,9 @@ wpdtip{display: inline-block; position: inherit; width: auto;}
 #wpcomm .wpdiscuz-form-top-bar{width: 100%; color: #666666;}
 #wpcomm .wpdiscuz-form-top-bar .wpdiscuz-ftb-left{float: right; padding: 12px 0px 10px 0px; font-size: 14px; line-height: 20px;}
 #wpcomm .wpdiscuz-form-top-bar .wpdiscuz-ftb-right{float: left; padding: 12px 0px 10px 0px; font-size: 14px; line-height: 20px;}
-#wpcomm .wpdiscuz-form-top-bar .wpdiscuz-user-settings{ vertical-align:middle; display: inline-block; color: #666666; padding:1px 10px 1px 10px; font-size: 18px; line-height: 20px; cursor: pointer;}
+#wpcomm .wpdiscuz-form-top-bar .wpdiscuz-user-settings{ vertical-align:middle; display: inline-block; color: #666666; padding:1px 10px 1px 10px; font-size: 18px; line-height: 20px; cursor: pointer; border-left: 1px solid #ccc; margin-left: 10px;}
 #wpcomm .wpdiscuz-form-top-bar .wpdiscuz-user-settings:hover{color: #00B38F;}
-#wpcomm .wpdiscuz-form-top-bar #wc_show_hide_loggedin_username{display: inline-block; color: #666666; padding:1px 10px 1px 5px; border-right: 1px solid #ccc; font-size:14px; line-height: 20px;}
+#wpcomm .wpdiscuz-form-top-bar #wc_show_hide_loggedin_username{display: inline-block; color: #666666; padding:1px 0px 1px 5px; font-size:14px; line-height: 20px;}
 #wpcomm .wpdiscuz-form-top-bar #wc_show_hide_loggedin_username span{ display: inline-block;line-height: 22px;vertical-align: bottom;}
 #wpcomm .wpdiscuz-form-top-bar #wc_show_hide_loggedin_username i{ vertical-align:middle; font-size: 21px; display: inline-block; padding: 0px 5px 0px 5px;}
 #wpcomm .wc-comment-title{margin:0; line-height:18px; font-weight:bold; padding:15px 10px; font-size:13px; text-align:left; padding-bottom:10px}
