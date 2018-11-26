@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: Google Map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, gmaps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, googlemaps, gprs, gps, gpx, kml, latitude, Longitude, location, loaction by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
 Tested up to: 4.9.4
-Version: 1.3.7
-Stable tag: 1.3.7
+Version: 1.3.8
+Stable tag: 1.3.8
 Requires PHP: 5.6
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -17,8 +17,10 @@ WP Google Map is very Simple, light-weight and Easy to use Google Custom Map wit
 
 WP Google Map is an awesome plugin to use when adding a custom Google map to your website. It is fully customizable and can be used as shortcode.
 
+[Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q)
+
 ### !!Important Notice for All!!
-After July 16, 2018, Google has changed their policy. **You need to add billing information to use Google Map**. If you see a working message on Map like "This page can't load Google Maps correctly", please have a look on google developers [documentation](https://developers.google.com/maps/documentation/javascript/error-messages?utm_source=maps_js&utm_medium=degraded&utm_campaign=billing#api-key-and-billing-errors). Even if you face problem, please send a message in mail: **milonfci@gmail.com** or Skype: **milon305021**
+After July 16, 2018, Google has changed their policy. **You need to add billing information to use Google Map**. If you see a warning message on Map like "This page can't load Google Maps correctly", please have a look on google developers [documentation](https://developers.google.com/maps/documentation/javascript/error-messages?utm_source=maps_js&utm_medium=degraded&utm_campaign=billing#api-key-and-billing-errors). Even if you face problem, please send a message in mail: **milonfci@gmail.com** or Skype: **milon305021**
 
 
 * [Demo](https://sobyasachi.com/wp/google-map-demo/)
@@ -236,3 +238,6 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.3.7 =
 * Google API realted update
+
+= 1.3.8 =
+* Google API readme updated, language and donation button added.

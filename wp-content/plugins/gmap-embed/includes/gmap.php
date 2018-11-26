@@ -24,9 +24,7 @@ if (isset($_GET['page'])) {
                 src="<?php echo esc_url(plugins_url("../assets/js/srm_gmap_loader.js", __FILE__)); ?>"></script>
         <div id="gmap_container_inner">
             <!--modal contents-->
-            <div class="error">
-                <p style="font-size:17px;"><strong><?php _e('Notice: If it seems Direction option is not working properly, Please take api key again from settings tab.','gmap-embed');?></strong></p>
-            </div>
+            
             <ul id="wp-gmap-nav">
                 <li class="<?php echo ($wpgmap_page == 'wpgmapembed' && $wpgmap_tag == '') ? 'active' : ''; ?>">
                     <a href="<?php echo admin_url(); ?>admin.php?page=wpgmapembed" data-id="wp-gmap-all"
@@ -47,6 +45,9 @@ if (isset($_GET['page'])) {
                         <?php _e('Need Help ?','gmap-embed');?></a>
                 </li>
                 <span class="spinner" style="margin-right: 20px !important;float:right"></span>
+				
+				<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q"><img alt="Donate" src="<?php echo esc_url(plugins_url("../assets/images/paypal.png", __FILE__)); ?>" width="150"/></a>
+				
             </ul>
 
             <div id="wp-gmap-tabs">
