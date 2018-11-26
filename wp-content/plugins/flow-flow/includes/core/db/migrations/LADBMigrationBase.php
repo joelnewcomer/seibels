@@ -16,7 +16,7 @@ use flow\db\FFDB;
 abstract class LADBMigrationBase implements ILADBMigration{
 	
 	public function version() {
-		return LADBMigrationManager::INIT_MIGRAION;
+		return LADBMigrationManager::INIT_MIGRATION;
 	}
 	
 	public function execute($conn, $manager){

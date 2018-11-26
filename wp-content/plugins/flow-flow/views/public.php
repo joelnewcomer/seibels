@@ -169,9 +169,10 @@ $js_opts = array(
     $.when( ajaxDeferred, FF_resource.scriptDeferred, FF_resource.styleDeferred ).done(function ( data ) {
         var response, $errCont, err;
         var moderation = <?php echo $moderation ? 1 : 0 ?>;
-        var original = <?php if ($admin) {echo 'data[0]';} else {echo '(isLS && sessionStorage.getItem(hash)) ? sessionStorage.getItem(hash) : data[0]';}?>;
+        var original = <?php if ($admin) {echo 'data[0]';} else {echo '(isLS && sessionStorage.getItem(hash)) ? JSON.parse( sessionStorage.getItem(hash) ) : data[0]';}?>;
         try {
-            response = JSON.parse(original);
+            // response = JSON.parse(original);
+            response = original; // since 4.1
         } catch (e) {
             window.console && window.console.log('Flow-Flow gets invalid data from server');
             if (opts.isAdmin || opts.isLog) {
@@ -217,7 +218,7 @@ $js_opts = array(
 
             $stream = FlowFlow.buildStreamWith(response, streamOpts, moderation, FlowFlowOpts.dependencies);
 
-            <?php if (!$admin) {echo 'if (isLS && response.items.length > 0 && response.hash.length > 0) sessionStorage.setItem(response.hash, original);' . PHP_EOL;}?>
+            <?php if (!$admin) {echo 'if (isLS && response.items.length > 0 && response.hash.length > 0) sessionStorage.setItem( JSON.stringify( response.hash ), original);' . PHP_EOL;}?>
 
             var num = streamOpts.layout === 'compact' || (streamOpts.mobileslider === 'yep' && isMobile)? (streamOpts.mobileslider === 'yep' ? 3 : streamOpts['cards-num']) : false;
 
