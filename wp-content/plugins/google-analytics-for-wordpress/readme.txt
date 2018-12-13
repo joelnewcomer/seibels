@@ -273,6 +273,10 @@ You can also learn about other <a href="http://www.wpbeginner.com/category/plugi
 4. Want more features? <a href="https://www.monsterinsights.com/?utm_source=wprepo&utm_medium=link&utm_campaign=liteversion">Purchase MonsterInsights Pro</a>!
 
 == Changelog ==
+= 7.3.2: November 27, 2018 =
+- Fixed: Issue on some Lite installs where timezone differences caused users to see an error related to custom date ranges.
+- Fixed: Issue where some users were unable to reauthenticate their site.
+
 = 7.3.0: October 30, 2018 =
 - New: We've added new custom link attribution, so now you can easily set custom link categories, actions, and labels, which MonsterInsights will use with precedence over our comprehensive automatic link detection, and is compatible with our AMP addon. For usage instructions, see our documentation on <a href="https://www.monsterinsights.com/docs/custom-link-attribution/">custom link attribution</a>.
 - Tweak: Better error handling for reports.
