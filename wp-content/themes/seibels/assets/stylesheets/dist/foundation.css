@@ -6203,7 +6203,7 @@ h2.resp-accordion {
     white-space: nowrap;
     cursor: pointer;
     background: #333;
-    background: transparent; }
+    background: rgba(0, 0, 0, 0); }
   .fl-modal:last-of-type {
     background: rgba(0, 0, 0, 0.8); }
   .fl-modal:before {

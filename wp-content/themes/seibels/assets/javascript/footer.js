@@ -7,7 +7,7 @@ window.jQuery = $;
 // require('./originals/stickyFooter.min');
 
 require('./originals/back-to-top');
-// require('./originals/background-blur.min');
+require('./originals/background-blur.min');
 require('./originals/easyResponsiveTabs');
 // require('./originals/jquery.bxslider.min');
 require('./originals/jquery.floatlabel.min');
