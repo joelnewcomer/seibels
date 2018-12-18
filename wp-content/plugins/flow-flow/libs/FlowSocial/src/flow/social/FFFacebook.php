@@ -257,7 +257,7 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 					return true;
 				}
 			}
-			//depricated
+			//deprecated
 			$url = "https://graph.facebook.com/{$api}/{$item->object_id}?fields=images";
 			$original_url = $this->cache->getOriginalUrl($url);
 			if ($original_url == ''){
