@@ -7,7 +7,7 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: http://www.srmilon.com
-  Version: 1.3.8
+  Version: 1.4.0
  */
 
 if (!defined('ABSPATH')) exit;
@@ -180,7 +180,7 @@ if (!class_exists('srm_gmap_embed_main')) {
             $content = '';
             $args = array(
                 'post_type' => 'wpgmapembed',
-				'posts_per_page'=>-1
+                'posts_per_page'=>-1
             );
             $mapsList = new WP_Query($args);
 

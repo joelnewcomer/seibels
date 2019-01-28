@@ -10,7 +10,7 @@ use flow\social\cache\FFImageSizeCacheBase;
  * @author    Looks Awesome <email@looks-awesome.com>
 
  * @link      http://looks-awesome.com
- * @copyright 2014-2016 Looks Awesome
+ * @copyright Looks Awesome
  */
 abstract class FFBaseFeed implements FFFeed{
 	/** @var \stdClass */

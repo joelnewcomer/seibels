@@ -14,7 +14,7 @@ if ( ! defined( 'WPINC' ) ) die;
  * @author    Looks Awesome <email@looks-awesome.com>
 
  * @link      http://looks-awesome.com
- * @copyright 2014-2016 Looks Awesome
+ * @copyright Looks Awesome
  */
 class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
     private $url;
@@ -67,9 +67,9 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 					$this->alternative = true;
 					break;
 				case 'location':
-					$locationID = $feed->content;
-					$this->url = "https://api.instagram.com/v1/locations/{$locationID}/media/recent?access_token={$accessToken}&count={$this->getCount()}";
-					//$this->alternative = true;
+//					$locationID = $feed->content;
+//					$this->url = "https://api.instagram.com/v1/locations/{$locationID}/media/recent?access_token={$accessToken}&count={$this->getCount()}";
+					$this->alternative = true;
 					break;
 				case 'coordinates':
 					$coordinates = explode(',', $feed->content);
@@ -99,10 +99,9 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 					$medias = $instagram->getMediasByTag($this->url, $this->getCount());
 					$forced_loading_of_post = true;
 					break;
-//				case 'location':
-//					$location = $instagram->getLocationById('380503552017025');
-//					$medias = $instagram->getMediasByLocationId('380503552017025', $this->getCount());
-//					break;
+				case 'location':
+					$locationID = $this->feed->content;
+					$medias = $instagram->getMediasByLocationId($locationID, $this->getCount());
 			}
 
 			foreach ( $medias as $media ) {

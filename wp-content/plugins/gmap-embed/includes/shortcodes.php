@@ -40,7 +40,7 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
                 });
 
                 // To view directions form and data
-                <?php if($wpgmap_enable_direction){ ?>
+                <?php if($wpgmap_enable_direction and strlen(get_option('wpgmapembed_license'))==32 ){ ?>
                 var directionsDisplay = new google.maps.DirectionsRenderer();
 
                 directionsDisplay.setMap(map);
@@ -114,7 +114,7 @@ if (!function_exists('srm_gmap_embed_shortcode')) {
 
         </div>
         <?php
-        if ($wpgmap_enable_direction == 1) { ?>
+        if ($wpgmap_enable_direction == 1 and strlen(get_option('wpgmapembed_license'))==32) { ?>
             <style type="text/css">
                 .wp_gmap_direction_box {
                     width: 100%;

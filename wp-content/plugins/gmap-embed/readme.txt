@@ -3,9 +3,9 @@ Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q
 Tags: Google Map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, gmaps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, googlemaps, gprs, gps, gpx, kml, latitude, Longitude, location, loaction by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
-Tested up to: 4.9.4
-Version: 1.3.8
-Stable tag: 1.3.8
+Tested up to: 5.0.3
+Version: 1.4.0
+Stable tag: 1.4.0
 Requires PHP: 5.6
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -241,3 +241,9 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.3.8 =
 * Google API readme updated, language and donation button added.
+
+= 1.3.9 =
+* Added pro version features and updated shortcode.
+
+= 1.4.0 =
+* Settings option updated.

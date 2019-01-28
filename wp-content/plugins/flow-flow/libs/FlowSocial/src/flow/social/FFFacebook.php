@@ -10,7 +10,7 @@ if ( ! defined('FF_FACEBOOK_RATE_LIMIT')) define('FF_FACEBOOK_RATE_LIMIT', 200);
  * @author    Looks Awesome <email@looks-awesome.com>
 
  * @link      http://looks-awesome.com
- * @copyright 2014-2016 Looks Awesome
+ * @copyright Looks Awesome
  */
 class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 	const API_VERSION = 'v2.8';
