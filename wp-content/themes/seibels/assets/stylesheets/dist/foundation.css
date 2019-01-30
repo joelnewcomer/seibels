@@ -2922,7 +2922,8 @@ body.error404 main#content {
   display: none !important; }
 
 header a.logo {
-  margin: 37px 15px; }
+  margin: 27px 15px;
+  /* margin: 37px 15px; */ }
   @media only screen and (max-width: 1000px) {
     header a.logo {
       margin: 25px 15px; } }
@@ -2931,20 +2932,25 @@ a.logo {
   display: inline-block; }
   a.logo svg {
     float: left;
-    width: 186px;
-    height: 43px; }
-    @media only screen and (max-width: 40.063em) {
+    width: 212px;
+    height: 68px;
+    /* Standard Logo
+		width: 186px;
+		height: 43px;
+		*/ }
+    @media only screen and (max-width: 745px) {
       a.logo svg {
         width: 144px;
-        height: 33px; } }
+        height: 46px;
+        /* height: 33px; */ } }
 
 @media only screen and (min-width: 40.063em) {
   .top-bar-right {
     margin-top: 23px; } }
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 745px) {
   .top-bar-right {
-    margin-top: 10px; } }
+    margin-top: 16px; } }
 
 @media only screen and (min-width: 40.063em) {
   .header-container {
@@ -2971,10 +2977,19 @@ header#masthead {
       z-index: 99999;
       box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.15); }
       header#masthead.headroom--pinned:not(.headroom--top) .top-bar-left a {
-        padding: 16px 0;
+        /* padding: 16px 0; */
+        padding: 7px 0;
         width: 186px;
         float: left;
         margin: 0 15px; }
+        header#masthead.headroom--pinned:not(.headroom--top) .top-bar-left a svg {
+          width: 168px;
+          height: 68px; } }
+      @media only screen and (min-width: 40em) and (max-width: 720px) {
+        header#masthead.headroom--pinned:not(.headroom--top) .top-bar-left a svg {
+          height: 43px;
+          width: 134px; } }
+  @media print, screen and (min-width: 40em) {
         header#masthead.headroom--pinned:not(.headroom--top) .top-bar-left a img {
           min-height: 0; }
       header#masthead.headroom--pinned:not(.headroom--top) .top-bar-right {
@@ -2999,7 +3014,8 @@ header#masthead {
     .top-bar-left a.logo {
       z-index: 9999;
       position: relative;
-      margin: 15px; }
+      /* margin: 15px; */
+      margin: 9px; }
       .top-bar-left a.logo img {
         max-height: 100%; }
   .top-bar-right {
@@ -6384,7 +6400,7 @@ ul.slimmenu li a {
   @media only screen and (min-width: 40.063em) {
     ul.slimmenu li a {
       max-width: 152px; } }
-  @media only screen and (max-width: 830px) {
+  @media only screen and (max-width: 860px) {
     ul.slimmenu li a {
       padding: 12px 10px;
       max-width: 125px; } }
