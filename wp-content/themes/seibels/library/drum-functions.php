@@ -588,6 +588,7 @@ add_image_size( 'nl-third', 311, 288, true );
 add_image_size( 'nl-two-thirds', 635, 288, true );
 add_image_size( 'nl-third-tall', 311, 587, true );
 add_image_size( 'nl-two-thirds-tall', 635, 587, true );
+add_image_size( 'no-nav-featured', 1440, 500, true);
 
 
 // Is this a child, grandchild, etc of particular page

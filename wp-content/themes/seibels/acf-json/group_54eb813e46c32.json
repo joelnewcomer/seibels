@@ -1885,6 +1885,13 @@
                 "operator": "==",
                 "value": "default"
             }
+        ],
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "page-templates\/page-no-nav.php"
+            }
         ]
     ],
     "menu_order": 0,
@@ -1897,5 +1904,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1523548040
+    "modified": 1549032576
 }

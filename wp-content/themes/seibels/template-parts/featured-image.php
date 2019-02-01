@@ -18,12 +18,19 @@ $has_menu = '';
 if (is_ancestor(get_theme_mod( 'about_page' )) || is_ancestor(581)) {
 	$has_menu = 'has-menu';
 }
+
+$size = 'featured';
+$header_class = 'blog-header';
+if (is_page_template('page-templates/page-no-nav.php')) {
+	$size = 'no-nav-featured';
+	$header_class = 'no-nav-header';
+}
 ?>
 
 
 	<div class="featured-container <?php echo $has_menu; ?>">
 		<div class="featured-image-container">
-			<?php echo wp_get_attachment_image($image_id, 'featured'); ?>
+			<?php echo wp_get_attachment_image($image_id, $size); ?>
 			<div class="grid-container no-padding">
 				<div class="featured-image blog-landing-featured">
 					<div class="overlay">
@@ -40,7 +47,7 @@ if (is_ancestor(get_theme_mod( 'about_page' )) || is_ancestor(581)) {
 							</div> <!-- grid-container -->
 						</section>
 						<?php endif; ?>
-						<div class="blog-header single-header text-center">
+						<div class="<?php echo $header_class; ?> single-header text-center">
 							<div style="display:table;width:100%;height:100%;">
 								<div style="display:table-cell;vertical-align:middle;">
 							    	<div style="text-align:center;">

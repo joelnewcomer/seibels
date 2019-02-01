@@ -2921,6 +2921,9 @@ body.error404 main#content {
 .ff-errors {
   display: none !important; }
 
+.page-template-page-no-nav .header-wrapper {
+  display: none; }
+
 header a.logo {
   margin: 27px 15px;
   /* margin: 37px 15px; */ }
@@ -4159,7 +4162,7 @@ ul.post-meta {
     background: rgba(0, 0, 0, 0.2); }
   .featured-container h1 {
     color: #fff; }
-  .featured-container .blog-header {
+  .featured-container .blog-header, .featured-container .no-nav-header {
     display: block;
     position: absolute;
     top: 0;

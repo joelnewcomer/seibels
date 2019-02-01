@@ -41,6 +41,7 @@
 	<body <?php body_class(); ?>>
 		<?php get_template_part('template-parts/preloader'); ?>
 		<a class="skip-link sr-only" href="#content"><?php _e( 'Skip to content', 'drumroll' ); ?></a>
+		<?php if (!is_page_template('page-templates/page-no-nav.php')) : ?>
 		<div class="top-nav-wrapper">
 			<nav id="top-navigation" class="top-navigation top-bar grid-container" role="navigation">
 				<div class="grid-x">
@@ -50,6 +51,7 @@
 				</div>
 			</nav>
 		</div>
+		<?php endif; ?>
 		<div class="header-wrapper match-header">
 			<header id="masthead" class="site-header match-header"  role="banner">
 				<nav id="site-navigation" class="main-navigation top-bar grid-container" role="navigation">
