@@ -14,7 +14,7 @@ if ( ! defined( 'WPINC' ) ) die;
  * @author    Looks Awesome <email@looks-awesome.com>
 
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2016 Looks Awesome
  */
 class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
     private $url;
@@ -39,6 +39,10 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 		Request::verifyHost(false);
 		Request::curlOpt( CURLOPT_IPRESOLVE, $feed->use_ipv4 ? CURL_IPRESOLVE_V4 : CURL_IPRESOLVE_V6);
 		Request::curlOpt( CURLOPT_FOLLOWLOCATION, true);
+	}
+
+	public function getCount() {
+		return 50;
 	}
 
 	public function deferredInit($feed) {
@@ -290,7 +294,6 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	}
 	
     private function getCaption($text){
-		$text = FFFeedUtils::removeEmoji( (string) $text );
 		return $this->hashtagLinks($text);
     }
 

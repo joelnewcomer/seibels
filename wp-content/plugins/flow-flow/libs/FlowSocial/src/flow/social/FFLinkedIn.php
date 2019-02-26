@@ -7,7 +7,7 @@ if ( ! defined( 'WPINC' ) ) die;
  * @author    Looks Awesome <email@looks-awesome.com>
  *
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2016 Looks Awesome
  */
 
 class FFLinkedIn extends FFHttpRequestFeed {
@@ -38,6 +38,7 @@ class FFLinkedIn extends FFHttpRequestFeed {
 			$event_type = '&event-type=' . $feed->{'event-type'};
 		}
 		$this->url = "https://api.linkedin.com/v1/companies/{$this->company}/updates?oauth2_access_token={$token}&count={$num}&format=json";
+        $this->url .= $event_type;
 		$this->profileUrl = "https://api.linkedin.com/v1/companies/{$this->company}:(id,name,logo-url,square-logo-url)?oauth2_access_token={$token}&format=json";
 
 		$data = $this->getFeedData($this->profileUrl);

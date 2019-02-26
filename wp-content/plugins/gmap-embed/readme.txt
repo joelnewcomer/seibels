@@ -1,17 +1,17 @@
 === WP Google Map ===
 Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q
-Tags: Google Map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, gmaps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, googlemaps, gprs, gps, gpx, kml, latitude, Longitude, location, loaction by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
+Tags: google map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross-browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, maps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, google maps, gprs, gps, gpx, kml, latitude, Longitude, location, location by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
-Tested up to: 5.0.3
-Version: 1.4.0
-Stable tag: 1.4.0
-Requires PHP: 5.6
+Tested up to: 5.1
+Version: 1.4.1
+Stable tag: 1.4.1
+Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WP Google Map is very Simple, light-weight and Easy to use Google Custom Map with markers in Posts, Pages as shortcode and sidebar as widget and it is most popular plugin for wordpress.
+WP Google Map is very Simple, light-weight and Easy to use Google Custom Map with markers in Posts, Pages as shortcode and sidebar as widget.
 
 == Description ==
 
@@ -20,43 +20,57 @@ WP Google Map is an awesome plugin to use when adding a custom Google map to you
 [Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q)
 
 ### !!Important Notice for All!!
-After July 16, 2018, Google has changed their policy. **You need to add billing information to use Google Map**. If you see a warning message on Map like "This page can't load Google Maps correctly", please have a look on google developers [documentation](https://developers.google.com/maps/documentation/javascript/error-messages?utm_source=maps_js&utm_medium=degraded&utm_campaign=billing#api-key-and-billing-errors). Even if you face problem, please send a message in mail: **milonfci@gmail.com** or Skype: **milon305021**
+After July 16, 2018, Google has changed its policy. **You need to add billing information to use Google Map**. If you see a warning message on Map-like "**This page can't load Google Maps correctly**", please have a look on google developers [documentation](https://developers.google.com/maps/documentation/javascript/error-messages?utm_source=maps_js&utm_medium=degraded&utm_campaign=billing#api-key-and-billing-errors). Even if you face a problem, please send a message in the mail: **milonfci@gmail.com** or Skype: **milon305021**
 
 
 * [Demo](https://sobyasachi.com/wp/google-map-demo/)
 * [Support Forum](https://wordpress.org/support/plugin/gmap-embed)
 
-To have continue the update, please donate for the plugin.
+To have continued the update, please donate for the plugin.
 [Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q)
 
 https://www.youtube.com/watch?v=Lak-tJjGjl8
 
-### Important Notice
-`If it seems Direction option is not working, Please take api key again from settings tab, it's necessary for Direction Option in WP Google Map.`
+### Features of WP Google Map Plugin-Lite version(FREE):
 
-### Features of WP Google Map Plugin:
-
-* **User friendly**
-* **Direction Support with Map.**
+* **User-friendly**
 * **Importing the shortcode by Embed Google Map Button upon Editor**
 * **Fully Customizable**
+* **It is the most popular Google Maps plugin on WordPress**
 * **Automatic Google Map location identification**
 * **Tested with other popular plugins**
-* **Ability to change Latitude, Longitude, Address by Dragging Marker**
+* **Super easy to use**
 * **Ability to change zoom level(1-15)**
-* **Easy to add as widget (By Shortcode)**
-* **Ability to use as shortcode in post and Single page**
-* **Can be used in single page, single post, sidebar, footer, etc.**
-* **It is most helpful for wordpress website to embed google map**
+* **Easy to add a widget (By Shortcode)**
+* **No coding required!**
+* **Drag map markers to an exact location**
+* **Ability to use a shortcode in the post and Single page**
+* **Fully responsive maps**
+* **Supported UTF-8 font encoding**
+* **Google Map autocomplete available**
+* **Multiple Language supported(Localization)
+* **Can be used in the single page, single post, sidebar, footer, etc.**
+* **You can set any width and width as you need**
+* **It is most helpful for WordPress website to embed google map**
+
+### Features of WP Google Map Plugin-Lite version(PREMIUM):
+
+* **Direction Support with Map.**
+* **Ability to change Latitude, Longitude, Address by Dragging Marker**
+* **Roadmap, Terrain, Satellite and Hybrid types of map supported
+* **Supports Google Map Streetview option**
+* **You can add multiple maps in any page or post if you need!**
+* **Map full screen functionality**
+* **Ability to create Map and Marker as much as you need!**
 
 ### USE AS SHORTCODE IN POST, PAGE, AND SIDEBAR.
 `[gmap-embed id="<Your map ID>"]`
 
 ### USE AS SHORTCODE IN PHP CODE.
-`<?php echo do_shortcode('[gmap-embed id="<Your map ID>"]');?>`
+`<?php echo do_shortcode('[gmap-embed id="YOUR MAP ID"]');?>`
 
 
-###Important:    
+###Important:
 The plugin requires an API key., [click here](https://console.developers.google.com/flows/enableapi?apiid=maps_backend,places_backend,geolocation,geocoding_backend&keyType=CLIENT_SIDE&reusekey=true) to get your free API key. The API key may take up to 5 minutes to take effect.
 
 Contact me if you have any problems with installation or anything else.
@@ -73,7 +87,7 @@ If you have a problem or a suggestion, please post in [Support Forum](https://wo
 2. Upload the zip folder plugins directory "wp-content/plugins"
 3. Activate the WP Google Map Plugin from the Admin panel.
 4. Add the WP Google Map widget to your sidebar using Shortcode.
-5. Add the WP Google Map in posts/pages using shortcode.
+5. Add the WP Google Map in posts/pages using the shortcode.
 
 
 == Upgrade Notice ==
@@ -82,39 +96,39 @@ Upgrade Google Map Plugin from [here](https://plugins.svn.wordpress.org/gmap-emb
 
 == Frequently Asked Questions ==
 
-Our WP Google Map plugin is user friendly, but you can read some frequently asked questions that might help you here.
+Our WP Google Map plugin is user-friendly, but you can read some frequently asked questions that might help you here.
 
 = How can I create a new Google Map? =
-After install the plugin, Click on Google Map in the left side bar. Then click on = Create New map =
+After installing the plugin, Click on Google Map SRM in the left sidebar. Then click on  **Create New map**
 
-= How can I see a list of created Google Maps? =
-Click on Google Map in the left side bar, here Created Maps list will apper.
+= How can I see the list of created Google Maps? =
+Click on **Google Map SRM** in the left sidebar, here Created Maps list will appear.
 
 = How do I enable directions on my Google Map? =
-You will see an option named "Enable Direction in Map" under each map setting.
+You will see an option named "**Enable Direction in Map**" under each map setting. Also, you can set the option in creating a new map page.
 
 = How do I add a Google Map to my post? =
-Go to =Posts=->=Add New= then you will see a button named "Embed Google Map" beside media button. Click on it and insert your desired map by click ing on Insert Button, then save post and the map will appear in your desired post. Enjoy!
+Go to **Posts**=-> **Add New** then you will see a button named "Embed Google Map" beside the **media** button. Click on it and insert your desired map by clicking on Insert Button, then save the post and the map will appear in your desired post. Enjoy!
 
 
 = How do I add a Google Map to my page(s)? =
-Go to =Pages=->=Add New= then you will see a button named "Embed Google Map" beside media button. Click on it and insert your desired map by click ing on Insert Button, then save post and the map will appear in your desired post. Enjoy!
+Go to **Pages** =-> **Add New** then you will see a button named "Embed Google Map" beside media button. Click on it and insert your desired map by clicking on Insert Button, then save the post and the map will appear in your desired post. Enjoy!
 
 
 = How do I add a Google Map as a widget? =
-Go to =Appearence=->=Widget= then you will see a widget named "Google Map ". Drag it to any widget area and enter Google Map Shortcode then save it and the map will appear in your sidebar or footer whatever you selected. Enjoy!
+Go to **Appearance** =-> **Widget** then you will see a widget named "Google Map SRM ". Drag it to any widget area and enter Google Map Shortcode then save it and the map will appear in your sidebar or footer whatever you selected. Enjoy!
 
 = How do I get a Google Map API key? =
 See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get idea.
 
 == Screenshots ==
 
-1. Google Map  menu in left sidebar
+1. Google Map  menu in the left sidebar
 2. To create New Map
-3. To Allow Locatoin Sharing
-4. Creating New Map and Saving
+3. To Allow Location Sharing
+4. Creating a New Map and Saving
 5. Map List with Shortcode
-6. To Embed Shortcode in Pages, Posts and Widgets
+6. To Embed Shortcode in Pages, Posts, and Widgets
 7. Maps list going to insert
 8. Using as Widget
 
@@ -126,7 +140,7 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.0.1 =
 
-*  Updated screenshots with FAQ to make easier.
+*  Updated screenshots with the FAQ to make easier.
 
 = 1.0.2 =
 
@@ -134,7 +148,7 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.0.3 =
 
-*  Self api key adding option added
+*  Self API key adding option added
 
 = 1.0.4 =
 
@@ -142,7 +156,7 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.0.5 =
 
-*  Added new helpfull video with how to get Free API key
+*  Added new helpful video with how to get Free API key
 
 
 = 1.0.6 =
@@ -156,7 +170,7 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.0.8 =
 *  Initial marker dragging related problem fixing
-*  API key trailing blank space removed	
+*  API key trailing blank space removed
 
 
 = 1.0.9 =
@@ -180,7 +194,7 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 *  Widget title giving option added
 
 = 1.1.6 =
-* Added option for creating unlimited maps(Previous limit was 10)
+* Added option for creating unlimited maps(the Previous limit was 10)
 
 = 1.1.7 =
 * Look and Feel changes
@@ -228,7 +242,7 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 * Spanish language files updated.
 
 = 1.3.4 =
-* Direction From feild default to emtpy, Readme file updated with Google Billing warning message.
+* Direction From field default to empty, Readme file updated with Google Billing warning message.
 
 = 1.3.5 =
 * Google API realted update
@@ -247,3 +261,6 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.4.0 =
 * Settings option updated.
+
+= 1.4.1 =
+* User help manual, FAQ and details description updated, also bug fixed.

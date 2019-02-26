@@ -240,7 +240,7 @@ $js_opts = array(
 
         var isErr = response.status === "errors";
         if ((opts.isAdmin || opts.isLog) && isErr) {
-            $errCont = $('<div class="ff-errors" id="ff-errors-'+response.id+'"><div class="ff-err-info">If you see this then you are administrator and Flow-Flow got errors from APIs while requesting data. Please go to plugin admin and after refreshing page check for error(s) on stream settings page. Please provide error message info if you are doing support request.<\/div><\/div>');
+            $errCont = $('<div class="ff-errors"><div class="ff-err-info">If you see this then you are administrator and Flow-Flow got errors from APIs while requesting data. Please go to plugin admin and after refreshing page check for error(s) on stream settings page. Please provide error message info if you are doing support request.<\/div><\/div>');
             $cont.before($errCont);
         }
 

@@ -474,7 +474,13 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 	protected function getCarousel( $item ) {
 		$carousel = parent::getCarousel($item);
 		$subattachments = $this->carousel;
-		if (sizeof($subattachments) > 1){
+
+        // changed 30.01.19, removing first element which is duplicate of main image
+
+		if (sizeof($subattachments) > 2){
+
+            unset($subattachments[0]);
+
 			foreach ($subattachments as $image){
 				$carousel[] = $this->createMedia($image->src, $image->width, $image->height);
 			}

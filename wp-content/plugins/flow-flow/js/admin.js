@@ -1764,7 +1764,7 @@ var FlowFlowApp = (function($){
         if (!name && feed.type == "wordpress") {
           name = capitaliseFirstLetter(feed['category-name'] || 'Posts');
         }
-        options += '<option value="' + feed.id + '">' + capitaliseFirstLetter(feed.type) + ' - ' + name + '</option>';
+        options += '<option value="' + feed.id + '">' + capitaliseFirstLetter(feed.type) + ' - ' + name + ' - ' + feed.id  + '</option>';
       }
 
       $select.html('').append(options).closest('.stream-feeds').addClass('stream-feeds--connecting');
@@ -2577,6 +2577,8 @@ var FlowFlowApp = (function($){
           if (feed['timeline-type']) settings['timeline-type'] = feed['timeline-type'];
           if (feed['mod'] === 'yep') settings['mod'] = feed['mod'];
 
+          settings['id'] = 'ID: ' + feed['id'];
+
           for (prop in settings) {
             ikey = capitaliseFirstLetter( prop.replace(' timeline', '').replace('_', ' ').replace('-', ' ').replace('timeline ', '')  );
             ival = stripslashes( settings[prop] );
@@ -2587,7 +2589,7 @@ var FlowFlowApp = (function($){
             if (ival.length > 20) {
               ival = ival.substring(0, 20) + '...';
             }
-            info = info + '<span><span class="highlight">' + ival + '</span></span>' ;
+            info = info + '<span><span class="highlight' + ( $key === 'id' ? ' highlight-id' : '' ) + '">' + ival + '</span></span>' ;
           }
 
           if (feed.cache_lifetime == 5) {

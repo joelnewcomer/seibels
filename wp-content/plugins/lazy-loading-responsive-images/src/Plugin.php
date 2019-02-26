@@ -46,11 +46,11 @@ class Plugin {
 	 *
 	 * @var string
 	 */
-	public $basename;
+	protected $basename;
 
 	/**
 	 * Placeholder data uri for img src attributes.
-	 * 
+	 *
 	 * @link https://stackoverflow.com/a/13139830
 	 *
 	 * @var string
@@ -59,7 +59,7 @@ class Plugin {
 
 	/**
 	 * Hint if the plugin is disabled for this page.
-	 * 
+	 *
 	 * @var null|int
 	 */
 	private $disabled_for_current_post = null;
@@ -68,7 +68,7 @@ class Plugin {
 	 * Plugin constructor.
 	 */
 	public function __construct() {
-		
+
 	}
 
 	/**
@@ -121,10 +121,7 @@ class Plugin {
 		add_action( 'plugins_loaded', array( $this, 'load_translation' ) );
 
 		// Action on uninstall.
-		register_uninstall_hook( __FILE__, array(
-			'FlorianBrinkmann\LazyLoadResponsiveImages\Plugin',
-			'uninstall',
-		) );
+		register_uninstall_hook( $this->basename, 'FlorianBrinkmann\LazyLoadResponsiveImages\Plugin::uninstall' );
 	}
 
 	/**
@@ -162,13 +159,13 @@ class Plugin {
 
 		/**
 		 * Filter for disabling Lazy Loader on specific pages/posts/….
-		 * 
+		 *
 		 * @param boolean True if lazy loader should be disabled, false if not.
 		 */
 		if ( 1 === $this->disabled_for_current_post || true === apply_filters( 'lazy_loader_disabled', false ) ) {
 			return $content;
 		}
-		
+
 		// Check if we have no content.
 		if ( empty( $content ) ) {
 			return $content;
@@ -656,8 +653,8 @@ class Plugin {
         .lazyloading {
 			opacity: 0;
 		}
-		
-		
+
+
 		.lazyloaded {
 			opacity: 1;
 			transition: opacity 300ms;
@@ -681,7 +678,7 @@ class Plugin {
 		if ( isset( $_REQUEST['post'] ) && in_array( get_post_type( $_REQUEST['post'] ), $this->settings->disable_option_object_types ) ) {
 			$file_data  = get_file_data( __FILE__, array( 'v' => 'Version' ) );
 			$assets_url = trailingslashit( plugin_dir_url( __FILE__ ) );
-			wp_enqueue_script( 'lazy-loading-responsive-images-functions', plugins_url( '/lazy-loading-responsive-images/js/functions.js' ), array( 'wp-blocks', 'wp-element', 'wp-edit-post' ), $file_data['v'] );	
+			wp_enqueue_script( 'lazy-loading-responsive-images-functions', plugins_url( '/lazy-loading-responsive-images/js/functions.js' ), array( 'wp-blocks', 'wp-element', 'wp-edit-post' ), $file_data['v'] );
 		}
 	}
 
@@ -693,12 +690,33 @@ class Plugin {
 	}
 
 	/**
+	 * Sets plugin basename.
+	 *
+	 * @param string $basename The plugin basename.
+	 */
+	public function set_basename( $basename ) {
+		$this->basename = $basename;
+	}
+
+	/**
 	 * Action on plugin uninstall.
 	 */
-	public function uninstall() {
+	public static function uninstall() {
+		$options_array = array(
+			'lazy_load_responsive_images_disabled_classes',
+			'lazy_load_responsive_images_enable_for_iframes',
+			'lazy_load_responsive_images_unveilhooks_plugin',
+			'lazy_load_responsive_images_enable_for_videos',
+			'lazy_load_responsive_images_enable_for_audios',
+			'lazy_load_responsive_images_aspectratio_plugin',
+			'lazy_load_responsive_images_loading_spinner',
+			'lazy_load_responsive_images_loading_spinner_color',
+			'lazy_load_responsive_images_granular_disable_option',
+		);
+
 		// Delete options.
-		foreach ( $this->settings->options as $option_id => $option ) {
-			delete_option( $option_id );
+		foreach ( $options_array as $option ) {
+			delete_option( $option );
 		}
 	}
 }
