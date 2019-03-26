@@ -4,8 +4,8 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: google map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross-browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, maps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, google maps, gprs, gps, gpx, kml, latitude, Longitude, location, location by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
 Tested up to: 5.1
-Version: 1.4.1
-Stable tag: 1.4.1
+Version: 1.4.2
+Stable tag: 1.4.2
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -264,3 +264,6 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.4.1 =
 * User help manual, FAQ and details description updated, also bug fixed.
+
+= 1.4.2 =
+* Bug fixing, Added instant contact form to give best experience and getting suggestion from users.

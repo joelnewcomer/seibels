@@ -7,7 +7,7 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: http://www.srmilon.com
-  Version: 1.4.1
+  Version: 1.4.2
  */
 
 if (!defined('ABSPATH')) exit;
@@ -59,7 +59,7 @@ if (!class_exists('srm_gmap_embed_main')) {
             if ($pagenow == 'post.php' || $pagenow == 'post-new.php' || @$_GET['page'] == 'wpgmapembed') {
                 wp_enqueue_script('wp-gmap-api', 'https://maps.google.com/maps/api/js?key=' . $this->wpgmap_api_key . '&libraries=places', array('jquery'), '20161019', true);
                 wp_enqueue_script('wp-gmap-custom-js', plugins_url('assets/js/custom.js', __FILE__), array('wp-gmap-api'), '20161019', false);
-                wp_enqueue_style('wp-gmap-embed-css', plugins_url('assets/css/wp-gmap-style.css', __FILE__));
+                wp_enqueue_style('wp-gmap-embed-css', plugins_url('assets/css/wp-gmap-style.css', __FILE__),rand(999,9999));
             }
         }
 

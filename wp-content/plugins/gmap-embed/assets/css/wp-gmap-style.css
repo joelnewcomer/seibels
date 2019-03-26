@@ -154,3 +154,19 @@ ul#wp-gmap-nav li a {
     margin: 9px;
     float: left;
 }
+
+/**********To view contact form ***********/
+.srm_gmap_contact_area{
+    width: 50%;
+    float: left;
+    padding: 10px;
+}
+.srm_gmap_video_area{
+    width: 42%;
+    float: left;
+    margin-left: 2%;
+    padding: 10px;
+}
+.wp_gmap_contact_field{
+    width: 100% !important;
+}

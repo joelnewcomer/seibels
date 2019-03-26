@@ -8,7 +8,7 @@
  * @package   FlowFlow
  * @author    Looks Awesome <email@looks-awesome.com>
  * @link      http://looks-awesome.com
- * @copyright 2014-2016 Looks Awesome
+ * @copyright Looks Awesome
  */
 $options = $context['options'];
 
@@ -77,6 +77,9 @@ if ($activated) {
 } ?></dd>
         </dl>
     </div>
-    <?php include($context['root']  . 'views/footer.php'); ?>
+	<?php
+		/** @noinspection PhpIncludeInspection */
+		include($context['root']  . 'views/footer.php');
+	?>
 
 </div>

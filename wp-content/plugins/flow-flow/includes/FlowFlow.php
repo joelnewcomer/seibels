@@ -16,7 +16,7 @@ if ( ! defined( 'WPINC' ) ) die;
  * @author    Looks Awesome <email@looks-awesome.com>
 
  * @link      http://looks-awesome.com
- * @copyright 2014-2016 Looks Awesome
+ * @copyright Looks Awesome
  */
 class FlowFlow extends LABase{
 	/**
@@ -99,6 +99,9 @@ class FlowFlow extends LABase{
 			'lightbox_navigate' => __('Navigate with arrow keys', 'flow-flow'),
 			'view_on' => __('View on', 'flow-flow'),
 			'view_on_site' => __('View on site', 'flow-flow'),
+			'view_all' => __('View all', 'flow-flow'),
+            'comments' => __('comments', 'flow-flow'),
+            'scroll' => __('Scroll for more', 'flow-flow'),
             'no_comments' => __('No comments yet.', 'flow-flow'),
             'be_first' => __('Be the first!', 'flow-flow'),
 			'server_time' => time(),

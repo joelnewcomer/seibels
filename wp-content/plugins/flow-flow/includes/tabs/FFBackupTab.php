@@ -11,7 +11,7 @@ if ( ! defined( 'WPINC' ) ) die;
  * @author    Looks Awesome <email@looks-awesome.com>
  *
  * @link      http://looks-awesome.com
- * @copyright 2014-2016 Looks Awesome
+ * @copyright Looks Awesome
  */
 class FFBackupTab implements LATab {
 	public function __construct() {
@@ -32,6 +32,7 @@ class FFBackupTab implements LATab {
 	public function includeOnce( $context ) {
 		$manager            = new FFSnapshotManager( $context );
 		$context['backups'] = $manager->getSnapshots();
+		/** @noinspection PhpIncludeInspection */
 		include_once($context['root']  . 'views/backup.php');
 	}
 }
