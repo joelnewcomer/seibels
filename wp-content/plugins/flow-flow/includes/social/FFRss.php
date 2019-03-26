@@ -2,6 +2,7 @@
 if ( ! defined( 'WPINC' ) ) die;
 
 use \SimpleXMLElement;
+use flow\settings\FFSettingsUtils;
 
 /**
  * Flow-Flow.
@@ -32,10 +33,10 @@ class FFRss extends FFHttpRequestFeed {
 		parent::__construct( $type );
 	}
 
-	public function deferredInit($feed) {
+	public function deferredInit($options, $feed) {
 		$this->url = $feed->content;
-		$this->isRichText = $feed->{'rich-text'};
-		$this->hideCaption = $feed->{'hide-caption'};
+		$this->isRichText = isset($feed->{'rich-text'}) ? FFSettingsUtils::YepNope2ClassicStyle($feed->{'rich-text'}) : false;
+		$this->hideCaption = isset($feed->{'hide-caption'}) ? FFSettingsUtils::YepNope2ClassicStyle($feed->{'hide-caption'}) : false;
 		if (isset($feed->{'channel-name'})) $this->screenName = $feed->{'channel-name'};
 		$this->profileImage = isset($feed->{'avatar-url'}) && trim($feed->{'avatar-url'}) != ''?
 			$feed->{'avatar-url'} : $this->context['plugin_url'] . '/' . $this->context['slug'] . '/assets/avatar_default_rss.png';

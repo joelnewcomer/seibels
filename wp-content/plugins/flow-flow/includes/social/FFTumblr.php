@@ -1,6 +1,8 @@
 <?php namespace flow\social;
 if ( ! defined( 'WPINC' ) ) die;
 
+use flow\settings\FFSettingsUtils;
+
 /**
  * Flow-Flow.
  *
@@ -21,10 +23,10 @@ class FFTumblr extends FFHttpRequestFeed{
 		parent::__construct( 'tumblr' );
 	}
 
-	public function deferredInit($feed) {
+	public function deferredInit( $options, $feed) {
 		$num = $this->getCount();
 		$this->blog_name = (string) $feed->content;
-		$this->isRichText = $feed->{'rich-text'};
+		$this->isRichText = FFSettingsUtils::YepNope2ClassicStyle($feed->{'rich-text'});
 		$this->url = "http://{$this->blog_name}.tumblr.com/api/read/json?debug=1&num={$num}&type=photo";
 	}
 

@@ -1,6 +1,8 @@
 <?php namespace flow\social\timelines;
 if ( ! defined( 'WPINC' ) ) die;
 
+use flow\settings\FFSettingsUtils;
+
 /**
  * Flow-Flow.
  *
@@ -22,7 +24,7 @@ class FFListTimeline implements FFTimeline{
 		$this->count = $twitter->getCount();
 		$this->listName = $feed->{'list-name'};
 		$this->screenName = $feed->content;
-		$this->include_rts = (string)$feed->retweets;
+		$this->include_rts = (string)FFSettingsUtils::YepNope2ClassicStyle($feed->retweets);
 	}
 	
 	public function getUrl() {

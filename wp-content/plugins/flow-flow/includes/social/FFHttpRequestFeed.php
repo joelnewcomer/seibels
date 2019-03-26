@@ -19,7 +19,6 @@ abstract class FFHttpRequestFeed extends FFBaseFeed{
 
 	/**
 	 * @return array
-	 * @throws \Exception
 	 */
 	protected function onePagePosts() {
 		$result = array();
@@ -92,16 +91,15 @@ abstract class FFHttpRequestFeed extends FFBaseFeed{
 		return $item;
 	}
 
-	/**
-	 * @param $item
-	 * @return \stdClass
-	 */
-	protected function prepare($item){
-		$post = new \stdClass();
-		$post->feed_id = $this->id();
-		$post->smart_order = 0;
-		return $post;
-	}
+    /**
+     * @param $item
+     * @return \stdClass
+     */
+    protected function prepare($item){
+        $post = new \stdClass();
+	    $post->feed_id = $this->id();
+	    return $post;
+    }
 
 	/**
 	 * @param $item

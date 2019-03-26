@@ -18,8 +18,8 @@ class FFFlickr extends FFRss {
 		parent::__construct( 'flickr' );
 	}
 
-	public function deferredInit( $feed ) {
-		parent::deferredInit( $feed );
+	public function deferredInit( $options, $feed ) {
+		parent::deferredInit( $options, $feed );
 
 		$content = $feed->content;
 		switch ($feed->{'timeline-type'}) {

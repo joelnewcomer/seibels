@@ -1,7 +1,7 @@
 <?php namespace flow\social\timelines;
 if ( ! defined( 'WPINC' ) ) die;
 
-use flow\social\FFFeedUtils;
+use flow\settings\FFSettingsUtils;
 
 /**
  * Flow-Flow.
@@ -21,8 +21,8 @@ class FFHomeTimeline implements FFTimeline{
 	
 	public function init($twitter, $feed){
 		$this->count = $twitter->getCount();
-		$this->screenName = FFFeedUtils::preparePrefixContent($feed->content, '@');
-		$this->exclude_replies = (string)$feed->replies;
+		$this->screenName = FFSettingsUtils::preparePrefixContent($feed->content, '@');
+		$this->exclude_replies = (string)FFSettingsUtils::notYepNope2ClassicStyle($feed->replies);
 	}
 	
 	public function getUrl(){

@@ -1,4 +1,5 @@
 <?php namespace flow\social;
+use la\core\social\LAFeedWithComments;
 
 if ( ! defined( 'WPINC' ) ) die;
 /**
@@ -22,12 +23,17 @@ class FFGoogle extends FFHttpRequestFeed implements LAFeedWithComments {
 		parent::__construct( 'google' );
 	}
 
-	public function deferredInit($feed){
-		$this->content = $feed->content;
-		$this->apiKey = $feed->google_api_key;
-	}
+	/**
+     * @param FFGeneralSettings $options
+     * @param $feed
+     */
+    public function deferredInit($options, $feed){
+        $this->content = $feed->content;
+        $original = $options->original();
+        $this->apiKey = $original['google_api_key'];
+    }
 
-	protected function getUrl(){
+    protected function getUrl(){
         return "https://www.googleapis.com/plus/v1/people/{$this->content}/activities/public?key={$this->apiKey}&maxResults={$this->getCount()}&prettyprint=false&fields=items(id,actor,object(attachments(displayName,fullImage,id,image,objectType,url,thumbnails),id,content,objectType,url,replies(totalItems),plusoners(totalItems),resharers(totalItems)),published,title,url)";
     }
 
@@ -195,7 +201,8 @@ class FFGoogle extends FFHttpRequestFeed implements LAFeedWithComments {
 		}
 		
 		$objectId = $item;
-		$this->apiKey = $this->feed->google_api_key;
+        $original = $this->options->original();
+        $this->apiKey = $original['google_api_key'];
         $url = "https://www.googleapis.com/plus/v1/activities/{$objectId}/comments?key={$this->apiKey}&maxResults={$this->getCount()}";
         $request = $this->getFeedData($url);
         $json = json_decode($request['response']);

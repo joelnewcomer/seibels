@@ -1,6 +1,6 @@
 <?php namespace flow;
 
-use flow\social\cache\LAFacebookCacheManager;
+use flow\cache\LAFacebookCacheManager;
 use flow\tabs\FFAddonsTab;
 use flow\tabs\FFBackupTab;
 use flow\tabs\FFModerationTab;
@@ -25,7 +25,7 @@ if ( ! defined( 'WPINC' ) ) die;
  * @package   FlowFlowAdmin
  * @author    Looks Awesome <email@looks-awesome.com>
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2017 Looks Awesome
  */
 class FlowFlowAdmin extends LAAdminBase{
 	/**
@@ -65,8 +65,7 @@ class FlowFlowAdmin extends LAAdminBase{
 		
 		$context['buttons-after-tabs'] = '<li id="request-tab"><span>Save changes</span> <i class="flaticon-paperplane"></i></li>';
 		$context = apply_filters('ff_change_context', $context);
-
-		/** @noinspection PhpIncludeInspection */
+		
 		include_once($context['root']  . 'views/admin.php');
 	}
 	

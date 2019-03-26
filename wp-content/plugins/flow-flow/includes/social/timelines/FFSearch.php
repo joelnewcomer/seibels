@@ -1,4 +1,5 @@
 <?php namespace flow\social\timelines;
+use flow\settings\FFSettingsUtils;
 
 if ( ! defined( 'WPINC' ) ) die;
 /**
@@ -24,7 +25,7 @@ class FFSearch implements FFTimeline{
 		$this->searchQuery = $feed->content;
 		$this->resultType = 'mixed';
 		if (isset($feed->lang)) $this->lang = $feed->lang;
-		if ($feed->{'use-geo'}){
+		if (isset($feed->{'use-geo'}) && $feed->{'use-geo'} == FFSettingsUtils::YEP){
 			$this->geo = "&geocode={$feed->latitude},{$feed->longitude},{$feed->radius}km";
 		}
 	}

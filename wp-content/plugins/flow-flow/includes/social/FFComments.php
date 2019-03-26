@@ -1,6 +1,8 @@
 <?php namespace flow\social;
 if ( ! defined( 'WPINC' ) ) die;
 
+use flow\settings\FFSettingsUtils;
+
 /**
  * Flow-Flow.
  *
@@ -22,9 +24,9 @@ class FFComments extends FFBaseFeed{
 		parent::__construct( 'comments' );
 	}
 
-	public function deferredInit($feed) {
+	public function deferredInit($options, $feed) {
 		$post_id = $feed->{'post-id'};
-		$show_post_title = $feed->{'include-post-title'};
+		$show_post_title = @FFSettingsUtils::YepNope2ClassicStyle($feed->{'include-post-title'});
 		$number = $this->getCount();
 		$this->args = array(
 			'post_id'       => $post_id,
@@ -46,30 +48,29 @@ class FFComments extends FFBaseFeed{
         return $result;
     }
 
-	public function useCache(){
+    public function useCache(){
         return false;
     }
 
-	private function parse($comment){
-		$tc = new \stdClass();
-		$tc->feed_id = $this->id();
-		$tc->smart_order = 0;
-		$tc->id = (string)$comment->comment_ID;
-		$tc->header = $this->postTitle;
-		$tc->type = $this->getType();
-		$tc->nickname = $this->getAuthor($comment->user_id, 'nicename');
-		$tc->screenname = trim($this->getAuthor($comment->user_id, 'user_full_name'));
-		if (empty($tc->screenname)) $tc->screenname = (string)$comment->comment_author;
-		$tc->system_timestamp = strtotime($comment->comment_date);
-		$tc->text = $comment->comment_content;
-		$userpic = get_avatar($comment->user_id, 80, '');
-		$tc->userpic =  (strpos($userpic,'avatar-default') !== false) ? $this->profileImage : FFFeedUtils::getUrlFromImg($userpic);
-		$tc->userlink = $this->getCommentAuthorProfileLink($comment);
-		$tc->permalink = get_comment_link($comment->comment_ID);
-		return $tc;
-	}
+    private function parse($comment){
+        $tc = new \stdClass();
+	    $tc->feed_id = $this->id();
+        $tc->id = (string)$comment->comment_ID;
+	    $tc->header = $this->postTitle;
+        $tc->type = $this->getType();
+        $tc->nickname = $this->getAuthor($comment->user_id, 'nicename');
+        $tc->screenname = trim($this->getAuthor($comment->user_id, 'user_full_name'));
+        if (empty($tc->screenname)) $tc->screenname = (string)$comment->comment_author;
+        $tc->system_timestamp = strtotime($comment->comment_date);
+        $tc->text = $comment->comment_content;
+	    $userpic = get_avatar($comment->user_id, 80, '');
+	    $tc->userpic =  (strpos($userpic,'avatar-default') !== false) ? $this->profileImage : FFFeedUtils::getUrlFromImg($userpic);
+	    $tc->userlink = $this->getCommentAuthorProfileLink($comment);
+	    $tc->permalink = get_comment_link($comment->comment_ID);
+        return $tc;
+    }
 
-	private function getAuthor($author_id, $key){
+    private function getAuthor($author_id, $key){
         if (!isset($this->authors[$author_id])){
             $this->authors[$author_id] = array(
                 'nicename' => (string)get_the_author_meta('nicename', $author_id),

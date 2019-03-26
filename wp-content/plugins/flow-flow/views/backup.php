@@ -8,7 +8,7 @@
  * @package   FlowFlow
  * @author    Looks Awesome <email@looks-awesome.com>
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2016 Looks Awesome
  */
 $backups = $context['backups'];
 ?>
@@ -44,9 +44,6 @@ $backups = $context['backups'];
 
 		<span class='admin-button green-button create_backup'>Create new database snapshot</span>
 	</div>
-	<?php
-		/** @noinspection PhpIncludeInspection */
-		include($context['root']  . 'views/footer.php');
-	?>
+	<?php include($context['root']  . 'views/footer.php'); ?>
 
 </div>

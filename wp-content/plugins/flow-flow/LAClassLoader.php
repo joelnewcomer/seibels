@@ -6,7 +6,7 @@
  * @author    Looks Awesome <email@looks-awesome.com>
  *
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2016 Looks Awesome
  */
 class LAClassLoader {
 	private static $instance = null;
@@ -25,14 +25,7 @@ class LAClassLoader {
 	}
 
 	public function loadClass($className) {
-		if (0 === strpos($className, 'flow\\social\\')){
-			$path = $this->root . 'libs/FlowSocial/src/flow';
-			$cls = str_replace('flow', $path, $className);
-			$path = str_replace('\\', DIRECTORY_SEPARATOR, $cls) . '.php';
-			/** @noinspection PhpIncludeInspection */
-			require_once($path);
-		}
-		else if (0 === strpos($className, 'flow\\')){
+	    if (0 === strpos($className, 'flow\\')){
 			$path = $this->root . 'includes';
 			$cls = str_replace('flow', $path, $className);
 			$path = str_replace('\\', DIRECTORY_SEPARATOR, $cls) . '.php';
@@ -50,9 +43,7 @@ class LAClassLoader {
 
 	public function register($with_config = false) {
 		if ($with_config) {
-			/** @noinspection PhpIncludeInspection */
 			require_once($this->root . 'ff-config.php');
-			/** @noinspection PhpIncludeInspection */
 			require_once($this->root . 'ff-init.php');
 		}
 		spl_autoload_register(array(self::get(), 'loadClass'));

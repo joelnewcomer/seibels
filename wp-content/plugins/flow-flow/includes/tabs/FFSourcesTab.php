@@ -11,7 +11,7 @@ if ( ! defined( 'WPINC' ) ) die;
  * @author    Looks Awesome <email@looks-awesome.com>
  *
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2016 Looks Awesome
  */
 class FFSourcesTab implements LATab {
 	public function __construct() {
@@ -32,6 +32,9 @@ class FFSourcesTab implements LATab {
 	public function includeOnce( $context ) {
 		?>
 		<script>
+//			var feedStr = '<?php //echo json_encode($context['sources'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>//';
+//			feedStr = feedStr.replace(/\n/g, "\\\\n").replace(/\r/g, "\\\\r").replace(/\t/g, "\\\\t").replace(/\\\'/g, "'")
+//			var feeds = JSON.parse(feedStr);
 			var feeds = <?php echo json_encode($context['sources'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP); ?>;
 			if (_.isArray(feeds)) feeds = {};
 		</script>
@@ -79,8 +82,6 @@ class FFSourcesTab implements LATab {
 								if (isset($feed['timeline-type'])) $settingArr['timeline-type'] = $feed['timeline-type'];
 								if (isset($feed['mod']) && $feed['mod'] !== FFSettingsUtils::NOPE) $settingArr['mod'] = $feed['mod'];
 
-                                $settingArr['id'] = 'ID: ' . $feed['id'];
-
 								foreach ($settingArr  as $key => $value ) {
 									if (!empty($value)) {
 										/*if (isset($_GET['debug'])){
@@ -96,13 +97,13 @@ class FFSourcesTab implements LATab {
 											$v = str_replace('https://', '', $v);
 											$k = str_replace('timeline-', '', $key);
 											$k = str_replace('-', ' ', ucfirst($k));
-											if ( $key === 'mod' ) $v = 'moderated';
+											if ($key === 'mod') $v = 'moderated';
 
 											if ( strlen($v) > 20) {
 												$v = substr( $v , 0, 20 ) . '...';
 											}
 
-											$settings .= '<span><span class="highlight' . ( $key === 'id' ? ' highlight-id' : '' ) . '">' . $v . '</span></span>';
+											$settings .= '<span><span class="highlight">' . $v . '</span></span>';
 //										}
 									}
 								}
@@ -259,10 +260,7 @@ class FFSourcesTab implements LATab {
 					</div>
 				</div>
 			</div>
-			<?php
-				/** @noinspection PhpIncludeInspection */
-				include($context['root']  . 'views/footer.php');
-			?>
+			<?php include($context['root']  . 'views/footer.php'); ?>
 		</div>
 	<?php
 	}

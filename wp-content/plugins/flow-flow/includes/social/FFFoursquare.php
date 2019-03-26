@@ -1,6 +1,8 @@
 <?php namespace flow\social;
 if ( ! defined( 'WPINC' ) ) die;
 
+use flow\settings\FFSettingsUtils;
+
 /**
  * Flow-Flow.
  *
@@ -18,14 +20,15 @@ class FFFoursquare extends FFHttpRequestFeed{
 		parent::__construct( 'foursquare' );
 	}
 
-	public function deferredInit( $feed ) {
+	public function deferredInit( $options, $feed ) {
 		$venue = $feed->content;
-		$token = $feed->foursquare_access_token;
+		$original = $options->original();
+		$token = @$original['foursquare_access_token'];
 		$this->url_part = $feed->{'content-type'};
-		$this->only_text = $feed->{'only-text'};
+		$this->only_text = FFSettingsUtils::YepNope2ClassicStyle($feed->{'only-text'}, false);
 		if (empty($token)){
-			$clientId = $feed->foursquare_client_id;
-			$clientSecret = $feed->foursquare_client_secret;
+			$clientId = $original['foursquare_client_id'];
+			$clientSecret = $original['foursquare_client_secret'];
 			$this->url = "https://api.foursquare.com/v2/venues/{$venue}/{$this->url_part}?sort=recent&client_id={$clientId}&client_secret={$clientSecret}&v=20141210&limit={$this->getCount()}";
 		}
 		else {

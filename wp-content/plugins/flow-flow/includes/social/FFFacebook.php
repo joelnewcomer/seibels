@@ -1,5 +1,9 @@
 <?php namespace flow\social;
-use flow\social\cache\LAFacebookCacheManager;
+use flow\cache\LAFacebookCacheManager;
+use flow\db\FFDB;
+use flow\db\LADBManager;
+use la\core\social\LAFeedWithComments;
+//use Stripe\Object;
 
 if ( ! defined( 'WPINC' ) ) die;
 if ( ! defined('FF_FACEBOOK_RATE_LIMIT')) define('FF_FACEBOOK_RATE_LIMIT', 200);
@@ -10,16 +14,14 @@ if ( ! defined('FF_FACEBOOK_RATE_LIMIT')) define('FF_FACEBOOK_RATE_LIMIT', 200);
  * @author    Looks Awesome <email@looks-awesome.com>
 
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2016 Looks Awesome
  */
 class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 	const API_VERSION = 'v2.8';
 
+    private $header = false;
     /** @var  string | bool */
     private $accessToken;
-	/** @var LAFacebookCacheManager */
-	private $facebookCache;
-
     /** @var bool */
     private $hideStatus = true;
 	/** @var  bool */
@@ -30,17 +32,18 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 	private $images;
 	private $youtube_api_key;
 
+	private $hasHitLimit = false;
+	private $creationTime;
+	private $request_count = 0;
+	private $global_request_count;
+	private $global_request_array;
+
 	private $new_post_ids;
 
 	public function __construct() {
 		parent::__construct( 'facebook' );
 	}
-
-	public function init( $context, $feed ) {
-		parent::init( $context, $feed );
-		$this->facebookCache = $this->context['facebook_cache'];
-	}
-
+	
 	public function getComments($item) {
 		if (is_object($item)){
 			$result = array();
@@ -61,19 +64,16 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 			}
 			return $result;
 		}
-
+		
 		$objectId = $item;
-		$accessToken = $this->facebookCache->getAccessToken();
-		if ($this->accessToken === false){
-			$this->errors[] = $this->facebookCache->getError();
-			throw new \Exception();
-		}
+		$facebookCache = $this->context['facebook_cache'];
+		$accessToken = $facebookCache->getAccessToken();
 		$api = FFFacebook::API_VERSION;
 		$url = "https://graph.facebook.com/{$api}/{$objectId}/comments?total_count={$this->getCount()}&access_token={$accessToken}";
 
 		$request = $this->getFeedData($url);
 		$json = json_decode($request['response']);
-
+		
 		if (!is_object($json) || (is_object($json) && sizeof($json->data) == 0)) {
 			if (isset($request['errors']) && is_array($request['errors'])){
 				if (!empty($request['errors'])){
@@ -116,64 +116,100 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 		}
 	}
 
-	protected function deferredInit($feed) {
-		$this->images = array();
-		if (isset($feed->{'timeline-type'})) {
-			$timeline = $feed->{'timeline-type'} == 'user_timeline' ? 'page_timeline' : $feed->{'timeline-type'};
-			$locale = defined('FF_LOCALE') ? 'locale=' . FF_LOCALE : 'locale=en_US';
-			$fields    = 'fields=';
-			$fields    = $fields . 'likes.summary(true),comments.summary(true),shares,';
-			$fields    = $fields . 'id,created_time,from,link,message,name,object_id,picture,full_picture,attachments{media,subattachments},source,status_type,story,type';
-			$api = FFFacebook::API_VERSION;
-			switch ($timeline) {
-				case 'group':
-					$groupId = (string)$feed->content;
-					$this->url        = "https://graph.facebook.com/{$api}/{$groupId}/feed?{$fields}&limit={$this->getCount()}&{$locale}";
+    protected function deferredInit($options, $feed) {
+	    $this->images = array();
+        if (isset($feed->{'timeline-type'})) {
+        	$timeline = $feed->{'timeline-type'} == 'user_timeline' ? 'page_timeline' : $feed->{'timeline-type'};
+	        $locale = defined('FF_LOCALE') ? 'locale=' . FF_LOCALE : 'locale=en_US';
+	        $fields    = 'fields=';
+	        $fields    = $fields . 'likes.summary(true),comments.summary(true),shares,';
+	        $fields    = $fields . 'id,created_time,from,link,message,name,object_id,picture,full_picture,attachments{media,subattachments},source,status_type,story,type';
+	        $api = FFFacebook::API_VERSION;
+            switch ($timeline) {
+	            case 'group':
+		            $groupId = (string)$feed->content;
+		            $this->url        = "https://graph.facebook.com/{$api}/{$groupId}/feed?{$fields}&limit={$this->getCount()}&{$locale}";
+		            $this->hideStatus = false;
+		            break;
+                case 'page_timeline':
+                    $userId = (string)$feed->content;
+	                $this->url        = "https://graph.facebook.com/{$api}/{$userId}/posts?{$fields}&limit={$this->getCount()}&{$locale}";
 					$this->hideStatus = false;
-					break;
-				case 'page_timeline':
-					$page_id = (string)$feed->content;
-
-					$request = $this->getFeedData("https://graph.facebook.com/{$api}/me/accounts?access_token={$this->accessToken}");
-					$json = json_decode($request['response']);
-					if($json->data) {
-						foreach ( $json->data as $item ) {
-							if ($page_id == $item->id) {
-								$this->accessToken = $item->access_token;
-								$page_id = 'me';
-								break;
-							}
-						}
-					}
-
-					$this->url        = "https://graph.facebook.com/{$api}/{$page_id}/posts?{$fields}&limit={$this->getCount()}&{$locale}";
-					$this->hideStatus = false;
-					break;
-				case 'album':
+                    break;
+	            case 'album':
 					$albumId = (string)$feed->content;
-					$this->url = "https://graph.facebook.com/{$api}/{$albumId}/photos?{$fields}&limit={$this->getCount()}&{$locale}";
-					break;
-				default:
-					$this->url = "https://graph.facebook.com/{$api}/me/home?{$fields}&limit={$this->getCount()}&{$locale}";
-			}
-		}
-		$this->youtube_api_key = $feed->google_api_key;
+		            $this->url = "https://graph.facebook.com/{$api}/{$albumId}/photos?{$fields}&limit={$this->getCount()}&{$locale}";
+		            break;
+                default:
+	                $this->url = "https://graph.facebook.com/{$api}/me/home?{$fields}&limit={$this->getCount()}&{$locale}";
+            }
+        }
+	    $original = $options->original();
+	    $this->youtube_api_key = @$original['google_api_key'];
 
-		$this->saveImages = false;//FFSettingsUtils::YepNope2ClassicStyleSafe($original, 'general-settings-save-images', false);
-	}
+	    $this->saveImages = false;//FFSettingsUtils::YepNope2ClassicStyleSafe($original, 'general-settings-save-images', false);
+    }
 
 	protected function beforeProcess() {
-		$this->accessToken = $this->facebookCache->getAccessToken();
+		/** @var LAFacebookCacheManager $facebookCache */
+		$facebookCache = $this->context['facebook_cache'];
+		/** @var LADBManager $db */
+		$db = $this->context['db_manager'];
+
+		$this->accessToken = $facebookCache->getAccessToken();
 		if ($this->accessToken === false){
-			$this->errors[] = $this->facebookCache->getError();
+			$this->errors[] = $facebookCache->getError();
 			return false;
 		}
-		$this->facebookCache->startCounter();
+
+		if (FFDB::beginTransaction()){
+			$limit = $db->getOption('fb_limit_counter', true, true);
+			if ($limit === false){
+				@$db->setOption('fb_limit_counter', array(), true, false);
+				$limit = $db->getOption('fb_limit_counter', true, true);
+			}
+
+			if (!is_array($limit)){
+				$this->errors[] = array( 'type' => 'facebook', 'message' => 'Can`t save `fb_limit_counter` option to mysql db.' );
+				FFDB::rollback();
+				return false;
+			}
+
+			$this->creationTime = time();
+			$this->global_request_count = 0;
+			$limitTime = $this->creationTime - 3600;
+			$result = array();
+			foreach ( $limit as $time => $count ) {
+				if ($time > $limitTime) {
+					$result[$time] = $count;
+					$this->global_request_count += (int)$count;
+				}
+			}
+			$this->global_request_array = $result;
+
+			if ($this->global_request_count + 4 > FF_FACEBOOK_RATE_LIMIT) {
+				$this->errors[] = array( 'type' => 'facebook', 'message' => 'Your site has hit the Facebook API rate limit. <a href="http://docs.social-streams.com/article/133-facebook-app-request-limit-reached" target="_blank">Troubleshooting</a>.' );
+				FFDB::rollback();
+				return false;
+			}
+		}
+		else {
+			$this->errors[] = array( 'type' => 'facebook', 'message' => 'Can`t get mysql transaction.' );
+			FFDB::rollback();
+			return false;
+		}
 		return true;
 	}
 
 	protected function afterProcess( $result ) {
-		$this->facebookCache->stopCounter();
+		/** @var LADBManager $db */
+		$db = $this->context['db_manager'];
+
+		if ($this->request_count > 0) {
+			$this->global_request_array[$this->creationTime] = $this->request_count;
+		}
+		$db->setOption('fb_limit_counter', $this->global_request_array, true, false);
+		FFDB::commit();
 		return parent::afterProcess( $result );
 	}
 
@@ -181,24 +217,26 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
         return $this->getUrlWithToken($this->url);
     }
 
-	protected function items( $request ) {
-		$pxml = json_decode($request);
-		if (isset($pxml->data)) {
-			$ids = $this->facebookCache->getIdPosts($this->id());
-			$new_ids = array();
-			foreach ( $pxml->data as $item ) {
-				$new_ids[] = $this->getId($item);
-			}
-			$this->new_post_ids = array();
-			$diff = array_diff($new_ids, $ids);
-			foreach ( $diff as $id ) {
-				$this->new_post_ids[$id] = 1;
-			}
+    protected function items( $request ) {
+        $pxml = json_decode($request);
+        if (isset($pxml->data)) {
+	        /** @var LADBManager $db */
+	        $db = $this->context['db_manager'];
+	        $ids = $db->getIdPosts($this->id());
+	        $new_ids = array();
+	        foreach ( $pxml->data as $item ) {
+		        $new_ids[] = $this->getId($item);
+	        }
+	        $this->new_post_ids = array();
+	        $diff = array_diff($new_ids, $ids);
+	        foreach ( $diff as $id ) {
+		        $this->new_post_ids[$id] = 1;
+	        }
 
-			return $pxml->data;
-		}
-		return array();
-	}
+	        return $pxml->data;
+        }
+        return array();
+    }
 
 	protected function isSuitableOriginalPost( $post ) {
 		if (isset($post->type)){
@@ -207,14 +245,14 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 		}
 		if (!isset($post->created_time)) return false;
 
-		$hasLimit = $this->facebookCache->hasLimit();
-		if (!$hasLimit){
-			$this->errors[] = array(
-				'type' => 'facebook',
-				'message' => 'Your site has hit the Facebook API rate limit. <a href="http://docs.social-streams.com/article/133-facebook-app-request-limit-reached" target="_blank">Troubleshooting</a>.'
-			);
+		if ($this->hasHitLimit) return false;
+		if ($this->global_request_count + $this->request_count + 3 > FF_FACEBOOK_RATE_LIMIT) {
+			$this->errors[] = array( 'type' => 'facebook', 'message' => 'Your site has hit the Facebook API rate limit. <a href="http://docs.social-streams.com/article/133-facebook-app-request-limit-reached" target="_blank">Troubleshooting</a>.' );
+			$this->hasHitLimit = true;
+			return false;
 		}
-		return $hasLimit;
+
+		return true;
 	}
 
 	protected function isNewPost( $post ) {
@@ -257,7 +295,7 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 					return true;
 				}
 			}
-			//deprecated
+			//depricated
 			$url = "https://graph.facebook.com/{$api}/{$item->object_id}?fields=images";
 			$original_url = $this->cache->getOriginalUrl($url);
 			if ($original_url == ''){
@@ -316,14 +354,7 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 							$width = 600;
 						}
 						$this->image = $this->createImage($image->src, $width, $height);
-						if (isset($item->from->id)){
-							$page = $item->from->id;
-							$this->media = $this->createMedia('https://www.facebook.com/plugins/video.php?app_id=&container_width=0&href=https%3A%2F%2Ffacebook.com%2F' . $page . '%2Fvideos%2F' . $item->object_id . '%2F&locale=en_US&sdk=joey', $width, $height, 'video');
-						}
-						else {
-							$this->media = $this->createMedia('http://www.facebook.com/video/embed?video_id=' . $item->object_id, $width, $height, 'video');
-						}
-
+						$this->media = $this->createMedia('http://www.facebook.com/video/embed?video_id=' . $item->object_id, $width, $height, 'video');
 						$this->carousel = $subattachments;
 						return true;
 					}
@@ -350,13 +381,7 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 					    $this->image = $this->createImage( $this->getLocation( $url ), $width, $height );
 				    }
 			    }
-				if (isset($item->from->id)){
-					$page = $item->from->id;
-					$this->media = $this->createMedia('https://www.facebook.com/plugins/video.php?app_id=&container_width=0&href=https%3A%2F%2Ffacebook.com%2F' . $page . '%2Fvideos%2F' . $item->object_id . '%2F&locale=en_US&sdk=joey', $width, $height, 'video');
-				}
-				else {
-					$this->media = $this->createMedia('http://www.facebook.com/video/embed?video_id=' . $item->object_id, $width, $height, 'video');
-				}
+			    $this->media = $this->createMedia('http://www.facebook.com/video/embed?video_id=' . $item->object_id, $width, $height, 'video');
 			    return true;
 		    }
 		    else if (isset($item->source)){
@@ -474,13 +499,7 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 	protected function getCarousel( $item ) {
 		$carousel = parent::getCarousel($item);
 		$subattachments = $this->carousel;
-
-        // changed 30.01.19, removing first element which is duplicate of main image
-
-		if (sizeof($subattachments) > 2){
-
-            unset($subattachments[0]);
-
+		if (sizeof($subattachments) > 1){
 			foreach ($subattachments as $image){
 				$carousel[] = $this->createMedia($image->src, $image->width, $image->height);
 			}
@@ -667,9 +686,9 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 	}
 
 	private function getUrlWithToken($url){
-		$this->facebookCache->addRequest();
-
+		$this->request_count++;
 		$token = $this->accessToken;
+
 		return $url . "&access_token={$token}";
 	}
 	

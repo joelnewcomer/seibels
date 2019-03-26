@@ -12,10 +12,10 @@ if ( ! defined( 'WPINC' ) ) die;
  * @author    Looks Awesome <email@looks-awesome.com>
  
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2017 Looks Awesome
  */
 abstract class LADBMigrationManager{
-	const INIT_MIGRATION = '0.9999';
+	const INIT_MIGRAION = '0.9999';
 	
 	protected $context;
 	
@@ -64,7 +64,7 @@ abstract class LADBMigrationManager{
 	protected abstract function migrations();
 	
 	private function getDBVersion(){
-		$version = self::INIT_MIGRATION;
+		$version = self::INIT_MIGRAION;
 		$dbm = $this->context['db_manager'];
 		if (FFDB::existTable($dbm->option_table_name)){
 			$version = $dbm->getOption('db_version');
@@ -78,19 +78,19 @@ abstract class LADBMigrationManager{
 	}
 	
 	private function needStartInitMigration($version){
-		return self::INIT_MIGRATION == $version || $version === false;
+		return self::INIT_MIGRAION == $version || $version === false;
 	}
 	
 	private function getInitMigration(){
 		$migrations = $this->getMigrations();
 		
-		$max = self::INIT_MIGRATION;
+		$max = self::INIT_MIGRAION;
 		foreach ($migrations as $version => $migration) {
 			if ($max < $version){
 				$max = $version;
 			}
 		}
-		return array($max => $migrations[self::INIT_MIGRATION]);
+		return array($max => $migrations[self::INIT_MIGRAION]);
 	}
 	
 	private function getMigrations(){

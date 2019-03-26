@@ -20,8 +20,9 @@ class FFDribbble extends FFHttpRequestFeed{
 		parent::__construct( 'dribbble' );
 	}
 
-	public function deferredInit( $feed ) {
-		$token = $feed->dribbble_access_token;
+	public function deferredInit( $options, $feed ) {
+		$original = $options->original();
+		$token = $original['dribbble_access_token'];
 		$username = $feed->content;
 		$partOfUrl = ($feed->{'timeline-type'} == 'liked') ? 'likes' : 'shots';
 		$this->template_url = "https://api.dribbble.com/v1/users/{$username}/{$partOfUrl}?access_token={$token}&sort=recent&page=";

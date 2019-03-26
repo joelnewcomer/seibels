@@ -1,4 +1,6 @@
 <?php namespace flow\social;
+use flow\settings\FFSettingsUtils;
+use la\core\social\LAFeedWithComments;
 use SimpleXMLElement;
 
 if ( ! defined( 'WPINC' ) ) die;
@@ -31,8 +33,15 @@ class FFYoutube extends FFHttpRequestFeed implements LAFeedWithComments {
 		parent::__construct( 'youtube' );
 	}
 
-	public function deferredInit($feed) {
-		$this->apiKeyPart = '&key=' . $feed->google_api_key;
+	/**
+	 * @param FFGeneralSettings $options
+	 * @param $feed
+	 *
+	 * @return mixed|void
+	 */
+	public function deferredInit($options, $feed) {
+		$original = $options->original();
+		$this->apiKeyPart = '&key=' . $original['google_api_key'];
 
 		if (isset($feed->{'timeline-type'})) {
 			$content = urlencode($feed->content);
@@ -40,7 +49,7 @@ class FFYoutube extends FFHttpRequestFeed implements LAFeedWithComments {
 				case 'user_timeline':
 					$this->userlink = "https://www.youtube.com/user/{$content}";
 					$profileUrl = "https://www.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails&forUsername={$content}" . $this->apiKeyPart;
-					$this->profile = $this->getProfile($profileUrl);
+					$this->profile = $this->getProfile($profileUrl, $content);
 					$this->url = "https://www.googleapis.com/youtube/v3/playlistItems?part=id%2Csnippet&playlistId={$this->profile->uploads}&maxResults=50" . $this->apiKeyPart;
 					break;
 				case 'channel':
@@ -52,7 +61,7 @@ class FFYoutube extends FFHttpRequestFeed implements LAFeedWithComments {
 					$this->isSearch = true;
 					$this->isPlaylist = true;
 					$this->url = "https://www.googleapis.com/youtube/v3/playlistItems?part=id%2Csnippet&playlistId={$content}&maxResults=50" . $this->apiKeyPart;
-					$this->order = $feed->{'playlist-order'};
+					$this->order = FFSettingsUtils::YepNope2ClassicStyleSafe($feed, 'playlist-order', false);
 					break;
 				case 'search':
 					$this->isSearch = true;
@@ -312,55 +321,56 @@ class FFYoutube extends FFHttpRequestFeed implements LAFeedWithComments {
 		if (is_object($item)){
 			return array();
 		}
-
+		
 		$objectId = $item;
-		$accessToken = $this->feed->google_api_key;
-		$url = "https://www.googleapis.com/youtube/v3/commentThreads?videoId={$objectId}&maxResults={$this->getCount()}&part=snippet&key={$accessToken}";
-		$request = $this->getFeedData($url);
-		$json = json_decode($request['response']);
+        $original = $this->options->original();
+        $accessToken = $original['google_api_key'];
+        $url = "https://www.googleapis.com/youtube/v3/commentThreads?videoId={$objectId}&maxResults={$this->getCount()}&part=snippet&key={$accessToken}";
+        $request = $this->getFeedData($url);
+        $json = json_decode($request['response']);
 
-		if (!is_object($json) || (is_object($json) && sizeof($json->items) == 0)) {
-			if (isset($request['errors']) && is_array($request['errors'])){
-				if (!empty($request['errors'])){
-					foreach ( $request['errors'] as $error ) {
-						$error['type'] = 'youtube';
-						//TODO $this->filterErrorMessage
-						$this->errors[] = $error;
-						throw new \Exception();
-					}
-				}
-			}
-			else {
-				$this->errors[] = array('type'=>'youtube', 'message' => 'Bad request, access token issue. <a href="http://docs.social-streams.com/article/55-400-bad-request" target="_blank">Troubleshooting</a>.', 'url' => $url);
-				throw new \Exception();
-			}
-			return array();
-		}
-		else {
-			if($json->items){
-				// return first 5 comments
-				$data = array_slice($json->items, 0, 5);
-				$result = array();
-				foreach ($data as $item){
-					$obj = new \stdClass();
-					$obj->id = $item->snippet->topLevelComment->id;
-					$obj->from = array(
-						'id' => $item->snippet->topLevelComment->snippet->authorChannelId->value,
-						'full_name' => $item->snippet->topLevelComment->snippet->authorDisplayName
-					);
-					$obj->text = $item->snippet->topLevelComment->snippet->textDisplay;
-					$obj->created_time = $item->snippet->topLevelComment->snippet->publishedAt;
-					$result[] = $obj;
-				}
-				return $result;
-			}else{
-				$this->errors[] = array(
-					'type' => 'instagram',
-					'message' => 'User not found',
-					'url' => $url
-				);
-				throw new \Exception();
-			}
-		}
-	}
+        if (!is_object($json) || (is_object($json) && sizeof($json->items) == 0)) {
+            if (isset($request['errors']) && is_array($request['errors'])){
+                if (!empty($request['errors'])){
+                    foreach ( $request['errors'] as $error ) {
+                        $error['type'] = 'youtube';
+                        //TODO $this->filterErrorMessage
+                        $this->errors[] = $error;
+                        throw new \Exception();
+                    }
+                }
+            }
+            else {
+                $this->errors[] = array('type'=>'youtube', 'message' => 'Bad request, access token issue. <a href="http://docs.social-streams.com/article/55-400-bad-request" target="_blank">Troubleshooting</a>.', 'url' => $url);
+                throw new \Exception();
+            }
+            return array();
+        }
+        else {
+            if($json->items){
+                // return first 5 comments
+                $data = array_slice($json->items, 0, 5);
+                $result = array();
+                foreach ($data as $item){
+                    $obj = new \stdClass();
+                    $obj->id = $item->snippet->topLevelComment->id;
+                    $obj->from = array(
+                        'id' => $item->snippet->topLevelComment->snippet->authorChannelId->value,
+                        'full_name' => $item->snippet->topLevelComment->snippet->authorDisplayName
+                    );
+                    $obj->text = $item->snippet->topLevelComment->snippet->textDisplay;
+                    $obj->created_time = $item->snippet->topLevelComment->snippet->publishedAt;
+                    $result[] = $obj;
+                }
+                return $result;
+            }else{
+                $this->errors[] = array(
+                    'type' => 'instagram',
+                    'message' => 'User not found',
+                    'url' => $url
+                );
+                throw new \Exception();
+            }
+        }
+    }
 }

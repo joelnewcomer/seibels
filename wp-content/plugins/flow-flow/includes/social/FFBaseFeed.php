@@ -1,7 +1,9 @@
 <?php namespace flow\social;
 if ( ! defined( 'WPINC' ) ) die;
 
-use flow\social\cache\FFImageSizeCacheBase;
+use \stdClass;
+use flow\cache\FFImageSizeCacheManager;
+use flow\settings\FFGeneralSettings;
 
 /**
  * Flow-Flow.
@@ -13,25 +15,24 @@ use flow\social\cache\FFImageSizeCacheBase;
  * @copyright 2014-2016 Looks Awesome
  */
 abstract class FFBaseFeed implements FFFeed{
-	/** @var \stdClass */
+	/** @var stdClass */
 	public $feed;
 
-	private $id;
-	/** @var FFImageSizeCacheBase */
-	protected $cache;
-	private $count;
-	private $imageWidth;
+    private $id;
+    /** @var FFImageSizeCacheManager */
+    protected $cache;
+    private $count;
+    private $imageWidth;
+    private $useProxyServer;
 	private $type;
-	/**
-	 * Exclude words
-	 * @var  array $filterByWords */
+	/** @var  Exclude words */
 	private $filterByWords;
-	/**
-	 * Include words
-	 * @var array $include */
+    /** @var  Include words */
 	private $include;
 	private $criticalError = true;
-	protected $errors;
+	/** @var FFGeneralSettings */
+	protected $options;
+    protected $errors;
 	protected $context;
 
 	function __construct( $type ) {
@@ -66,17 +67,20 @@ abstract class FFBaseFeed implements FFFeed{
 
 	/**
 	 * @param $context
+	 * @param FFGeneralSettings $options
 	 * @param $feed
 	 *
 	 * @return void
 	 */
-    public function init($context, $feed){
+    public function init($context, $options, $feed){
 		$this->context = $context;
+		$this->options = $options;
 		$this->errors = array();
+		$this->useProxyServer = $options->useProxyServer();
 		$this->imageWidth = defined('FF_MAX_IMAGE_WIDTH') ? FF_MAX_IMAGE_WIDTH : 300;
 		
 		if (!is_null($feed)){
-			$this->cache = $context['image_size_cache'];
+			$this->cache = new FFImageSizeCacheManager($context['db_manager']->image_cache_table_name);
 			$this->feed = $feed;
 			$this->id = $feed->id;
 			if ($feed->last_update === 'N/A' && isset($context['count_posts_4init'])){
@@ -103,39 +107,38 @@ abstract class FFBaseFeed implements FFFeed{
 	public final function posts($is_empty_feed) {
 		$result = array();
 		try {
-			try {
-				if ($is_empty_feed) {
-					$this->count = defined('FF_FEED_INIT_COUNT_POSTS') ? FF_FEED_INIT_COUNT_POSTS : 50;
+			if ($is_empty_feed) {
+				$this->count = defined('FF_FEED_INIT_COUNT_POSTS') ? FF_FEED_INIT_COUNT_POSTS : 50;
+			}
+			if ($this->beforeProcess()) {
+				$this->deferredInit($this->options, $this->feed);
+				if (sizeof($this->errors) == 0){
+					do {
+						$result += $this->onePagePosts();
+					} while ($this->nextPage($result));
+					return $this->afterProcess($result);
 				}
-				if ($this->beforeProcess()) {
-					$this->deferredInit($this->feed);
-					if (sizeof($this->errors) == 0){
-						do {
-							$result += $this->onePagePosts();
-						} while ($this->nextPage($result));
-						return $this->afterProcess($result);
-					}
-				}
-			} catch (LASocialException $se){
-				$error = $se->getSocialError();
-				$error['type'] = $this->getType();
-				$this->errors[] = $error;
-				throw $se;
 			}
 		}
 		catch (\Exception $e){
-			$this->print2log($e->getMessage());
-			$this->print2log($e);
+			error_log($e->getMessage());
+			error_log($e->getTraceAsString());
+			$this->errors[] = array(
+				'type'    => $this->getType(),
+				'message' => $e->getMessage()
+			);
 		}
 		$this->criticalError = true;
 		return $result;
 	}
 
 	/**
-	 * @param \stdClass $feed
+	 * @param FFGeneralSettings $options
+	 * @param stdClass $feed
+	 *
 	 * @return void
 	 */
-	protected abstract function deferredInit($feed);
+	protected abstract function deferredInit($options, $feed);
 	protected abstract function onePagePosts( );
 
     /**
@@ -268,7 +271,7 @@ abstract class FFBaseFeed implements FFFeed{
     }
 
 	/**
-	 * @param \stdClass $post
+	 * @param stdClass $post
 	 * @return bool
 	 */
 	protected function isSuitablePost($post){
@@ -315,46 +318,15 @@ abstract class FFBaseFeed implements FFFeed{
 		return false;
 	}
 
-	/**
-	 * @param $url
-	 * @param int $timeout
-	 * @param bool $header
-	 * @param bool $log
-	 *
-	 * @return array
-	 * @throws LASocialRequestException
-	 */
 	protected function getFeedData($url, $timeout = 60, $header = false, $log = true){
-		$response = FFFeedUtils::getFeedData($url, $timeout, $header, $log, $this->feed->use_curl_follow_location, $this->feed->use_ipv4);
-
-		if (sizeof($response['errors']) > 0){
-			$message = isset($response['errors'][0]['msg']) ? $response['errors'][0]['msg'] : '';
-			throw new LASocialRequestException($url, $response['errors'], $message);
-		}
-
-		return $response;
+		/** @var LADBManager $db */
+		$db = $this->context['db_manager'];
+		$use = $db->getGeneralSettings()->useCurlFollowLocation();
+		$useIpv4 = $db->getGeneralSettings()->useIPv4();
+		return FFFeedUtils::getFeedData($url, $timeout, $header, $log, $use, $useIpv4);
 	}
 
-	/**
-	 * TODO Remove this method. Need to use LASocialException
-	 *
-	 * @deprecated
-	 * @param $message
-	 * @return string
-	 */
 	protected function filterErrorMessage($message){
-		if (is_array($message)){
-			if (sizeof($message) > 0 && isset($message[0]['msg'])){
-				return stripslashes(htmlspecialchars($message[0]['msg'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
-			}
-			else {
-				return '';
-			}
-		}
-		return stripslashes(htmlspecialchars($message, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'));
-	}
-
-	protected function print2log($msg){
-		error_log($msg);
+		return FFFeedUtils::filter_error_message($message);
 	}
 } 

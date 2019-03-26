@@ -22,7 +22,7 @@ class FFVine extends FFHttpRequestFeed{
 		parent::__construct( 'vine' );
 	}
 
-	public function deferredInit( $feed ) {
+	public function deferredInit( $options, $feed ) {
 		$this->content = $feed->content;
 		if (isset($feed->{'timeline-type'})) {
 			switch ( $feed->{'timeline-type'} ) {

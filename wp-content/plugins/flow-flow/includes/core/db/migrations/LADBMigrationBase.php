@@ -11,12 +11,12 @@ use flow\db\FFDB;
  * @author    Looks Awesome <email@looks-awesome.com>
  *
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2017 Looks Awesome
  */
 abstract class LADBMigrationBase implements ILADBMigration{
 	
 	public function version() {
-		return LADBMigrationManager::INIT_MIGRATION;
+		return LADBMigrationManager::INIT_MIGRAION;
 	}
 	
 	public function execute($conn, $manager){
@@ -91,7 +91,6 @@ abstract class LADBMigrationBase implements ILADBMigration{
 	protected function create_posts_table($conn, $table_name){
 		if(!FFDB::existTable($table_name)) {
 			$charset = $this->charset();
-			$collate = $this->collate();
 			$sql = "CREATE TABLE ?n
 			(
 				`feed_id` VARCHAR(20) NOT NULL,
@@ -99,9 +98,9 @@ abstract class LADBMigrationBase implements ILADBMigration{
 				`post_type` VARCHAR(10) NOT NULL,
 				`post_text` BLOB,
 				`post_permalink` VARCHAR(300),
-				`post_header` VARCHAR(200){$collate},
-				`user_nickname` VARCHAR(100){$collate},
-				`user_screenname` VARCHAR(200){$collate},
+				`post_header` VARCHAR(200),
+				`user_nickname` VARCHAR(100),
+				`user_screenname` VARCHAR(200),
 				`user_pic` VARCHAR(300) NOT NULL,
 				`user_link` VARCHAR(300),
 				`rand_order` REAL,
@@ -122,7 +121,7 @@ abstract class LADBMigrationBase implements ILADBMigration{
 				`user_counts_media` INT,
 				`user_counts_follows` INT,
 				`user_counts_followed_by` INT,
-				`location` TEXT,
+				`location` VARCHAR(300),
 				`carousel_size` INT,
 				PRIMARY KEY (`post_id`, `post_type`, `feed_id`)
 			) ?p";

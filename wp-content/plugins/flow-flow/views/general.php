@@ -6,7 +6,7 @@
  * @author    Looks Awesome <email@looks-awesome.com>
  *
  * @link      http://looks-awesome.com
- * @copyright Looks Awesome
+ * @copyright 2014-2016 Looks Awesome
  */
 $options = $context['options'];
 ?>
@@ -126,12 +126,29 @@ $options = $context['options'];
 						<?php if (isset($options['general-uninstall']) && $options['general-uninstall'] == 'yep') echo "checked"; ?> value="yep"/>
 					<div><div></div></div>
 			</dd>
+
+<!--			<dt class="multiline">Save images to server-->
+<!--			<p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempus a nibh condimentum commodo. Integer fermentum tortor lectus, eu porta orci dictum venenatis</p></dt>-->
+<!--			<dd>-->
+<!--				<label for="general-settings-save-images">-->
+<!--					<input id="general-settings-save-images" class="clearcache switcher" type="checkbox"-->
+<!--					       name="flow_flow_options[general-settings-save-images]"-->
+								<?php //if (isset($options['general-settings-save-images']) && $options['general-settings-save-images'] == 'yep') echo "checked"; ?>
+<!--					       value="yep"/><div><div></div></div>-->
+<!--			</dd>-->
+			<!--<dt class="multiline">SEO mode<p class="desc">When cache content is available plugin injects stream HTML synchronously and search bots index it</p></dt>
+	                    <dd>
+		                    <label for="general-settings-seo-mode">
+			                    <input id="general-settings-seo-mode" class="switcher" type="checkbox"
+			                           name="flow_flow_options[general-settings-seo-mode]"
+				                    <?php /*if (isset($options['general-settings-seo-mode']) && $options['general-settings-seo-mode'] == 'yep') echo "checked"; */?>
+			                           value="yep"/><div><div></div></div>
+
+	                    </dd>-->
+
 		</dl>
 		<span id="general-settings-sbmt" class='admin-button green-button submit-button'>Save Changes</span>
 	</div>
-	<?php
-		/** @noinspection PhpIncludeInspection */
-		include($context['root']  . 'views/footer.php');
-	?>
+	<?php include($context['root']  . 'views/footer.php'); ?>
 
 </div>

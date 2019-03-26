@@ -1,4 +1,4 @@
-<?php namespace flow\social;
+<?php namespace la\core\social;
 if ( ! defined( 'WPINC' ) ) die;
 /**
  * Social-Streams core
