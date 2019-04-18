@@ -10,7 +10,7 @@
  * Plugin Name:       Flow-Flow
  * Plugin URI:        social-streams.com
  * Description:       Awesome social streams on your site
- * Version:           4.1.8
+ * Version:           4.1.12
  * Author:            Looks Awesome
  * Author URI:        looks-awesome.com
  * Text Domain:       flow-flow
@@ -24,6 +24,8 @@ if ( ! defined( 'FF_FORCE_FIT_MEDIA' ) ) define('FF_FORCE_FIT_MEDIA', false);
 if ( ! defined( 'FF_FEED_POSTS_COUNT' ) ) define('FF_FEED_POSTS_COUNT', 100);
 if ( ! defined( 'FF_LOCALE'))  define('FF_LOCALE', get_locale());//TODO add a slash to the end
 if ( ! defined( 'FF_DB_CHARSET')) define('FF_DB_CHARSET', defined( 'DB_CHARSET' ) ? DB_CHARSET : 'utf8mb4');
+if ( ! defined( 'FF_REMOVE_EMOJI' ) ) define('FF_REMOVE_EMOJI', true);
+if ( ! defined( 'FF_ALTERNATIVE_POST_STORAGE' ) ) define('FF_ALTERNATIVE_POST_STORAGE', false);
 if ( ! defined( 'PFC_IGNORE_COMPOSER_WARNING' ) ) define('PFC_IGNORE_COMPOSER_WARNING', true);
 
 if (!class_exists('LAClassLoader')){

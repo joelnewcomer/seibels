@@ -131,6 +131,8 @@ abstract class LABase {
 	public final function enqueue_scripts() {
 	    // Customization 16.08.18, JS opts added in public.php instead
 //         $this->enqueueScripts();
+        // make sure jQuery is always on page
+        wp_enqueue_script('jquery');
 	}
 	
 	public final function processAjaxRequest() {

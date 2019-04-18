@@ -732,15 +732,10 @@ abstract class LADBManager {
 		return FFDB::conn()->query( $sql, $this->cache_table_name, $feedId, $values, $values );
 	}
 	
-	public function setRandomOrder($feedId){
-		return FFDB::conn()->query('UPDATE ?n SET `rand_order` = RAND() WHERE `feed_id`=?s', $this->posts_table_name, $feedId);
-	}
-	
-	public function setSmartOrder($feedId, $count){
-		$wherePartOfSql = FFDB::conn()->parse('feed_id = ?s', $feedId);
-		if (false === FFDB::conn()->query('UPDATE ?n SET `smart_order` = `smart_order` + ?i WHERE ?p', $this->posts_table_name, $count, $wherePartOfSql)){
-			throw new \Exception(FFDB::conn()->conn->error);
-		}
+	public function setOrders($feedId){
+		$conn = FFDB::conn();
+		$conn->query('SET @ROW = -1;');//test mysql_query("SELECT @ROW = -1");
+		return $conn->query('UPDATE ?n SET `rand_order` = RAND(), `smart_order` = @ROW := @ROW+1 WHERE `feed_id`=?s', $this->posts_table_name, $feedId);
 	}
 	
 	public function removeOldRecords($c_count){

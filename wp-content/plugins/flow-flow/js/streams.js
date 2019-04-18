@@ -811,8 +811,7 @@ Posts to load during update\
                 <div class="hint hint-pro">\
                     <h1>Content to show</h1>\
                     <ul>\
-                        <li><b>User feed</b> — enter username e.g. <i>elainen</i>.</li>\
-                        <li><b>User board</b> — enter user board slug e.g. <i>elainen/cute-animals</i>.</li>\
+                        <li><b>User board</b> — enter user board slug e.g. <i>elainen/cute-animals</i></li>\
                     </ul>\
                 </div>\
             </div>\

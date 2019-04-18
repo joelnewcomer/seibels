@@ -47,7 +47,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 
 	public function deferredInit($feed) {
 		$accessToken = $feed->instagram_access_token;
-		$this->url = "https://api.instagram.com/v1/users/self/media/recent/?access_token={$accessToken}&count={$this->getCount()}";
+		$this->url = "https://api.instagram.com/v1/users/self/media/recent/?access_token={$accessToken}&count={$this->getCount()}&hl=en";
 		if (isset($feed->{'timeline-type'})) {
 			$this->timeline = $feed->{'timeline-type'};
 			switch ($this->timeline) {
@@ -57,7 +57,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 					//$this->userMeta = $this->getUserMeta($userId, $accessToken);
 					//$this->url = "https://api.instagram.com/v1/users/self/media/recent/?access_token={$accessToken}&count={$this->getCount()}";
 					if (empty($content)){
-						$this->url = "https://api.instagram.com/v1/users/self/media/recent/?access_token={$accessToken}&count={$this->getCount()}";
+						$this->url = "https://api.instagram.com/v1/users/self/media/recent/?access_token={$accessToken}&count={$this->getCount()}&hl=en";
 					}
 					else {
 						$this->url = $content;
@@ -79,7 +79,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 					$coordinates = explode(',', $feed->content);
 					$lat = trim($coordinates[0]);
 					$lng = trim($coordinates[1]);
-					$this->url = "https://api.instagram.com/v1/media/search?lat={$lat}&lng={$lng}&access_token={$accessToken}&count={$this->getCount()}";
+					$this->url = "https://api.instagram.com/v1/media/search?lat={$lat}&lng={$lng}&access_token={$accessToken}&count={$this->getCount()}&hl=en";
 					break;
 			}
 		}
