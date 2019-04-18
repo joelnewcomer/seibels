@@ -51,6 +51,7 @@
     background-color: white;
     float: left;
     width: 100%;
+    box-shadow: 0 0 5px darkgray;
 }
 
 .popup-content {
@@ -141,8 +142,9 @@ ul#wp-gmap-nav li a {
 .gmap_properties tr {
     height: 50px;
 }
-.gmap_properties tr .regular-text{
-    width: 24em !important;
+
+.gmap_properties tr .regular-text {
+    width: 23em !important;
 }
 
 /******* To Preview Map ******/
@@ -156,17 +158,87 @@ ul#wp-gmap-nav li a {
 }
 
 /**********To view contact form ***********/
-.srm_gmap_contact_area{
+.srm_gmap_contact_area {
     width: 50%;
     float: left;
     padding: 10px;
 }
-.srm_gmap_video_area{
+
+.srm_gmap_instructions {
     width: 42%;
     float: left;
     margin-left: 2%;
     padding: 10px;
 }
-.wp_gmap_contact_field{
+
+.srm_gmap_instructions ul {
+    padding: 0;
+    margin: 0;
+}
+
+.srm_gmap_instructions ul li {
+    background-color: #f0f0f0;
+    padding: 6px;
+    border: 1px solid #e0e0e0;
+    margin: 5px 0;
+}
+
+.srm_gmap_instructions ul li:before {
+    content: '> ';
+    font-weight: bold;
+}
+
+.srm_gmap_instructions ul li:hover {
+
+}
+
+.srm_gmap_instructions ul li a {
+    text-decoration: none;
+}
+
+.srm_gmap_video_area {
+    width: 95%;
+    float: left;
+    margin-left: 2%;
+    clear: both;
+    text-align: center;
+    padding-top: 35px;
+}
+
+.wp_gmap_contact_field {
     width: 100% !important;
+}
+
+/*updated at 06/04/2019*/
+/*Menu section*/
+.gmap_header_section {
+    width: 100%;
+}
+
+.gmap_header_section_left {
+    width: 58%;
+    float: left;
+}
+
+.gmap_header_section_right {
+    width: 40%;
+    float: left;
+}
+
+.gmap_donate_button {
+    float: left;
+    margin-top: 5px;
+}
+
+.gmap_donate_button img {
+    height: 54px;
+}
+
+.gmap_get_pro_version {
+    float: left;
+    padding: 11px 16px !important;
+    height: auto !important;
+    font-weight: bold !important;
+    margin: 5px 0 0 5px !important;
+    color: #238b68 !important;;
 }

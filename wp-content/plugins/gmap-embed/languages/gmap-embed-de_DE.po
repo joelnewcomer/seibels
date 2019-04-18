@@ -80,8 +80,8 @@ msgid "The plugin will help to google map Embed in post and pages also in sideba
 msgstr "Dieses Plugin hilft dabei Google Maps in Beiträgen und Seiten, sowie als Widget in der Seitenleiste, einzubinden."
 
 #. Author of the plugin/theme
-msgid "SRMILON"
-msgstr "SRMILON"
+msgid "srmilon.info"
+msgstr "srmilon.info"
 
 #: includes/wpgmap_create.php:92 includes/wpgmap_edit.php:108
 msgid "Show in marker infowindow"
@@ -135,8 +135,8 @@ msgstr "Breitengrad, Längengrad"
 #. Plugin URI of the plugin/theme
 #. #-#-#-#-#  gmap-embed-code.pot (Google Map Embed 1.2.5)  #-#-#-#-#
 #. Author URI of the plugin/theme
-msgid "http://www.srmilon.com"
-msgstr "http://www.srmilon.com"
+msgid "http://www.srmilon.info"
+msgstr "http://www.srmilon.info"
 
 #: includes/wpgmap_create.php:63 includes/wpgmap_edit.php:73
 msgid "Height (px)"

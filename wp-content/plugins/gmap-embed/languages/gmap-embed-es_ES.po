@@ -72,8 +72,8 @@ msgid "Disable zoom on mouse scroll"
 msgstr "Desactivar el zoom para el scroll del ratón."
 
 #. Author of the plugin/theme
-msgid "SRMILON"
-msgstr "SRMILON"
+msgid "srmilon.info"
+msgstr "srmilon.info"
 
 #. Description of the plugin/theme
 msgid "The plugin will help to embed Google Map in post and pages also in sidebar as widget."

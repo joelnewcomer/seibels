@@ -80,8 +80,8 @@ msgid "Disable zoom on mouse scroll"
 msgstr "Deaktiver zoom med musen"
 
 #. Author of the plugin/theme
-msgid "SRMILON"
-msgstr "SRMILON"
+msgid "srmilon.info"
+msgstr "srmilon.info"
 
 #. Description of the plugin/theme
 msgid ""
@@ -95,8 +95,8 @@ msgstr ""
 #. Plugin URI of the plugin/theme
 #. #-#-#-#-#  gmap-embed-code.pot (Google Map Embed 1.3.0)  #-#-#-#-#
 #. Author URI of the plugin/theme
-msgid "http://www.srmilon.com"
-msgstr "http://www.srmilon.com"
+msgid "http://www.srmilon.info"
+msgstr "http://www.srmilon.info"
 
 #. Plugin Name of the plugin/theme
 msgid "Google Map Embed"

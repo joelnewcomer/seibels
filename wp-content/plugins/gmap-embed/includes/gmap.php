@@ -15,51 +15,62 @@ if (isset($_GET['page'])) {
         <script type="text/javascript"
                 src="<?php echo esc_url(plugins_url("../assets/js/srm_gmap_loader.js", __FILE__)); ?>"></script>
         <div id="gmap_container_inner">
-            <!--modal contents-->
+            <!--contents-->
 
-            <ul id="wp-gmap-nav">
-                <li class="<?php echo ($wpgmap_page == 'wpgmapembed' && $wpgmap_tag == '') ? 'active' : ''; ?>">
-                    <a href="<?php echo admin_url(); ?>admin.php?page=wpgmapembed" data-id="wp-gmap-all"
-                       class="media-menu-item"><?php _e('All Maps', 'gmap-embed'); ?></a>
-                </li>
-                <li class="<?php echo $wpgmap_tag == 'new' ? 'active' : ''; ?>">
-                    <a href="<?php echo esc_url(admin_url() . 'admin.php?page=wpgmapembed&tag=new'); ?>"
-                       data-id="wp-gmap-new"
-                       class="media-menu-item"><?php _e('Create New Map', 'gmap-embed'); ?></a>
-                </li>
-                <li class="<?php echo $wpgmap_tag == 'settings' ? 'active' : ''; ?>">
-                    <a href="<?php echo esc_url(admin_url() . 'admin.php?page=wpgmapembed&tag=settings'); ?>"
-                       data-id="wp-gmap-settings"
-                       class="media-menu-item"><?php _e('Settings', 'gmap-embed'); ?></a>
-                </li>
-                <li class="<?php echo $wpgmap_tag == 'settings' ? 'active' : ''; ?>">
-                    <a href="<?php echo esc_url(admin_url() . 'admin.php?page=wpgmapembed&tag=contact'); ?>"
-                       data-id="wp-gmap-settings"
-                       class="media-menu-item"><?php _e('Having Problem?', 'gmap-embed'); ?></a>
-                </li>
-                <li>
-                    <a target="_blank" href="https://www.youtube.com/watch?v=Lak-tJjGjl8" class="media-menu-item">
-                        <?php _e('Need Help ?', 'gmap-embed'); ?></a>
-                </li>
-                <span class="spinner" style="margin-right: 20px !important;float:right"></span>
+            <!--            Menu area-->
+            <div class="gmap_header_section">
 
-                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q"><img
-                            alt="Donate"
-                            src="<?php echo esc_url(plugins_url("../assets/images/paypal.png", __FILE__)); ?>"
-                            width="150"/></a>
+                <!--                Left area-->
+                <div class="gmap_header_section_left">
+                    <ul id="wp-gmap-nav">
+                        <li class="<?php echo ($wpgmap_page == 'wpgmapembed' && $wpgmap_tag == '') ? 'active' : ''; ?>">
+                            <a href="<?php echo admin_url(); ?>admin.php?page=wpgmapembed" data-id="wp-gmap-all"
+                               class="media-menu-item"><?php _e('All Maps', 'gmap-embed'); ?></a>
+                        </li>
+                        <li class="<?php echo $wpgmap_tag == 'new' ? 'active' : ''; ?>">
+                            <a href="<?php echo esc_url(admin_url() . 'admin.php?page=wpgmapembed&tag=new'); ?>"
+                               data-id="wp-gmap-new"
+                               class="media-menu-item"><?php _e('Create New Map', 'gmap-embed'); ?></a>
+                        </li>
+                        <li class="<?php echo $wpgmap_tag == 'settings' ? 'active' : ''; ?>">
+                            <a href="<?php echo esc_url(admin_url() . 'admin.php?page=wpgmapembed&tag=settings'); ?>"
+                               data-id="wp-gmap-settings"
+                               class="media-menu-item"><?php _e('Settings', 'gmap-embed'); ?></a>
+                        </li>
+                        <li class="<?php echo $wpgmap_tag == 'contact' ? 'active' : ''; ?>">
+                            <a href="<?php echo esc_url(admin_url() . 'admin.php?page=wpgmapembed&tag=contact'); ?>"
+                               data-id="wp-gmap-settings"
+                               class="media-menu-item"><?php _e('Having Problem?', 'gmap-embed'); ?></a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.youtube.com/watch?v=Lak-tJjGjl8"
+                               class="media-menu-item">
+                                <?php _e('See Video', 'gmap-embed'); ?></a>
+                        </li>
+                    </ul>
+                </div>
 
-                <a target="_blank"
-                   href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=WVPQNC6CJ6T4Q"
-                   class="button media-button button-default button-large" style="
-    padding: 7px 16px;
-    height: auto;
-    font-weight: bold;
-    margin: 20px 0px 0px 24px;
-">GET PRO VERSION</a>
+                <!--    Right Area-->
+                <div class="gmap_header_section_right">
+                    <a class="gmap_donate_button" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q">
+                        <img alt="Donate"
+                             src="<?php echo esc_url(plugins_url("../assets/images/paypal.png", __FILE__)); ?>"
+                             width="150"/>
+                    </a>
 
-            </ul>
+                    <a target="_blank"
+                       href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=WVPQNC6CJ6T4Q"
+                       class="button media-button button-default button-large gmap_get_pro_version">
+                        GET PRO VERSION
+                    </a>
 
-            <div id="wp-gmap-tabs">
+                    <a onclick="window.open('https://tawk.to/chat/5ca5dea51de11b6e3b06dc41/default', 'LIVE CHAT', 'width=500,height=300')" style="float: right;cursor: pointer;">
+                        <img src="<?php echo esc_url(plugins_url("../assets/images/live_chat.png", __FILE__)); ?>" width="110"/>
+                    </a>
+                </div>
+            </div>
+
+            <div id="wp-gmap-tabs" style="float: left;width: 100%;">
                 <?php
                 if (isset($_GET['message'])) {
                     ?>

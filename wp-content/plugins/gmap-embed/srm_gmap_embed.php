@@ -1,13 +1,13 @@
 <?php
 /*
   Plugin Name: Google Map Embed
-  Plugin URI: http://www.srmilon.com
+  Plugin URI: http://www.srmilon.info
   Description: The plugin will help to embed Google Map in post and pages also in sidebar as widget.
-  Author: SRMILON
+  Author: srmilon.info
   Text Domain: gmap-embed
   Domain Path: /languages
-  Author URI: http://www.srmilon.com
-  Version: 1.4.2
+  Author URI: http://www.srmilon.info
+  Version: 1.4.4
  */
 
 if (!defined('ABSPATH')) exit;
@@ -59,7 +59,7 @@ if (!class_exists('srm_gmap_embed_main')) {
             if ($pagenow == 'post.php' || $pagenow == 'post-new.php' || @$_GET['page'] == 'wpgmapembed') {
                 wp_enqueue_script('wp-gmap-api', 'https://maps.google.com/maps/api/js?key=' . $this->wpgmap_api_key . '&libraries=places', array('jquery'), '20161019', true);
                 wp_enqueue_script('wp-gmap-custom-js', plugins_url('assets/js/custom.js', __FILE__), array('wp-gmap-api'), '20161019', false);
-                wp_enqueue_style('wp-gmap-embed-css', plugins_url('assets/css/wp-gmap-style.css', __FILE__),rand(999,9999));
+                wp_enqueue_style('wp-gmap-embed-css', plugins_url('assets/css/wp-gmap-style.css', __FILE__), rand(999, 9999));
             }
         }
 
@@ -71,10 +71,10 @@ if (!class_exists('srm_gmap_embed_main')) {
         {
 
             //create new top-level menu
-            add_menu_page($this->plugin_name, $this->plugin_name, 'administrator', 'wpgmapembed', array($this, 'srm_gmap_main'), 'dashicons-location',11);
+            add_menu_page($this->plugin_name, $this->plugin_name, 'administrator', 'wpgmapembed', array($this, 'srm_gmap_main'), 'dashicons-location', 11);
 
             //to create sub menu
-            add_submenu_page('wpgmapembed', __("Add new Map","gmap-embed"), __("Add New", "gmap-embed"), 'administrator', 'wpgmapembed&tag=new', array($this, 'srm_gmap_new'), 'dashicons-location');
+            add_submenu_page('wpgmapembed', __("Add new Map", "gmap-embed"), __("Add New", "gmap-embed"), 'administrator', 'wpgmapembed&tag=new', array($this, 'srm_gmap_new'), 'dashicons-location');
         }
 
         public function gmap_register_fields()
@@ -180,7 +180,7 @@ if (!class_exists('srm_gmap_embed_main')) {
             $content = '';
             $args = array(
                 'post_type' => 'wpgmapembed',
-                'posts_per_page'=>-1
+                'posts_per_page' => -1
             );
             $mapsList = new WP_Query($args);
 
@@ -200,7 +200,7 @@ if (!class_exists('srm_gmap_embed_main')) {
                                         </div>
                                         <div class="wp-gmap-single-action">
                                             <a href="?page=wpgmapembed&tag=edit&id=' . get_the_ID() . '" class="button media-button button-primary button-large wpgmap-edit" data-id="' . get_the_ID() . '">
-                                                '.__('Change','gmap-embed').'
+                                                ' . __('Change', 'gmap-embed') . '
                                             </a>
                                             <button type="button"
                                                     class="button media-button button-danger button-large wpgmap-insert-delete" data-id="' . get_the_ID() . '" style="background-color: red;color: white;opacity:0.7;">
@@ -210,9 +210,38 @@ if (!class_exists('srm_gmap_embed_main')) {
                                     </div>';
                 }
             } else {
-                $content = __("You have not created any Map yet. ","gmap-embed");
-                $content .= '<a href="' . esc_url(admin_url()) . 'admin.php?page=wpgmapembed&amp;tag=new"
-                                           data-id="wp-gmap-new" class="media-menu-item">'.__("Create New Map","gmap-embed").'</a>';
+                $content = __("You have not created any Map yet. ", "gmap-embed");
+                $content .= '<a style="padding: 9px;border-radius: 5px;background-color: #0073aa;color: white;text-decoration: none;font-weight: bold;font-size: 11px;" href="' . esc_url(admin_url()) . 'admin.php?page=wpgmapembed&amp;tag=new"
+                                           data-id="wp-gmap-new" class="media-menu-item">' . __("Create New Map", "gmap-embed") . '</a>';
+                $content .= '<br/><br/><div class="srm_gmap_instructions">
+                <h3>Frequently asked questions</h3>
+                <ul>
+                    <li>
+                        <a href="http://srmilon.info/2019/02/18/how-to-get-google-map-api-key" target="_blank">How to get API
+                            key?</a>
+                    </li>
+                    <li>
+                        <a href="http://srmilon.info/2019/03/31/how-to-get-your-license-key" target="_blank">How to get your
+                            License key?</a>
+                    </li>
+                    <li>
+                        <a href="http://srmilon.info/2019/03/31/how-to-add-google-map-in-your-wordpress-page" target="_blank">How to
+                            add Google Map in page?</a>
+                    </li>
+                    <li>
+                        <a href="http://srmilon.info/2019/03/31/how-to-add-google-map-in-your-wordpress-post" target="_blank">How to
+                            add Google Map in post?</a>
+                    </li>
+                    <li>
+                        <a href="http://srmilon.info/2019/03/31/how-to-add-google-map-in-sidebar-as-widget" target="_blank">How to
+                            add Google Map in Sidebar as widget?</a>
+                    </li>
+                    <li>
+                        <a href="http://srmilon.info/2019/03/31/can-not-load-the-map-correctly" target="_blank">Do you see "the page
+                            can\'t load the map correctly"?</a>
+                    </li>
+                </ul>
+            </div>';
             }
 
             echo $content;
