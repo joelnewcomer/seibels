@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Flow-Flow package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Flow-Flow 4.1.12\n"
+"Project-Id-Version: Flow-Flow 4.1.15\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/flow-flow\n"
-"POT-Creation-Date: 2019-04-11 22:12:07+00:00\n"
+"POT-Creation-Date: 2019-04-24 09:07:47+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,19 +13,19 @@ msgstr ""
 "Language-Team: Team Name <team@example.com>\n"
 "X-Generator: grunt-wp-i18n 0.4.9\n"
 
-#: includes/FlowFlowActivator.php:43
+#: includes/FlowFlowActivator.php:79
 msgid "Social Stream"
 msgstr ""
 
-#: includes/FlowFlowActivator.php:47
+#: includes/FlowFlowActivator.php:83
 msgid "Flow-Flow plugin social stream"
 msgstr ""
 
-#: includes/FlowFlowActivator.php:49
+#: includes/FlowFlowActivator.php:85
 msgid "Social"
 msgstr ""
 
-#: includes/FlowFlowActivator.php:57
+#: includes/FlowFlowActivator.php:93
 msgid "Choose stream to place on page:"
 msgstr ""
 

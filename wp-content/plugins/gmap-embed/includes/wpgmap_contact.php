@@ -110,7 +110,8 @@
 </div>
 
 <div class="srm_gmap_video_area">
-    <iframe width="100%" height="520" src="https://www.youtube.com/embed/Lak-tJjGjl8" frameborder="0"
+    <iframe width="100%" height="520" src="https://www.youtube.com/embed/aeiycD9m_ko" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			
 </div>
 

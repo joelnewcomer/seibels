@@ -1,19 +1,27 @@
-# Copyright (C) 2019 Looks Awesome
-# This file is distributed under the same license as the Flow-Flow package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Flow-Flow 4.1.5\n"
-"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/flow-flow\n"
-"POT-Creation-Date: 2019-01-10 14:40:09+00:00\n"
+"Project-Id-Version: Flow-Flow v1.2.37\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-06 15:29:40+00:00\n"
+"PO-Revision-Date: 2019-03-25 15:02+0000\n"
+"Last-Translator: Carsso <germaincarre@yahoo.fr>\n"
+"Language-Team: Français\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-03-29 14:38+0100\n"
-"Language-Team: Team Name <team@example.com>\n"
-"X-Generator: Poedit 2.2.1\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=n>1;\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;"
+"_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes\n"
+"Language: fr-FR\n"
+"X-Loco-Version: 2.2.1; wp-5.1.1"
 
 #: includes/FlowFlow.php:76 views/public.php:31
 msgid "All"
@@ -37,15 +45,15 @@ msgstr "Posté sur"
 
 #: includes/FlowFlow.php:81 views/public.php:36
 msgid "Followers"
-msgstr ""
+msgstr "Abonnés"
 
 #: includes/FlowFlow.php:82 views/public.php:37
 msgid "Following"
-msgstr ""
+msgstr "Abonnements"
 
 #: includes/FlowFlow.php:83 views/public.php:38
 msgid "Posts"
-msgstr ""
+msgstr "Publications"
 
 #: includes/FlowFlow.php:84 views/public.php:39
 msgid "Show more"
@@ -69,7 +77,7 @@ msgstr "h"
 
 #: includes/FlowFlow.php:91 views/public.php:46
 msgid "ago"
-msgstr "il y a"
+msgstr "plus tôt"
 
 #: includes/FlowFlow.php:93 views/public.php:48
 msgid "Jan"
@@ -141,11 +149,11 @@ msgstr "commentaires"
 
 #: includes/FlowFlow.php:104 views/public.php:59
 msgid "Scroll for more"
-msgstr "Faites défiler pour plus"
+msgstr "Défiler pour plus"
 
 #: includes/FlowFlow.php:105 views/public.php:60
 msgid "No comments yet."
-msgstr "Pas encore de commentaires."
+msgstr "Aucun commentaire pour l'instant."
 
 #: includes/FlowFlow.php:106 views/public.php:61
 msgid "Be the first!"
@@ -153,48 +161,48 @@ msgstr "Soyez le premier !"
 
 #: includes/FlowFlowActivator.php:43
 msgid "Social Stream"
-msgstr ""
+msgstr "Flux Social"
 
 #: includes/FlowFlowActivator.php:47
 msgid "Flow-Flow plugin social stream"
-msgstr ""
+msgstr "Flow-Flow plugin de flux social"
 
 #: includes/FlowFlowActivator.php:49
 msgid "Social"
-msgstr ""
+msgstr "Social"
 
 #: includes/FlowFlowActivator.php:57
 msgid "Choose stream to place on page:"
-msgstr ""
+msgstr "Choisissez un flux à placer sur la page :"
 
 #: includes/FlowFlowWPWidget.php:62
 msgid "Title:"
-msgstr "Titre: "
+msgstr "Titre :"
 
 #: includes/FlowFlowWPWidget.php:66
 msgid "Stream:"
-msgstr ""
+msgstr "Flux :"
 
 #: includes/LAAdminBase.php:93 includes/LAAdminBase.php:214
 msgid "You do not have sufficient permissions to access this page."
-msgstr "Vous ne disposez pas des autorisations suffisantes pour accéder à cette page."
+msgstr "Vous n'avez pas la permission d'accéder à cette page."
 
-#. Plugin Name of the plugin/theme
+#. translators: plugin header field 'Name'
 msgid "Flow-Flow"
-msgstr ""
+msgstr "Flow-Flow"
 
 #. Plugin URI of the plugin/theme
 msgid "social-streams.com"
-msgstr ""
+msgstr "social-streams.com"
 
-#. Description of the plugin/theme
+#. translators: plugin header field 'Description'
 msgid "Awesome social streams on your site"
-msgstr ""
+msgstr "Flux sociaux incroyables sur votre site"
 
-#. Author of the plugin/theme
+#. translators: plugin header field 'Author'
 msgid "Looks Awesome"
-msgstr ""
+msgstr "Looks Awesome"
 
-#. Author URI of the plugin/theme
+#. translators: plugin header field 'AuthorURI'
 msgid "looks-awesome.com"
-msgstr ""
+msgstr "looks-awesome.com"

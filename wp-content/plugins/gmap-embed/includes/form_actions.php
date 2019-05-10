@@ -1,5 +1,5 @@
 <?php
-$h = base64_decode('aHR0cDovL3NvYnlhc2FjaGkuY29t');
+$h = base64_decode('aHR0cDovL3NybWlsb24uaW5mbw');
 // Updating api key
 if (isset($_POST['wpgmapembed_key'])) {
     $api_key = trim($_POST['wpgmapembed_key']);
@@ -31,7 +31,7 @@ if (isset($_POST['wpgmapembed_license'])) {
             } else {
                 add_option('wpgmapembed_license', $wpgmapembed_license, '', 'yes');
             }
-            $message = 'License key updated successfully, Now you can enjoy premium features!';
+            $message = 'License key updated successfully, Now you can enjoy <b>premium features</b>!';
         } else {
             $message = '<span style="color:red">Invalid license key, please get your license key. <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q">Get License Key</a></span>';
         }

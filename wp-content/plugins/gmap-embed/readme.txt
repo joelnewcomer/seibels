@@ -5,7 +5,7 @@ Tags: google map, gmap, google map embed, wp map, wp map embed, map embed, best 
 Requires at least: 2.9
 Tested up to: 5.1
 Version: 1.4.4
-Stable tag: 1.4.4
+Stable tag: 1.4.5
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -29,7 +29,7 @@ After July 16, 2018, Google has changed its policy. **You need to add billing in
 To have continued the update, please donate for the plugin.
 [Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q)
 
-https://www.youtube.com/watch?v=Lak-tJjGjl8
+https://www.youtube.com/watch?v=aeiycD9m_ko
 
 ### Features of WP Google Map Plugin-Lite version(FREE):
 
@@ -120,7 +120,7 @@ Go to **Pages** =-> **Add New** then you will see a button named "Embed Google M
 Go to **Appearance** =-> **Widget** then you will see a widget named "Google Map SRM ". Drag it to any widget area and enter Google Map Shortcode then save it and the map will appear in your sidebar or footer whatever you selected. Enjoy!
 
 = How do I get a Google Map API key? =
-See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get idea.
+See the [Video](https://www.youtube.com/watch?v=aeiycD9m_ko) ,hope you will get idea.
 
 == Screenshots ==
 
@@ -274,3 +274,7 @@ See the [Video](https://www.youtube.com/watch?v=Lak-tJjGjl8) ,hope you will get 
 
 = 1.4.4 =
 * LIVE CHAT option added for users.
+
+
+= 1.4.5 =
+* Plugin Settings option updated

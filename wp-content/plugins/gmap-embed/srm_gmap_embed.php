@@ -7,7 +7,7 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: http://www.srmilon.info
-  Version: 1.4.4
+  Version: 1.4.5
  */
 
 if (!defined('ABSPATH')) exit;
@@ -366,3 +366,19 @@ if ($pagenow == 'post.php' || $pagenow == 'post-new.php') {
 }
 
 load_plugin_textdomain('gmap-embed', false, dirname(plugin_basename(__FILE__)) . '/languages');
+
+//updated at 07.04.2019 14:20:00
+
+add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'gmap_srm_settings_link');
+function gmap_srm_settings_link( $links ) {
+	$links[] = '<a href="' .
+		admin_url( 'admin.php?page=wpgmapembed' ) .
+		'">' . __('Settings') . '</a>';
+	return $links;
+}
+
+add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'gmap_srm_settings_linka');
+function gmap_srm_settings_linka( $links ) {
+	$links[] = '<a target="_blank" style="color: #11967A;font-weight:bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q">' . __('Upgrade To Premium') . '</a>';
+	return $links;
+}

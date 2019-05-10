@@ -83,6 +83,9 @@ abstract class LADBManager {
 	 */
 	public final function get_stream_settings(){
 
+        // testing fatal error logging
+	    // trigger_error("Flow-Flow error", E_USER_ERROR);
+
         if (FF_USE_WP) {
             if (!check_ajax_referer( 'flow_flow_nonce', 'security', false ) ) {
                 die( json_encode( array('error' => 'not_allowed') ) );
@@ -264,7 +267,13 @@ abstract class LADBManager {
 			echo json_encode( $response );
 		}catch (\Exception $e){
 			error_log('ff_save_settings_fn error:');
-			error_log($e->getMessage());
+			$msg = $e->getMessage();
+
+			if ( strpos( $msg, 'Connection timed out after') !== false ) {
+			    $msg .= '. Failed to connect to http://flow.looks-awesome.com which validates purchase code. Please ask help from your hosting support and tell them curl_exec exits with connection timeout error on line 889 of wp-content/plugins/flow-flow/includes/db/LADBManager.php';
+            }
+
+			error_log( $msg );
 			error_log($e->getTraceAsString());
 			FFDB::rollbackAndClose();
 			die($e->getMessage());
@@ -735,7 +744,7 @@ abstract class LADBManager {
 	public function setOrders($feedId){
 		$conn = FFDB::conn();
 		$conn->query('SET @ROW = -1;');//test mysql_query("SELECT @ROW = -1");
-		return $conn->query('UPDATE ?n SET `rand_order` = RAND(), `smart_order` = @ROW := @ROW+1 WHERE `feed_id`=?s', $this->posts_table_name, $feedId);
+		return $conn->query('UPDATE ?n SET `rand_order` = RAND(), `smart_order` = @ROW := @ROW+1 WHERE `feed_id`=?s ORDER BY post_timestamp DESC', $this->posts_table_name, $feedId);
 	}
 	
 	public function removeOldRecords($c_count){
