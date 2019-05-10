@@ -101,7 +101,7 @@ jQuery(document).on( "click", ".ppt-tab-choice", function() {
 	<div class="grid-container">
 		<div class="grid-x">
 			<div class="large-12 cell text-center">
-				<h2>Partnerships</h2>
+				<h2>Certifications and Partnerships</h2>
 			</div>
 			<div class="large-12 cell">	
 				<?php echo get_field('partnerships_content'); ?>
