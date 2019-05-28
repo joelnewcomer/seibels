@@ -3,9 +3,9 @@ Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q
 Tags: google map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross-browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, maps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, google maps, gprs, gps, gpx, kml, latitude, Longitude, location, location by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
-Tested up to: 5.1
-Version: 1.4.4
-Stable tag: 1.4.5
+Tested up to: 5.2
+Version: 1.4.6
+Stable tag: 1.4.6
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -64,11 +64,12 @@ https://www.youtube.com/watch?v=aeiycD9m_ko
 * **Ability to create Map and Marker as much as you need!**
 
 ### USE AS SHORTCODE IN POST, PAGE, AND SIDEBAR.
-`[gmap-embed id="<Your map ID>"]`
+        `[gmap-embed id="<Your map ID>"]`
 
 
 ### USE AS SHORTCODE IN PHP CODE
-`<?php echo do_shortcode('[gmap-embed id="YOUR MAP ID"]');?>`
+
+		<?php echo do_shortcode('[gmap-embed id="YOUR MAP ID"]');?>
 
 
 ###Important:
@@ -278,3 +279,6 @@ See the [Video](https://www.youtube.com/watch?v=aeiycD9m_ko) ,hope you will get 
 
 = 1.4.5 =
 * Plugin Settings option updated
+
+= 1.4.6 =
+* Removed update to pro once updated to pro version

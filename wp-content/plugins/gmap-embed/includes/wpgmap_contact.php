@@ -20,6 +20,7 @@
                            value="<?php echo get_bloginfo('admin_email'); ?>"
                            id="srm_gmap_email" required=""
                            placeholder="example@mail.com">
+                    <span style="color:red">Please provide a valid email for further communication</span>
                 </td>
             </tr>
             <tr>
