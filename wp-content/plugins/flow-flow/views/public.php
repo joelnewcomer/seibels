@@ -17,7 +17,6 @@ if (FF_USE_WP)
 else
 	$admin = ff_user_can_moderate();
 $id = $stream->id;
-error_log('stream id ' . $id);
 $hash = $context['hashOfStream'];
 $seo = $context['seo'];
 $disableCache = isset($_REQUEST['disable-cache']);

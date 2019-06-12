@@ -83,9 +83,6 @@ abstract class LADBManager {
 	 */
 	public final function get_stream_settings(){
 
-        // testing fatal error logging
-	    // trigger_error("Flow-Flow error", E_USER_ERROR);
-
         if (FF_USE_WP) {
             if (!check_ajax_referer( 'flow_flow_nonce', 'security', false ) ) {
                 die( json_encode( array('error' => 'not_allowed') ) );
