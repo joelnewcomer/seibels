@@ -1,4 +1,19 @@
-## 3.0.41 ##
+## 3.0.43
+
+Jun.16 2019, dev time: 30m
+
+* Fix: Google Fonts URL references in multisites.
+* New: It is now possible to reset Kirki google-font caches by visiting {site-url}/?action=kirki-reset-cache
+
+## 3.0.42
+
+Jun.16 2019, dev time: 2h
+
+* Deprecated: `fontawesome` field was deprecated. If a theme uses this field users will be prompted to install the official Font Awesome plugin from the w.org repository.
+* Fix: Transient for Google Fonts now has a lifetime of 1 day instead of 1 week.
+* Fix: Updated Google Fonts list.
+
+## 3.0.41
 
 Jun.8 2019, dev time: 30m
 
