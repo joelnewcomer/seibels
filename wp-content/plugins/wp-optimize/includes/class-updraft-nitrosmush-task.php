@@ -24,7 +24,6 @@ class Nitro_Smush_Task extends Updraft_Smush_Task {
 	 */
 	public static function is_server_online() {
 
-		global $task_manager;
 		$test_image = WPO_PLUGIN_MAIN_PATH . 'images/icon/wpo.png';
 		$boundary = wp_generate_password(12);
 		$headers  = array( "content-type" => "multipart/form-data; boundary=$boundary" );

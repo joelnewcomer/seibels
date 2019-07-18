@@ -24,7 +24,6 @@ class Re_Smush_It_Task extends Updraft_Smush_Task {
 	 */
 	public static function is_server_online() {
 		
-		global $task_manager;
 		global $wp_version;
 		$test_image = WPO_PLUGIN_MAIN_PATH . 'images/icon/wpo.png';
 		$boundary = wp_generate_password(12);
