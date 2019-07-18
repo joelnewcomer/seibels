@@ -117,7 +117,7 @@ class FlowFlowActivator extends LAActivatorBase{
 				'plugin_url'        => plugin_dir_url(dirname($file).'/'),
 				'admin_url'         => admin_url('admin-ajax.php'),
 				'table_name_prefix' => $wpdb->prefix . 'ff_',
-				'version' 			=> '4.1.16',
+				'version' 			=> '4.1.17',
 				'faq_url' 			=> 'http://docs.social-streams.com/',
 				'count_posts_4init'	=> 30
 		);

@@ -5244,6 +5244,7 @@ section.timeline-section {
         margin-right: 148px;
         position: relative;
         display: block;
+        cursor: pointer;
         float: left;
         width: 156px;
         height: 156px;
@@ -5299,7 +5300,8 @@ section.timeline-section {
           line-height: 30px;
           text-align: center;
           font-family: "open_sansregular";
-          color: #fff; }
+          color: #fff;
+          cursor: pointer; }
         section.timeline-section .timeline-container .timeline-slider .year-container .year-modal {
           text-align: left;
           display: none;

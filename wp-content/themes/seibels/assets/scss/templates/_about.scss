@@ -331,6 +331,7 @@ section.timeline-section {
 				margin-right: 148px;
 				position: relative;
 				display: block;
+				cursor: pointer;
 				float: left;
 				width: 156px;
 				height: 156px;
@@ -396,6 +397,7 @@ section.timeline-section {
 					text-align: center;
 					font-family: "open_sansregular";
 					color: #fff;
+					cursor: pointer;
 				}				
 				.year-modal {
 					text-align: left;

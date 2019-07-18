@@ -91,6 +91,9 @@
             <a href="http://srmilon.info/2019/03/31/how-to-get-your-license-key" target="_blank">How to get your
                 License key?</a>
         </li>
+		<li>
+            <a href="http://srmilon.info/2019/07/03/dont-see-embed-google-map-button-in-new-editor" target="_blank">Don’t see “Embed Google Map” button in new Editor?</a>
+        </li>
         <li>
             <a href="http://srmilon.info/2019/03/31/how-to-add-google-map-in-your-wordpress-page" target="_blank">How to
                 add Google Map in page?</a>
