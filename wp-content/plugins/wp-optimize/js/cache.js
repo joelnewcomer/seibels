@@ -115,8 +115,8 @@ var WP_Optimize_Cache = function (send_command) {
 				}
 			} else if (response.hasOwnProperty('error')) {
 				alert(response.error);
-				console.log('GZIP status error code: ' + response.code);
-				console.log('GZIP status error message: ' + response.message);
+				console.log('Gzip status error code: ' + response.code);
+				console.log('Gzip status error message: ' + response.message);
 			}
 		});
 	});

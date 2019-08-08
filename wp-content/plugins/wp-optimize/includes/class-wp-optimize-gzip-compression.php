@@ -104,8 +104,14 @@ class WP_Optimize_Gzip_Compression {
 		if (is_wp_error($is_gzip_compression_enabled)) return $is_gzip_compression_enabled;
 
 		// if Gzip is not enabled but we have added settings and Apache modules nt loaded then return error.
-		if (false == $is_gzip_compression_enabled && $this->is_gzip_compression_section_exists() && false === $this->_wp_optimize->is_apache_module_loaded(array('mod_filter', 'mod_deflate'))) {
-			return new WP_Error('Gzip', __('We successfully added Gzip compression settings into .htaccess file. But it seems one of Apache modules - mod_filter or mod_deflate is not active.', 'wp-optimize'));
+		if (false == $is_gzip_compression_enabled && $this->is_gzip_compression_section_exists()) {
+			if (false === $this->_wp_optimize->is_apache_module_loaded(array('mod_filter', 'mod_deflate'))) {
+				return new WP_Error('gzip_missing_module', __('We successfully added Gzip compression settings into .htaccess file.', 'wp-optimize').' '.__('However, the test file we fetched was not Gzip-compressed.', 'wp-optimize').' '.__('It seems one of Apache modules - mod_filter or mod_deflate - is not active.', 'wp-optimize'));
+			} elseif (WP_Optimize()->is_apache_server()) {
+				return new WP_Error('gzip_missing_module', __('We successfully added Gzip compression settings into .htaccess file.', 'wp-optimize').' '.__('However, the test file we fetched was not Gzip-compressed.', 'wp-optimize').' '.__('Possible causes include that Apache (your webserver) is not configured to allow .htaccess files to take effect, or one of Apache modules - mod_filter or mod_deflate - is not active, or the webserver is configured to disallow Gzip compression.', 'wp-optimize').' '.__('You should speak to your web hosting support to find how to enable it.', 'wp-optimize'));
+			} else {
+				return new WP_Error('gzip_unsuccessful', __('We successfully added Gzip compression settings into .htaccess file.', 'wp-optimize').' '.__('However, the test file we fetched was not Gzip-compressed.', 'wp-optimize').' '.__('You should speak to your web hosting support to find how to enable it.', 'wp-optimize'));
+			}
 		}
 
 		WP_Optimize()->get_options()->update_option('is_gzip_compression_enabled', $is_gzip_compression_enabled);

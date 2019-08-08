@@ -136,7 +136,7 @@ class Nitro_Smush_Task extends Updraft_Smush_Task {
 		if ($compressed_image) {
 			return $compressed_image;
 		} else {
-			$this->fail("invalid_repsonse", "The Smush process failed with an invalid response from the server");
+			$this->fail("invalid_response", "The Smush process failed with an invalid response from the server");
 			return false;
 		}
 	}

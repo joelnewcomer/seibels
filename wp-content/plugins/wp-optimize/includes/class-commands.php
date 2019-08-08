@@ -385,7 +385,7 @@ class WP_Optimize_Commands {
 	 */
 	public function get_gzip_compression_status() {
 		$status = WP_Optimize()->get_gzip_compression()->is_gzip_compression_enabled(true);
-		return is_wp_error($status) ? array('error' => __('We could not determine if GZIP compression is enabled.', 'wp-optimize'), 'code' => $status->get_error_code(), 'message' => $status->get_error_message()) : array('status' => $status);
+		return is_wp_error($status) ? array('error' => __('We could not determine if Gzip compression is enabled.', 'wp-optimize'), 'code' => $status->get_error_code(), 'message' => $status->get_error_message()) : array('status' => $status);
 	}
 
 	/**

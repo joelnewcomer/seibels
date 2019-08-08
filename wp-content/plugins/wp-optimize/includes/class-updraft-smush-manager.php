@@ -73,7 +73,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 		$this->add_logger($this->logger);
 
 		add_action('wp_ajax_updraft_smush_ajax', array($this, 'updraft_smush_ajax'));
-		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
+		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'), 9);
 		add_action('add_attachment', array($this, 'autosmush_create_task'));
 		add_action('ud_task_initialised', array($this, 'set_task_logger'));
 		add_action('ud_task_started', array($this, 'set_task_logger'));
@@ -158,7 +158,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 		$task_name = $this->get_associated_task($server);
 
 		$description = "$task_name with attachment ID : ".$post_id.", autocreated on : ".date("F d, Y h:i:s", time());
-		$task = call_user_func(array($task_name, 'create_task'), 'smush', $description, $options);
+		$task = call_user_func(array($task_name, 'create_task'), 'smush', $description, $options, $task_name);
 		
 		if ($task) $task->add_logger($this->logger);
 		$this->log($description);
@@ -202,7 +202,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 		$task_name = $this->get_associated_task($server);
 		$description = "$task_name - attachment ID : ". $image. ", started on : ". date("F d, Y h:i:s", time());
 
-		$task = call_user_func(array($task_name, 'create_task'), 'smush', $description, $options);
+		$task = call_user_func(array($task_name, 'create_task'), 'smush', $description, $options, $task_name);
 		$task->add_logger($this->logger);
 		$this->clear_cached_data();
 
@@ -294,7 +294,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 			$task_name = $this->get_associated_task($server);
 
 			$description = "$task_name - Attachment ID : ". intval($image['attachment_id']) . ", Started on : ". date("F d, Y h:i:s", time());
-			$task = call_user_func(array($task_name, 'create_task'), 'smush', $description, $options);
+			$task = call_user_func(array($task_name, 'create_task'), 'smush', $description, $options, $task_name);
 			$task->add_logger($this->logger);
 		}
 
@@ -486,7 +486,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 	 */
 	public function add_smush_metabox($post) {
 
-		if (!wp_attachment_is_image($post)) return;
+		if (!wp_attachment_is_image($post->ID)) return;
 
 		if (!file_exists(get_attached_file($post->ID))) {
 			return;
@@ -709,6 +709,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 
 		$enqueue_version = (defined('WP_DEBUG') && WP_DEBUG) ? WPO_VERSION.'.'.time() : WPO_VERSION;
 		$min_or_not = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
+		$min_or_not_internal = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '-'. str_replace('.', '-', WPO_VERSION). '.min';
 		
 		$js_variables = $this->smush_js_translations();
 		$js_variables['ajaxurl'] = admin_url('admin-ajax.php');
@@ -717,8 +718,8 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 		$js_variables['smush_ajax_nonce'] = wp_create_nonce('updraft-task-manager-ajax-nonce');
 
 		wp_enqueue_script('block-ui-js', WPO_PLUGIN_URL.'js/jquery.blockUI'.$min_or_not.'.js', array('jquery'), $enqueue_version);
-		wp_enqueue_script('smush-js', WPO_PLUGIN_URL.'js/smush'.$min_or_not.'.js', array('jquery', 'block-ui-js'), $enqueue_version);
-		wp_enqueue_style('smush-css', WPO_PLUGIN_URL.'css/smush'.$min_or_not.'.css', array(), $enqueue_version);
+		wp_enqueue_script('smush-js', WPO_PLUGIN_URL.'js/wposmush'.$min_or_not_internal.'.js', array('jquery', 'block-ui-js'), $enqueue_version);
+		wp_enqueue_style('smush-css', WPO_PLUGIN_URL.'css/smush'.$min_or_not_internal.'.css', array(), $enqueue_version);
 		wp_localize_script('smush-js', 'wposmush', $js_variables);
 	}
 
@@ -1042,6 +1043,8 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 	 */
 	public function add_compress_button_to_media_modal($form_fields, $post) {
 
+		if (!is_admin() || !function_exists('get_current_screen')) return $form_fields;
+	
 		/**
 		 * In media modal get_current_screen() return null or id = 'async-upload' We don't need add smush fields elsewhere.
 		 */
@@ -1051,7 +1054,7 @@ class Updraft_Smush_Manager extends Updraft_Task_Manager_1_2 {
 		/**
 		 * Don't show additional fields for non-image attachments.
 		 */
-		if (!wp_attachment_is_image($post)) return $form_fields;
+		if (!wp_attachment_is_image($post->ID)) return $form_fields;
 
 		ob_start();
 		$this->render_smush_metabox($post);

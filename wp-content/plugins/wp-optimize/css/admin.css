@@ -12,6 +12,14 @@
 	box-shadow: 0 1px 3px rgba(0,0,0,0.13);
 }
 
+#wp-optimize-wrap .widefat thead th, #wp-optimize-wrap .widefat thead td {
+	border-bottom: 1px solid #E1E1E1;
+}
+
+#wp-optimize-wrap .widefat td, #wp-optimize-wrap .widefat th {
+	padding: 8px 10px;
+}
+
 /* big button */
 .wpo_primary_big {
 	padding: 4px 6px !important;

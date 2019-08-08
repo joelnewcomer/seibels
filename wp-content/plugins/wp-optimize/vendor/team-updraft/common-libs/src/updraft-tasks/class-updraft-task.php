@@ -279,7 +279,7 @@ abstract class Updraft_Task_1_1 {
 		
 		$attempts = $this->get_attempts();
 
-		if ($attempts >= self::get_max_attempts()) {
+		if ($attempts >= $this->get_max_attempts()) {
 			$this->fail("max_attempts_exceeded", "Maximum attempts ($attempts) exceeded for task");
 			return false;
 		}
@@ -616,8 +616,8 @@ abstract class Updraft_Task_1_1 {
 	 *
 	 * @return int Max attempts permitted for task type
 	 */
-	public static function get_max_attempts(){
-		return apply_filters("ud_max_attempts", 5, get_called_class());
+	private function get_max_attempts() {
+		return apply_filters('ud_max_attempts', 5, $this);
 	}
 
 	/**
@@ -646,18 +646,18 @@ abstract class Updraft_Task_1_1 {
 	 *
 	 * @param String $type 		  A identifier for the task
 	 * @param String $description A description of the task
-	 * @param Mixed  $options	 A list of options to initialise the task
+	 * @param Mixed  $options	  A list of options to initialise the task
+	 * @param String $task_class  Class name of task; only needed/used on PHP 5.2 (due to lack of late static binding)
 	 *
 	 * @return Updraft_Task|false Task object, false otherwise.
 	 */
-	public static function create_task($type, $description, $options = array()) {
+	public static function create_task($type, $description, $options = array(), $task_class = '') {
 		global $wpdb;
 
 		$user_id = get_current_user_id();
-		$class_identifier = get_called_class();
+		$class_identifier = function_exists('get_called_class') ? get_called_class() : $task_class;
 
-		if (!$user_id)
-			return false;
+		if (!$user_id) return false;
 
 		$sql = $wpdb->prepare("INSERT INTO {$wpdb->base_prefix}tm_tasks (type, user_id, description, class_identifier, status) VALUES (%s, %d, %s, %s, %s)", $type, $user_id, $description, $class_identifier, 'active');
 
@@ -665,15 +665,13 @@ abstract class Updraft_Task_1_1 {
 
 		$task_id = $wpdb->insert_id;
 
-		if (!$task_id)
-			return false;
+		if (!$task_id) return false;
 
 		$_task = $wpdb->get_row("SELECT * FROM {$wpdb->base_prefix}tm_tasks WHERE id = {$task_id} LIMIT 1");
 
 		$task = new $class_identifier($_task);
 
-		if (!$task)
-			return false;
+		if (!$task) return false;
 
 		$task->initialise($options);
 

@@ -16,6 +16,14 @@
 	box-shadow: 0 1px 3px rgba(0,0,0,0.13);
 }
 
+#wp-optimize-wrap .widefat thead th, #wp-optimize-wrap .widefat thead td {
+	border-bottom: 1px solid #E1E1E1;
+}
+
+#wp-optimize-wrap .widefat td, #wp-optimize-wrap .widefat th {
+	padding: 8px 10px;
+}
+
 /* big button */
 
 .wpo_primary_big {
@@ -1416,28 +1424,40 @@ a.wpo-info__trigger span.dashicons {
 	}
 }
 
-.wpo-mobile-menu-opened .wpo-main .wpo-tab-postbox {
+@media (max-width: 782px) {
+
+		.wpo-mobile-menu-opened .wpo-main .wpo-tab-postbox {
+		//	display: none;
+		}
+
+		.wpo-mobile-menu-opened h2.nav-tab-wrapper a {
+			display: block;
+			float: none
+		}
+
+		.wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab {
+		display: block !important;
+	}
+
+		.wpo-mobile-menu-opened h2.nav-tab-wrapper a:not(.nav-tab-active) {
+		background: #f9f9f9 !important;
+	}
+
+		.wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab-active,
+			.wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab-active:focus {
+		border-top: none;
+		border-left: 3px solid;
+	}
+
+		.wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab-active .dashicons, .wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab-active:focus .dashicons, .wpo-mobile-menu-opened h2.nav-tab-wrapper a:focus .dashicons, .wpo-mobile-menu-opened h2.nav-tab-wrapper a:hover .dashicons, .wpo-mobile-menu-opened h2.nav-tab-wrapper a .dashicons {
+					display: inline-block;
+					line-height: inherit;
+	}
+
+		.wpo-mobile-menu-opened h2.nav-tab-wrapper a[role="toggle-menu"] {
 		display: none;
 	}
 
-.wpo-mobile-menu-opened h2.nav-tab-wrapper a {
-		display: block;
-		float: none
-	}
-
-.wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab-active,
-		.wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab-active:focus {
-	border-top: none;
-	border-left: 3px solid;
-}
-
-.wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab-active .dashicons, .wpo-mobile-menu-opened h2.nav-tab-wrapper a.nav-tab-active:focus .dashicons, .wpo-mobile-menu-opened h2.nav-tab-wrapper a:focus .dashicons, .wpo-mobile-menu-opened h2.nav-tab-wrapper a:hover .dashicons, .wpo-mobile-menu-opened h2.nav-tab-wrapper a .dashicons {
-				display: inline-block; 
-				line-height: inherit;
-}
-
-.wpo-mobile-menu-opened h2.nav-tab-wrapper a[role="toggle-menu"] {
-	display: none;
 }
 
 /* Pages MENU */

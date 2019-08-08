@@ -4,6 +4,10 @@
 
 <h2 id="wp-optimize-nav-tab-wrapper__<?php echo esc_attr($page); ?>" class="nav-tab-wrapper">
 
+	<a id="wp-optimize-nav-tab-menu" href="#" class="nav-tab" role="toggle-menu">
+		<span><?php _e('Menu', 'wp-optimize'); ?></span>
+	</a>
+
 <?php
 	foreach ($tabs as $tab_id => $tab) {
 		$tab_icon = '';
@@ -22,13 +26,6 @@
 	</a>
 
 	<?php } ?>
-
-	<a id="wp-optimize-nav-tab-menu" href="#" class="nav-tab" role="toggle-menu">
-		<?php if ($tab_icon) : ?>
-			<span class="dashicons dashicons-menu"></span>
-		<?php endif; ?>
-		<span><?php _e('Menu', 'wp-optimize'); ?></span>
-	</a>
 
 	<span class="wpo-feedback">
 		<a href="#" class="nav-tab">

@@ -4,7 +4,7 @@ Donate link: https://david.dw-perspective.org.uk/donate
 Tags: cache, optimizing, database, image optimize, performance, clean, spam, speed, caching, smush, smushing
 Requires at least: 3.8
 Tested up to: 5.2
-Stable tag: 3.0.0
+Stable tag: 3.0.11
 License: GPLv2+
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -173,6 +173,70 @@ Please check your database for corrupted tables. That can happen, usually your w
 
 
 == Changelog ==
+
+= 3.0.11 - 07/Aug/2019 =
+
+* FIX: Check the results of opendir() when emptying the cache, to prevent a possible infinite loop if it fails
+* FIX: Compatibility issues with WordPress 4.0
+* FIX: Replace function that did not exist on PHP 5.2
+* TWEAK: Add work-around for plugins which call the WP action comment_post incorrectly
+* TWEAK: Change the algorithm for locating file-based-page-cache.php to handle same-server site moves better
+* TWEAK: Prevent an unwanted PHP notice caused by Action Scheduler purges
+
+= 3.0.10 - 30/Jul/2019 =
+
+* TWEAK: If short-circuiting the attachment_fields_to_edit filter result, return the pre-existing value
+* TWEAK: Adjust wpo_delete_files() and related functions with extra sanity checks
+
+= 3.0.9 - 30/Jul/2019 =
+
+* FIX: Fix bug in logic for sending "Content-Encoding: gzip" header that could cause it to be sent prematurely with non-cached pages
+
+= 3.0.8 - 30/Jul/2019 =
+
+* FIX: Lazy-loading regression in recent Premium release
+* FIX: Smush images selection on multisite
+* FIX: Displaying WP-Optimize tabs menu on mobile devices
+* TWEAK: Disable redundant lazy-loading feature when Divi theme is active
+* TWEAK: Improve accuracy of message shown when it is not possible to automatically enable Gzip compression of static resources
+* TWEAK: Only output reasons a page was not cached if the wp_footer action was run
+
+= 3.0.7 - 25/Jul/2019 =
+
+* FIX: Fix some logic bugs related to the decision whether to send gzip-encoded cached content
+* FEATURE: To aid debugging if WP_DEBUG is turned on then if a page was *not* cached, then the HTML source will now contain the reason(s) why not in the footer
+* TWEAK: The is_user_logged_in() function is not necessarily available during a WP 'technical difficulties' scenario
+* TWEAK: Purge site homepage cache after updating post or publishing a new post (can be over-ridden with the filter wpo_delete_cached_homepage_on_post_update)
+
+= 3.0.6 - 25/Jul/2019 =
+
+* FIX: Regression causing incorrect JavaScript filenames in the Premium release in 3.0.5
+* TWEAK: Also add cache-busting for the compiled handlebars file
+* TWEAK: Change the handlebars enqueue handle to prevent double loading
+
+= 3.0.5 - 23/Jul/2019 =
+
+* FIX: Short-circuit Updraft_Smush_Manager::add_compress_button_to_media_modal() outside of a dashboard context, so that plugins or themes that hook into some dashboard hooks outside of that context can't cause fatal errors
+* TWEAK: Added suffixes with WP-Optimize version number to js, css files
+* TWEAK: Change the method used to generate the configuration file path in advanced-cache.php; no issues were reported, but analysis indicated a potential way to generate a path that would not agree with what was written by saving settings; and also another way to generate an invalid path on Windows webservers running on non-standard ports.
+* TWEAK: Use WPO_CACHE_CONFIG_DIR constant instead string value in advanced-cache.php
+
+= 3.0.4 - 20/Jul/2019 =
+
+* FIX: Fixed a regression in 3.0 with orphaned relationship data optimization
+
+= 3.0.3 - 20/Jul/2019 =
+
+* TWEAK: Prevent saving of page cache settings when the page cache was already off and another page cache plugin was active from over-writing the other plugin's advanced-cache.php
+
+= 3.0.2 - 19/Jul/2019 =
+
+* TWEAK: Rename in order to cache-bust sites that cached old versions of the JS admin scripts
+* TWEAK: Prevent unwanted PHP notice if saving page cache settings without ever having turned the cache on
+
+= 3.0.1 - 18/Jul/2019 =
+
+* FIX: Prevent a potential stray line of text appearing
 
 = 3.0.0 - 17/Jul/2019 =
 
@@ -572,4 +636,4 @@ Please check your database for corrupted tables. That can happen, usually your w
 * Fix Interface
 
 == Upgrade Notice ==
-* 3.0.0: Introduction of a new major feature: Page caching, as well as various small improvements, tweaks and fixes. A recommended update for all.
+* 3.0.11: 3.0 introduces a new major feature: Page caching, as well as various small improvements, tweaks and fixes. A recommended update for all. 3.0.1-11 releases add small tweaks/fixes.

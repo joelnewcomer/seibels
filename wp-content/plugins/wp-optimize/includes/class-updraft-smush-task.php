@@ -396,7 +396,7 @@ abstract class Updraft_Smush_Task extends Updraft_Task_1_1 {
 	 */
 	private function get_attachment_files($attachment_id) {
 		$attachment_images = array();
-		$upload_dir = wp_get_upload_dir();
+		$upload_dir = function_exists('wp_get_upload_dir') ? wp_get_upload_dir() : wp_upload_dir(null, false);
 
 		// get sizes info from attachment meta data.
 		$meta = wp_get_attachment_metadata($attachment_id);

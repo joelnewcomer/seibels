@@ -33,11 +33,11 @@ class WP_Optimize_Browser_Cache {
 		$this->_options = $this->_wp_optimize->get_options();
 	}
 
-	/***
+	/**
 	 * Check headers for Cache-Control and Etag. And if they are exist return true.
 	 *
 	 * @return bool|WP_Error
-	 */
+	 **/
 	public function is_enabled() {
 
 		static $is_enabled;
@@ -53,10 +53,9 @@ class WP_Optimize_Browser_Cache {
 			$is_enabled = false;
 		}
 
-		if ($this->is_browser_cache_section_exists() && !$this->_wp_optimize->is_apache_module_loaded(array('mod_expires', 'mod_headers'))) {
+		if ($this->is_browser_cache_section_exists() && false === $this->_wp_optimize->is_apache_module_loaded(array('mod_expires', 'mod_headers'))) {
 			$is_enabled = new WP_Error('Browser cache', __('We successfully updated your .htaccess file. But it seems one of Apache modules - mod_expires or mod_headers is not active.', 'wp-optimize'));
 		}
-
 
 		return $is_enabled;
 	}
