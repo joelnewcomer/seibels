@@ -346,8 +346,9 @@ abstract class LABase {
 	protected abstract function getNameJSOptions();
 	
 	protected function prepareProcess($forceLoadCache = false) {
-		$_REQUEST['stream-id'] = @filter_var( trim( $_REQUEST['stream-id'] ), FILTER_SANITIZE_NUMBER_INT);
-		$_REQUEST['action'] = @filter_var( trim( $_REQUEST['action'] ), FILTER_SANITIZE_STRING );
+		if (isset($_REQUEST['stream-id'])) $_REQUEST['stream-id'] = @filter_var( trim( $_REQUEST['stream-id'] ), FILTER_SANITIZE_NUMBER_INT);
+		if (isset($_REQUEST['feed_id'])) $_REQUEST['feed_id'] = @filter_var( trim( $_REQUEST['feed_id'] ), FILTER_SANITIZE_STRING );
+		if (isset($_REQUEST['action'])) $_REQUEST['action'] = @filter_var( trim( $_REQUEST['action'] ), FILTER_SANITIZE_STRING );
 		if (isset($_REQUEST['page'])) $_REQUEST['page'] = filter_var( trim( $_REQUEST['page'] ), FILTER_SANITIZE_NUMBER_INT);
 		if (isset($_REQUEST['countOfPages'])) $_REQUEST['countOfPages'] = filter_var( trim( $_REQUEST['countOfPages'] ), FILTER_SANITIZE_NUMBER_INT);
 		if (isset($_REQUEST['hash']) && !empty($_REQUEST['hash'])){
@@ -516,7 +517,7 @@ abstract class LABase {
 		}
 		if ($feed->type == 'instagram') {
 			/** @noinspection PhpIncludeInspection */
-			require_once $this->context['root'] . 'libs/InstagramScraper.php';
+			require_once $this->context['root'] . 'libs/InstagramAPI.php';
 			/** @noinspection PhpIncludeInspection */
 			require_once $this->context['root'] . 'libs/Unirest.php';
 			/** @noinspection PhpIncludeInspection */
@@ -558,6 +559,8 @@ abstract class LABase {
 		$feed->foursquare_client_secret = @$original['foursquare_client_secret'];
 		$feed->google_api_key           = @$original['google_api_key'];
 		$feed->instagram_access_token   = @$original['instagram_access_token'];
+		$feed->instagram_login          = @$original['instagram_login'];
+		$feed->instagram_password       = @$original['instagram_pass'];
 		$feed->soundcloud_api_key       = @$original['soundcloud_api_key'];
 		$feed->twitter_access_settings = array(
 			'oauth_access_token' => @$original['oauth_access_token'],

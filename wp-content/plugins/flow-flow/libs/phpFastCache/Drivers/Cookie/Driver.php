@@ -14,22 +14,19 @@
 
 namespace phpFastCache\Drivers\Cookie;
 
-use phpFastCache\Core\Pool\DriverBaseTrait;
-use phpFastCache\Core\Pool\ExtendedCacheItemPoolInterface;
-use phpFastCache\Entities\DriverStatistic;
+use phpFastCache\Core\DriverAbstract;
+use phpFastCache\Core\StandardPsr6StructureTrait;
+use phpFastCache\Entities\driverStatistic;
 use phpFastCache\Exceptions\phpFastCacheDriverCheckException;
 use phpFastCache\Exceptions\phpFastCacheDriverException;
-use phpFastCache\Exceptions\phpFastCacheInvalidArgumentException;
 use Psr\Cache\CacheItemInterface;
 
 /**
  * Class Driver
  * @package phpFastCache\Drivers
  */
-class Driver implements ExtendedCacheItemPoolInterface
+class Driver extends DriverAbstract
 {
-    use DriverBaseTrait;
-
     const PREFIX = 'PFC_';
 
     /**
@@ -69,7 +66,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return mixed
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverWrite(CacheItemInterface $item)
     {
@@ -87,18 +84,20 @@ class Driver implements ExtendedCacheItemPoolInterface
 
             return setcookie($keyword, $v, $item->getExpirationDate()->getTimestamp(), '/');
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
     /**
      * @param \Psr\Cache\CacheItemInterface $item
-     * @return null|array
+     * @return mixed
      * @throws \phpFastCache\Exceptions\phpFastCacheDriverException
      */
     protected function driverRead(CacheItemInterface $item)
     {
         $this->driverConnect();
+        // return null if no caching
+        // return value if in caching
         $keyword = self::PREFIX . $item->getKey();
         $x = isset($_COOKIE[ $keyword ]) ? json_decode($_COOKIE[ $keyword ], true) : false;
 
@@ -114,7 +113,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     }
 
     /**
-     * @param string $key
+     * @param $key
      * @return int
      */
     protected function driverReadExpirationDate($key)
@@ -129,7 +128,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return bool
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverDelete(CacheItemInterface $item)
     {
@@ -143,7 +142,7 @@ class Driver implements ExtendedCacheItemPoolInterface
 
             return @setcookie($keyword, null, -10);
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
@@ -174,12 +173,12 @@ class Driver implements ExtendedCacheItemPoolInterface
      *******************/
 
     /**
-     * @return DriverStatistic
+     * @return driverStatistic
      */
     public function getStats()
     {
         $size = 0;
-        $stat = new DriverStatistic();
+        $stat = new driverStatistic();
         $stat->setData($_COOKIE);
 
         /**

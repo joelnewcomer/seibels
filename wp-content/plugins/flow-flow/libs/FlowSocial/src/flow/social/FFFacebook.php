@@ -13,15 +13,15 @@ if ( ! defined('FF_FACEBOOK_RATE_LIMIT')) define('FF_FACEBOOK_RATE_LIMIT', 200);
  * @copyright Looks Awesome
  */
 class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
-	const API_VERSION = 'v2.8';
+	const API_VERSION = 'v3.3';
 
-    /** @var  string | bool */
-    private $accessToken;
+	/** @var  string | bool */
+	private $accessToken;
 	/** @var LAFacebookCacheManager */
 	private $facebookCache;
 
-    /** @var bool */
-    private $hideStatus = true;
+	/** @var bool */
+	private $hideStatus = true;
 	/** @var  bool */
 	private $saveImages = false;
 	private $image;
@@ -107,9 +107,9 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 				return $result;
 			}else{
 				$this->errors[] = array(
-						'type' => 'facebook',
-						'message' => 'Comments issue',
-						'url' => $url
+					'type' => 'facebook',
+					'message' => 'Comments issue',
+					'url' => $url
 				);
 				throw new \Exception();
 			}
@@ -121,13 +121,13 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 		if (isset($feed->{'timeline-type'})) {
 			$timeline = $feed->{'timeline-type'} == 'user_timeline' ? 'page_timeline' : $feed->{'timeline-type'};
 			$locale = defined('FF_LOCALE') ? 'locale=' . FF_LOCALE : 'locale=en_US';
-			$fields    = 'fields=';
-			$fields    = $fields . 'likes.summary(true),comments.summary(true),shares,';
-			$fields    = $fields . 'id,created_time,from,link,message,name,object_id,picture,full_picture,attachments{media,subattachments},source,status_type,story,type';
 			$api = FFFacebook::API_VERSION;
 			switch ($timeline) {
 				case 'group':
 					$groupId = (string)$feed->content;
+					$fields    = 'fields=';
+					$fields    = $fields . 'likes.summary(true),comments.summary(true),shares,';
+					$fields    = $fields . 'id,created_time,from,link,message,name,object_id,picture,full_picture,attachments{media,subattachments},source,status_type,story,type';
 					$this->url        = "https://graph.facebook.com/{$api}/{$groupId}/feed?{$fields}&limit={$this->getCount()}&{$locale}";
 					$this->hideStatus = false;
 					break;
@@ -146,14 +146,23 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 						}
 					}
 
+					$fields    = 'fields=';
+					$fields    = $fields . 'likes.summary(true),comments.summary(true),shares,permalink_url,';
+					$fields    = $fields . 'id,created_time,from,message,picture,full_picture,attachments,status_type,story';
 					$this->url        = "https://graph.facebook.com/{$api}/{$page_id}/posts?{$fields}&limit={$this->getCount()}&{$locale}";
 					$this->hideStatus = false;
 					break;
 				case 'album':
+					$fields    = 'fields=';
+					$fields    = $fields . 'likes.summary(true),comments.summary(true),';
+					$fields    = $fields . 'id,created_time,from,link,name,picture,source';
 					$albumId = (string)$feed->content;
 					$this->url = "https://graph.facebook.com/{$api}/{$albumId}/photos?{$fields}&limit={$this->getCount()}&{$locale}";
 					break;
 				default:
+					$fields    = 'fields=';
+					$fields    = $fields . 'likes.summary(true),comments.summary(true),shares,';
+					$fields    = $fields . 'id,created_time,from,link,message,name,object_id,picture,full_picture,attachments{media,subattachments},source,status_type,story,type';
 					$this->url = "https://graph.facebook.com/{$api}/me/home?{$fields}&limit={$this->getCount()}&{$locale}";
 			}
 		}
@@ -178,8 +187,8 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 	}
 
 	protected function getUrl() {
-        return $this->getUrlWithToken($this->url);
-    }
+		return $this->getUrlWithToken($this->url);
+	}
 
 	protected function items( $request ) {
 		$pxml = json_decode($request);
@@ -234,13 +243,13 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 		if (isset($item->name)){
 			return $item->name;
 		}
-        return '';
-    }
+		return '';
+	}
 
-    protected function showImage($item){
+	protected function showImage($item){
 		$api = FFFacebook::API_VERSION;
 
-		if (!isset($item->type)){
+		if (!isset($item->type) && isset($item->source)){
 			$this->image = $this->createImage($item->source);
 			$this->media = $this->createMedia($item->source);
 			return true;
@@ -275,12 +284,12 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 					if ($original_url == ''){
 						$original_url = $this->getLocation($url);
 					}
-					
+
 					$size = $this->cache->size($url, $original_url);
 					$width = $size['width'];
 					$height = $size['height'];
 					$this->image = $this->createImage($original_url, $width, $height);
-					
+
 					$url = "https://graph.facebook.com/{$api}/{$item->object_id}/picture?width=600&type=normal";
 					$original_url = $this->cache->getOriginalUrl($url);
 					if ($original_url == ''){
@@ -295,11 +304,40 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 			return true;
 		}
 
+		if ($item->status_type == 'added_video'){
+			if (isset($item->attachments) && isset($item->attachments->data) && sizeof($item->attachments->data) > 0){
+				$subattachments = $this->getSubattachments($item);
+				if (sizeof($subattachments) > 0){
+					$image= $subattachments[0];
+					$width = $image->width;
+					$height = $image->height;
+					if ($width > 600) {
+						$height = FFFeedUtils::getScaleHeight(600, $width, $height);
+						$width = 600;
+					}
+					$this->image = $this->createImage($image->src, $width, $height);
+
+					if (isset($item->attachments->data[0]->target)){
+						$videoId = $item->attachments->data[0]->target->id;
+						if (isset($item->from->id)){
+							$this->media = $this->createMedia('https://www.facebook.com/plugins/video.php?app_id=&container_width=0&href=https%3A%2F%2Ffacebook.com%2F' . $item->from->id . '%2Fvideos%2F' . $videoId . '%2F&locale=en_US&sdk=joey', $width, $height, 'video');
+						}
+						else {
+							$this->media = $this->createMedia('http://www.facebook.com/video/embed?video_id=' . $item->object_id, $width, $height, 'video');
+						}
+					}
+
+					$this->carousel = $subattachments;
+					return true;
+				}
+			}
+		}
+
 		if (($item->type == 'video')
-			&& (!isset($item->status_type) || $item->status_type == 'added_video' ||
-				$item->status_type == 'shared_story' || $item->status_type == 'mobile_status_update')){
+		    && (!isset($item->status_type) || $item->status_type == 'added_video' ||
+		        $item->status_type == 'shared_story' || $item->status_type == 'mobile_status_update')){
 			if (!isset($item->object_id) && isset($item->link) && strpos($item->link, 'facebook.com') > 0 && strpos($item->link, '/videos/') > 0){
-			 	$path = parse_url($item->link, PHP_URL_PATH);
+				$path = parse_url($item->link, PHP_URL_PATH);
 				$tokens = explode('/', $path);
 				if (empty($tokens[sizeof($tokens)-1])) unset($tokens[sizeof($tokens)-1]);
 				$item->object_id = $tokens[sizeof($tokens)-1];
@@ -329,27 +367,27 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 					}
 				}
 				//deprecated
-			    $data = $this->getFeedData($this->getUrlWithToken( "https://graph.facebook.com/{$api}/{$item->object_id}?fields=embed_html,source" ));
-			    $data = json_decode($data['response']);
-			    preg_match("/\<iframe.+width\=(?:\"|\')(.+?)(?:\"|\')(?:.+?)\>/", $data->embed_html, $matches);
-			    $width = $matches[1];
-			    preg_match("/\<iframe.+height\=(?:\"|\')(.+?)(?:\"|\')(?:.+?)\>/", $data->embed_html, $matches);
-			    $height = $matches[1];
-			    if ($width > 600) {
-				    $height = FFFeedUtils::getScaleHeight(600, $width, $height);
-				    $width = 600;
+				$data = $this->getFeedData($this->getUrlWithToken( "https://graph.facebook.com/{$api}/{$item->object_id}?fields=embed_html,source" ));
+				$data = json_decode($data['response']);
+				preg_match("/\<iframe.+width\=(?:\"|\')(.+?)(?:\"|\')(?:.+?)\>/", $data->embed_html, $matches);
+				$width = $matches[1];
+				preg_match("/\<iframe.+height\=(?:\"|\')(.+?)(?:\"|\')(?:.+?)\>/", $data->embed_html, $matches);
+				$height = $matches[1];
+				if ($width > 600) {
+					$height = FFFeedUtils::getScaleHeight(600, $width, $height);
+					$width = 600;
 				}
 				$url = "https://graph.facebook.com/{$api}/{$item->object_id}/picture?width={$this->getImageWidth()}&type=normal";
 				{
 					if ($width == 0 || $height == 0) {
-					    $this->image = $this->createImage($this->getLocation($url));
-					    $width = $this->image['width'];
-					    $height = $this->image['height'];
-				    }
-				    else {
-					    $this->image = $this->createImage( $this->getLocation( $url ), $width, $height );
-				    }
-			    }
+						$this->image = $this->createImage($this->getLocation($url));
+						$width = $this->image['width'];
+						$height = $this->image['height'];
+					}
+					else {
+						$this->image = $this->createImage( $this->getLocation( $url ), $width, $height );
+					}
+				}
 				if (isset($item->from->id)){
 					$page = $item->from->id;
 					$this->media = $this->createMedia('https://www.facebook.com/plugins/video.php?app_id=&container_width=0&href=https%3A%2F%2Ffacebook.com%2F' . $page . '%2Fvideos%2F' . $item->object_id . '%2F&locale=en_US&sdk=joey', $width, $height, 'video');
@@ -357,65 +395,64 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 				else {
 					$this->media = $this->createMedia('http://www.facebook.com/video/embed?video_id=' . $item->object_id, $width, $height, 'video');
 				}
-			    return true;
-		    }
-		    else if (isset($item->source)){
-		        if (strpos($item->source, 'giphy.com') > 0) {
-			        $arr = parse_url( urldecode( $item->source ) );
-			        parse_str( $arr['query'], $output );
-			        $this->image = $this->createImage( $output['gif_url'], $output['giphyWidth'], $output['giphy_height'] );
-			        $this->media = $this->createMedia( $output['gif_url'], $output['giphyWidth'], $output['giphy_height'] );
-			        return $this->image != null;
-		        }
-			    if (!empty($this->youtube_api_key) && (strpos($item->source, 'youtube.com') > 0)) {
-				    if (strpos($item->source, 'list=') > 0){
-					    $query_str = parse_url($item->source, PHP_URL_QUERY);
-					    parse_str($query_str, $query_params);
-					    $listId = $query_params['list'];
-					    $url = "https://www.googleapis.com/youtube/v3/playlists?part=snippet&id={$listId}&key={$this->youtube_api_key}";
-				    }
-				    else if ((strpos($item->link, '?v=') > 0) || (strpos($item->link, '&v=') > 0)){
-					    $query_str = parse_url($item->link, PHP_URL_QUERY);
-					    parse_str($query_str, $query_params);
-					    $listId = $query_params['v'];
-					    $url = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id={$listId}&key={$this->youtube_api_key}";
-				    }
-				    if (isset($url)){
-					    $data = @$this->getFeedData($url);
-					    if (is_array($data) && isset($data['response'])){
-						    $response = $data['response'];
-						    $pxml = json_decode($response);
-						    if (isset($pxml->items)) {
-							    $youtubeItem = $pxml->items[0];
-							    $thumbnail = $youtubeItem->snippet->thumbnails->high;
-							    if (isset($thumbnail->width)){
-								    $this->image = $this->createImage($thumbnail->url, $thumbnail->width, $thumbnail->height);
-							    } else {
-								    $this->image = $this->createImage($thumbnail->url);
-							    }
-							    $this->media = $this->createMedia($item->source, 600, FFFeedUtils::getScaleHeight(600, $this->image['width'], $this->image['height']), 'video');
-							    return true;
-						    }
-					    }
-				    }
-			    }
-			    if (isset($item->full_picture)){
-				    $this->image = $this->createImage($item->full_picture);
-				    $type = (strpos($item->source, '.mp4') > 0) ? 'video/mp4' : 'video';
-				    $this->media = $this->createMedia($item->source, 600, FFFeedUtils::getScaleHeight(600, $this->image['width'], $this->image['height']), $type);
-				    return true;
-			    }
-			    if (isset($item->picture)){
-				    $this->image = $this->createImage($item->picture);
-				    $type = (strpos($item->source, '.mp4') > 0) ? 'video/mp4' : 'video';
-				    $this->media = $this->createMedia($item->source, 600, FFFeedUtils::getScaleHeight(600, $this->image['width'], $this->image['height']), $type);
-				    return true;
-			    }
-			    //TODO snappytv.com
-			    //TODO twitch.tv swf
-		    }
+				return true;
+			}
+			else if (isset($item->source)){
+				if (strpos($item->source, 'giphy.com') > 0) {
+					$arr = parse_url( urldecode( $item->source ) );
+					parse_str( $arr['query'], $output );
+					$this->image = $this->createImage( $output['gif_url'], $output['giphyWidth'], $output['giphy_height'] );
+					$this->media = $this->createMedia( $output['gif_url'], $output['giphyWidth'], $output['giphy_height'] );
+					return $this->image != null;
+				}
+				if (!empty($this->youtube_api_key) && (strpos($item->source, 'youtube.com') > 0)) {
+					if (strpos($item->source, 'list=') > 0){
+						$query_str = parse_url($item->source, PHP_URL_QUERY);
+						parse_str($query_str, $query_params);
+						$listId = $query_params['list'];
+						$url = "https://www.googleapis.com/youtube/v3/playlists?part=snippet&id={$listId}&key={$this->youtube_api_key}";
+					}
+					else if ((strpos($item->link, '?v=') > 0) || (strpos($item->link, '&v=') > 0)){
+						$query_str = parse_url($item->link, PHP_URL_QUERY);
+						parse_str($query_str, $query_params);
+						$listId = $query_params['v'];
+						$url = "https://www.googleapis.com/youtube/v3/videos?part=snippet&id={$listId}&key={$this->youtube_api_key}";
+					}
+					if (isset($url)){
+						$data = @$this->getFeedData($url);
+						if (is_array($data) && isset($data['response'])){
+							$response = $data['response'];
+							$pxml = json_decode($response);
+							if (isset($pxml->items)) {
+								$youtubeItem = $pxml->items[0];
+								$thumbnail = $youtubeItem->snippet->thumbnails->high;
+								if (isset($thumbnail->width)){
+									$this->image = $this->createImage($thumbnail->url, $thumbnail->width, $thumbnail->height);
+								} else {
+									$this->image = $this->createImage($thumbnail->url);
+								}
+								$this->media = $this->createMedia($item->source, 600, FFFeedUtils::getScaleHeight(600, $this->image['width'], $this->image['height']), 'video');
+								return true;
+							}
+						}
+					}
+				}
+				if (isset($item->full_picture)){
+					$this->image = $this->createImage($item->full_picture);
+					$type = (strpos($item->source, '.mp4') > 0) ? 'video/mp4' : 'video';
+					$this->media = $this->createMedia($item->source, 600, FFFeedUtils::getScaleHeight(600, $this->image['width'], $this->image['height']), $type);
+					return true;
+				}
+				if (isset($item->picture)){
+					$this->image = $this->createImage($item->picture);
+					$type = (strpos($item->source, '.mp4') > 0) ? 'video/mp4' : 'video';
+					$this->media = $this->createMedia($item->source, 600, FFFeedUtils::getScaleHeight(600, $this->image['width'], $this->image['height']), $type);
+					return true;
+				}
+				//TODO snappytv.com
+				//TODO twitch.tv swf
+			}
 		}
-
 
 		if ((($item->type == 'link') || ($item->type == 'event')) && isset($item->picture)){
 			if (isset($item->attachments->data) && sizeof($item->attachments->data) > 0){
@@ -430,7 +467,7 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 					return true;
 				}
 			}
-			
+
 			if (isset($item->full_picture)){
 				$this->image = $this->createImage($item->full_picture);
 				$this->media = $this->createMedia((pathinfo($item->link, PATHINFO_EXTENSION) === 'gif') ? $item->link : $item->full_picture, null, null, 'image', true);
@@ -440,24 +477,24 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 			$image = $item->picture;
 			$parts = parse_url($image);
 			if (isset($parts['query'])){
-			    parse_str($parts['query'], $attr);
-			    if (isset($attr['url'])) {
-				    $image = $attr['url'];
-				    $original = $this->createImage($image, null, null, false);
-				    if (150 > $original['width'] || 150 > $original['height']) return false;
-				    $this->image = $this->createImage($image, $original['width'], $original['height']);
-				    if (!empty($this->image['height'])) {
-					    $this->media = $this->createMedia($image, null, null, 'image', true);
-					    return true;
-				    }
-			    }
+				parse_str($parts['query'], $attr);
+				if (isset($attr['url'])) {
+					$image = $attr['url'];
+					$original = $this->createImage($image, null, null, false);
+					if (150 > $original['width'] || 150 > $original['height']) return false;
+					$this->image = $this->createImage($image, $original['width'], $original['height']);
+					if (!empty($this->image['height'])) {
+						$this->media = $this->createMedia($image, null, null, 'image', true);
+						return true;
+					}
+				}
 			}
 			$this->image = $this->createImage($item->picture);
 			$this->media = $this->createMedia($item->picture, null, null, 'image', true);
 			return true;
 		}
-		
-		if ($item->type == 'status' && isset($item->attachments->data) && sizeof($item->attachments->data) > 0){
+
+		if (isset($item->attachments->data) && sizeof($item->attachments->data) > 0){
 			$subattachments = $this->getSubattachments($item);
 			if (sizeof($subattachments) > 0){
 				$image = $subattachments[0];
@@ -467,19 +504,19 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 				return true;
 			}
 		}
-			
+
 		return false;
 	}
-	
+
 	protected function getCarousel( $item ) {
 		$carousel = parent::getCarousel($item);
 		$subattachments = $this->carousel;
 
-        // changed 30.01.19, removing first element which is duplicate of main image
+		// changed 30.01.19, removing first element which is duplicate of main image
 
 		if (sizeof($subattachments) > 2){
 
-            unset($subattachments[0]);
+			unset($subattachments[0]);
 
 			foreach ($subattachments as $image){
 				$carousel[] = $this->createMedia($image->src, $image->width, $image->height);
@@ -487,68 +524,54 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 		}
 		return $carousel;
 	}
-	
-    protected function getImage( $item ) {
-        return $this->image;
-    }
+
+	protected function getImage( $item ) {
+		return $this->image;
+	}
 
 	protected function getMedia( $item ) {
 		return $this->media;
 	}
 
 	protected function getScreenName($item){
-        return $item->from->name;
-    }
+		return $item->from->name;
+	}
 
 	//TODO going to use a message_tags attribute
-    protected function getContent($item){
-	    if (!isset($item->type) && isset($item->name)) return (string)$item->name;
-	    if (isset($item->message)) return self::wrapHashTags(FFFeedUtils::wrapLinks($item->message), $item->id);
-	    if (isset($item->story)) return (string)$item->story;
-	    return '';
-    }
+	protected function getContent($item){
+		if (!isset($item->type) && isset($item->name)) return (string)$item->name;
+		if (isset($item->message)) return self::wrapHashTags(FFFeedUtils::wrapLinks($item->message), $item->id);
+		if (isset($item->story)) return (string)$item->story;
+		return '';
+	}
 
-    protected function getProfileImage( $item ) {
-	    $url = "https://graph.facebook.com/" . FFFacebook::API_VERSION . "/{$item->from->id}/picture?width=80&height=80";
-	    if (!array_key_exists($url, $this->images)){
-		    if ($this->saveImages){
-			    list($path, $remoteUrl, $localUrl) = $this->getInfo4Save($url);
-			    if (!file_exists($path)) {
-				    if ( copy( $remoteUrl, $path ) ) {
-					    $this->images[$url] = $localUrl;
-				    }
-				    else {
-					    $this->images[$url] = $this->getLocation($url);
-				    }
-			    }
-			    else {
-				    $this->images[$url] = $localUrl;
-			    }
-		    }
-		    else $this->images[$url] = $this->getLocation($url);
-	    }
-        return $this->images[$url];
-    }
+	protected function getProfileImage( $item ) {
+		$url = "https://graph.facebook.com/" . FFFacebook::API_VERSION . "/{$item->from->id}/picture?width=80&height=80";
+		if (!array_key_exists($url, $this->images)){
+			$this->images[$url] = $this->getLocation($url);
+		}
+		return $this->images[$url];
+	}
 
-    protected function getId( $item ) {
-        return $item->id;
-    }
+	protected function getId( $item ) {
+		return $item->id;
+	}
 
-    protected function getSystemDate( $item ) {
-        return strtotime($item->created_time);
-    }
+	protected function getSystemDate( $item ) {
+		return strtotime($item->created_time);
+	}
 
-    protected function getUserlink( $item ) {
-        return 'https://www.facebook.com/'.$item->from->id;
-    }
+	protected function getUserlink( $item ) {
+		return 'https://www.facebook.com/'.$item->from->id;
+	}
 
-    protected function getPermalink( $item ) {
-	    if (!isset($item->type)){
-		    return $item->link;
-	    }
-        $parts = explode('_', $item->id);
-        return 'https://www.facebook.com/'.$parts[0].'/posts/'.$parts[1];
-    }
+	protected function getPermalink( $item ) {
+		if (isset($item->link)){
+			return $item->link;
+		}
+		$parts = explode('_', $item->id);
+		return 'https://www.facebook.com/'.$parts[0].'/posts/'.$parts[1];
+	}
 
 	protected function getAdditionalInfo( $item ) {
 		$additional = parent::getAdditionalInfo( $item );
@@ -562,8 +585,8 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 		if (isset($item->type) && $item->type == 'link' && isset($item->link) && strlen($item->link) < 300){
 			$post->source = $item->link;
 		}
-        return parent::customize( $post, $item );
-    }
+		return parent::customize( $post, $item );
+	}
 
 	private function getInfo4Save($url){
 		$fileName = hash('md5', $url);
@@ -672,20 +695,20 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 		$token = $this->accessToken;
 		return $url . "&access_token={$token}";
 	}
-	
+
 	private function getImageObjectByUrl($url){
 		$url = $this->getUrlWithToken($url);
 		$data = FFFeedUtils::getFeedData($url);
-		
+
 		if ( sizeof( $data['errors'] ) > 0 ) {
 			$this->errors[] = array(
-					'type'    => $this->getType(),
-					'message' => $this->filterErrorMessage($data['errors']),
-					'url' => $this->getUrl()
+				'type'    => $this->getType(),
+				'message' => $this->filterErrorMessage($data['errors']),
+				'url' => $this->getUrl()
 			);
 			return false;
 		}
-		
+
 		$result = array();
 		$pxml = json_decode($data['response']);
 		foreach ( $pxml->images as $item ) {
@@ -699,7 +722,7 @@ class FFFacebook extends FFHttpRequestFeed implements LAFeedWithComments {
 		}
 		return $result;
 	}
-	
+
 	private function getSubattachments($item){
 		$attachments = array();
 		if (isset($item->attachments) && isset($item->attachments->data) && sizeof($item->attachments->data) > 0){

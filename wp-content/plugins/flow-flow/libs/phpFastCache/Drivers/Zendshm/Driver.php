@@ -13,12 +13,11 @@
 
 namespace phpFastCache\Drivers\Zendshm;
 
-use phpFastCache\Core\Pool\DriverBaseTrait;
-use phpFastCache\Core\Pool\ExtendedCacheItemPoolInterface;
-use phpFastCache\Entities\DriverStatistic;
+use phpFastCache\Core\DriverAbstract;
+use phpFastCache\Core\StandardPsr6StructureTrait;
+use phpFastCache\Entities\driverStatistic;
 use phpFastCache\Exceptions\phpFastCacheDriverCheckException;
 use phpFastCache\Exceptions\phpFastCacheDriverException;
-use phpFastCache\Exceptions\phpFastCacheInvalidArgumentException;
 use Psr\Cache\CacheItemInterface;
 
 /**
@@ -26,10 +25,8 @@ use Psr\Cache\CacheItemInterface;
  * Requires Zend Data Cache Functions from ZendServer
  * @package phpFastCache\Drivers
  */
-class Driver implements ExtendedCacheItemPoolInterface
+class Driver extends DriverAbstract
 {
-    use DriverBaseTrait;
-
     /**
      * Driver constructor.
      * @param array $config
@@ -59,7 +56,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return mixed
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverWrite(CacheItemInterface $item)
     {
@@ -71,13 +68,13 @@ class Driver implements ExtendedCacheItemPoolInterface
 
             return zend_shm_cache_store($item->getKey(), $this->driverPreWrap($item), ($ttl > 0 ? $ttl : 0));
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
     /**
      * @param \Psr\Cache\CacheItemInterface $item
-     * @return null|array
+     * @return mixed
      */
     protected function driverRead(CacheItemInterface $item)
     {
@@ -92,7 +89,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return bool
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverDelete(CacheItemInterface $item)
     {
@@ -102,7 +99,7 @@ class Driver implements ExtendedCacheItemPoolInterface
         if ($item instanceof Item) {
             return zend_shm_cache_delete($item->getKey());
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
@@ -129,27 +126,24 @@ class Driver implements ExtendedCacheItemPoolInterface
      *******************/
 
     /**
-     * @return string
-     */
-    public function getHelp()
-    {
-        return <<<HELP
-<p>
-This driver rely on Zend Server 8.5+, see: http://www.zend.com/en/products/zend_server
-</p>
-HELP;
-    }
-
-    /**
-     * @return DriverStatistic
+     * @return driverStatistic
      */
     public function getStats()
     {
-        $stats = (array)zend_shm_cache_info();
-        return (new DriverStatistic())
-          ->setData(implode(', ', array_keys($this->itemInstances)))
-          ->setInfo(sprintf("The Zend memory have %d item(s) in cache.\n For more information see RawData.", $stats[ 'items_total' ]))
-          ->setRawData($stats)
-          ->setSize($stats[ 'memory_total' ]);
+        if(function_exists('zend_shm_cache_info')) {
+            $stats = (array)zend_shm_cache_info();
+            return (new driverStatistic())
+                ->setData(implode(', ', array_keys($this->itemInstances)))
+                ->setInfo(sprintf("The Zend memory have %d item(s) in cache.\n For more information see RawData.", $stats['items_total']))
+                ->setRawData($stats)
+                ->setSize($stats['memory_total']);
+        } else {
+            /** zend_shm_cache_info supported V8 or higher */
+            return (new driverStatistic())
+                ->setData(implode(', ', array_keys($this->itemInstances)))
+                ->setInfo("The Zend memory statistics is only supported by ZendServer V8 or higher")
+                ->setRawData(null)
+                ->setSize(0);
+        }
     }
 }

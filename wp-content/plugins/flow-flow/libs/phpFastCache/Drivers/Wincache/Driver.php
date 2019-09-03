@@ -14,22 +14,19 @@
 
 namespace phpFastCache\Drivers\Wincache;
 
-use phpFastCache\Core\Pool\DriverBaseTrait;
-use phpFastCache\Core\Pool\ExtendedCacheItemPoolInterface;
-use phpFastCache\Entities\DriverStatistic;
+use phpFastCache\Core\DriverAbstract;
+use phpFastCache\Core\StandardPsr6StructureTrait;
+use phpFastCache\Entities\driverStatistic;
 use phpFastCache\Exceptions\phpFastCacheDriverCheckException;
 use phpFastCache\Exceptions\phpFastCacheDriverException;
-use phpFastCache\Exceptions\phpFastCacheInvalidArgumentException;
 use Psr\Cache\CacheItemInterface;
 
 /**
  * Class Driver
  * @package phpFastCache\Drivers
  */
-class Driver implements ExtendedCacheItemPoolInterface
+class Driver extends DriverAbstract
 {
-    use DriverBaseTrait;
-
     /**
      * Driver constructor.
      * @param array $config
@@ -55,7 +52,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return mixed
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverWrite(CacheItemInterface $item)
     {
@@ -65,13 +62,13 @@ class Driver implements ExtendedCacheItemPoolInterface
         if ($item instanceof Item) {
             return wincache_ucache_set($item->getKey(), $this->driverPreWrap($item), $item->getTtl());
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
     /**
      * @param \Psr\Cache\CacheItemInterface $item
-     * @return null|array
+     * @return mixed
      */
     protected function driverRead(CacheItemInterface $item)
     {
@@ -87,7 +84,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return bool
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverDelete(CacheItemInterface $item)
     {
@@ -97,7 +94,7 @@ class Driver implements ExtendedCacheItemPoolInterface
         if ($item instanceof Item) {
             return wincache_ucache_delete($item->getKey());
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
@@ -124,7 +121,7 @@ class Driver implements ExtendedCacheItemPoolInterface
      *******************/
 
     /**
-     * @return DriverStatistic
+     * @return driverStatistic
      */
     public function getStats()
     {
@@ -132,7 +129,7 @@ class Driver implements ExtendedCacheItemPoolInterface
         $info = wincache_ucache_info();
         $date = (new \DateTime())->setTimestamp(time() - $info[ 'total_cache_uptime' ]);
 
-        return (new DriverStatistic())
+        return (new driverStatistic())
           ->setInfo(sprintf("The Wincache daemon is up since %s.\n For more information see RawData.", $date->format(DATE_RFC2822)))
           ->setSize($memInfo[ 'memory_free' ] - $memInfo[ 'memory_total' ])
           ->setData(implode(', ', array_keys($this->itemInstances)))

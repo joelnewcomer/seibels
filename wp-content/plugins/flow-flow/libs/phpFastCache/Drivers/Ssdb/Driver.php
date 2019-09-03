@@ -14,24 +14,26 @@
 
 namespace phpFastCache\Drivers\Ssdb;
 
-use phpFastCache\Core\Pool\DriverBaseTrait;
-use phpFastCache\Core\Pool\ExtendedCacheItemPoolInterface;
-use phpFastCache\Entities\DriverStatistic;
+use phpFastCache\Core\DriverAbstract;
+use phpFastCache\Core\StandardPsr6StructureTrait;
+use phpFastCache\Entities\driverStatistic;
 use phpFastCache\Exceptions\phpFastCacheDriverCheckException;
 use phpFastCache\Exceptions\phpFastCacheDriverException;
-use phpFastCache\Exceptions\phpFastCacheInvalidArgumentException;
 use phpssdb\Core\SimpleSSDB;
+use phpssdb\Core\SSDB;
 use phpssdb\Core\SSDBException;
 use Psr\Cache\CacheItemInterface;
 
 /**
  * Class Driver
  * @package phpFastCache\Drivers
- * @property SimpleSSDB $instance Instance of driver service
  */
-class Driver implements ExtendedCacheItemPoolInterface
+class Driver extends DriverAbstract
 {
-    use DriverBaseTrait;
+    /**
+     * @var SimpleSSDB
+     */
+    public $instance;
 
     /**
      * Driver constructor.
@@ -65,7 +67,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return mixed
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverWrite(CacheItemInterface $item)
     {
@@ -75,13 +77,13 @@ class Driver implements ExtendedCacheItemPoolInterface
         if ($item instanceof Item) {
             return $this->instance->setx($item->getEncodedKey(), $this->encode($this->driverPreWrap($item)), $item->getTtl());
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
     /**
      * @param \Psr\Cache\CacheItemInterface $item
-     * @return null|array
+     * @return mixed
      */
     protected function driverRead(CacheItemInterface $item)
     {
@@ -96,7 +98,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return bool
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverDelete(CacheItemInterface $item)
     {
@@ -106,7 +108,7 @@ class Driver implements ExtendedCacheItemPoolInterface
         if ($item instanceof Item) {
             return $this->instance->del($item->getEncodedKey());
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
@@ -133,9 +135,9 @@ class Driver implements ExtendedCacheItemPoolInterface
             ];
 
             $host = $server[ 'host' ];
-            $port = isset($server[ 'port' ]) ? (int)$server[ 'port' ] : 8888;
+            $port = isset($server[ 'port' ]) ? (int) $server[ 'port' ] : 8888;
             $password = isset($server[ 'password' ]) ? $server[ 'password' ] : '';
-            $timeout = !empty($server[ 'timeout' ]) ? (int)$server[ 'timeout' ] : 2000;
+            $timeout = !empty($server[ 'timeout' ]) ? (int) $server[ 'timeout' ] : 2000;
             $this->instance = new SimpleSSDB($host, $port, $timeout);
             if (!empty($password)) {
                 $this->instance->auth($password);
@@ -158,11 +160,11 @@ class Driver implements ExtendedCacheItemPoolInterface
      *******************/
 
     /**
-     * @return DriverStatistic
+     * @return driverStatistic
      */
     public function getStats()
     {
-        $stat = new DriverStatistic();
+        $stat = new driverStatistic();
         $info = $this->instance->info();
 
         /**

@@ -1,8 +1,8 @@
 <?php namespace flow\social;
-use InstagramScraper\Endpoints;
-use InstagramScraper\Exception\InstagramNotFoundException;
-use InstagramScraper\Instagram;
-use InstagramScraper\Model\Media;
+use InstagramAPI\Endpoints;
+use InstagramAPI\Exception\InstagramNotFoundException;
+use InstagramAPI\Instagram;
+use InstagramAPI\Model\Media;
 use Unirest\Request;
 
 if ( ! defined( 'WPINC' ) ) die;
@@ -25,6 +25,9 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	private $alternative = false;
 	private $timeline;
 	private $accounts = [];
+	private $api = null;
+	private $username = null;
+	private $password = null;
 
 	public function __construct() {
 		parent::__construct( 'instagram' );
@@ -32,13 +35,33 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 
 	public function init( $context, $feed ) {
 		parent::init( $context, $feed );
-//		require_once $context['root'] . 'libs/InstagramScraper.php';
-//		require_once $context['root'] . 'libs/Unirest.php';
-//		require_once $context['root'] . 'libs/phpFastCache.php';
 		Request::verifyPeer(false);
 		Request::verifyHost(false);
 		Request::curlOpt( CURLOPT_IPRESOLVE, $feed->use_ipv4 ? CURL_IPRESOLVE_V4 : CURL_IPRESOLVE_V6);
 		Request::curlOpt( CURLOPT_FOLLOWLOCATION, true);
+
+		$this->username = $feed->instagram_login;
+		$this->password = $feed->instagram_password;
+	}
+
+	/**
+	 * @return Instagram
+	 * @throws \InstagramAPI\Exception\InstagramAuthException
+	 * @throws \InstagramAPI\Exception\InstagramException
+	 * @throws \phpFastCache\Exceptions\phpFastCacheDriverCheckException
+	 */
+	public function getApi(){
+		if ($this->api == null){
+			if (!empty($this->username) && !empty($this->password)){
+				$session_folder = '/tmp/sessions';
+				$this->api = Instagram::withCredentials($this->username, $this->password, $session_folder);
+				$this->api->login();
+			}
+			else {
+				$this->api = new Instagram();
+			}
+		}
+		return $this->api;
 	}
 
 	public function getCount() {
@@ -88,8 +111,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	public function onePagePosts() {
 		$result = array();
 		if ($this->alternative){
-			$instagram = new Instagram();
-			$instagram->setUserAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36");
+			$instagram = $this->getApi();
 			$medias = [];
 			$forced_loading_of_post = false;
 			switch ($this->timeline){
@@ -200,6 +222,8 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	 * @param bool $forced_loading_of_post
 	 *
 	 * @return \stdClass
+	 * @throws LASocialException
+	 * @throws \InstagramAPI\Exception\InstagramException
 	 */
 	private function altParsePost($post, $forced_loading_of_post = false) {
 
@@ -380,7 +404,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 
 		$result = [];
 		$objectId = $item;
-		$instagram = new Instagram();
+		$instagram = $this->getApi();
 		$code = $this->getCodeFromId($objectId);
 		$mediaLink = Endpoints::getMediaPageLink($code);
 		$media = $instagram->getMediaByUrl($mediaLink);
@@ -478,15 +502,14 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	/**
 	 * @param string $username
 	 *
-	 * @return \InstagramScraper\Model\Account
+	 * @return \InstagramAPI\Model\Account
 	 * @throws LASocialException
-	 * @throws \InstagramScraper\Exception\InstagramException
+	 * @throws \InstagramAPI\Exception\InstagramException
 	 */
 	private function getAccount($username){
 		if (!array_key_exists($username, $this->accounts)){
-			$i = new Instagram();
 			try {
-				$this->accounts[$username] = $i->getAccount($username);
+				$this->accounts[$username] = $this->getApi()->getAccount($username);
 			} catch ( InstagramNotFoundException $e ) {
 				throw new LASocialException('Username not found', array(), $e);
 			}
@@ -497,15 +520,14 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	/**
 	 * @param string $id
 	 *
-	 * @return \InstagramScraper\Model\Account
+	 * @return \InstagramAPI\Model\Account
 	 * @throws LASocialException
-	 * @throws \InstagramScraper\Exception\InstagramException
+	 * @throws \InstagramAPI\Exception\InstagramException
 	 */
 	private function getAccountById($id){
 		if (!array_key_exists($id, $this->accounts)){
-			$i = new Instagram();
 			try {
-				$this->accounts[$id] = $i->getAccountById($id);
+				$this->accounts[$id] = $this->getApi()->getAccountById($id);
 			} catch ( InstagramNotFoundException $e ) {
 				throw new LASocialException('Username not found', array(), $e);
 			}

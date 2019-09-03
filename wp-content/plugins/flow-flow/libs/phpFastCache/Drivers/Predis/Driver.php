@@ -14,24 +14,24 @@
 
 namespace phpFastCache\Drivers\Predis;
 
-use phpFastCache\Core\Pool\DriverBaseTrait;
-use phpFastCache\Core\Pool\ExtendedCacheItemPoolInterface;
-use phpFastCache\Entities\DriverStatistic;
+use phpFastCache\Core\DriverAbstract;
+use phpFastCache\Core\StandardPsr6StructureTrait;
+use phpFastCache\Entities\driverStatistic;
 use phpFastCache\Exceptions\phpFastCacheDriverCheckException;
 use phpFastCache\Exceptions\phpFastCacheDriverException;
-use phpFastCache\Exceptions\phpFastCacheInvalidArgumentException;
 use Predis\Client as PredisClient;
-use Predis\Connection\ConnectionException as PredisConnectionException;
 use Psr\Cache\CacheItemInterface;
 
 /**
  * Class Driver
  * @package phpFastCache\Drivers
- * @property PredisClient $instance Instance of driver service
  */
-class Driver implements ExtendedCacheItemPoolInterface
+class Driver extends DriverAbstract
 {
-    use DriverBaseTrait;
+    /**
+     * @var PredisClient Instance of driver service
+     */
+    public $instance;
 
     /**
      * Driver constructor.
@@ -64,7 +64,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return mixed
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverWrite(CacheItemInterface $item)
     {
@@ -84,13 +84,13 @@ class Driver implements ExtendedCacheItemPoolInterface
                 return $this->instance->setex($item->getKey(), $ttl, $this->encode($this->driverPreWrap($item)));
             }
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
     /**
      * @param \Psr\Cache\CacheItemInterface $item
-     * @return null|array
+     * @return mixed
      */
     protected function driverRead(CacheItemInterface $item)
     {
@@ -105,7 +105,7 @@ class Driver implements ExtendedCacheItemPoolInterface
     /**
      * @param \Psr\Cache\CacheItemInterface $item
      * @return bool
-     * @throws phpFastCacheInvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     protected function driverDelete(CacheItemInterface $item)
     {
@@ -113,9 +113,9 @@ class Driver implements ExtendedCacheItemPoolInterface
          * Check for Cross-Driver type confusion
          */
         if ($item instanceof Item) {
-            return $this->instance->del([$item->getKey()]);
+            return $this->instance->del($item->getKey());
         } else {
-            throw new phpFastCacheInvalidArgumentException('Cross-Driver type confusion detected');
+            throw new \InvalidArgumentException('Cross-Driver type confusion detected');
         }
     }
 
@@ -124,44 +124,22 @@ class Driver implements ExtendedCacheItemPoolInterface
      */
     protected function driverClear()
     {
-        return $this->instance->flushdb();
+        return $this->instance->flushDB();
     }
 
     /**
      * @return bool
-     * @throws phpFastCacheDriverException
      */
     protected function driverConnect()
     {
-        /** Backward compatibility */
-        $config = isset($this->config[ 'predis' ]) ? $this->config[ 'predis' ] : $this->config;
-        $path = isset($config[ 'path' ]) ? (string) $config[ 'path' ] : false;
+        $config = isset($this->config[ 'predis' ]) ? $this->config[ 'predis' ] : [];
 
-        $defaultConfig = [
+        $this->instance = new PredisClient(array_merge([
           'host' => '127.0.0.1',
           'port' => 6379,
           'password' => null,
           'database' => null,
-        ];
-        $config = array_merge($defaultConfig, $config);
-
-        /**
-         * If path is provided we consider it as an UNIX Socket
-         */
-        if($path){
-            $this->instance = new PredisClient([
-              'scheme' => 'unix',
-              'path' =>  $path
-            ]);
-        }else{
-            $this->instance = new PredisClient($config);
-        }
-
-        try {
-            $this->instance->connect();
-        } catch (PredisConnectionException $e) {
-            throw new phpFastCacheDriverException('Failed to connect to predis server. Check the Predis documentation: https://github.com/nrk/predis/tree/v1.1#how-to-install-and-use-predis', 0, $e);
-        }
+        ], $config));
 
         return true;
     }
@@ -172,35 +150,20 @@ class Driver implements ExtendedCacheItemPoolInterface
      *
      *******************/
 
-
     /**
-     * @return string
-     */
-    public function getHelp()
-    {
-        return <<<HELP
-<p>
-To install the Predis library via Composer:
-<code>composer require "predis/predis" "~1.1.0"</code>
-</p>
-HELP;
-    }
-
-    /**
-     * @return DriverStatistic
+     * @return driverStatistic
      */
     public function getStats()
     {
         $info = $this->instance->info();
-        $size = (isset($info[ 'Memory' ][ 'used_memory' ]) ? $info[ 'Memory' ][ 'used_memory' ] : 0);
-        $version = (isset($info[ 'Server' ][ 'redis_version' ]) ? $info[ 'Server' ][ 'redis_version' ] : 0);
-        $date = (isset($info[ 'Server' ][ 'uptime_in_seconds' ]) ? (new \DateTime())->setTimestamp(time() - $info[ 'Server' ][ 'uptime_in_seconds' ]) : 'unknown date');
+        $size = (isset($info['Memory']['used_memory']) ? $info['Memory']['used_memory'] : 0);
+        $version = (isset($info['Server']['redis_version']) ? $info['Server']['redis_version'] : 0);
+        $date = (isset($info['Server'][ 'uptime_in_seconds' ]) ? (new \DateTime())->setTimestamp(time() - $info['Server'][ 'uptime_in_seconds' ]) : 'unknown date');
 
-        return (new DriverStatistic())
+        return (new driverStatistic())
           ->setData(implode(', ', array_keys($this->itemInstances)))
-          ->setRawData($info)
+          ->setRawData($this->instance->info())
           ->setSize($size)
-          ->setInfo(sprintf("The Redis daemon v%s is up since %s.\n For more information see RawData. \n Driver size includes the memory allocation size.",
-            $version, $date->format(DATE_RFC2822)));
+          ->setInfo(sprintf("The Redis daemon v%s is up since %s.\n For more information see RawData. \n Driver size includes the memory allocation size.", $version, $date->format(DATE_RFC2822)));
     }
 }
