@@ -212,13 +212,14 @@ $js_opts = array(
                     echo "if (!FlowFlowOpts.dependencies['{$name}']) FlowFlowOpts.dependencies['{$name}'] = true;";
                 }
                 ?>
-                var requests = [];
+
+                FlowFlow.extensionResourcesRequests = FlowFlow.extensionResourcesRequests || [];
                 var request, extension, style;
 
                 for ( extension in FlowFlowOpts.dependencies ) {
                     if ( FlowFlowOpts.dependencies[extension] && FlowFlowOpts.dependencies[extension] !== 'loaded') {
                         request = $.getScript( opts.plugin_base + '-' + extension + '/js/ff_' + extension + '_public.js');
-                        requests.push(request);
+                        FlowFlow.extensionResourcesRequests.push(request);
 
                         style = document.createElement('link');
                         style.type = "text/css";
@@ -232,7 +233,7 @@ $js_opts = array(
                     }
                 }
 
-                var resourcesLoaded = $.when.apply($, requests);
+                var resourcesLoaded = $.when.apply($, FlowFlow.extensionResourcesRequests);
 
                 resourcesLoaded.done(function(){
                     var $stream, width;

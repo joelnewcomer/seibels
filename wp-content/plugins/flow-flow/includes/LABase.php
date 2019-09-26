@@ -260,16 +260,13 @@ abstract class LABase {
 					$stream->gallery = $stream->preview ? FFSettingsUtils::NOPE : isset($stream->gallery) ? $stream->gallery : FFSettingsUtils::NOPE;
 					$output = $this->renderStream($stream, $this->getPublicContext($stream, $this->context));
 
-                    /* workaround for extra P tags issue and possibly &&, set to true */
-                    $echo = isset($_GET["echo"]);
-
-					if ( $echo ) {
-					    echo $output;
-					    return '';
-                    } else {
-                        return $output;
-                    }
-
+					/* workaround for extra P tags issue and possibly &&, set to true */
+					if (FFSettingsUtils::notYepNope2ClassicStyleSafe(FFGeneralSettings::get()->original(), 'general-render-alt')){
+						return $output;
+					}
+					else {
+						echo $output;
+					}
 				}
 			} else {
 				echo '<p>Flow-Flow message: Stream with specified ID not found or no feeds were added to stream</p>';
