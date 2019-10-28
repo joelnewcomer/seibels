@@ -107,22 +107,22 @@
         </table>
     </div>
 
-
     <div class="wp-gmap-preview">
+        <h1 id="wpgmap_heading_preview" style="padding: 0px;margin: 0px;"></h1>
         <input id="pac-input" class="controls" type="text" placeholder="<?php _e('Search by Address, Zip Code','gmap-embed');?>"/>
         <div id="map" style="height: 415px;"></div>
     </div>
 
     <script type="text/javascript"
-            src="<?php echo esc_url(plugins_url("../assets/js/geo_based_map.js", __FILE__)); ?>"></script>
+            src="<?php echo esc_url(plugins_url("../assets/js/geo_based_map_create.js?v=1.4.9", __FILE__)); ?>"></script>
 </div>
 
 <div class="media-frame-toolbar">
     <div class="media-toolbar">
         <div class="media-toolbar-secondary"
-             style="text-align: right;float: right;margin-top:10px;">
+             style="text-align: right;float: right;margin-top:10px;margin-right:10px;">
             <span class="spinner" style="margin: 0px !important;float:left;"></span>
-            <button class="button button-primary" id="wp-gmap-embed-save"><?php _e('Save','gmap-embed');?></button>
+            <button class=" button button-primary button-large" id="wp-gmap-embed-save"><?php _e('Save','gmap-embed');?></button>
         </div>
     </div>
 </div>

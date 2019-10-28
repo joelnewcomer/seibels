@@ -2444,7 +2444,7 @@ var FlowFlowApp = (function($){
           var filters = $holder.val() == "" ? [] : $holder.val().split(',');
 
           filters.forEach(function (item, i) {
-              if(item == content) filters.splice(i, 1);
+              if(item == content.replace(/\\/g, '')) filters.splice(i, 1);
           })
 
           $holder.val(filters.join(','));

@@ -122,19 +122,24 @@ list($wpgmap_lat, $wpgmap_lng) = explode(',', esc_html($wpgmap_single->wpgmap_la
     </div>
 
     <div class="wp-gmap-preview">
+        <h1 id="wpgmap_heading_preview" style="padding: 0px;margin: 0px;"><?php echo $wpgmap_single->wpgmap_title;?></h1>
         <input id="pac-input" class="controls" type="text" placeholder="<?php _e('Search by Address, Zip Code','gmap-embed');?>"/>
         <div id="map" style="height: 415px;"></div>
     </div>
+    <script type="text/javascript"
+            src="<?php echo esc_url(plugins_url("../assets/js/geo_based_map_edit.js?v=1.4.9", __FILE__)); ?>"></script>
     <script>
         (function ($) {
             $(function () {
                 google.maps.event.addDomListener(window, 'load',
-                    initAutocomplete('map', 'pac-input',<?php echo $wpgmap_lat;?>,<?php echo $wpgmap_lng;?>, 'roadmap',<?php echo $wpgmap_single->wpgmap_map_zoom;?>)
+                    initAutocomplete('map', 'pac-input',<?php echo $wpgmap_lat;?>,<?php echo $wpgmap_lng;?>, '<?php echo $wpgmap_single->wpgmap_map_type; ?>',<?php echo $wpgmap_single->wpgmap_map_zoom;?>,'edit')
                 );
+                if (jQuery('#wpgmap_show_infowindow').is(':checked') === true) {
+                    openInfoWindow();
+                }
             });
         })(jQuery);
     </script>
-
 </div>
 
 <div class="media-frame-toolbar">
@@ -142,7 +147,7 @@ list($wpgmap_lat, $wpgmap_lng) = explode(',', esc_html($wpgmap_single->wpgmap_la
         <div class="media-toolbar-secondary"
              style="text-align: right;float: right;margin-top:10px;">
             <span class="spinner" style="margin: 0px !important;float:left;"></span>
-            <button class="button button-primary" id="wp-gmap-embed-update"><?php _e('Update','gmap-embed');?></button>
+            <button class="button button-primary" style="margin-right:10px;" id="wp-gmap-embed-update"><?php _e('Update','gmap-embed');?></button>
         </div>
     </div>
 </div>

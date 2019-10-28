@@ -53,7 +53,12 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	public function getApi(){
 		if ($this->api == null){
 			if (!empty($this->username) && !empty($this->password)){
-				$session_folder = '/tmp/sessions';
+				if (defined('FF_CACHE_PATH')){
+					$session_folder = FF_CACHE_PATH . '/sessions';
+				}
+				else {
+					$session_folder = WP_CONTENT_DIR . '/resources/' . $this->context['slug'] . '/cache/sessions';
+				}
 				$this->api = Instagram::withCredentials($this->username, $this->password, $session_folder);
 				$this->api->login();
 			}
@@ -65,7 +70,7 @@ class FFInstagram extends FFBaseFeed implements LAFeedWithComments{
 	}
 
 	public function getCount() {
-		return 50;
+		return 40;
 	}
 
 	public function deferredInit($feed) {

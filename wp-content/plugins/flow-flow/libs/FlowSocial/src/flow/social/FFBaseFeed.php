@@ -124,6 +124,11 @@ abstract class FFBaseFeed implements FFFeed{
 			}
 		}
 		catch (\Exception $e){
+			$error = [
+				'type' => $this->getType(),
+				'message' => $e->getMessage(),
+			];
+			$this->errors[] = $error;
 			$this->print2log($e->getMessage());
 			$this->print2log($e);
 		}

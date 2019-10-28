@@ -13,9 +13,10 @@ if ( isset( $_GET['page'] ) ) {
 		$wpgmap_tag = esc_html( $_GET['tag'] );
 	}
 	?>
+    <script type="text/javascript">
+        var wp_gmap_api_key = '<?php echo esc_html( get_option( 'wpgmap_api_key' ) );?>';
+    </script>
     <div class="wrap">
-        <script type="text/javascript"
-                src="<?php echo esc_url( plugins_url( "../assets/js/srm_gmap_loader.js", __FILE__ ) ); ?>"></script>
         <div id="gmap_container_inner">
             <!--contents-->
 
@@ -61,26 +62,27 @@ if ( isset( $_GET['page'] ) ) {
                              width="150"/>
                     </a>
 
-	                <?php
-	                if ( strlen( trim( get_option( 'wpgmapembed_license' ) ) ) !== 32 ) { ?>
-                    <a target="_blank"
-                       href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=WVPQNC6CJ6T4Q"
-                       class="button media-button button-default button-large gmap_get_pro_version">
-                        GET PRO VERSION
-                    </a>
-		                <?php
-	                }else {
-		                ?>
-                        <img style="margin-left: 10px;" src="<?php echo esc_url( plugins_url( "../assets/images/pro_version.png", __FILE__ ) ); ?>"
-                             width="80"/>
-		                <?php
-	                }
-                        ?>
-                        <a onclick="window.open('https://tawk.to/chat/5ca5dea51de11b6e3b06dc41/default', 'LIVE CHAT', 'width=500,height=300')"
-                           style="float: right;cursor: pointer;">
-                            <img src="<?php echo esc_url( plugins_url( "../assets/images/live_chat.png", __FILE__ ) ); ?>"
-                                 width="110"/>
+					<?php
+					if ( strlen( trim( get_option( 'wpgmapembed_license' ) ) ) !== 32 ) { ?>
+                        <a target="_blank"
+                           href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=WVPQNC6CJ6T4Q"
+                           class="button media-button button-default button-large gmap_get_pro_version">
+                            GET PRO VERSION
                         </a>
+						<?php
+					} else {
+						?>
+                        <img style="margin-left: 10px;"
+                             src="<?php echo esc_url( plugins_url( "../assets/images/pro_version.png", __FILE__ ) ); ?>"
+                             width="80"/>
+						<?php
+					}
+					?>
+                    <a onclick="window.open('https://tawk.to/chat/5ca5dea51de11b6e3b06dc41/default', 'LIVE CHAT', 'width=500,height=300')"
+                       style="float: right;cursor: pointer;">
+                        <img src="<?php echo esc_url( plugins_url( "../assets/images/live_chat.png", __FILE__ ) ); ?>"
+                             width="110"/>
+                    </a>
                 </div>
             </div>
 
@@ -96,10 +98,10 @@ if ( isset( $_GET['page'] ) ) {
 									$message_status = $_GET['message'];
 									switch ( $message_status ) {
 										case 1:
-											echo __( 'Map has been created Successfully.', 'gmap-embed' );
+											echo __( 'Map has been created Successfully. <a href="https://youtu.be/aeiycD9m_ko?t=181" target="_blank"> See How to use >></a>', 'gmap-embed' );
 											break;
 										case 2:
-											echo __( 'Map Updated Successfully.', 'gmap-embed' );
+											echo __( 'Map Updated Successfully. <a href="https://youtu.be/aeiycD9m_ko?t=181" target="_blank"> See How to use >></a>', 'gmap-embed' );
 											break;
 										case 3:
 											echo __( 'Settings updated Successfully.', 'gmap-embed' );
