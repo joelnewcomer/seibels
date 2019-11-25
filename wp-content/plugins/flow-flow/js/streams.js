@@ -326,8 +326,8 @@ var ff_templates = {
                         </dd>\
                     </dl>\
 <dl class="classic-style style-choice section-settings section-compact" style="display:block">\
-    <dt class="hide"><span class="valign">Info style</span></dt>\
-    <dd class="hide">\
+    <dt class="ff-hide"><span class="valign">Info style</span></dt>\
+    <dd class="ff-hide">\
         <div class="select-wrapper">\
             <select name="stream-<%= id %>-gc-style" id="gc-style-<%= id %>">\
                 <option value="style-1" selected>Centered meta, round icon</option>\
@@ -424,7 +424,7 @@ var ff_templates = {
                 </select>\
             </div>\
         </dd>\
-        <dt class="hide">Preview</dt>\
+        <dt class="ff-hide">Preview</dt>\
         <dd class="preview">\
             <h1>Card builder - drag\'n\'drop</h1>\
             <input type="hidden" id="stream-<%= id %>-template" name="stream-<%= id %>-template"/>\
@@ -636,8 +636,8 @@ Posts to load during update\
 <dd>\
 <input id="<%= uid %>-page-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="page_timeline" checked />\
 <label for="<%= uid %>-page-timeline-type">Page</label>\
-<input class="hide" id="<%= uid %>-group-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="group" />\
-<label class="hide" for="<%= uid %>-group-timeline-type">Group</label><br><br>\
+<input class="ff-hide" id="<%= uid %>-group-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="group" />\
+<label class="ff-hide" for="<%= uid %>-group-timeline-type">Group</label><br><br>\
 <input id="<%= uid %>-album-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="album" />\
 <label for="<%= uid %>-album-timeline-type">Album</label>\
 </dd>\
@@ -651,7 +651,7 @@ Content to show\
         <h1>Content to show</h1>\
         <ul>\
             <li><b>Page</b> — enter nickname of any public page or Page ID.</li>\
-            <li class="hide"><b>Group</b> — enter Group ID.</li>\
+            <li class="ff-hide"><b>Group</b> — enter Group ID.</li>\
             <li><b>Album</b> — enter Album ID. <a href="http://docs.social-streams.com/article/50-find-facebook-album-id" target="_blank">What is it?</a> </li>\
         </ul><br>\
         Use <a href="http://lookup-id.com" target="_blank">Find my Facebook ID</a> tool to find your Page ID or Group ID.\
@@ -839,8 +839,8 @@ Posts to load during update\
           <dd>\
           <input id="<%= uid %>-user-timeline-type" checked type="radio" name="<%= uid %>-timeline-type" value="user_timeline"/>\
             <label for="<%= uid %>-user-timeline-type">User feed</label>\
-          <input class="hide" id="<%= uid %>-likes-type"  type="radio" name="<%= uid %>-timeline-type" value="likes"/>\
-            <label class="hide" for="<%= uid %>-likes-type">User\'s likes</label><br><br>\
+          <input class="ff-hide" id="<%= uid %>-likes-type"  type="radio" name="<%= uid %>-timeline-type" value="likes"/>\
+            <label class="ff-hide" for="<%= uid %>-likes-type">User\'s likes</label><br><br>\
           <input id="<%= uid %>-search-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="tag"/>\
             <label for="<%= uid %>-search-timeline-type">Hashtag</label><br><br>\
           <input id="<%= uid %>-location-type" type="radio" name="<%= uid %>-timeline-type" value="location"/>\
@@ -856,7 +856,7 @@ Posts to load during update\
                     <h1>Content to show</h1>\
                     <ul>\
                         <li><b>User feed</b> — enter nickname of any public Instagram account.</li>\
-                        <li class="hide"><b>User\'s likes</b> — enter nickname of your own account.</li>\
+                        <li class="ff-hide"><b>User\'s likes</b> — enter nickname of your own account.</li>\
                         <li><b>Hashtag</b> — enter a hashtag.</li>\
                         <li><b>Location</b> — enter <a href="http://docs.social-streams.com/article/118-find-instagram-location-id" target="_blank">Location ID</a>.</li>\
                     </ul>\
@@ -866,7 +866,7 @@ Posts to load during update\
           <dd>\
               <input type="text" name="<%= uid %>-content"/>\
                       </dd>\
-          <dt class="hide">API METHODS\
+          <dt class="ff-hide">API METHODS\
           <div class="desc hint-block">\
                 <span class="hint-link">\
                     <img src="<%= plugin_url %>/assets/info_icon.svg">\
@@ -881,7 +881,7 @@ Posts to load during update\
                 </div>\
             </div>\
           </dt>\
-          <dd class="hide" style="margin-top: 8px">\
+          <dd class="ff-hide" style="margin-top: 8px">\
           <input id="<%= uid %>-api-official" checked type="radio" name="<%= uid %>-api-type" value="official"/>\
             <label for="<%= uid %>-api-official">Official API</label><br><br>\
           <input id="<%= uid %>-api-json" type="radio" name="<%= uid %>-api-type" value="json"/>\
@@ -892,11 +892,11 @@ Posts to load during update\
                       <dt>Feed updates frequency</dt>\
 <dd>\
 <div class="select-wrapper"> <select name="<%= uid %>-cache_lifetime" id="<%= uid %>-cache_lifetime"><option value="60">Every hour</option> <option value="360">Every 6 hours</option> <option value="1440">Once a day</option></select> </div></dd>\
-<dt class="hide" >\
+<dt class="ff-hide" >\
     Posts to load during update\
     <p class="desc">The first load is always 50. <a href="http://docs.social-streams.com/article/137-managing-feed-updates" target="_blank">Learn more</a>.</p>\
 </dt>\
-<dd class="hide" >\
+<dd class="ff-hide" >\
 <div class="select-wrapper"> <select name="<%= uid %>-posts" id="<%= uid %>-post"><option value="1">1 post</option><option value="5">5 posts</option><option selected value="10">10 posts</option><option value="20">20 posts</option></select></div>\
 </dd>\
 <dt>\

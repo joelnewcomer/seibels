@@ -7,7 +7,7 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: http://www.srmilon.info
-  Version: 1.4.9
+  Version: 1.5.1
  */
 
 if (!defined('ABSPATH')) exit;

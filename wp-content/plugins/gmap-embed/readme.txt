@@ -3,9 +3,8 @@ Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q
 Tags: google map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross-browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, maps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, google maps, gprs, gps, gpx, kml, latitude, Longitude, location, location by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
-Tested up to: 5.2
-Version: 1.4.9
-Stable tag: 1.4.9
+Tested up to: 5.3
+Version: 1.5.1
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -29,7 +28,7 @@ After July 16, 2018, Google has changed its policy. **You need to add billing in
 To have continued the update, please donate for the plugin.
 [Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q)
 
-https://www.youtube.com/watch?v=aeiycD9m_ko
+https://www.youtube.com/watch?v=FRBqfx_lB-Y
 
 ### Features of WP Google Map Plugin-Lite version(FREE):
 
@@ -121,7 +120,7 @@ Go to **Pages** =-> **Add New** then you will see a button named "Embed Google M
 Go to **Appearance** =-> **Widget** then you will see a widget named "Google Map SRM ". Drag it to any widget area and enter Google Map Shortcode then save it and the map will appear in your sidebar or footer whatever you selected. Enjoy!
 
 = How do I get a Google Map API key? =
-See the [Video](https://www.youtube.com/watch?v=aeiycD9m_ko) ,hope you will get idea.
+See the [Video](https://www.youtube.com/watch?v=FRBqfx_lB-Y) ,hope you will get idea.
 
 == Screenshots ==
 
@@ -294,3 +293,6 @@ See the [Video](https://www.youtube.com/watch?v=aeiycD9m_ko) ,hope you will get 
 * Map type wise map rendering live
 * Infowindow live changing when updating
 * Address related API issue fixing
+
+= 1.5.0 =
+New version released with new helpful video

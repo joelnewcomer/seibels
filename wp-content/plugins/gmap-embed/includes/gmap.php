@@ -46,7 +46,7 @@ if ( isset( $_GET['page'] ) ) {
                                class="media-menu-item"><?php _e( 'Having Problem?', 'gmap-embed' ); ?></a>
                         </li>
                         <li>
-                            <a target="_blank" href="https://www.youtube.com/watch?v=aeiycD9m_ko"
+                            <a target="_blank" href="https://www.youtube.com/watch?v=FRBqfx_lB-Y"
                                class="media-menu-item">
 								<?php _e( 'See Video', 'gmap-embed' ); ?></a>
                         </li>
