@@ -2,19 +2,19 @@
 Contributors: resmushit
 Tags: image, optimizer, image optimization, resmush.it, smush, jpg, png, gif, optimization, compression, Compress, Images, Pictures, Reduce Image Size, Smush, Smush.it
 Requires at least: 4.0.0
-Tested up to: 5.0.3
-Stable tag: 0.1.22
+Tested up to: 5.3.2
+Stable tag: 0.2.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Use reSmush.it Image Optimizer for FREE to optimize your pictures file sizes. Improve your performances by using reSmush.it, the 4 billion images API optimizer.
+Use reSmush.it Image Optimizer for FREE to optimize your pictures file sizes. Improve your performances by using reSmush.it, the 7 billion images API optimizer.
 
 == Description ==
 
 reSmush.it Image Optimizer allow to use **free Image optimization** based on [reSmush.it API](http://www.resmush.it/ "Image Optimization API, developped by Charles Bourgeaux"). reSmush.it provides image size reduction based on several advanced algorithms. The API accept JPG, PNG and GIF files up to **5MB**.
 
 This plugin includes a bulk operation to optimize all your pictures in 2 clicks ! Change your image optimization level to fit your needs !
-This service is used by more than **300,000** websites on different CMS (Wordpress, Drupal, Joomla, Magento, Prestashop...).
+This service is used by more than **400,000** websites on different CMS (Wordpress, Drupal, Joomla, Magento, Prestashop...).
 
 The plugin includes an option to exclude some pictures of the optimizer.
 
@@ -34,11 +34,15 @@ This plugin has initially been developped by [Maecia Agency](http://www.maecia.c
 
 = How great is reSmush.it ? =
 
-Since we've optimized more than 4,000,000,000 pictures, we've risen new skills. Our service is still in development to bring you new crazy functionalities.
+Since we've optimized more than 7,000,000,000 pictures, we've risen new skills. Our service is still in development to bring you new crazy functionalities.
 
 = Is there an "Optimize on upload" feature ? =
 
 Absolutely, this feature is enabled for all new pictures to be added, and can be disabled on will.
+
+= Is there a CRON feature ? =
+
+Yes, for big (and even for small) media Libraries, you can optimize your pictures using Cronjobs.
 
 = Can I choose an optimisation level ? =
 
@@ -50,7 +54,7 @@ Yes, by excluding/reverting this asset you'll have your original image available
 
 = Is it possible to exclude some pictures from the optimizer ? =
 
-Yes, since version 0.12, you can easily exclude an asset from the optimizer.
+Yes, since version 0.1.2, you can easily exclude an asset from the optimizer.
 
 = Have I a risk to lose my existing pictures ? =
 
@@ -65,6 +69,27 @@ Yes ! Absolutely free, the only restriction is to send images below 5MB.
 1. The simple interface
 
 == Changelog ==
+
+= 0.2.3 =
+* Version number issue
+
+= 0.2.2 =
+* Fix settings automatically reinitialized.
+
+= 0.2.1 =
+* Complete French translation
+* Plugin translation fix
+
+= 0.2.0 =
+* Add CRON feature
+* Code refactoring
+* Fix issue for big Media library, with a limitation while fetching attachments
+* Fix log path issues
+
+= 0.1.23 =
+* Add Settings link to Plugin page
+* Limit reSmush.it options to image attachments only
+* Fix `RESMUSHIT_QLTY is not defined`
 
 = 0.1.22 =
 * Fix on attachment metadata incorrectly returned (will fix issues with other media libraries)
