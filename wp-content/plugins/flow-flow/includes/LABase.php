@@ -515,10 +515,6 @@ abstract class LABase {
 		if ($feed->type == 'instagram') {
 			/** @noinspection PhpIncludeInspection */
 			require_once $this->context['root'] . 'libs/InstagramAPI.php';
-			/** @noinspection PhpIncludeInspection */
-			require_once $this->context['root'] . 'libs/Unirest.php';
-			/** @noinspection PhpIncludeInspection */
-			require_once $this->context['root'] . 'libs/phpFastCache.php';
 		}
 		if (FF_USE_WP && $feed->type == 'wordpress'){
 			$wpt = 'wordpress-type';

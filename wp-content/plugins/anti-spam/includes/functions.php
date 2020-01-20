@@ -1,14 +1,96 @@
 <?php
 /**
+ * Helper functions
  *
- * @author        Webcraftic <wordpress.webraftic@gmail.com>, Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @author        Alex Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
  * @copyright (c) 12.12.2019, Webcraftic
  * @version       1.0
  */
 
 /**
+ * Gets honeypot fields.
+ *
+ * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @since  6.5.3
+ */
+function wantispam_get_honeypot_fields() {
+	$rn   = "\r\n"; // .chr(13).chr(10)
+	$html = '';
+
+	$html .= '<div class="wantispam-group wantispam-group-q" style="clear: both;">
+					<label>Current ye@r <span class="required">*</span></label>
+					<input type="hidden" name="wantispam_a" class="wantispam-control wantispam-control-a" value="' . date( 'Y' ) . '" />
+					<input type="text" name="wantispam_q" class="wantispam-control wantispam-control-q" value="' . \WBCR\Antispam\Plugin::app()->getPluginVersion() . '" autocomplete="off" />
+				  </div>' . $rn; // question (hidden with js)
+	$html .= '<div class="wantispam-group wantispam-group-e" style="display: none;">
+					<label>Leave this field empty</label>
+					<input type="text" name="wantispam_e_email_url_website" class="wantispam-control wantispam-control-e" value="" autocomplete="off" />
+				  </div>' . $rn; // empty field (hidden with css); trap for spammers because many bots will try to put email or url here
+
+	return $html;
+}
+
+/**
+ * Gets required fields into the comment form on the page.
+ *
+ * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @since  6.5.3
+ *
+ * @param string $html
+ *
+ * @return string
+ */
+function wantispam_get_required_fields( $render_honeypot_fields = true ) {
+	$html = '<!-- Anti-spam plugin wordpress.org/plugins/anti-spam/ -->';
+	$html .= '<div class="wantispam-required-fields">';
+	$html .= '<input type="hidden" name="wantispam_t" class="wantispam-control wantispam-control-t" value="' . time() . '" />'; // Start time of form filling
+	if ( $render_honeypot_fields ) {
+		$html .= wantispam_get_honeypot_fields();
+	}
+	$html .= '</div>';
+	$html .= '<!--\End Anti-spam plugin -->';
+
+	return $html;
+}
+
+/**
+ * Controls the display of a privacy related notice underneath the comment form.
+ *
+ * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @since  6.5.3
+ */
+function wantispam_display_comment_form_privacy_notice() {
+	if ( ! \WBCR\Antispam\Plugin::app()->getPopulateOption( 'comment_form_privacy_notice' ) ) {
+		return;
+	}
+	echo '<p class="wantispam-comment-form-privacy-notice" style="margin-top:10px;">' . sprintf( __( 'This site uses Antispam to reduce spam. <a href="%s" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.', 'anti-spam' ), 'https://anti-spam.space/antispam-privacy/' ) . '</p>';
+}
+
+/**
+ * Return premium widget markup
+ *
+ * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @since  6.5.3
+ * @return string
+ */
+function wantispam_get_sidebar_premium_widget() {
+	ob_start();
+	?>
+    <div class="wbcr-factory-sidebar-widget">
+        <p>
+            <a href="https://anti-spam.space/pricing/" target="_blank" rel="noopener nofollow">
+                <img style="width: 100%;" src="https://api.cm-wp.com/wp-content/uploads/2019/12/baner_antispam_vertical.jpg" alt="">
+            </a>
+        </p>
+    </div>
+	<?php
+	return ob_get_clean();
+}
+
+/**
  * Should show a page about the plugin or not.
  *
+ * @since  6.5.3
  * @return bool
  */
 function wantispam_is_need_show_about_page() {
@@ -58,7 +140,7 @@ function wantispam_doing_rest_api() {
 }
 
 /**
- * @since 2.1.0
+ * @since  6.5.3
  * @return bool
  */
 function wantispam_doing_ajax() {
@@ -70,7 +152,7 @@ function wantispam_doing_ajax() {
 }
 
 /**
- * @since 2.1.0
+ * @since  6.5.3
  * @return bool
  */
 function wantispam_doing_cron() {

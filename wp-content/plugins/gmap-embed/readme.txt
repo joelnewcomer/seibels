@@ -1,10 +1,10 @@
 === WP Google Map ===
 Contributors: milonfci
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA
 Tags: google map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross-browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, maps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, google maps, gprs, gps, gpx, kml, latitude, Longitude, location, location by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
 Tested up to: 5.3
-Version: 1.5.1
+Version: 1.5.3
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -16,7 +16,7 @@ WP Google Map is very Simple, light-weight and Easy to use Google Custom Map wit
 
 WP Google Map is an awesome plugin to use when adding a custom Google map to your website. It is fully customizable and can be used as shortcode.
 
-[Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q)
+[Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA)
 
 ### !!Important Notice for All!!
 After July 16, 2018, Google has changed its policy. **You need to add billing information to use Google Map**. If you see a warning message on Map-like "**This page can't load Google Maps correctly**", please have a look on google developers [documentation](https://developers.google.com/maps/documentation/javascript/error-messages?utm_source=maps_js&utm_medium=degraded&utm_campaign=billing#api-key-and-billing-errors). Even if you face a problem, please send a message in the mail: **milonfci@gmail.com** or Skype: **milon305021**
@@ -26,7 +26,7 @@ After July 16, 2018, Google has changed its policy. **You need to add billing in
 * [Support Forum](https://wordpress.org/support/plugin/gmap-embed)
 
 To have continued the update, please donate for the plugin.
-[Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q)
+[Click here to donate](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA)
 
 https://www.youtube.com/watch?v=FRBqfx_lB-Y
 
@@ -296,3 +296,12 @@ See the [Video](https://www.youtube.com/watch?v=FRBqfx_lB-Y) ,hope you will get 
 
 = 1.5.0 =
 New version released with new helpful video
+
+= 1.5.1 =
+New version released with helpful resources and insitilization of street view.
+
+= 1.5.2 =
+New version released with bug fixing
+
+= 1.5.3 =
+New version released with payment option updated.

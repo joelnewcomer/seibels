@@ -56,7 +56,7 @@ if ( isset( $_GET['page'] ) ) {
                 <!--    Right Area-->
                 <div class="gmap_header_section_right">
                     <a class="gmap_donate_button"
-                       href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q">
+                       href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA">
                         <img alt="Donate"
                              src="<?php echo esc_url( plugins_url( "../assets/images/paypal.png", __FILE__ ) ); ?>"
                              width="150"/>
@@ -65,7 +65,7 @@ if ( isset( $_GET['page'] ) ) {
 					<?php
 					if ( strlen( trim( get_option( 'wpgmapembed_license' ) ) ) !== 32 ) { ?>
                         <a target="_blank"
-                           href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=WVPQNC6CJ6T4Q"
+                           href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA"
                            class="button media-button button-default button-large gmap_get_pro_version">
                             GET PRO VERSION
                         </a>

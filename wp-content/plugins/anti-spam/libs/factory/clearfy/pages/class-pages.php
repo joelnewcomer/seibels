@@ -414,7 +414,8 @@ class Wbcr_FactoryClearfy216_PageBase extends Wbcr_FactoryPages424_ImpressiveThe
 	 */
 	public function showSupportWidget() {
 		$free_support_url = $this->plugin->get_support()->get_contacts_url();
-		$hot_support_url  = 'https://webcraftic.com/other-questions-support/';
+		$hot_support_url  = $this->plugin->get_support()->get_site_url() . '/other-questions-support';
+
 		?>
         <div id="wbcr-clr-support-widget" class="wbcr-factory-sidebar-widget">
             <p><strong><?php _e( 'Having Issues?', 'clearfy' ); ?></strong></p>

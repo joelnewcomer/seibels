@@ -97,7 +97,10 @@ class Plugin extends \Wbcr_Factory424_Plugin {
 
 		self::app()->registerPage( '\WBCR\Antispam\Page\License', WANTISPAM_PLUGIN_DIR . '/admin/pages/class-pages-license.php' );
 		self::app()->registerPage( '\WBCR\Antispam\Page\Logs', WANTISPAM_PLUGIN_DIR . '/admin/pages/class-pages-logs.php' );
-		self::app()->registerPage( '\WBCR\Antispam\Page\About', WANTISPAM_PLUGIN_DIR . '/admin/pages/class-pages-about.php' );
+
+		if ( ! $this->premium->is_activate() ) {
+			self::app()->registerPage( '\WBCR\Antispam\Page\About', WANTISPAM_PLUGIN_DIR . '/admin/pages/class-pages-about.php' );
+		}
 	}
 
 	/**

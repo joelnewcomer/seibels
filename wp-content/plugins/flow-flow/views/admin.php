@@ -66,7 +66,7 @@ if (!$dbm->canCreateCssFolder()){
 			<?php
 				/** @var LATab $tab*/
 				foreach ( $context['tabs'] as $tab ) {
-					echo '<li id="'.$tab->id().'"><i class="'.$tab->flaticon().'"></i> <span>'.$tab->title().'</span></li>';
+					echo '<li id="'.$tab->id().'"><span class="ff-border-anim"></span> <i class="'.$tab->flaticon().'"></i> <span>'.$tab->title().'</span></li>';
 				}
 				if (isset($context['buttons-after-tabs'])) echo $context['buttons-after-tabs'];
 			?>

@@ -14,3 +14,5 @@ require_once __DIR__ . '/InstagramAPI/Model/Tag.php';
 require_once __DIR__ . '/InstagramAPI/Exception/InstagramException.php';
 require_once __DIR__ . '/InstagramAPI/Exception/InstagramAuthException.php';
 require_once __DIR__ . '/InstagramAPI/Exception/InstagramNotFoundException.php';
+
+require_once __DIR__ . '/autoload.php';

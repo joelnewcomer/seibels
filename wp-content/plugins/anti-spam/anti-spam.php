@@ -3,7 +3,7 @@
 Plugin Name: Anti-Spam
 Plugin URI: http://wordpress.org/plugins/anti-spam/
 Description: No spam in comments. No captcha.
-Version: 6.5.1
+Version: 6.5.3
 Author: CreativeMotion
 Text Domain: anti-spam
 Author URI: https://cm-wp.com/
@@ -60,6 +60,8 @@ $cm_antspam_plugin_info = array(
 		'slug'               => 'antispam-premium',
 		'plugin_id'          => '5079',
 		'public_key'         => 'pk_98a99846a14067246257d4f43c04a',
+		//'plugin_id'          => '4865',
+		//'public_key'         => 'pk_05cbde6c0f9c96814c3b3cbff2259',
 		'price'              => 15,
 		'has_updates'        => true,
 		'updates_settings' => array(
@@ -84,7 +86,8 @@ $cm_antspam_plugin_info = array(
 		array( 'libs/factory/forms', 'factory_forms_422', 'admin' ),
 		array( 'libs/factory/pages', 'factory_pages_424', 'admin' ),
 		array( 'libs/factory/clearfy', 'factory_clearfy_216', 'all' ),
-		array( 'libs/factory/freemius', 'factory_freemius_112', 'all')
+		array( 'libs/factory/freemius', 'factory_freemius_112', 'all'),
+		array( 'libs/factory/feedback', 'factory_feedback_101', 'admin')
 	)
 );
 

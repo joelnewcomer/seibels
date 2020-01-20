@@ -49,7 +49,7 @@ if ( isset( $_POST['wpgmapembed_license'] ) ) {
 			}
 			$message = 'License key updated successfully, Now you can enjoy <b>premium features</b>!';
 		} else {
-			$message = '<span style="color:red">Invalid license key, please get your license key. <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q">Get License Key</a></span>';
+			$message = '<span style="color:red">Invalid license key, please get your license key. <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA">Get License Key</a></span>';
 		}
 
 	}

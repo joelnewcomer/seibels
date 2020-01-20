@@ -112,11 +112,19 @@ class Settings extends \Wbcr_FactoryClearfy216_PageBase {
 	 * @return mixed[]
 	 */
 	public function getPageOptions() {
-		$is_premium = \WBCR\Antispam\Plugin::app()->premium->is_activate();
+		$is_premium = $this->plugin->premium->is_activate();
+		//$upgrade_premium_url = $this->plugin->get_support()->get_pricing_url();
+
+		$blocked_total  = 0; // show 0 by default
+		$antispam_stats = get_option( 'antispam_stats', [] );
+
+		if ( isset( $antispam_stats['blocked_total'] ) ) {
+			$blocked_total = $antispam_stats['blocked_total'];
+		}
 
 		$options[] = [
 			'type' => 'html',
-			'html' => '<div class="wbcr-factory-page-group-header">' . '<strong>' . __( 'Base options.', 'anti-spam' ) . '</strong>' . '<p>' . __( 'More 1 000 000 spam comments were blocked by Anti-spam plugin so far. Upgrade to Anti-spam Pro for advanced protection.', 'anti-spam' ) . '</p>' . '</div>'
+			'html' => '<div class="wbcr-factory-page-group-header">' . '<strong>' . __( 'Base options.', 'anti-spam' ) . '</strong>' . '<p>' . sprintf( __( '%s spam comments were blocked by Anti-spam plugin so far.', 'anti-spam' ), $blocked_total ) . '</p>' . '</div>'
 		];
 
 		$options[] = [
@@ -166,16 +174,17 @@ class Settings extends \Wbcr_FactoryClearfy216_PageBase {
 			'default'  => false,
 			'cssClass' => ! $is_premium ? [ 'factory-checkbox--disabled wantispam-checkbox-premium-label' ] : [],
 		];
-		/*$options[] = [
+
+		$options[] = [
 			'type'     => 'checkbox',
 			'way'      => 'buttons',
-			'name'     => 'protect_contacts_form',
-			'title'    => __( 'Protect Contact Forms (Beta)', 'anti-spam' ),
-			'layout'   => [ 'hint-type' => 'icon', 'hint-icon-color' => 'red' ],
+			'name'     => 'protect_contacts_form7',
+			'title'    => __( 'Protect Contact Forms 7', 'anti-spam' ),
+			'layout'   => [ 'hint-type' => 'icon', 'hint-icon-color' => 'green' ],
 			'hint'     => __( 'Job Spam-Free for WordPress Contact Forms.', 'anti-spam' ),
 			'default'  => false,
 			'cssClass' => ! $is_premium ? [ 'factory-checkbox--disabled wantispam-checkbox-premium-label' ] : [],
-		];*/
+		];
 
 		$form_options = [];
 

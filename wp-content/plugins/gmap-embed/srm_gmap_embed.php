@@ -7,7 +7,7 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: http://www.srmilon.info
-  Version: 1.5.1
+  Version: 1.5.3
  */
 
 if (!defined('ABSPATH')) exit;
@@ -383,6 +383,6 @@ function gmap_srm_settings_link( $links ) {
 
 add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'gmap_srm_settings_linka');
 function gmap_srm_settings_linka( $links ) {
-	$links[] = '<a target="_blank" style="color: #11967A;font-weight:bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q">' . __('Upgrade To Premium') . '</a>';
+	$links[] = '<a target="_blank" style="color: #11967A;font-weight:bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA">' . __('Upgrade To Premium') . '</a>';
 	return $links;
 }

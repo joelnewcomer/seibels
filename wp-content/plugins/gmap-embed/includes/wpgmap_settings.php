@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<?php
 					if ( strlen( trim( get_option( 'wpgmapembed_license' ) ) ) !== 32 ) { ?>
                         <a target="_blank"
-                           href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=WVPQNC6CJ6T4Q"
+                           href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA"
                            class="button media-button button-default button-large"><?php _e( 'GET LICENSE KEY', 'gmap-embed' ); ?></a>
 						<?php
 					}
