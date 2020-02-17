@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @copyright (c) 2018 Webraftic Ltd
  */
-class License extends \Wbcr_FactoryClearfy216_LicensePage {
+class License extends \Wbcr_FactoryClearfy217_LicensePage {
 
 	/**
 	 * {@inheritdoc}
@@ -41,9 +41,9 @@ class License extends \Wbcr_FactoryClearfy216_LicensePage {
 	 *
 	 * @author Alexander Kovalev <alex.kovalevv@gmail.com>
 	 *
-	 * @param \Wbcr_Factory424_Plugin $plugin
+	 * @param \Wbcr_Factory425_Plugin $plugin
 	 */
-	public function __construct( \Wbcr_Factory424_Plugin $plugin ) {
+	public function __construct( \Wbcr_Factory425_Plugin $plugin ) {
 		$this->menu_title                  = __( 'License', 'anti-spam' );
 		$this->page_menu_short_description = __( 'Product activation', 'anti-spam' );
 		$this->plan_name                   = __( 'Anti-spam PRO', 'anti-spam' );
@@ -58,10 +58,10 @@ class License extends \Wbcr_FactoryClearfy216_LicensePage {
 	 * @since 6.5.2
 	 *
 	 * @param                         $notices
-	 * @param \Wbcr_Factory424_Plugin $plugin
+	 * @param \Wbcr_Factory425_Plugin $plugin
 	 *
 	 * @return array
-	 * @see   \FactoryPages424_ImpressiveThemplate
+	 * @see   \FactoryPages425_ImpressiveThemplate
 	 */
 	public function getActionNotices( $notices ) {
 

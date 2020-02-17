@@ -88,7 +88,7 @@
                 key?</a>
         </li>
         <li>
-            <a href="http://srmilon.info/2019/03/31/how-to-get-your-license-key" target="_blank">How to get your
+            <a href="http://srmilon.info/2019/03/31/how-to-get-your-license-key" target="_blank">How to get your Lifetime
                 License key?</a>
         </li>
 		<li>
@@ -114,7 +114,7 @@
 </div>
 
 <div class="srm_gmap_video_area">
-    <iframe width="100%" height="520" src="https://www.youtube.com/embed/FRBqfx_lB-Y" frameborder="0"
+    <iframe width="100%" height="520" src="https://www.youtube.com/embed/Nh2z_oRK-RM" frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			
 </div>

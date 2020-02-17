@@ -31,6 +31,21 @@ In the Pro version, you can:
 * Antispam Pro a transparent anti-spam protection. We provide detailed statistics of all entered comments and logins. You can always be sure that there are no errors. We have developed a mobile app for you to see anti-spam statistics, wherever and whenever.
 * We regularly release updates to the anti-spam module. Our modules always meet new versions of CMS and we are constantly expanding supported CMS.
 
+New 6.6 Release of our plugin
+* Firewall (WAF)
+Antispam includes a Web Application Firewall (WAF) that identifies and blocks malicious traffic. It runs at the endpoint, enabling deep integration with WordPress. Unlike cloud alternatives it does not break encryption, cannot be bypassed and cannot leak data. 
+* Malware scanner
+An integrated malware scanner blocks requests that include malicious code or content. Defends against brute force attacks by limiting login attempts, enforcing strong passwords and other login security measures.
+* Real-time IP Blacklist
+Real-time IP Blacklist, which blocks all requests from the most malicious IPs, protecting your site while reducing load.
+* WordPress Security Scanner
+The scanner checks core files, themes and plugins for malware, bad URLs, backdoors, SEO spam, malicious redirects and code injections. 
+* Repier Files
+It also compares your files with what is in the WordPress.org repository, checking their integrity and reporting any changes to you.Repair files that have changed by overwriting them with a pristine, original version and easily delete any files that don't belong.
+* Detect Malicious Code in WordPress Themes and Plugins
+It also checks your site for known security vulnerabilities, abandoned and closed plugins. Content safety checks ensure that your files, posts and comments don't contain dangerous URLs or suspicious content. 
+
+
 == Installation ==
 
 1. Install and activate the plugin on the Plugins page
@@ -115,6 +130,10 @@ The plugin is pretty small and easy to read.
 
 
 == Changelog ==
+= 6.5.4 - 24.01.2020 =
+* Fixed: Minor bugs.
+* Fixed: Compatibility Anti-spam Pro.
+
 = 6.5.3 - 08.01.2020 =
 * Removed: Admin redirect to the premium page.
 * Updated: Premium page.

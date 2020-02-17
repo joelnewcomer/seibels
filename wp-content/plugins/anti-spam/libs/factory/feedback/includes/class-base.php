@@ -1,6 +1,6 @@
 <?php
 
-namespace WBCR\Factory_Feedback_101;
+namespace WBCR\Factory_Feedback_102;
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) {
@@ -28,7 +28,7 @@ class Base {
 	 * Plugin instance this module interacts with
 	 *
 	 * @since  1.0.0 Added
-	 * @var \Wbcr_Factory424_Plugin
+	 * @var \Wbcr_Factory425_Plugin
 	 */
 	private $plugin;
 
@@ -36,18 +36,19 @@ class Base {
 	 * Экземпляр класса для работы API CreativeMotion
 	 *
 	 * @since  1.0.0
-	 * @var \WBCR\Factory_Feedback_101\Creative_Motion_API
+	 * @var \WBCR\Factory_Feedback_102\Creative_Motion_API
 	 */
 	private $api;
 
 	/**
 	 * Wbcr_Factory_Feedback constructor.
 	 *
+	 * @param \Wbcr_Factory425_Plugin $plugin
+	 *
 	 * @since 1.0.0 Added
 	 *
-	 * @param \Wbcr_Factory424_Plugin $plugin
 	 */
-	public function __construct( \Wbcr_Factory424_Plugin $plugin ) {
+	public function __construct( \Wbcr_Factory425_Plugin $plugin ) {
 		$this->plugin = $plugin;
 
 		$this->api = new Creative_Motion_API( $this->plugin );
@@ -63,23 +64,23 @@ class Base {
 		}
 
 		if ( wp_doing_ajax() ) {
-			add_action( 'wp_ajax_wbcr-factory-feedback-101-save', [ $this, 'send_feedback' ] );
+			add_action( 'wp_ajax_wbcr-factory-feedback-102-save', [ $this, 'send_feedback' ] );
 		}
 	}
 
 	/**
 	 * Enqueues module assets for work feedback popup.
 	 *
-	 * @since  1.0.0 Added
-	 *
 	 * @param $hook_suffix
 	 *
 	 * @return void
+	 * @since  1.0.0 Added
+	 *
 	 */
 	public function admin_assets( $hook_suffix ) {
 		if ( 'plugins.php' === $hook_suffix ) {
-			wp_enqueue_script( 'wbcr-factory-feedback-101-deactivate', FACTORY_FEEDBACK_101_URL . '/assets/js/deactivate-feedback.js', [ 'jquery' ], FACTORY_FEEDBACK_101_VERSION, true );
-			wp_enqueue_style( 'wbcr-factory-feedback-101-deactivate', FACTORY_FEEDBACK_101_URL . '/assets/css/dialog-boxes.css' );
+			wp_enqueue_script( 'wbcr-factory-feedback-102-deactivate', FACTORY_FEEDBACK_102_URL . '/assets/js/deactivate-feedback.js', [ 'jquery' ], FACTORY_FEEDBACK_102_VERSION, true );
+			wp_enqueue_style( 'wbcr-factory-feedback-102-deactivate', FACTORY_FEEDBACK_102_URL . '/assets/css/dialog-boxes.css' );
 		}
 	}
 
@@ -90,21 +91,21 @@ class Base {
 	 * @since  1.0.0 Added
 	 */
 	public function render_deactivate_form() {
-		include FACTORY_FEEDBACK_101_DIR . "/views/deactivate-form.php";
+		include FACTORY_FEEDBACK_102_DIR . "/views/deactivate-form.php";
 	}
 
 	/**
 	 * Adds invisible element to action link to able to listen js events.
 	 *
-	 * @since  1.0.0 Added
-	 *
-	 * @param array  $actions       Links array under plugin title
-	 * @param string $plugin_file   Plugin basename: plugin-name/plugin-name.php
+	 * @param array $actions Links array under plugin title
+	 * @param string $plugin_file Plugin basename: plugin-name/plugin-name.php
 	 *
 	 * @return array Links array
+	 * @since  1.0.0 Added
+	 *
 	 */
 	public function plugin_deactivate_action_link( $actions, $plugin_file ) {
-		if ( false === strpos( $plugin_file, basename( $this->plugin->get_paths()->basename ) ) ) {
+		if ( $plugin_file !== $this->plugin->get_paths()->basename ) {
 			return $actions;
 		}
 		$actions['deactivate'] .= '<i class="plugin-slug" data-plugin="' . $this->plugin->getPluginName() . '"></i>';

@@ -33,12 +33,12 @@ function wantispam_get_honeypot_fields() {
 /**
  * Gets required fields into the comment form on the page.
  *
- * @author Alexander Kovalev <alex.kovalevv@gmail.com>
- * @since  6.5.3
- *
  * @param string $html
  *
  * @return string
+ * @author Alexander Kovalev <alex.kovalevv@gmail.com>
+ * @since  6.5.3
+ *
  */
 function wantispam_get_required_fields( $render_honeypot_fields = true ) {
 	$html = '<!-- Anti-spam plugin wordpress.org/plugins/anti-spam/ -->';
@@ -59,19 +59,26 @@ function wantispam_get_required_fields( $render_honeypot_fields = true ) {
  * @author Alexander Kovalev <alex.kovalevv@gmail.com>
  * @since  6.5.3
  */
-function wantispam_display_comment_form_privacy_notice() {
+function wantispam_display_comment_form_privacy_notice( $echo = false ) {
 	if ( ! \WBCR\Antispam\Plugin::app()->getPopulateOption( 'comment_form_privacy_notice' ) ) {
-		return;
+		return '';
 	}
-	echo '<p class="wantispam-comment-form-privacy-notice" style="margin-top:10px;">' . sprintf( __( 'This site uses Antispam to reduce spam. <a href="%s" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.', 'anti-spam' ), 'https://anti-spam.space/antispam-privacy/' ) . '</p>';
+
+	$output = '<p class="wantispam-comment-form-privacy-notice" style="margin-top:10px;">' . sprintf( __( 'This site uses Antispam to reduce spam. <a href="%s" target="_blank" rel="nofollow noopener">Learn how your comment data is processed</a>.', 'anti-spam' ), 'https://anti-spam.space/antispam-privacy/' ) . '</p>';
+
+	if ( ! $echo ) {
+		return $output;
+	}
+
+	echo $output;
 }
 
 /**
  * Return premium widget markup
  *
- * @author Alexander Kovalev <alex.kovalevv@gmail.com>
- * @since  6.5.3
  * @return string
+ * @since  6.5.3
+ * @author Alexander Kovalev <alex.kovalevv@gmail.com>
  */
 function wantispam_get_sidebar_premium_widget() {
 	ob_start();
@@ -79,7 +86,8 @@ function wantispam_get_sidebar_premium_widget() {
     <div class="wbcr-factory-sidebar-widget">
         <p>
             <a href="https://anti-spam.space/pricing/" target="_blank" rel="noopener nofollow">
-                <img style="width: 100%;" src="https://api.cm-wp.com/wp-content/uploads/2019/12/baner_antispam_vertical.jpg" alt="">
+                <img style="width: 100%;"
+                     src="https://api.cm-wp.com/wp-content/uploads/2019/12/baner_antispam_vertical.jpg" alt="">
             </a>
         </p>
     </div>
@@ -90,8 +98,8 @@ function wantispam_get_sidebar_premium_widget() {
 /**
  * Should show a page about the plugin or not.
  *
- * @since  6.5.3
  * @return bool
+ * @since  6.5.3
  */
 function wantispam_is_need_show_about_page() {
 	if ( \WBCR\Antispam\Plugin::app()->isNetworkActive() ) {
@@ -140,8 +148,8 @@ function wantispam_doing_rest_api() {
 }
 
 /**
- * @since  6.5.3
  * @return bool
+ * @since  6.5.3
  */
 function wantispam_doing_ajax() {
 	if ( function_exists( 'wp_doing_ajax' ) ) {
@@ -152,8 +160,8 @@ function wantispam_doing_ajax() {
 }
 
 /**
- * @since  6.5.3
  * @return bool
+ * @since  6.5.3
  */
 function wantispam_doing_cron() {
 	if ( function_exists( 'wp_doing_cron' ) ) {

@@ -43,6 +43,7 @@
         function readyGmapPopupWindow() {
             loadSrmGmapsList();
         }
+
         window.onload = readyGmapPopupWindow;
 
         //******* To insert ShortCode From List *******
@@ -125,6 +126,7 @@
             var wpgmap_map_height = parent.find("#wpgmap_map_height").val();
             var wpgmap_map_type = parent.find("#wpgmap_map_type").val();
             var wpgmap_map_address = parent.find("#wpgmap_map_address").val();
+            var wpgmap_marker_icon = parent.find("#wpgmap_upload_hidden").val();
 
             var map_data = {
                 wpgmap_title: wpgmap_title,
@@ -138,7 +140,8 @@
                 wpgmap_map_type: wpgmap_map_type,
                 wpgmap_map_address: wpgmap_map_address,
                 wpgmap_show_infowindow: wpgmap_show_infowindow,
-                wpgmap_enable_direction: wpgmap_enable_direction
+                wpgmap_enable_direction: wpgmap_enable_direction,
+                wpgmap_marker_icon: wpgmap_marker_icon
             };
 
             if (btn_id == 'wp-gmap-embed-save') {
@@ -166,8 +169,8 @@
                     if (btn_id == 'wp-gmap-embed-save' || btn_id == 'wp-gmap-embed-update') {
 
                         $("#" + btn_id).prop('disabled', false);
-                        var redirectTo = (btn_id == 'wp-gmap-embed-save')?1:2;
-                        window.location.href = '?page=wpgmapembed&message='+redirectTo;
+                        var redirectTo = (btn_id == 'wp-gmap-embed-save') ? 1 : 2;
+                        window.location.href = '?page=wpgmapembed&message=' + redirectTo;
                         $('body #wp-gmap-all .wpgmap_msg_error').html('<div class="success bellow-h2 notice notice-success is-dismissible"><p>' + response.message + '</p></div>');
                     }
                     $("#wpgmap_title,#wpgmap_latlng, #wpgmap_map_address").val("");

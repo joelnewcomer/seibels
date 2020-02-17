@@ -25,7 +25,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @return string
  */
-add_filter( 'wbcr_factory_pages_424_imppage_rating_widget_url', function ( $page_url, $plugin_name ) {
+add_filter( 'wbcr_factory_pages_425_imppage_rating_widget_url', function ( $page_url, $plugin_name ) {
 	if ( $plugin_name == \WBCR\Antispam\Plugin::app()->getPluginName() ) {
 		return 'https://wordpress.org/support/plugin/anti-spam/reviews/';
 	}

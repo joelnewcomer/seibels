@@ -130,13 +130,20 @@ ul#wp-gmap-nav li a {
 }
 
 /******* Map Properties ******/
-.wp-gmap-properties {
-    width: 30%;
-    padding: 1%;
-    border: 1px #ccc solid;
-    background-color: #f3f3f3;
-    margin: 9px;
+.wp-gmap-properties-outer {
+    width: 32%;
     float: left;
+    margin: 9px;
+    border: 1px #ccc solid;
+
+}
+
+.wp-gmap-properties, .wp-gmap-other-properties {
+    width: 98.1%;
+    background-color: white;
+    float: left;
+    padding: 5px 1% 1% 1%;
+
 }
 
 .gmap_properties tr {
@@ -241,4 +248,35 @@ ul#wp-gmap-nav li a {
     font-weight: bold !important;
     margin: 5px 0 0 5px !important;
     color: #238b68 !important;;
+}
+
+/* Updated 31.01.2020*/
+.wpgmap_tab_menu {
+    width: 100%;
+    background-color: #ccc;
+    float: left;
+    height: 30px;
+}
+
+ul.wpgmap_tab {
+    padding: 0;
+    margin: 0;
+    height: 30px;
+}
+
+.wpgmap_tab li {
+    display: inline;
+    padding: 6px 6px;
+    float: left;
+    background-color: #ccc;
+    border-right: 1px white solid;
+    cursor: pointer;
+}
+
+.wpgmap_tab li:hover, .wpgmap_tab .active {
+    background-color: white;
+}
+
+.hidden {
+    display: none;
 }

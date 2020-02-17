@@ -46,7 +46,7 @@ if ( isset( $_GET['page'] ) ) {
                                class="media-menu-item"><?php _e( 'Having Problem?', 'gmap-embed' ); ?></a>
                         </li>
                         <li>
-                            <a target="_blank" href="https://www.youtube.com/watch?v=FRBqfx_lB-Y"
+                            <a target="_blank" href="https://www.youtube.com/watch?v=Nh2z_oRK-RM"
                                class="media-menu-item">
 								<?php _e( 'See Video', 'gmap-embed' ); ?></a>
                         </li>
@@ -98,10 +98,10 @@ if ( isset( $_GET['page'] ) ) {
 									$message_status = $_GET['message'];
 									switch ( $message_status ) {
 										case 1:
-											echo __( 'Map has been created Successfully. <a href="https://youtu.be/aeiycD9m_ko?t=181" target="_blank"> See How to use >></a>', 'gmap-embed' );
+											echo __( 'Map has been created Successfully. <a href="https://youtu.be/Nh2z_oRK-RM?t=181" target="_blank"> See How to use >></a>', 'gmap-embed' );
 											break;
 										case 2:
-											echo __( 'Map Updated Successfully. <a href="https://youtu.be/aeiycD9m_ko?t=181" target="_blank"> See How to use >></a>', 'gmap-embed' );
+											echo __( 'Map Updated Successfully. <a href="https://youtu.be/Nh2z_oRK-RM?t=181" target="_blank"> See How to use >></a>', 'gmap-embed' );
 											break;
 										case 3:
 											echo __( 'Settings updated Successfully.', 'gmap-embed' );
