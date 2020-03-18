@@ -7,12 +7,13 @@
   Text Domain: gmap-embed
   Domain Path: /languages
   Author URI: http://www.srmilon.info
-  Version: 1.6.1
+  Version: 1.6.2
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+require_once plugin_dir_path( __FILE__ ) . '/includes/helper.php';
 load_plugin_textdomain( 'gmap-embed', false, dirname( plugin_basename( __FILE__, '/languages/' ) ) );
 if ( ! class_exists( 'srm_gmap_embed_main' ) ) {
 
@@ -31,6 +32,7 @@ if ( ! class_exists( 'srm_gmap_embed_main' ) ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'gmap_enqueue_scripts' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_gmap_scripts' ) );
 			add_action( 'admin_menu', array( $this, 'gmap_create_menu' ) );
+			add_action( 'init', array( $this, 'gmap_embed_register_post_type' ) );
 			add_action( 'admin_init', array( $this, 'gmap_register_fields' ) );
 			add_action( 'wp_ajax_wpgmapembed_save_map_data', array( $this, 'save_wpgmapembed_data' ) );
 			add_action( 'wp_ajax_wpgmapembed_load_map_data', array( $this, 'load_wpgmapembed_list' ) );
@@ -79,11 +81,14 @@ if ( ! class_exists( 'srm_gmap_embed_main' ) ) {
 				'srm_gmap_main'
 			), 'dashicons-location', 11 );
 
+			$no_of_map_created = gmap_embed_no_of_post();
 			//to create sub menu
-			add_submenu_page( 'wpgmapembed', __( "Add new Map", "gmap-embed" ), __( "Add New", "gmap-embed" ), 'administrator', 'wpgmapembed&tag=new', array(
-				$this,
-				'srm_gmap_new'
-			), 'dashicons-location' );
+			if ( gmap_embed_is_using_premium_version() ) {
+				add_submenu_page( 'wpgmapembed', __( "Add new Map", "gmap-embed" ), __( "Add New", "gmap-embed" ), 'administrator', 'wpgmapembed&tag=new', array(
+					$this,
+					'srm_gmap_new'
+				), 11 );
+			}
 		}
 
 		public function gmap_register_fields() {
@@ -220,11 +225,14 @@ if ( ! class_exists( 'srm_gmap_embed_main' ) ) {
                                            data-id="wp-gmap-new" class="media-menu-item">' . __( "Create New Map", "gmap-embed" ) . '</a>';
 				$content .= '<br/><br/><div class="srm_gmap_instructions">
                 <h3>Frequently asked questions</h3>
-                <ul>
+                <ul>	                
                     <li>
                         <a href="http://srmilon.info/2019/02/18/how-to-get-google-map-api-key" target="_blank">How to get API
                             key?</a>
                     </li>
+                    <li>
+            			<a href="http://srmilon.info/2020/02/27/how-to-debug-or-identify-the-map-loading-problems-in-admin-panel" target="_blank">See why map is not working properly</a>
+        			</li>
                     <li>
                         <a href="http://srmilon.info/2019/03/31/how-to-get-your-license-key" target="_blank">How to get your Lifetime
                             License key?</a>
@@ -358,11 +366,27 @@ if ( ! class_exists( 'srm_gmap_embed_main' ) ) {
 			}
 		}
 
+		public function gmap_embed_register_post_type() {
+			register_post_type( 'wpgmapembed',
+				array(
+					'labels'      => array(
+						'name'          => __( 'Google Maps' ),
+						'singular_name' => __( 'Map' ),
+					),
+					'public'      => false,
+					'has_archive' => false,
+				)
+			);
+		}
+
+
 	}
 
 
 }
 new srm_gmap_embed_main();
+
+
 // including requird files
 require_once plugin_dir_path( __FILE__ ) . '/includes/widget.php';
 require_once plugin_dir_path( __FILE__ ) . '/includes/shortcodes.php';
@@ -386,7 +410,9 @@ function gmap_srm_settings_link( $links ) {
 
 add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'gmap_srm_settings_linka' );
 function gmap_srm_settings_linka( $links ) {
-	$links[] = '<a target="_blank" style="color: #11967A;font-weight:bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA">' . __( 'Upgrade To Premium' ) . '</a>';
+	if ( ! gmap_embed_is_using_premium_version() ) {
+		$links[] = '<a target="_blank" style="color: #11967A;font-weight:bold;" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA">' . __( 'Upgrade To Premium' ) . '</a>';
+	}
 
 	return $links;
 }

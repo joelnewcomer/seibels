@@ -2,6 +2,8 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
+require_once( plugin_dir_path( __FILE__ ) . '/helper.php' );
+$no_of_map_created = gmap_embed_no_of_post();
 if ( isset( $_GET['page'] ) ) {
 
 	// Form actions like Settings, Contact
@@ -31,10 +33,17 @@ if ( isset( $_GET['page'] ) ) {
                                class="media-menu-item"><?php _e( 'All Maps', 'gmap-embed' ); ?></a>
                         </li>
                         <li class="<?php echo $wpgmap_tag == 'new' ? 'active' : ''; ?>">
-                            <a href="<?php echo esc_url( admin_url() . 'admin.php?page=wpgmapembed&tag=new' ); ?>"
-                               data-id="wp-gmap-new"
-                               class="media-menu-item"><?php _e( 'Create New Map', 'gmap-embed' ); ?></a>
+							<?php
+							if ( gmap_embed_is_using_premium_version() ) { ?>
+                                <a href="<?php echo esc_url( admin_url() . 'admin.php?page=wpgmapembed&tag=new' ); ?>"
+                                   data-id="wp-gmap-new"
+                                   class="media-menu-item"><?php _e( 'Create New Map', 'gmap-embed' ); ?></a>
+							<?php } else {
+								require_once( plugin_dir_path( __FILE__ ) . '/premium-version-notice.php' );
+							}
+							?>
                         </li>
+
                         <li class="<?php echo $wpgmap_tag == 'settings' ? 'active' : ''; ?>">
                             <a href="<?php echo esc_url( admin_url() . 'admin.php?page=wpgmapembed&tag=settings' ); ?>"
                                data-id="wp-gmap-settings"

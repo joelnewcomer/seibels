@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: google map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross-browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, maps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, google maps, gprs, gps, gpx, kml, latitude, Longitude, location, location by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
 Tested up to: 5.3
-Version: 1.6.1
+Version: 1.6.2
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -135,158 +135,44 @@ See the [Video](https://www.youtube.com/watch?v=Nh2z_oRK-RM) ,hope you will get 
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.6.2 =
+Security feature updated and feedback resolving.
 
-*  Initial version of Google Map Embed Plugin.
+= 1.6.1 =
+Shortcode related dynamic title class and id updated and bug fixing.
 
-= 1.0.1 =
+= 1.6.0 =
+Address autocomplete bug fixing.
 
-*  Updated screenshots with the FAQ to make easier.
+= 1.5.9 =
+Map direction view option changed.
 
-= 1.0.2 =
+= 1.5.8 =
+Create new Map UI changes.
 
-*  Bug fixes with adding helpful video embedding
+= 1.5.7 =
+Security patch updated.
 
-= 1.0.3 =
+= 1.5.6 =
+Helpful video tutorial added.
 
-*  Self API key adding option added
+= 1.5.5 =
+Language realted changes and some minor changes in files.
 
-= 1.0.4 =
+= 1.5.4 =
+Dynamic/Customized Marker icon option added, Code related optimization added.
 
-*  Once plugin activated, goes to plugin settings page directly.
+= 1.5.3 =
+New version released with payment option updated.
 
-= 1.0.5 =
+= 1.5.2 =
+New version released with bug fixing
 
-*  Added new helpful video with how to get Free API key
+= 1.5.1 =
+New version released with helpful resources and insitilization of street view.
 
-
-= 1.0.6 =
-
-*  Custom map heading class adding option added
-*  Map rendering related problem fixing
-*  Custom status message showed
-
-= 1.0.7 =
-*  Added helpful video both in description and admin panel
-
-= 1.0.8 =
-*  Initial marker dragging related problem fixing
-*  API key trailing blank space removed
-
-
-= 1.0.9 =
-*  https or SSl related problem fixing
-
-= 1.1.0 =
-*  Initial Translation support for English(en), Bengali(bn) and German(de)
-
-
-= 1.1.1 =
-*  Menu Position changed and readme.txt updated
-
-= 1.1.2, 1.1.3 =
-*  Small bug fixes
-
-= 1.1.4 =
-*  Added option to disable/enable zoom on mouse scrolling
-
-
-= 1.1.5 =
-*  Widget title giving option added
-
-= 1.1.6 =
-* Added option for creating unlimited maps(the Previous limit was 10)
-
-= 1.1.7 =
-* Look and Feel changes
-
-= 1.2.0 =
-* Direction support with Google Map
-
-= 1.2.1 =
-* Direction support Bug fixing
-
-= 1.2.2 =
-* Italian Language Support
-
-= 1.2.3 =
-* Spanish Language support
-
-= 1.2.4 =
-* CSS updated related to map search box
-
-= 1.2.5 =
-* Installation process explained in details.
-
-= 1.2.6 =
-* Translation enabled for some additional text.
-
-= 1.2.7 =
-* Readme file updated.
-
-= 1.2.8 =
-* Tags updated in readme.txt file.
-
-= 1.2.9 =
-* Examples button and Donation Button added.
-
-= 1.3.0 =
-* German, German (Formal) and Spanish (Spain) Language file updated.
-
-= 1.3.1 =
-* Danish Language Translation support added.
-
-= 1.3.2 =
-* Danish Language Translation support updated.
-
-= 1.3.3 =
-* Spanish language files updated.
-
-= 1.3.4 =
-* Direction From field default to empty, Readme file updated with Google Billing warning message.
-
-= 1.3.5 =
-* Google API realted update
-
-= 1.3.6 =
-* Google API realted update
-
-= 1.3.7 =
-* Google API realted update
-
-= 1.3.8 =
-* Google API readme updated, language and donation button added.
-
-= 1.3.9 =
-* Added pro version features and updated shortcode.
-
-= 1.4.0 =
-* Settings option updated.
-
-= 1.4.1 =
-* User help manual, FAQ and details description updated, also bug fixed.
-
-= 1.4.2 =
-* Bug fixing, Added instant contact form to give best experience and getting suggestion from users.
-
-= 1.4.3 =
-* Faq and contact page updated.
-
-= 1.4.4 =
-* LIVE CHAT option added for users.
-
-
-= 1.4.5 =
-* Plugin Settings option updated
-
-= 1.4.6 =
-* Removed update to pro once updated to pro version
-
-= 1.4.7 =
-* How to add Google Map in Gutenberg Wordpress editor.
-
-= 1.4.8 =
-* License key and api key updating problem server issue fixed.
+= 1.5.0 =
+New version released with new helpful video
 
 = 1.4.9 =
 * Map title on keyup effect added
@@ -294,23 +180,146 @@ See the [Video](https://www.youtube.com/watch?v=Nh2z_oRK-RM) ,hope you will get 
 * Infowindow live changing when updating
 * Address related API issue fixing
 
-= 1.5.0 =
-New version released with new helpful video
+= 1.4.8 =
+* License key and api key updating problem server issue fixed.
 
-= 1.5.1 =
-New version released with helpful resources and insitilization of street view.
+= 1.4.7 =
+* How to add Google Map in Gutenberg Wordpress editor.
 
-= 1.5.2 =
-New version released with bug fixing
+= 1.4.6 =
+* Removed update to pro once updated to pro version
 
-= 1.5.3 =
-New version released with payment option updated.
+= 1.4.5 =
+* Plugin Settings option updated
 
-= 1.5.4 =
-Dynamic/Customized Marker icon option added, Code related optimization added.
+= 1.4.4 =
+* LIVE CHAT option added for users.
 
-= 1.5.5 =
-Language realted changes and some minor changes in files.
+= 1.4.3 =
+* Faq and contact page updated.
 
-= 1.5.6 =
-Helpful video tutorial added.
+= 1.4.2 =
+* Bug fixing, Added instant contact form to give best experience and getting suggestion from users.
+
+= 1.4.1 =
+* User help manual, FAQ and details description updated, also bug fixed.
+
+= 1.4.0 =
+* Settings option updated.
+
+= 1.3.9 =
+* Added pro version features and updated shortcode.
+
+= 1.3.8 =
+* Google API readme updated, language and donation button added.
+
+= 1.3.7 =
+* Google API realted update
+
+= 1.3.6 =
+* Google API realted update
+
+= 1.3.5 =
+* Google API realted update
+
+= 1.3.4 =
+* Direction From field default to empty, Readme file updated with Google Billing warning message.
+
+= 1.3.3 =
+* Spanish language files updated.
+
+= 1.3.2 =
+* Danish Language Translation support updated.
+
+= 1.3.1 =
+* Danish Language Translation support added.
+
+= 1.3.0 =
+* German, German (Formal) and Spanish (Spain) Language file updated.
+
+= 1.2.9 =
+* Examples button and Donation Button added.
+
+= 1.2.8 =
+* Tags updated in readme.txt file.
+
+= 1.2.7 =
+* Readme file updated.
+
+= 1.2.6 =
+* Translation enabled for some additional text.
+
+= 1.2.5 =
+* Installation process explained in details.
+
+= 1.2.4 =
+* CSS updated related to map search box
+
+= 1.2.3 =
+* Spanish Language support
+
+= 1.2.2 =
+* Italian Language Support
+
+= 1.2.1 =
+* Direction support Bug fixing
+
+= 1.2.0 =
+* Direction support with Google Map
+
+= 1.1.7 =
+* Look and Feel changes
+
+= 1.1.6 =
+* Added option for creating unlimited maps(the Previous limit was 10)
+
+= 1.1.5 =
+*  Widget title giving option added
+
+= 1.1.4 =
+*  Added option to disable/enable zoom on mouse scrolling
+
+= 1.1.2, 1.1.3 =
+*  Small bug fixes
+
+= 1.1.1 =
+*  Menu Position changed and readme.txt updated
+
+= 1.1.0 =
+*  Initial Translation support for English(en), Bengali(bn) and German(de)
+
+= 1.0.9 =
+*  https or SSl related problem fixing
+
+= 1.0.8 =
+*  Initial marker dragging related problem fixing
+*  API key trailing blank space removed
+
+= 1.0.7 =
+*  Added helpful video both in description and admin panel
+
+= 1.0.6 =
+*  Custom map heading class adding option added
+*  Map rendering related problem fixing
+*  Custom status message showed
+
+= 1.0.5 =
+*  Added new helpful video with how to get Free API key
+
+= 1.0.4 =
+*  Once plugin activated, goes to plugin settings page directly.
+
+= 1.0.3 =
+*  Self API key adding option added
+
+
+= 1.0.2 =
+*  Bug fixes with adding helpful video embedding
+
+
+= 1.0.1 =
+*  Updated screenshots with the FAQ to make easier.
+
+
+= 1.0.0 =
+*  Initial version of Google Map Embed Plugin.

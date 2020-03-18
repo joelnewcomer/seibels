@@ -9,7 +9,6 @@ if ( isset( $_POST['wpgmapembed_key'] ) ) {
 		} else {
 			add_option( 'wpgmap_api_key', $api_key, '', 'yes' );
 		}
-
 	}
 }
 

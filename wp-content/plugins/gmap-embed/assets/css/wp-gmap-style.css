@@ -280,3 +280,38 @@ ul.wpgmap_tab {
 .hidden {
     display: none;
 }
+
+/*wp gmap premium notice*/
+.wpgmap_premium_notice_title {
+    color: #0073aa;
+    font-size: 2em;
+    margin: .67em 0;
+    display: block;
+    font-weight: 600;
+    text-align: center;
+}
+
+.wpgmap_premium_notice_button {
+    background-color: #0073aa;
+    color: white;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 12px;
+    box-shadow: 0 0 14px grey;
+}
+
+.wpgmap_pro_version_title {
+    color: #0073aa;
+    font-size: 2em;
+    margin: .67em 0;
+    display: block;
+    font-weight: 600;
+    padding-left: 55px;
+}
+
+.wpgmap_features_list {
+    padding-left: 51px;
+}
