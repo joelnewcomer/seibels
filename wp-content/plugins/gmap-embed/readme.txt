@@ -3,8 +3,8 @@ Contributors: milonfci
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA
 Tags: google map, gmap, google map embed, wp map, wp map embed, map embed, best google maps, best maps, bing maps, cross-browser, custom google map, custom google maps, map direction, easy map, geo, geocoder, maps, google earth, google map plugin, google map shortcode, google map widget, google maps v3, google maps, gprs, gps, gpx, kml, latitude, Longitude, location, location by address, map, map directions, map markers, map plugin, map shortcode, map styles, maps google, post map, map point, polygons, roads, routes, store locator, street view, wp google map, contact page map, google map wordpress, google maps wordpress, google maps for wordpress, simple google map, simple google map plugin, wp google maps,maps
 Requires at least: 2.9
-Tested up to: 5.3
-Version: 1.6.2
+Tested up to: 5.4
+Version: 1.6.4
 Requires PHP: 5.3
 Text Domain: gmap-embed
 License: GPLv2 or later
@@ -52,7 +52,7 @@ https://www.youtube.com/watch?v=Nh2z_oRK-RM
 * **You can set any width and width as you need**
 * **It is most helpful for WordPress website to embed google map**
 
-### Features of WP Google Map Plugin-Lite version(PREMIUM):
+### Features of WP Google Map Plugin(PREMIUM):
 
 * **Direction Support with Map.**
 * **Ability to change Latitude, Longitude, Address by Dragging Marker**
@@ -60,7 +60,8 @@ https://www.youtube.com/watch?v=Nh2z_oRK-RM
 * **Supports Google Map Streetview option**
 * **You can add multiple maps in any page or post if you need!**
 * **Map full screen functionality**
-* **Ability to create Map and Marker as much as you need!**
+* **Ability to create Map as much as you need!**
+* **Ability to change Map Language and Regional Area!**
 
 ### USE AS SHORTCODE IN POST, PAGE, AND SIDEBAR.
         `[gmap-embed id="<Your map ID>"]`
@@ -134,6 +135,15 @@ See the [Video](https://www.youtube.com/watch?v=Nh2z_oRK-RM) ,hope you will get 
 8. Using as Widget
 
 == Changelog ==
+
+= 1.6.4 =
+* Map language and Region customization option added.
+* Form and field level security enhanced.
+* Secured domain added for mail and verification process.
+* Support contact mail issue fixed.
+
+= 1.6.3 =
+Exception handled for warning message, security enhanced, review giving option added.
 
 = 1.6.2 =
 Security feature updated and feedback resolving.

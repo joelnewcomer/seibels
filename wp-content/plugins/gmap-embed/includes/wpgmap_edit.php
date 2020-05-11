@@ -177,7 +177,6 @@ list( $wpgmap_lat, $wpgmap_lng ) = explode( ',', esc_html( $wpgmap_single->wpgma
         (function ($) {
             $(function () {
                 icon = '<?php echo $wpgmap_single->wpgmap_marker_icon;?>';
-                console.log(icon);
                 google.maps.event.addDomListener(window, 'load',
                     initAutocomplete('map', 'pac-input',<?php echo $wpgmap_lat;?>,<?php echo $wpgmap_lng;?>, '<?php echo $wpgmap_single->wpgmap_map_type; ?>',<?php echo $wpgmap_single->wpgmap_map_zoom;?>, 'edit')
                 );

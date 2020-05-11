@@ -17,7 +17,7 @@
                 </th>
                 <td>
                     <input type="email" class="wp_gmap_contact_field" name="srm_gmap_email"
-                           value="<?php echo get_bloginfo( 'admin_email' ); ?>"
+                           value="<?php echo sanitize_email( get_bloginfo( 'admin_email' ) ); ?>"
                            id="srm_gmap_email" required=""
                            placeholder="example@mail.com">
                     <span style="color:red">Please provide a valid email for further communication</span>
@@ -31,7 +31,7 @@
                     <input type="text" class="wp_gmap_contact_field" name="srm_gmap_website"
                            value="<?php echo get_bloginfo( 'url' ); ?>"
                            id="srm_gmap_website"
-                           placeholder="http://example.com"></td>
+                           placeholder="<?php echo esc_url('http://example.com');?>"></td>
             </tr>
             <tr>
                 <th>
@@ -82,46 +82,14 @@
 
 <div class="srm_gmap_instructions">
     <h3>Frequently asked questions</h3>
-    <ul>
-        <li>
-            <a href="http://srmilon.info/2019/02/18/how-to-get-google-map-api-key" target="_blank">How to get API
-                key?</a>
-        </li>
-        <li>
-            <a href="http://srmilon.info/2020/02/27/how-to-debug-or-identify-the-map-loading-problems-in-admin-panel"
-               target="_blank">See
-                why map is not working properly</a>
-        </li>
-        <li>
-            <a href="http://srmilon.info/2019/03/31/how-to-get-your-license-key" target="_blank">How to get your
-                Lifetime
-                License key?</a>
-        </li>
-        <li>
-            <a href="http://srmilon.info/2019/07/03/dont-see-embed-google-map-button-in-new-editor" target="_blank">Don’t
-                see “Embed Google Map” button in new Editor?</a>
-        </li>
-        <li>
-            <a href="http://srmilon.info/2019/03/31/how-to-add-google-map-in-your-wordpress-page" target="_blank">How to
-                add Google Map in page?</a>
-        </li>
-        <li>
-            <a href="http://srmilon.info/2019/03/31/how-to-add-google-map-in-your-wordpress-post" target="_blank">How to
-                add Google Map in post?</a>
-        </li>
-        <li>
-            <a href="http://srmilon.info/2019/03/31/how-to-add-google-map-in-sidebar-as-widget" target="_blank">How to
-                add Google Map in Sidebar as widget?</a>
-        </li>
-        <li>
-            <a href="http://srmilon.info/2019/03/31/can-not-load-the-map-correctly" target="_blank">Do you see "the page
-                can\'t load the map correctly"?</a>
-        </li>
-    </ul>
+	<?php
+	require_once( plugin_dir_path( __FILE__ ) . 'wpgmap_faqs.php' );
+	?>
 </div>
 
 <div class="srm_gmap_video_area">
-    <iframe width="100%" height="520" src="https://www.youtube.com/embed/Nh2z_oRK-RM" frameborder="0"
+    <iframe width="100%" height="520" src="<?php echo esc_url( 'https://www.youtube.com/embed/Nh2z_oRK-RM' ); ?>"
+            frameborder="0"
             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 </div>

@@ -8,7 +8,7 @@
     <p></p>
     <span style="text-align: center;width: 100%;float: left;clear: both;">
                                     <a class="wpgmap_premium_notice_button" target="_blank"
-                                       href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA">Upgrade to Pro Version by $10 for Lifetime</a>
+                                       href="<?php echo esc_url('https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA');?>">Upgrade to Pro Version by $10 for Lifetime</a>
                                     </span>
     <p></p>
     <p></p>
@@ -37,7 +37,7 @@
             full-screen functionality
         </li>
         <li><span class="dashicons-before dashicons-yes" style="color: #0073aa;"></span>Ability
-            to create Map and Marker as much as you need!
+            to create Map as much as you need!
         </li>
         <li><span class="dashicons-before dashicons-yes" style="color: #0073aa;"></span>Google
             Map Auto-Complete available

@@ -1,5 +1,5 @@
 <?php
-$h = base64_decode( 'aHR0cDovL3NybWlsb24uaW5mbw' );
+$h = base64_decode( 'aHR0cHM6Ly9zcm1pbG9uLmluZm8=' );
 // Updating api key
 if ( isset( $_POST['wpgmapembed_key'] ) ) {
 	$api_key = trim( $_POST['wpgmapembed_key'] );
@@ -48,7 +48,7 @@ if ( isset( $_POST['wpgmapembed_license'] ) ) {
 			}
 			$message = 'License key updated successfully, Now you can enjoy <b>premium features</b>!';
 		} else {
-			$message = '<span style="color:red">Invalid license key, please get your license key. <a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA">Get License Key</a></span>';
+			$message = '<span style="color:red">Invalid license key, please get your license key. <a target="_blank" href="' . esc_url( 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA' ) . '">Get License Key</a></span>';
 		}
 
 	}
@@ -56,14 +56,13 @@ if ( isset( $_POST['wpgmapembed_license'] ) ) {
 
 if ( isset( $_POST['srm_gmap_contact_submit'] ) ) {
 	$contact_fields['srm_gmap_name']     = trim( $_POST['srm_gmap_name'] );
-	$contact_fields['srm_gmap_email']    = trim( $_POST['srm_gmap_email'] );
+	$contact_fields['srm_gmap_email']    = trim( sanitize_email( $_POST['srm_gmap_email'] ) );
 	$contact_fields['srm_gmap_website']  = trim( $_POST['srm_gmap_website'] );
 	$contact_fields['srm_gmap_category'] = trim( $_POST['srm_gmap_category'] );
 	$contact_fields['srm_gmap_subject']  = trim( $_POST['srm_gmap_subject'] );
 	$contact_fields['srm_gmap_message']  = trim( $_POST['srm_gmap_message'] );
 	$fields_json                         = json_encode( $contact_fields );
-
-	$ch = curl_init();
+	$ch                                  = curl_init();
 	curl_setopt( $ch, CURLOPT_URL, $h . "/paypal/contact.php" );
 	curl_setopt( $ch, CURLOPT_POST, 1 );
 	curl_setopt( $ch, CURLOPT_POSTFIELDS,
@@ -73,6 +72,22 @@ if ( isset( $_POST['srm_gmap_contact_submit'] ) ) {
 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
 	$server_output = curl_exec( $ch );
 	curl_close( $ch );
-	$message = 'Your email sent successfully, we will try to respond to your email(<b style="color: green;">' . $contact_fields['srm_gmap_email'] . '</b>) as soon as possible. Thank you for your co-operation!.';
+	$message = 'Your email sent successfully, we will try to respond to your email(<b style="color: green;">' . sanitize_email( $contact_fields['srm_gmap_email'] ) . '</b>) as soon as possible. Thank you for your co-operation!.';
+
+}
+
+// Updating map language settings
+if ( isset( $_POST['srm_gmap_map_language_settings'] ) ) {
+	$srm_gmap_lng    = trim( $_POST['srm_gmap_lng'] );
+	$srm_gmap_region = trim( $_POST['srm_gmap_region'] );
+
+	if ( $srm_gmap_lng != '' ) {
+		update_option( 'srm_gmap_lng', $srm_gmap_lng );
+	}
+
+	if ( $srm_gmap_region != '' ) {
+		update_option( 'srm_gmap_region', $srm_gmap_region );
+	}
+	$message = 'Map Language and Regional Area settings updated successfully.';
 
 }

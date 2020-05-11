@@ -135,8 +135,8 @@ msgstr "Breitengrad, Längengrad"
 #. Plugin URI of the plugin/theme
 #. #-#-#-#-#  gmap-embed-code.pot (Google Map Embed 1.2.5)  #-#-#-#-#
 #. Author URI of the plugin/theme
-msgid "http://www.srmilon.info"
-msgstr "http://www.srmilon.info"
+msgid "https://www.srmilon.info"
+msgstr "https://www.srmilon.info"
 
 #: includes/wpgmap_create.php:63 includes/wpgmap_edit.php:73
 msgid "Height (px)"

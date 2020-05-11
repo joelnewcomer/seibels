@@ -14,6 +14,21 @@ if ( isset( $_GET['page'] ) ) {
 	if ( isset( $_GET['tag'] ) ) {
 		$wpgmap_tag = esc_html( $_GET['tag'] );
 	}
+
+	// In case of review snoozed
+	if ( $wpgmap_tag == 'review-maybe-latter' ) {
+		update_option( 'gmap_embed_is_review_snoozed', true );
+		update_option( 'gmap_embed_review_snoozed_at', time() );
+		$wpgmap_redirect_to = isset( $_GET['redirect_to'] ) ? $_GET['redirect_to'] : admin_url();
+		echo "<script type='text/javascript'>window.location.href='$wpgmap_redirect_to'</script>";
+	}
+
+	// In case of review already done
+	if ( $wpgmap_tag == 'review-done' ) {
+		update_option( 'gmap_embed_is_review_done', true );
+		$wpgmap_redirect_to = isset( $_GET['redirect_to'] ) ? $_GET['redirect_to'] : admin_url();
+		echo "<script type='text/javascript'>window.location.href='$wpgmap_redirect_to'</script>";
+	}
 	?>
     <script type="text/javascript">
         var wp_gmap_api_key = '<?php echo esc_html( get_option( 'wpgmap_api_key' ) );?>';
@@ -55,7 +70,8 @@ if ( isset( $_GET['page'] ) ) {
                                class="media-menu-item"><?php _e( 'Having Problem?', 'gmap-embed' ); ?></a>
                         </li>
                         <li>
-                            <a target="_blank" href="https://www.youtube.com/watch?v=Nh2z_oRK-RM"
+                            <a target="_blank"
+                               href="<?php echo esc_url( 'https://www.youtube.com/watch?v=Nh2z_oRK-RM' ); ?>"
                                class="media-menu-item">
 								<?php _e( 'See Video', 'gmap-embed' ); ?></a>
                         </li>
@@ -65,7 +81,7 @@ if ( isset( $_GET['page'] ) ) {
                 <!--    Right Area-->
                 <div class="gmap_header_section_right">
                     <a class="gmap_donate_button"
-                       href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA">
+                       href="<?php echo esc_url( 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA' ); ?>">
                         <img alt="Donate"
                              src="<?php echo esc_url( plugins_url( "../assets/images/paypal.png", __FILE__ ) ); ?>"
                              width="150"/>
@@ -74,7 +90,7 @@ if ( isset( $_GET['page'] ) ) {
 					<?php
 					if ( strlen( trim( get_option( 'wpgmapembed_license' ) ) ) !== 32 ) { ?>
                         <a target="_blank"
-                           href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA"
+                           href="<?php echo esc_url( 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZBERRKARGNEYA' ); ?>"
                            class="button media-button button-default button-large gmap_get_pro_version">
                             GET PRO VERSION
                         </a>
@@ -87,7 +103,7 @@ if ( isset( $_GET['page'] ) ) {
 						<?php
 					}
 					?>
-                    <a onclick="window.open('https://tawk.to/chat/5ca5dea51de11b6e3b06dc41/default', 'LIVE CHAT', 'width=500,height=300')"
+                    <a onclick="window.open('<?php echo esc_url( 'https://tawk.to/chat/5ca5dea51de11b6e3b06dc41/default' ); ?>', 'LIVE CHAT', 'width=500,height=300')"
                        style="float: right;cursor: pointer;">
                         <img src="<?php echo esc_url( plugins_url( "../assets/images/live_chat.png", __FILE__ ) ); ?>"
                              width="110"/>
@@ -107,10 +123,10 @@ if ( isset( $_GET['page'] ) ) {
 									$message_status = $_GET['message'];
 									switch ( $message_status ) {
 										case 1:
-											echo __( 'Map has been created Successfully. <a href="https://youtu.be/Nh2z_oRK-RM?t=181" target="_blank"> See How to use >></a>', 'gmap-embed' );
+											echo __( 'Map has been created Successfully. <a href="' . esc_url( 'https://youtu.be/Nh2z_oRK-RM?t=181' ) . '" target="_blank"> See How to use >></a>', 'gmap-embed' );
 											break;
 										case 2:
-											echo __( 'Map Updated Successfully. <a href="https://youtu.be/Nh2z_oRK-RM?t=181" target="_blank"> See How to use >></a>', 'gmap-embed' );
+											echo __( 'Map Updated Successfully. <a href="' . esc_url( 'https://youtu.be/Nh2z_oRK-RM?t=181' ) . '" target="_blank"> See How to use >></a>', 'gmap-embed' );
 											break;
 										case 3:
 											echo __( 'Settings updated Successfully.', 'gmap-embed' );
@@ -152,7 +168,7 @@ if ( isset( $_GET['page'] ) ) {
                 <!---------------------------Create New Map-------------->
 
                 <div
-                        class="wp-gmap-tab-content <?php echo ( $_GET['page'] == 'wpgmapembed' && $_GET['tag'] == 'new' ) ? 'active' : ''; ?>"
+                        class="wp-gmap-tab-content <?php echo ( $_GET['page'] == 'wpgmapembed' && $wpgmap_tag == 'new' ) ? 'active' : ''; ?>"
                         id="wp-gmap-new">
 					<?php
 					if ( $wpgmap_page == 'wpgmapembed' && $wpgmap_tag == 'new' ) {

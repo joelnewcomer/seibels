@@ -8,7 +8,9 @@ function _e(id) {
 function wpgmapSetAddressByLatLng(lat, lng, id) {
     jQuery.getJSON('https://maps.googleapis.com/maps/api/geocode/json?key=' + wp_gmap_api_key + '&latlng=' + lat + ',' + lng + '&sensor=true')
         .done(function (location) {
-            _e('wpgmap_map_address').value = location.results[0].formatted_address;
+            if (location.status === 'OK') {
+                _e('wpgmap_map_address').value = location.results[0].formatted_address;
+            }
         })
         .fail(function (d) {
             console.log(d);
@@ -23,14 +25,11 @@ function wpgmapSetAddressByLatLng(lat, lng, id) {
 function generateAlreadyInitiztedMap(map_type, center_lat, center_lng) {
     if (map_type === 'ROADMAP') {
         map.setMapTypeId(google.maps.MapTypeId.ROADMAP);
-    }
-    else if (map_type === 'SATELLITE') {
+    } else if (map_type === 'SATELLITE') {
         map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-    }
-    else if (map_type === 'HYBRID') {
+    } else if (map_type === 'HYBRID') {
         map.setMapTypeId(google.maps.MapTypeId.HYBRID);
-    }
-    else if (map_type === 'TERRAIN') {
+    } else if (map_type === 'TERRAIN') {
         map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
     }
 
@@ -55,14 +54,11 @@ function setMapSettingsByMapType(map_type, center_lat, center_lng, zoom) {
     };
     if (map_type === 'ROADMAP') {
         gmap_settings.mapTypeId = google.maps.MapTypeId.ROADMAP;
-    }
-    else if (map_type === 'SATELLITE') {
+    } else if (map_type === 'SATELLITE') {
         gmap_settings.mapTypeId = google.maps.MapTypeId.SATELLITE;
-    }
-    else if (map_type === 'HYBRID') {
+    } else if (map_type === 'HYBRID') {
         gmap_settings.mapTypeId = google.maps.MapTypeId.HYBRID;
-    }
-    else if (map_type === 'TERRAIN') {
+    } else if (map_type === 'TERRAIN') {
         gmap_settings.mapTypeId = google.maps.MapTypeId.TERRAIN;
     }
     return gmap_settings;
@@ -178,7 +174,9 @@ function openInfoWindow() {
         });
         infowindow.open(map, marker1);
     } else {
-        infowindow.close();
+        if (infowindow !== undefined) {
+            infowindow.close();
+        }
     }
 }
 

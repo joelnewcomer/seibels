@@ -2,11 +2,10 @@
 /**
  
  STOP SENDING NOTIFICATION MAILS TO THE USERS 
- version: 1.5.0
+ version: 1.5.1
  updated: the core pluggable function wp_new_user_notification
  added: passing through the $deprecated and $notify
- 
- 1.2.0 initial
+ fixed notice of $deprecated
  */
 
 if (!defined('ABSPATH')) die();
@@ -78,7 +77,7 @@ function wp_new_user_notification( $user_id, $deprecated = null, $notify = '' ) 
 
     if (!empty($famne_options['wp_new_user_notification_to_admin'])) 
     {
-        fa_new_user_notification_to_admin($user_id,$notify);
+        fa_new_user_notification_to_admin($user_id,$deprecated,$notify);
     }
         
     if (!empty($famne_options['wp_new_user_notification_to_user'])) 
@@ -168,7 +167,7 @@ endif;
 
 
 
-function fa_new_user_notification_to_admin ($user_id,$notify='')
+function fa_new_user_notification_to_admin ($user_id,$deprecated,$notify='')
 {
     
     //Most parts of this function are copied form pluggable.php

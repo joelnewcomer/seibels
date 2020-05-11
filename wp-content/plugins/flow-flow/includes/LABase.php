@@ -505,7 +505,15 @@ abstract class LABase {
 		}
 		return $result;
 	}
-	
+
+	/**
+	 * @param $feed
+	 *
+	 * @return object
+	 * @throws \ReflectionException
+	 *
+	 * @see \flow\social\FFFacebook
+	 */
 	private function createFeedInstance($feed) {
 		$feed = (object)$feed;
 		$wpt = 'type';

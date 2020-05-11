@@ -70,7 +70,7 @@ abstract class FFBaseFeed implements FFFeed{
 	 *
 	 * @return void
 	 */
-    public function init($context, $feed){
+	public function init($context, $feed){
 		$this->context = $context;
 		$this->errors = array();
 		$this->imageWidth = defined('FF_MAX_IMAGE_WIDTH') ? FF_MAX_IMAGE_WIDTH : 300;
@@ -340,7 +340,13 @@ abstract class FFBaseFeed implements FFFeed{
 
 		if (sizeof($response['errors']) > 0){
 			$message = isset($response['errors'][0]['msg']) ? $response['errors'][0]['msg'] : '';
-			throw new LASocialRequestException($url, $response['errors'], $message);
+			if ($message == 'An unknown error has occurred.' && strpos($url, 'comments.summary(true),') > 0){
+				$url = str_replace('comments.summary(true),', '', $url);
+				$response = $this->getFeedData($url, $timeout, $header, $log);
+			}
+			else {
+				throw new LASocialRequestException($url, $response['errors'], $message);
+			}
 		}
 
 		return $response;

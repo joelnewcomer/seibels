@@ -501,6 +501,8 @@ var ff_templates = {
 <label for="<%= uid %>-search-timeline-type">Tweets by search</label><br><br>\
 <input id="<%= uid %>-list-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="list_timeline"/>\
 <label for="<%= uid %>-list-timeline-type">User list</label><br><br>\
+<input id="<%= uid %>-list-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="collection_timeline"/>\
+<label for="<%= uid %>-list-timeline-type">Tweets collection</label><br><br>\
 <input id="<%= uid %>-fav-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="favorites"/>\
 <label for="<%= uid %>-fav-timeline-type">User\'s likes</label><br><br>\
 </dd>\
@@ -517,6 +519,7 @@ Content to show\
             <li><b>User feed</b> — enter username of any public Twitter account.</li>\
             <li><b>Tweets by search</b> — enter any word or #hashtag. <a href="https://developer.twitter.com/en/docs/api-reference-index" target="_blank">Advanced search terms</a>.</li>\
             <li><b>User list</b> — enter username here and List name in corresponding field below.</li>\
+            <li><b>Tweets collection</b> — enter collection ID (numeric part in collection URL).</li>\
             <li><b>User’s likes</b> —  enter username.</li>\
         </ul>\
     </div>\
@@ -635,9 +638,9 @@ Posts to load during update\
 <dt>FEED TYPE </dt>\
 <dd>\
 <input id="<%= uid %>-page-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="page_timeline" checked />\
-<label for="<%= uid %>-page-timeline-type">Page</label>\
-<input class="ff-hide" id="<%= uid %>-group-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="group" />\
-<label class="ff-hide" for="<%= uid %>-group-timeline-type">Group</label><br><br>\
+<label for="<%= uid %>-page-timeline-type">Page</label><br><br>\
+<input class="" id="<%= uid %>-group-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="feed" />\
+<label class="" for="<%= uid %>-group-timeline-type">Page with restrictions</label><br><br>\
 <input id="<%= uid %>-album-timeline-type" type="radio" name="<%= uid %>-timeline-type" value="album" />\
 <label for="<%= uid %>-album-timeline-type">Album</label>\
 </dd>\
@@ -651,7 +654,7 @@ Content to show\
         <h1>Content to show</h1>\
         <ul>\
             <li><b>Page</b> — enter nickname of any public page or Page ID.</li>\
-            <li class="ff-hide"><b>Group</b> — enter Group ID.</li>\
+            <li><b>Page with restrictions</b> — nickname or ID, try if you have errors with feed above.</li>\
             <li><b>Album</b> — enter Album ID. <a href="http://docs.social-streams.com/article/50-find-facebook-album-id" target="_blank">What is it?</a> </li>\
         </ul><br>\
         Use <a href="http://lookup-id.com" target="_blank">Find my Facebook ID</a> tool to find your Page ID or Group ID.\

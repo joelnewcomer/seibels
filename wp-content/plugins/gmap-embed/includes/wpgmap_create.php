@@ -39,8 +39,8 @@
                 <tr>
                     <td>
                         <input id="wpgmap_upload_hidden" type="hidden" size="36" name="upload_image"
-                               value="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"/>
-                        <img src="https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png"
+                               value="<?php echo esc_url('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png');?>"/>
+                        <img src="<?php echo esc_url('https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2.png');?>"
                              id="wpgmap_icon_img" width="32" style="float: left;">
                         <input id="upload_image_button" type="button" value="Change Marker Icon"
                                style="float: left;margin-left: 14px;margin-top: 12px;"/>

@@ -3,9 +3,9 @@ Contributors: voltronik
 Donate link: https://betternotificationsforwp.com/donate/
 Tags: notification, email, push, sms, alert, HTML, customize, bulk, trigger, CC, BCC
 Requires at least: 4.0
-Tested up to: 5.3.2
+Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 1.7.6
+Stable tag: 1.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -58,6 +58,7 @@ The notifications that are currently available to use are:
 * Password Changed - For Admin
 * User Email Changed - For Admin
 * User Role Changed - For Admin
+* User Logged In - For Admin
 * WordPress Core Automatic Background Updates
 * Privacy – Confirm Action: Export Data Request – For Admin
 * Privacy – Confirm Action: Erase Data Request – For Admin
@@ -71,6 +72,7 @@ The notifications that are currently available to use are:
 * User Email Changed Confirmation - For User
 * User Email Changed - For User
 * User Role Changed - For User
+* User Logged In - For User
 * Comment Reply
 * Privacy – Confirm Action: Export Data Request – For User
 * Privacy – Confirm Action: Erase Data Request – For User
@@ -89,9 +91,10 @@ The notifications that are currently available to use are:
 * Post Pending Review
 * New Private Post
 * Post Scheduled
+* Published Post Moved to Trash
 * New Comment
 * New Comment Awaiting Moderation
-* Comment Approved
+* Post - Comment Approved
 * Post - Custom Field Updated ([Custom Fields Add-on](https://betternotificationsforwp.com/downloads/custom-fields/))
 * Post - Update Reminder ([Reminders Add-on](https://betternotificationsforwp.com/downloads/update-reminder/))
 * New Trackback
@@ -106,9 +109,19 @@ The notifications that are currently available to use are:
 * Page Scheduled
 * Page - New Comment
 * Page - New Comment Awaiting Moderation
+* Page - Comment Approved
 * Page - Comment Reply
 * Page - Custom Field Updated ([Custom Fields Add-on](https://betternotificationsforwp.com/downloads/custom-fields/))
 * Page - Update Reminder ([Reminders Add-on](https://betternotificationsforwp.com/downloads/update-reminder/))
+
+**Media**
+
+* New Media Published
+* Media Updated
+* Media - New Comment
+* Media - New Comment Awaiting Moderation
+* Media - Comment Approved
+* Media - Comment Reply
 
 **Posts**
 
@@ -221,6 +234,23 @@ Yes, of course! The plugin is completely translation-friendly and if you send me
 
 == Changelog ==
 
+= 1.8.1 - 21st April 2020 =
+* Added: Core changes to allow the [Global Override add-on](https://betternotificationsforwp.com/downloads/per-post-override/) to only send out notifications once.
+* Fixed: A range of issues relating to the [Global Override add-on](https://betternotificationsforwp.com/downloads/per-post-override/). 
+
+= 1.8 - 8th April 2020 =
+* POTENTIAL BREAKING CHANGES - Please edit and re-save each comment notification you have set-up to ensure that the correct notification is selected and saved.
+* New: A huge overhaul of the comment notifications which now gives a great comment management workflow.
+* New: New Comment, New Comment Awaiting Moderation, Comment Approved, and Comment Reply notifications are now availble to all posts, pages, custom post types, and media attachments.
+* Improved: The 'Send this notification to the Author' checkbox has been overhauled to work better for the above notifications. See the relevant section in [this support document](https://betternotificationsforwp.com/documentation/notifications/adding-a-new-notification/) for more information.
+
+= 1.7.7 - 27th March 2020 =
+* New: Three new notifications! "New Media Published", "Media Updated", "Media Comment" - complete with new shortcodes for caption, alt text, dimensions, etc.
+* New: "User Logged In - For Admin" notification - sends a notification to the admin when users log in.
+* New: "User Logged In - For User" notification - sends a notification to the user when they log in.
+* New: "Published to Trash" notification - sends a notification when a published post is moved to the trash.
+* Improved: Support for plugins that allow users to be assigned to multiple user roles.
+
 = 1.7.6 - 30th January 2020 =
 * New Notification: New Comment Approved. This is sent after the comment has been approved.
 * New: You can now output the description for the first available category in any new Post/Page/Custom Post Type notification, as well as to New Comment, Comment Awaiting Moderation, and Comment Reply notifications using the shortcode `[post_category_description]`. You can also use the `[post_category_slug]` notification to output the first available category slug.
@@ -322,7 +352,7 @@ Yes, of course! The plugin is completely translation-friendly and if you send me
 * New: If you want to allow other user roles to create or edit notifications, you can now grant them the 'bnfw' capability using a role editor.
 * Added: A new notice will display at the top of all Notification screens explaining how you can improve email deliverability. You can dismiss this permanently at any time.
 * Added: Inline help tips are now available when creating or editing a notification. Handy if you want to remember how something works but don't want to sift through the documentation.
-* Added: Merged two pull requests that came in via the GitHub clone of this plugin - ([#1](https://github.com/jackmcconnell/bnfw/pull/1) and [#2](https://github.com/jackmcconnell/bnfw/pull/2)).
+* Added: Merged two pull request that came in via the GitHub clone of this plugin - ([#1](https://github.com/jackmcconnell/bnfw/pull/1) and [#2](https://github.com/jackmcconnell/bnfw/pull/2)).
 * Added: For faster support, there is now a Priority Support menu item in the BNFW Notifications menu. Priority Support is available to customers with an active subscription to an add-on.
 * Improved: All date related shortcodes now output in the date and time format set in Settings > General in the WordPress Admin.
 * Improved: The list of available notifications has been re-ordered to make more sense.

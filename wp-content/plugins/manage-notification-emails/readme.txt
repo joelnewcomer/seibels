@@ -3,8 +3,8 @@ Contributors: (Virgial)
 Tags: notification,notify,email,user,password,moderator,postauthor,admin,e-mail,switch
 Requires at least: 4.0.0
 Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=TYG56SLWNG42N
-Tested up to: 5.2.3
-Stable tag: 1.5.0
+Tested up to: 5.4.0
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,8 @@ If you're one of the early installers, than you'll be happy to see that de new u
 
 == Changelog ==
 
+= 1.5.1 = 
+FIXED: php-notice for missing $deprecated variable.
 = 1.5.0 =
 UPGRADED: Upgraded the pluggable functions file. Fixing the missing PassWordHash Class bug.
 
